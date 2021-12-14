@@ -3,6 +3,8 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Transactions;
+using MySql.Data.MySqlClient;
 
 namespace OurResto
 {
@@ -171,7 +173,14 @@ namespace OurResto
 
         private void BtAjouter_Click(object sender, EventArgs e)
         {
-            AddMenus();
+            using (TransactionScope trans = new TransactionScope())
+            {
+                AddMenus();
+
+                trans.Complete();
+            }
+
+            MySqlConnection.ClearAllPools();
 
             RefreshDisplay();
         }
@@ -225,9 +234,16 @@ namespace OurResto
 
         private void BtModifier_Click(object sender, EventArgs e)
         {
-            DeleteMenuCurrentRow();
+            using (TransactionScope trans = new TransactionScope())
+            {
+                DeleteMenuCurrentRow();
 
-            AddMenus();
+                AddMenus();
+
+                trans.Complete();
+            }
+
+            MySqlConnection.ClearAllPools();
 
             RefreshDisplay();
         }
@@ -236,7 +252,14 @@ namespace OurResto
         {
             if (MessageBox.Show(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                DeleteMenuCurrentRow();
+                using (TransactionScope trans = new TransactionScope())
+                {                    
+                    DeleteMenuCurrentRow();
+
+                    trans.Complete();
+                }
+
+                MySqlConnection.ClearAllPools();
 
                 RefreshDisplay();
             }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Transactions;
 using System.Windows.Forms;
 
 namespace OurResto
@@ -150,18 +152,32 @@ namespace OurResto
                         }
                         else
                         {
-                            int nb = transactionTableAdapter.Insert(currentSalarieRow.Matricule, Id_TypePaiement, DateTime.Now, montant);
-
-                            if (nb != 1)
+                            using (TransactionScope trans = new TransactionScope())
                             {
-                                MessageBox.Show(Properties.Resources.TXTINSERTTRANSAC);
-                            }
-                            else
-                            {
-                                currentSalarieRow.EstActif = true;
+                                int nb = transactionTableAdapter.Insert(currentSalarieRow.Matricule, Id_TypePaiement, DateTime.Now, montant);
 
-                                salarieTableAdapter.Update(currentSalarieRow);
+                                if (nb != 1)
+                                {
+                                    MessageBox.Show(Properties.Resources.TXTINSERTTRANSAC);
+                                }
+                                else
+                                {
+                                    currentSalarieRow.EstActif = true;
+
+                                    nb = salarieTableAdapter.Update(currentSalarieRow);
+
+                                    if (nb != 1)
+                                    {
+                                        MessageBox.Show(Properties.Resources.TXTINSERTTRANSAC);
+                                    }
+                                    else
+                                    {
+                                        trans.Complete();
+                                    }
+                                }
                             }
+
+                            MySqlConnection.ClearAllPools();
                         }
 
                     }
@@ -191,14 +207,28 @@ namespace OurResto
 
                         decimal montant = decimal.Parse(tBSolde.Text);
 
-                        if (montant != 0)
+                        using (TransactionScope trans = new TransactionScope())
                         {
-                            transactionTableAdapter.Insert(currentRow.Matricule, Id_TypePaiement, DateTime.Now, -montant);
+                            if (montant != 0)
+                            {
+                                transactionTableAdapter.Insert(currentRow.Matricule, Id_TypePaiement, DateTime.Now, -montant);
+                            }
+
+                            currentRow.EstActif = false;
+
+                            int nb = salarieTableAdapter.Update(currentRow);
+
+                            if (nb != 1)
+                            {
+                                MessageBox.Show(Properties.Resources.TXTSOLDERCOMPTE);
+                            }
+                            else
+                            {
+                                trans.Complete();
+                            }
                         }
 
-                        currentRow.EstActif = false;
-                        
-                        salarieTableAdapter.Update(currentRow);
+                        MySqlConnection.ClearAllPools();
 
                         MessageBox.Show(String.Format(Properties.Resources.TXTRETURNMONEY, montant, currentRow.Prenom, currentRow.Nom));
                     }
@@ -222,6 +252,7 @@ namespace OurResto
             switch (e.ColumnIndex)
             {
                 case 0:
+                    
                     break;
                 case 1:
                     break;
