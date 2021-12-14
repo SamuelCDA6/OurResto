@@ -132,6 +132,10 @@ namespace OurResto
         private void DTPMain_ValueChanged(object sender, EventArgs e)
         {
             UpdateWeekMenus(dTPWeek.Value.Date);
+            if (vaffichermenuBindingSource.Current != null)
+            {
+                vaffichermenuBindingSource.Position = dGVMenu.Rows.OfType<DataGridViewRow>().OrderBy(r => Math.Abs(((DateTime)r.Cells[0].Value - dTPWeek.Value).Days)).FirstOrDefault().Index;
+            }
         }
 
         private void DGVMenu_SelectionChanged(object sender, EventArgs e)
@@ -253,7 +257,7 @@ namespace OurResto
             if (MessageBox.Show(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 using (TransactionScope trans = new TransactionScope())
-                {                    
+                {
                     DeleteMenuCurrentRow();
 
                     trans.Complete();
