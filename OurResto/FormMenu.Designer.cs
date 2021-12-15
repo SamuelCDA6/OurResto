@@ -478,6 +478,7 @@ namespace OurResto
             this.cBMoment.Size = new System.Drawing.Size(268, 28);
             this.cBMoment.TabIndex = 2;
             this.cBMoment.ValueMember = "Id_Nom";
+            this.cBMoment.SelectedIndexChanged += new System.EventHandler(this.CBMoment_SelectedIndexChanged);
             // 
             // tLPDateSemaine
             // 
@@ -668,7 +669,7 @@ namespace OurResto
             this.MinimumSize = new System.Drawing.Size(1052, 620);
             this.Name = "FormMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Menus";
+            this.Text = "Gestion des Menus";
             this.Load += new System.EventHandler(this.FormMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).EndInit();

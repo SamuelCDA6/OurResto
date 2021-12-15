@@ -141,14 +141,14 @@ namespace OurResto
             this.idGradeDataGridViewTextBoxColumn});
             this.dGVSalarie.DataSource = this.salarieBindingSource;
             this.dGVSalarie.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dGVSalarie.Location = new System.Drawing.Point(4, 39);
+            this.dGVSalarie.Location = new System.Drawing.Point(4, 42);
             this.dGVSalarie.Margin = new System.Windows.Forms.Padding(4);
             this.dGVSalarie.Name = "dGVSalarie";
             this.dGVSalarie.ReadOnly = true;
             this.dGVSalarie.RowHeadersVisible = false;
             this.dGVSalarie.RowHeadersWidth = 51;
             this.dGVSalarie.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVSalarie.Size = new System.Drawing.Size(735, 315);
+            this.dGVSalarie.Size = new System.Drawing.Size(735, 312);
             this.dGVSalarie.TabIndex = 100;
             this.dGVSalarie.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVSalarie_ColumnHeaderMouseClick);
             this.dGVSalarie.SelectionChanged += new System.EventHandler(this.DGVSalarie_SelectionChanged);
@@ -248,10 +248,10 @@ namespace OurResto
             // 
             this.lblEmail.AutoSize = true;
             this.lblEmail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblEmail.Location = new System.Drawing.Point(4, 62);
+            this.lblEmail.Location = new System.Drawing.Point(4, 68);
             this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(55, 36);
+            this.lblEmail.Size = new System.Drawing.Size(65, 34);
             this.lblEmail.TabIndex = 4;
             this.lblEmail.Text = "Email";
             this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -260,30 +260,30 @@ namespace OurResto
             // 
             this.tBPrenom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Prenom", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.tBPrenom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tBPrenom.Location = new System.Drawing.Point(67, 35);
+            this.tBPrenom.Location = new System.Drawing.Point(77, 38);
             this.tBPrenom.Margin = new System.Windows.Forms.Padding(4);
             this.tBPrenom.Name = "tBPrenom";
-            this.tBPrenom.Size = new System.Drawing.Size(664, 23);
+            this.tBPrenom.Size = new System.Drawing.Size(654, 26);
             this.tBPrenom.TabIndex = 2;
             // 
             // tBEmail
             // 
             this.tBEmail.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Email", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.tBEmail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tBEmail.Location = new System.Drawing.Point(67, 66);
+            this.tBEmail.Location = new System.Drawing.Point(77, 72);
             this.tBEmail.Margin = new System.Windows.Forms.Padding(4);
             this.tBEmail.Name = "tBEmail";
-            this.tBEmail.Size = new System.Drawing.Size(664, 23);
+            this.tBEmail.Size = new System.Drawing.Size(654, 26);
             this.tBEmail.TabIndex = 3;
             // 
             // tBNom
             // 
             this.tBNom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Nom", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.tBNom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tBNom.Location = new System.Drawing.Point(67, 4);
+            this.tBNom.Location = new System.Drawing.Point(77, 4);
             this.tBNom.Margin = new System.Windows.Forms.Padding(4);
             this.tBNom.Name = "tBNom";
-            this.tBNom.Size = new System.Drawing.Size(664, 23);
+            this.tBNom.Size = new System.Drawing.Size(654, 26);
             this.tBNom.TabIndex = 1;
             // 
             // lblNom
@@ -293,7 +293,7 @@ namespace OurResto
             this.lblNom.Location = new System.Drawing.Point(4, 0);
             this.lblNom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(55, 31);
+            this.lblNom.Size = new System.Drawing.Size(65, 34);
             this.lblNom.TabIndex = 3;
             this.lblNom.Text = "Nom";
             this.lblNom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -302,9 +302,9 @@ namespace OurResto
             // 
             this.lblPrenom.AutoSize = true;
             this.lblPrenom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPrenom.Location = new System.Drawing.Point(3, 31);
+            this.lblPrenom.Location = new System.Drawing.Point(3, 34);
             this.lblPrenom.Name = "lblPrenom";
-            this.lblPrenom.Size = new System.Drawing.Size(57, 31);
+            this.lblPrenom.Size = new System.Drawing.Size(67, 34);
             this.lblPrenom.TabIndex = 5;
             this.lblPrenom.Text = "Prénom";
             this.lblPrenom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -361,7 +361,7 @@ namespace OurResto
             this.montantDataGridViewTextBoxColumn});
             this.dGVTransaction.DataSource = this.transactionBindingSource;
             this.dGVTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dGVTransaction.Location = new System.Drawing.Point(746, 38);
+            this.dGVTransaction.Location = new System.Drawing.Point(746, 41);
             this.dGVTransaction.MultiSelect = false;
             this.dGVTransaction.Name = "dGVTransaction";
             this.dGVTransaction.ReadOnly = true;
@@ -369,7 +369,7 @@ namespace OurResto
             this.dGVTransaction.RowHeadersWidth = 51;
             this.dGVTransaction.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dGVTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVTransaction.Size = new System.Drawing.Size(304, 317);
+            this.dGVTransaction.Size = new System.Drawing.Size(304, 314);
             this.dGVTransaction.TabIndex = 100;
             // 
             // matriculeDataGridViewTextBoxColumn1
@@ -439,7 +439,7 @@ namespace OurResto
             this.lblType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblType.Location = new System.Drawing.Point(3, 66);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(123, 34);
+            this.lblType.Size = new System.Drawing.Size(145, 34);
             this.lblType.TabIndex = 4;
             this.lblType.Text = "Type de paiement";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -450,7 +450,7 @@ namespace OurResto
             this.lblMontant.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMontant.Location = new System.Drawing.Point(3, 33);
             this.lblMontant.Name = "lblMontant";
-            this.lblMontant.Size = new System.Drawing.Size(123, 33);
+            this.lblMontant.Size = new System.Drawing.Size(145, 33);
             this.lblMontant.TabIndex = 1;
             this.lblMontant.Text = "Montant à créditer";
             this.lblMontant.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -461,7 +461,7 @@ namespace OurResto
             this.lblSolde.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblSolde.Location = new System.Drawing.Point(3, 0);
             this.lblSolde.Name = "lblSolde";
-            this.lblSolde.Size = new System.Drawing.Size(123, 33);
+            this.lblSolde.Size = new System.Drawing.Size(145, 33);
             this.lblSolde.TabIndex = 0;
             this.lblSolde.Text = "Solde";
             this.lblSolde.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -469,9 +469,9 @@ namespace OurResto
             // tBMontant
             // 
             this.tBMontant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tBMontant.Location = new System.Drawing.Point(132, 38);
+            this.tBMontant.Location = new System.Drawing.Point(154, 36);
             this.tBMontant.Name = "tBMontant";
-            this.tBMontant.Size = new System.Drawing.Size(169, 23);
+            this.tBMontant.Size = new System.Drawing.Size(147, 26);
             this.tBMontant.TabIndex = 7;
             this.tBMontant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -479,10 +479,10 @@ namespace OurResto
             // 
             this.tBSolde.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tBSolde.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vsoldesalarieBindingSource, "Solde", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.tBSolde.Location = new System.Drawing.Point(132, 5);
+            this.tBSolde.Location = new System.Drawing.Point(154, 3);
             this.tBSolde.Name = "tBSolde";
             this.tBSolde.ReadOnly = true;
-            this.tBSolde.Size = new System.Drawing.Size(169, 23);
+            this.tBSolde.Size = new System.Drawing.Size(147, 26);
             this.tBSolde.TabIndex = 3;
             this.tBSolde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -498,9 +498,9 @@ namespace OurResto
             this.cBTypePaiement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBTypePaiement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBTypePaiement.FormattingEnabled = true;
-            this.cBTypePaiement.Location = new System.Drawing.Point(132, 69);
+            this.cBTypePaiement.Location = new System.Drawing.Point(154, 69);
             this.cBTypePaiement.Name = "cBTypePaiement";
-            this.cBTypePaiement.Size = new System.Drawing.Size(169, 24);
+            this.cBTypePaiement.Size = new System.Drawing.Size(147, 28);
             this.cBTypePaiement.TabIndex = 8;
             this.cBTypePaiement.ValueMember = "Nom";
             // 
@@ -523,7 +523,7 @@ namespace OurResto
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(737, 29);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(737, 32);
             this.tableLayoutPanel1.TabIndex = 101;
             // 
             // lblRechercheSalarie
@@ -532,16 +532,16 @@ namespace OurResto
             this.lblRechercheSalarie.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblRechercheSalarie.Location = new System.Drawing.Point(3, 0);
             this.lblRechercheSalarie.Name = "lblRechercheSalarie";
-            this.lblRechercheSalarie.Size = new System.Drawing.Size(77, 29);
+            this.lblRechercheSalarie.Size = new System.Drawing.Size(90, 32);
             this.lblRechercheSalarie.TabIndex = 0;
             this.lblRechercheSalarie.Text = "Recherche";
             this.lblRechercheSalarie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tBRechercheSalarie
             // 
-            this.tBRechercheSalarie.Location = new System.Drawing.Point(86, 3);
+            this.tBRechercheSalarie.Location = new System.Drawing.Point(99, 3);
             this.tBRechercheSalarie.Name = "tBRechercheSalarie";
-            this.tBRechercheSalarie.Size = new System.Drawing.Size(306, 23);
+            this.tBRechercheSalarie.Size = new System.Drawing.Size(306, 26);
             this.tBRechercheSalarie.TabIndex = 0;
             this.tBRechercheSalarie.TextChanged += new System.EventHandler(this.TBRechercheSalarie_TextChanged);
             // 
@@ -631,7 +631,7 @@ namespace OurResto
             // 
             // FormSalarie
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1053, 540);
             this.Controls.Add(this.tLPMain);
@@ -641,7 +641,7 @@ namespace OurResto
             this.MinimumSize = new System.Drawing.Size(1069, 579);
             this.Name = "FormSalarie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Salariés";
+            this.Text = "Comptes repas des salariés";
             this.Load += new System.EventHandler(this.FormSalarie_Load);
             this.tLPMain.ResumeLayout(false);
             this.tLPMain.PerformLayout();

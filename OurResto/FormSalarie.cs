@@ -92,7 +92,7 @@ namespace OurResto
                                                       .ToList()
                                                       .OrderBy(r => r.Nom);
 
-                // Met a jour la binding source et n'afficher que ses lignes de salariés dans le datagridview
+                // Met a jour la binding source et n'afficher que ses lignes de salariés dans le DataGridView
                 if (rowList.Count() > 0)
                 {
                     salarieBindingSource.DataSource = rowList;

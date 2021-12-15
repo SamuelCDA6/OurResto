@@ -172,6 +172,7 @@ namespace OurResto
             this.tBTitle.Font = new System.Drawing.Font("Britannic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tBTitle.Location = new System.Drawing.Point(3, 3);
             this.tBTitle.Name = "tBTitle";
+            this.tBTitle.ReadOnly = true;
             this.tBTitle.Size = new System.Drawing.Size(561, 34);
             this.tBTitle.TabIndex = 2;
             this.tBTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;

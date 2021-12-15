@@ -127,7 +127,7 @@ namespace OurResto
             this.btSalarie.Name = "btSalarie";
             this.btSalarie.Size = new System.Drawing.Size(136, 51);
             this.btSalarie.TabIndex = 0;
-            this.btSalarie.Text = "Comptes des Salariés";
+            this.btSalarie.Text = "Comptes Repas";
             this.btSalarie.UseVisualStyleBackColor = true;
             this.btSalarie.Click += new System.EventHandler(this.BtSalarie_Click);
             // 
@@ -181,7 +181,7 @@ namespace OurResto
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(635, 436);
             this.Controls.Add(this.tableLayoutPanel1);

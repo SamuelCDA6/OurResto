@@ -134,7 +134,9 @@ namespace OurResto
             UpdateWeekMenus(dTPWeek.Value.Date);
             if (vaffichermenuBindingSource.Current != null)
             {
-                vaffichermenuBindingSource.Position = dGVMenu.Rows.OfType<DataGridViewRow>().OrderBy(r => Math.Abs(((DateTime)r.Cells[0].Value - dTPWeek.Value).Days)).FirstOrDefault().Index;
+                vaffichermenuBindingSource.Position = dGVMenu.Rows.OfType<DataGridViewRow>()
+                            .OrderBy(r => Math.Abs(((DateTime)r.Cells[0].Value - dTPWeek.Value).Days))
+                            .FirstOrDefault().Index;
             }
         }
 
@@ -179,9 +181,12 @@ namespace OurResto
         {
             using (TransactionScope trans = new TransactionScope())
             {
-                AddMenus();
+                int nb = AddMenus();
 
-                trans.Complete();
+                if (nb == 5)
+                {
+                    trans.Complete();
+                }
             }
 
             MySqlConnection.ClearAllPools();
@@ -192,21 +197,25 @@ namespace OurResto
         /// <summary>
         /// Méthode pour ajouter les menus dans le SGBD
         /// </summary>
-        private void AddMenus()
+        private int AddMenus()
         {
             try
             {
                 var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
                 DateTime dateRepas = dTPUpdateDate.Value;
 
+                int nb = 0;
+
                 if (cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == idMoment && r.RepasDate == dateRepas).Count() == 0)
                 {
-                    AddPlat(cBPlatEntree, idMoment, dateRepas);
-                    AddPlat(cBPlatPrincipal, idMoment, dateRepas);
-                    AddPlat(cBPlatAccompagnement, idMoment, dateRepas);
-                    AddPlat(cBPlatFromage, idMoment, dateRepas);
-                    AddPlat(cBPlatDessert, idMoment, dateRepas);
+                    nb += AddPlat(cBPlatEntree, idMoment, dateRepas);
+                    nb += AddPlat(cBPlatPrincipal, idMoment, dateRepas);
+                    nb += AddPlat(cBPlatAccompagnement, idMoment, dateRepas);
+                    nb += AddPlat(cBPlatFromage, idMoment, dateRepas);
+                    nb += AddPlat(cBPlatDessert, idMoment, dateRepas);
                 }
+
+                return nb;
             }
             catch (Exception ex)
             {
@@ -219,6 +228,8 @@ namespace OurResto
                     MessageBox.Show(Properties.Resources.TXTADDMENU);
                 }
             }
+
+            return 0;
         }
 
         /// <summary>
@@ -227,29 +238,75 @@ namespace OurResto
         /// <param name="cb">ComboBox lié au plat à ajouter</param>
         /// <param name="idmoment">Id du moment pour le plat à ajouter</param>
         /// <param name="daterepas">date du repas pour le plat à ajouter</param>
-        private void AddPlat(ComboBox cb, int idmoment, DateTime daterepas)
+        private int AddPlat(ComboBox cb, int idmoment, DateTime daterepas)
         {
-            var id = (int)cb.SelectedValue;
-            //var id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cb.Text).Id_Plat;
+            //var id = (int)cb.SelectedValue;
+            var id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cb.Text).Id_Plat;
 
-            menuTableAdapter.Insert(id, idmoment, daterepas);
+            return menuTableAdapter.Insert(id, idmoment, daterepas);
         }
 
 
         private void BtModifier_Click(object sender, EventArgs e)
         {
+            //using (TransactionScope trans = new TransactionScope())
+            //{
+            //    DeleteMenuCurrentRow();
+
+            //    AddMenus();
+
+            //    trans.Complete();
+            //}
+
+            //MySqlConnection.ClearAllPools();
+
+            UpdateMenus();
+
+            RefreshDisplay();
+        }
+
+        private void UpdateMenus()
+        {
             using (TransactionScope trans = new TransactionScope())
             {
-                DeleteMenuCurrentRow();
+                try
+                {
+                    if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
+                    {
+                        cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == currentRow.Id_Moment &&
+                                                         r.RepasDate == currentRow.RepasDate)
+                                             .ToList()
+                                             .ForEach(r => r.Delete());
 
-                AddMenus();
+                        int nb = menuTableAdapter.Update(cda68_bd1DataSet.Menu.Select(null, null, DataViewRowState.Deleted));
 
-                trans.Complete();
+                        var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+                        DateTime dateRepas = dTPUpdateDate.Value;
+
+                        if (cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == idMoment && r.RepasDate == dateRepas).Count() == 0)
+                        {
+                            nb += AddPlat(cBPlatEntree, idMoment, dateRepas);
+                            nb += AddPlat(cBPlatPrincipal, idMoment, dateRepas);
+                            nb += AddPlat(cBPlatAccompagnement, idMoment, dateRepas);
+                            nb += AddPlat(cBPlatFromage, idMoment, dateRepas);
+                            nb += AddPlat(cBPlatDessert, idMoment, dateRepas);
+
+                            if (nb == 10)
+                            {
+                                trans.Complete();
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Properties.Resources.TXTUPDATEMENU);
+                }
+
+
             }
 
             MySqlConnection.ClearAllPools();
-
-            RefreshDisplay();
         }
 
         private void BtSupprimer_Click(object sender, EventArgs e)
@@ -267,7 +324,6 @@ namespace OurResto
 
                 RefreshDisplay();
             }
-
         }
 
         /// <summary>
@@ -313,6 +369,17 @@ namespace OurResto
                 default:
                     break;
             }
+
+            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == dTPUpdateDate.Value.Date && r.Id_Moment == idMoment))
+            {
+                cBPlatEntree.SelectedIndex = -1;
+                cBPlatPrincipal.SelectedIndex = -1;
+                cBPlatFromage.SelectedIndex = -1;
+                cBPlatAccompagnement.SelectedIndex = -1;
+                cBPlatDessert.SelectedIndex = -1;
+            }
         }
 
         private void DGVMenu_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -324,6 +391,20 @@ namespace OurResto
                 {
                     e.Value = String.Empty;
                 }
+            }
+        }
+
+        private void CBMoment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == dTPUpdateDate.Value.Date && r.Id_Moment == idMoment))
+            {
+                cBPlatEntree.SelectedIndex = -1;
+                cBPlatPrincipal.SelectedIndex = -1;
+                cBPlatFromage.SelectedIndex = -1;
+                cBPlatAccompagnement.SelectedIndex = -1;
+                cBPlatDessert.SelectedIndex = -1;
             }
         }
     }
