@@ -65,7 +65,6 @@ namespace OurResto
             this.lblMoment = new System.Windows.Forms.Label();
             this.cBMoment = new System.Windows.Forms.ComboBox();
             this.tLPDateSemaine = new System.Windows.Forms.TableLayoutPanel();
-            this.dTPWeek = new System.Windows.Forms.DateTimePicker();
             this.lblSemaine = new System.Windows.Forms.Label();
             this.btBefore = new System.Windows.Forms.Button();
             this.btAfter = new System.Windows.Forms.Button();
@@ -488,7 +487,6 @@ namespace OurResto
             this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPDateSemaine.Controls.Add(this.dTPWeek, 0, 0);
             this.tLPDateSemaine.Controls.Add(this.lblSemaine, 2, 0);
             this.tLPDateSemaine.Controls.Add(this.btBefore, 1, 0);
             this.tLPDateSemaine.Controls.Add(this.btAfter, 3, 0);
@@ -500,25 +498,12 @@ namespace OurResto
             this.tLPDateSemaine.Size = new System.Drawing.Size(1030, 54);
             this.tLPDateSemaine.TabIndex = 101;
             // 
-            // dTPWeek
-            // 
-            this.dTPWeek.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dTPWeek.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dTPWeek.Location = new System.Drawing.Point(3, 14);
-            this.dTPWeek.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dTPWeek.Name = "dTPWeek";
-            this.dTPWeek.Size = new System.Drawing.Size(285, 26);
-            this.dTPWeek.TabIndex = 0;
-            this.dTPWeek.TabStop = false;
-            this.dTPWeek.Value = new System.DateTime(2021, 12, 5, 9, 10, 2, 0);
-            this.dTPWeek.ValueChanged += new System.EventHandler(this.DTPMain_ValueChanged);
-            // 
             // lblSemaine
             // 
             this.lblSemaine.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblSemaine.AutoSize = true;
             this.lblSemaine.Font = new System.Drawing.Font("Britannic Bold", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSemaine.Location = new System.Drawing.Point(442, 13);
+            this.lblSemaine.Location = new System.Drawing.Point(297, 13);
             this.lblSemaine.Name = "lblSemaine";
             this.lblSemaine.Size = new System.Drawing.Size(460, 27);
             this.lblSemaine.TabIndex = 1;
@@ -527,7 +512,7 @@ namespace OurResto
             // btBefore
             // 
             this.btBefore.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btBefore.Location = new System.Drawing.Point(308, 7);
+            this.btBefore.Location = new System.Drawing.Point(17, 7);
             this.btBefore.Name = "btBefore";
             this.btBefore.Size = new System.Drawing.Size(80, 40);
             this.btBefore.TabIndex = 2;
@@ -695,7 +680,6 @@ namespace OurResto
         private cda68_bd1DataSet cda68_bd1DataSet;
         //private System.Windows.Forms.DataGridViewTextBoxColumn nomDataGridViewTextBoxColumn;
         private System.Windows.Forms.TableLayoutPanel tLPMain;
-        private System.Windows.Forms.DateTimePicker dTPWeek;
         private System.Windows.Forms.TableLayoutPanel tLPInputBox;
         private System.Windows.Forms.Label lblPlat;
         private System.Windows.Forms.Label lblDessert;

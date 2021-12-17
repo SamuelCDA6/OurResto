@@ -10,6 +10,9 @@ namespace OurResto
 {
     public partial class FormMenu : Form
     {
+        DateTime dateMonday;
+        DateTime dateFriday;
+        DateTime date;
         public FormMenu()
         {
             InitializeComponent();
@@ -18,6 +21,7 @@ namespace OurResto
         private void FormMenu_Load(object sender, EventArgs e)
         {
             Initialisation();
+            
             RefreshDisplay();
         }
 
@@ -37,7 +41,14 @@ namespace OurResto
                 cb.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.Never;
             }
 
-            dTPWeek.Value = DateTime.Today;
+            foreach (DataGridViewColumn c in dGVMenu.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            dGVMenu.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dTPUpdateDate.Value = DateTime.Today;
         }
         #endregion
 
@@ -48,8 +59,8 @@ namespace OurResto
         /// <param name="date">date comprise dans la semaine à afficher</param>
         private void UpdateWeekMenus(DateTime date)
         {
-            DateTime dateMonday = date.WeekDay(DayOfWeek.Monday);
-            DateTime dateFriday = date.WeekDay(DayOfWeek.Friday);
+            dateMonday = date.WeekDay(DayOfWeek.Monday);
+            dateFriday = date.WeekDay(DayOfWeek.Friday);
 
             // Si le lundi est sur le mois precedent prendre le mois aussi sinon que le jour
             string monday = (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("M") : dateMonday.Day.ToString();
@@ -76,6 +87,8 @@ namespace OurResto
                                                           .ThenBy(r => r.Id_Moment).ToList();
 
                 vaffichermenuBindingSource.DataSource = rows;
+
+                SetPositionBindingSource(date);
             }
             catch (Exception)
             {
@@ -95,7 +108,7 @@ namespace OurResto
 
                 SetupComboBoxs();
 
-                UpdateWeekMenus(dTPUpdateDate.Value.Date);
+                UpdateWeekMenus(date);
             }
             catch (Exception)
             {
@@ -129,17 +142,6 @@ namespace OurResto
             cb.DataSource = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == sorte).ToList();
         }
 
-        private void DTPMain_ValueChanged(object sender, EventArgs e)
-        {
-            UpdateWeekMenus(dTPWeek.Value.Date);
-            if (vaffichermenuBindingSource.Current != null)
-            {
-                vaffichermenuBindingSource.Position = dGVMenu.Rows.OfType<DataGridViewRow>()
-                            .OrderBy(r => Math.Abs(((DateTime)r.Cells[0].Value - dTPWeek.Value).Days))
-                            .FirstOrDefault().Index;
-            }
-        }
-
         private void DGVMenu_SelectionChanged(object sender, EventArgs e)
         {
             UpdateComboboxs();
@@ -164,12 +166,12 @@ namespace OurResto
 
         private void BtBefore_Click(object sender, EventArgs e)
         {
-            dTPWeek.Value = dTPWeek.Value.AddDays(-7);
+            dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(-7);
         }
 
         private void BtAfter_Click(object sender, EventArgs e)
         {
-            dTPWeek.Value = dTPWeek.Value.AddDays(7);
+            dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(7);
         }
 
         private void BtActualiser_Click(object sender, EventArgs e)
@@ -179,6 +181,7 @@ namespace OurResto
 
         private void BtAjouter_Click(object sender, EventArgs e)
         {
+            date = dTPUpdateDate.Value.Date;
             using (TransactionScope trans = new TransactionScope())
             {
                 int nb = AddMenus();
@@ -192,6 +195,8 @@ namespace OurResto
             MySqlConnection.ClearAllPools();
 
             RefreshDisplay();
+
+            SetPositionBindingSource(date);
         }
 
         /// <summary>
@@ -202,17 +207,17 @@ namespace OurResto
             try
             {
                 var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
-                DateTime dateRepas = dTPUpdateDate.Value;
+                date = dTPUpdateDate.Value;
 
                 int nb = 0;
 
-                if (cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == idMoment && r.RepasDate == dateRepas).Count() == 0)
+                if (cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == idMoment && r.RepasDate == date).Count() == 0)
                 {
-                    nb += AddPlat(cBPlatEntree, idMoment, dateRepas);
-                    nb += AddPlat(cBPlatPrincipal, idMoment, dateRepas);
-                    nb += AddPlat(cBPlatAccompagnement, idMoment, dateRepas);
-                    nb += AddPlat(cBPlatFromage, idMoment, dateRepas);
-                    nb += AddPlat(cBPlatDessert, idMoment, dateRepas);
+                    nb += AddPlat(cBPlatEntree, idMoment, date);
+                    nb += AddPlat(cBPlatPrincipal, idMoment, date);
+                    nb += AddPlat(cBPlatAccompagnement, idMoment, date);
+                    nb += AddPlat(cBPlatFromage, idMoment, date);
+                    nb += AddPlat(cBPlatDessert, idMoment, date);
                 }
 
                 return nb;
@@ -358,27 +363,38 @@ namespace OurResto
 
         private void DTPUpdateDate_ValueChanged(object sender, EventArgs e)
         {
-            switch (dTPUpdateDate.Value.DayOfWeek)
+            date = dTPUpdateDate.Value.Date;
+            // Si la date choisit n'est pas dans la même semaine remettre à jour le DataGridView
+            if (date < dateMonday || date > dateFriday)
             {
-                case DayOfWeek.Sunday:
-                    dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(1);
-                    break;
-                case DayOfWeek.Saturday:
-                    dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(2);
-                    break;
-                default:
-                    break;
+                UpdateWeekMenus(date);
             }
 
-            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+            // Si il y a un menu qui correspond à la date et au moment, positionner la BindingSource dessus
+            SetPositionBindingSource(date);
+        }
 
-            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == dTPUpdateDate.Value.Date && r.Id_Moment == idMoment))
+        private void SetPositionBindingSource(DateTime date)
+        {
+            if (vaffichermenuBindingSource.Current != null && cda68_bd1DataSet.Moment.Count > 0)
             {
-                cBPlatEntree.SelectedIndex = -1;
-                cBPlatPrincipal.SelectedIndex = -1;
-                cBPlatFromage.SelectedIndex = -1;
-                cBPlatAccompagnement.SelectedIndex = -1;
-                cBPlatDessert.SelectedIndex = -1;
+                var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+                if (dGVMenu.Rows.OfType<DataGridViewRow>()
+                                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
+                                                                    (int)r.Cells[12].Value == idMoment)
+                                            is DataGridViewRow row)
+                {
+                    vaffichermenuBindingSource.Position = row.Index;
+                }
+                else // Si pas de menu vider les ComboBox
+                {
+                    cBPlatEntree.SelectedIndex = -1;
+                    cBPlatPrincipal.SelectedIndex = -1;
+                    cBPlatFromage.SelectedIndex = -1;
+                    cBPlatAccompagnement.SelectedIndex = -1;
+                    cBPlatDessert.SelectedIndex = -1;
+                }
             }
         }
 
@@ -398,7 +414,7 @@ namespace OurResto
         {
             var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
 
-            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == dTPUpdateDate.Value.Date && r.Id_Moment == idMoment))
+            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == date && r.Id_Moment == idMoment))
             {
                 cBPlatEntree.SelectedIndex = -1;
                 cBPlatPrincipal.SelectedIndex = -1;

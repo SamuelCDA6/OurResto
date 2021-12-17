@@ -56,6 +56,9 @@
     <Reference Include="ZstdNet, Version=1.4.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cda68_bd1DataSet.cs">
+      <DependentUpon>cda68_bd1DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="cda68_bd1DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
