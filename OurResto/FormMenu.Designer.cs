@@ -33,21 +33,6 @@ namespace OurResto
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenu));
             this.dGVMenu = new System.Windows.Forms.DataGridView();
-            this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.momentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatEntreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatPrincipalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.platDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatAccompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.accompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatFromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatDessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idMomentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vaffichermenuBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cda68_bd1DataSet = new OurResto.cda68_bd1DataSet();
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.tLPInputBox = new System.Windows.Forms.TableLayoutPanel();
             this.cBPlatFromage = new System.Windows.Forms.ComboBox();
@@ -65,7 +50,6 @@ namespace OurResto
             this.lblMoment = new System.Windows.Forms.Label();
             this.cBMoment = new System.Windows.Forms.ComboBox();
             this.tLPDateSemaine = new System.Windows.Forms.TableLayoutPanel();
-            this.dTPWeek = new System.Windows.Forms.DateTimePicker();
             this.lblSemaine = new System.Windows.Forms.Label();
             this.btBefore = new System.Windows.Forms.Button();
             this.btAfter = new System.Windows.Forms.Button();
@@ -76,20 +60,36 @@ namespace OurResto
             this.btModifier = new System.Windows.Forms.Button();
             this.btSupprimer = new System.Windows.Forms.Button();
             this.btQuitter = new System.Windows.Forms.Button();
+            this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.momentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatEntreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatPrincipalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.platDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatAccompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatFromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatDessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idMomentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vaffichermenuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cda68_bd1DataSet = new OurResto.cda68_bd1DataSet();
             this.momentTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.MomentTableAdapter();
             this.vplatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.v_platsTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_platsTableAdapter();
             this.menuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.MenuTableAdapter();
             this.menuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.v_affichermenuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter();
+            this.btAddRandom = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             this.tLPMain.SuspendLayout();
             this.tLPInputBox.SuspendLayout();
             this.tLPDateSemaine.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.fLPButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vplatsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -137,136 +137,13 @@ namespace OurResto
             this.dGVMenu.RowHeadersVisible = false;
             this.dGVMenu.RowHeadersWidth = 51;
             this.dGVMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVMenu.Size = new System.Drawing.Size(1028, 271);
+            this.dGVMenu.Size = new System.Drawing.Size(1028, 261);
             this.dGVMenu.StandardTab = true;
             this.dGVMenu.TabIndex = 100;
             this.dGVMenu.TabStop = false;
             this.dGVMenu.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVMenu_CellFormatting);
+            this.dGVMenu.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dGVMenu_ColumnHeaderMouseClick);
             this.dGVMenu.SelectionChanged += new System.EventHandler(this.DGVMenu_SelectionChanged);
-            // 
-            // repasDateDataGridViewTextBoxColumn
-            // 
-            this.repasDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.repasDateDataGridViewTextBoxColumn.DataPropertyName = "RepasDate";
-            this.repasDateDataGridViewTextBoxColumn.HeaderText = "Date du repas";
-            this.repasDateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.repasDateDataGridViewTextBoxColumn.Name = "repasDateDataGridViewTextBoxColumn";
-            this.repasDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.repasDateDataGridViewTextBoxColumn.Width = 144;
-            // 
-            // momentDataGridViewTextBoxColumn
-            // 
-            this.momentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.momentDataGridViewTextBoxColumn.DataPropertyName = "Moment";
-            this.momentDataGridViewTextBoxColumn.HeaderText = "Moment";
-            this.momentDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.momentDataGridViewTextBoxColumn.Name = "momentDataGridViewTextBoxColumn";
-            this.momentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.momentDataGridViewTextBoxColumn.Width = 98;
-            // 
-            // idPlatEntreeDataGridViewTextBoxColumn
-            // 
-            this.idPlatEntreeDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Entree";
-            this.idPlatEntreeDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Entree";
-            this.idPlatEntreeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idPlatEntreeDataGridViewTextBoxColumn.Name = "idPlatEntreeDataGridViewTextBoxColumn";
-            this.idPlatEntreeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idPlatEntreeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // entreeDataGridViewTextBoxColumn
-            // 
-            this.entreeDataGridViewTextBoxColumn.DataPropertyName = "Entree";
-            this.entreeDataGridViewTextBoxColumn.HeaderText = "Entree";
-            this.entreeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.entreeDataGridViewTextBoxColumn.Name = "entreeDataGridViewTextBoxColumn";
-            this.entreeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idPlatPrincipalDataGridViewTextBoxColumn
-            // 
-            this.idPlatPrincipalDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Principal";
-            this.idPlatPrincipalDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Principal";
-            this.idPlatPrincipalDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idPlatPrincipalDataGridViewTextBoxColumn.Name = "idPlatPrincipalDataGridViewTextBoxColumn";
-            this.idPlatPrincipalDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idPlatPrincipalDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // platDataGridViewTextBoxColumn
-            // 
-            this.platDataGridViewTextBoxColumn.DataPropertyName = "Plat";
-            this.platDataGridViewTextBoxColumn.HeaderText = "Plat";
-            this.platDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.platDataGridViewTextBoxColumn.Name = "platDataGridViewTextBoxColumn";
-            this.platDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idPlatAccompagnementDataGridViewTextBoxColumn
-            // 
-            this.idPlatAccompagnementDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Accompagnement";
-            this.idPlatAccompagnementDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Accompagnement";
-            this.idPlatAccompagnementDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idPlatAccompagnementDataGridViewTextBoxColumn.Name = "idPlatAccompagnementDataGridViewTextBoxColumn";
-            this.idPlatAccompagnementDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idPlatAccompagnementDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // accompagnementDataGridViewTextBoxColumn
-            // 
-            this.accompagnementDataGridViewTextBoxColumn.DataPropertyName = "Accompagnement";
-            this.accompagnementDataGridViewTextBoxColumn.HeaderText = "Accompagnement";
-            this.accompagnementDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.accompagnementDataGridViewTextBoxColumn.Name = "accompagnementDataGridViewTextBoxColumn";
-            this.accompagnementDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idPlatFromageDataGridViewTextBoxColumn
-            // 
-            this.idPlatFromageDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Fromage";
-            this.idPlatFromageDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Fromage";
-            this.idPlatFromageDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idPlatFromageDataGridViewTextBoxColumn.Name = "idPlatFromageDataGridViewTextBoxColumn";
-            this.idPlatFromageDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idPlatFromageDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // fromageDataGridViewTextBoxColumn
-            // 
-            this.fromageDataGridViewTextBoxColumn.DataPropertyName = "Fromage";
-            this.fromageDataGridViewTextBoxColumn.HeaderText = "Fromage";
-            this.fromageDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.fromageDataGridViewTextBoxColumn.Name = "fromageDataGridViewTextBoxColumn";
-            this.fromageDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idPlatDessertDataGridViewTextBoxColumn
-            // 
-            this.idPlatDessertDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Dessert";
-            this.idPlatDessertDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Dessert";
-            this.idPlatDessertDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idPlatDessertDataGridViewTextBoxColumn.Name = "idPlatDessertDataGridViewTextBoxColumn";
-            this.idPlatDessertDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idPlatDessertDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // dessertDataGridViewTextBoxColumn
-            // 
-            this.dessertDataGridViewTextBoxColumn.DataPropertyName = "Dessert";
-            this.dessertDataGridViewTextBoxColumn.HeaderText = "Dessert";
-            this.dessertDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.dessertDataGridViewTextBoxColumn.Name = "dessertDataGridViewTextBoxColumn";
-            this.dessertDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idMomentDataGridViewTextBoxColumn
-            // 
-            this.idMomentDataGridViewTextBoxColumn.DataPropertyName = "Id_Moment";
-            this.idMomentDataGridViewTextBoxColumn.HeaderText = "Id_Moment";
-            this.idMomentDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idMomentDataGridViewTextBoxColumn.Name = "idMomentDataGridViewTextBoxColumn";
-            this.idMomentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idMomentDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // vaffichermenuBindingSource
-            // 
-            this.vaffichermenuBindingSource.DataMember = "v_affichermenu";
-            this.vaffichermenuBindingSource.DataSource = this.cda68_bd1DataSet;
-            // 
-            // cda68_bd1DataSet
-            // 
-            this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
-            this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tLPMain
             // 
@@ -312,7 +189,7 @@ namespace OurResto
             this.tLPInputBox.Controls.Add(this.lblMoment, 0, 3);
             this.tLPInputBox.Controls.Add(this.cBMoment, 1, 3);
             this.tLPInputBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPInputBox.Location = new System.Drawing.Point(3, 342);
+            this.tLPInputBox.Location = new System.Drawing.Point(3, 332);
             this.tLPInputBox.Name = "tLPInputBox";
             this.tLPInputBox.RowCount = 5;
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -320,7 +197,7 @@ namespace OurResto
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLPInputBox.Size = new System.Drawing.Size(1030, 160);
+            this.tLPInputBox.Size = new System.Drawing.Size(1030, 170);
             this.tLPInputBox.TabIndex = 3;
             // 
             // cBPlatFromage
@@ -329,7 +206,7 @@ namespace OurResto
             this.cBPlatFromage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatFromage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatFromage.FormattingEnabled = true;
-            this.cBPlatFromage.Location = new System.Drawing.Point(653, 99);
+            this.cBPlatFromage.Location = new System.Drawing.Point(653, 105);
             this.cBPlatFromage.Name = "cBPlatFromage";
             this.cBPlatFromage.Size = new System.Drawing.Size(374, 28);
             this.cBPlatFromage.TabIndex = 6;
@@ -340,7 +217,7 @@ namespace OurResto
             this.cBPlatAccompagnement.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatAccompagnement.FormattingEnabled = true;
-            this.cBPlatAccompagnement.Location = new System.Drawing.Point(653, 67);
+            this.cBPlatAccompagnement.Location = new System.Drawing.Point(653, 71);
             this.cBPlatAccompagnement.Name = "cBPlatAccompagnement";
             this.cBPlatAccompagnement.Size = new System.Drawing.Size(374, 28);
             this.cBPlatAccompagnement.TabIndex = 5;
@@ -351,7 +228,7 @@ namespace OurResto
             this.cBPlatPrincipal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatPrincipal.FormattingEnabled = true;
-            this.cBPlatPrincipal.Location = new System.Drawing.Point(653, 35);
+            this.cBPlatPrincipal.Location = new System.Drawing.Point(653, 37);
             this.cBPlatPrincipal.Name = "cBPlatPrincipal";
             this.cBPlatPrincipal.Size = new System.Drawing.Size(374, 28);
             this.cBPlatPrincipal.TabIndex = 4;
@@ -371,9 +248,9 @@ namespace OurResto
             // 
             this.lblPlat.AutoSize = true;
             this.lblPlat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPlat.Location = new System.Drawing.Point(504, 32);
+            this.lblPlat.Location = new System.Drawing.Point(504, 34);
             this.lblPlat.Name = "lblPlat";
-            this.lblPlat.Size = new System.Drawing.Size(143, 32);
+            this.lblPlat.Size = new System.Drawing.Size(143, 34);
             this.lblPlat.TabIndex = 6;
             this.lblPlat.Text = "Plat";
             this.lblPlat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -382,9 +259,9 @@ namespace OurResto
             // 
             this.lblDessert.AutoSize = true;
             this.lblDessert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDessert.Location = new System.Drawing.Point(504, 128);
+            this.lblDessert.Location = new System.Drawing.Point(504, 136);
             this.lblDessert.Name = "lblDessert";
-            this.lblDessert.Size = new System.Drawing.Size(143, 32);
+            this.lblDessert.Size = new System.Drawing.Size(143, 34);
             this.lblDessert.TabIndex = 5;
             this.lblDessert.Text = "Dessert";
             this.lblDessert.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -393,9 +270,9 @@ namespace OurResto
             // 
             this.lblFromage.AutoSize = true;
             this.lblFromage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFromage.Location = new System.Drawing.Point(504, 96);
+            this.lblFromage.Location = new System.Drawing.Point(504, 102);
             this.lblFromage.Name = "lblFromage";
-            this.lblFromage.Size = new System.Drawing.Size(143, 32);
+            this.lblFromage.Size = new System.Drawing.Size(143, 34);
             this.lblFromage.TabIndex = 4;
             this.lblFromage.Text = "Fromage";
             this.lblFromage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -406,7 +283,7 @@ namespace OurResto
             this.lblEntree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblEntree.Location = new System.Drawing.Point(504, 0);
             this.lblEntree.Name = "lblEntree";
-            this.lblEntree.Size = new System.Drawing.Size(143, 32);
+            this.lblEntree.Size = new System.Drawing.Size(143, 34);
             this.lblEntree.TabIndex = 3;
             this.lblEntree.Text = "Entrée";
             this.lblEntree.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -415,9 +292,9 @@ namespace OurResto
             // 
             this.lblAccompagnement.AutoSize = true;
             this.lblAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAccompagnement.Location = new System.Drawing.Point(504, 64);
+            this.lblAccompagnement.Location = new System.Drawing.Point(504, 68);
             this.lblAccompagnement.Name = "lblAccompagnement";
-            this.lblAccompagnement.Size = new System.Drawing.Size(143, 32);
+            this.lblAccompagnement.Size = new System.Drawing.Size(143, 34);
             this.lblAccompagnement.TabIndex = 2;
             this.lblAccompagnement.Text = "Accompagnement";
             this.lblAccompagnement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -427,7 +304,7 @@ namespace OurResto
             this.dTPUpdateDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dTPUpdateDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.vaffichermenuBindingSource, "RepasDate", true, System.Windows.Forms.DataSourceUpdateMode.Never));
             this.dTPUpdateDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dTPUpdateDate.Location = new System.Drawing.Point(124, 35);
+            this.dTPUpdateDate.Location = new System.Drawing.Point(124, 38);
             this.dTPUpdateDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dTPUpdateDate.Name = "dTPUpdateDate";
             this.dTPUpdateDate.Size = new System.Drawing.Size(268, 26);
@@ -440,7 +317,7 @@ namespace OurResto
             this.cBPlatDessert.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatDessert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatDessert.FormattingEnabled = true;
-            this.cBPlatDessert.Location = new System.Drawing.Point(653, 131);
+            this.cBPlatDessert.Location = new System.Drawing.Point(653, 139);
             this.cBPlatDessert.Name = "cBPlatDessert";
             this.cBPlatDessert.Size = new System.Drawing.Size(374, 28);
             this.cBPlatDessert.TabIndex = 7;
@@ -449,9 +326,9 @@ namespace OurResto
             // 
             this.lblDateRepas.AutoSize = true;
             this.lblDateRepas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDateRepas.Location = new System.Drawing.Point(3, 32);
+            this.lblDateRepas.Location = new System.Drawing.Point(3, 34);
             this.lblDateRepas.Name = "lblDateRepas";
-            this.lblDateRepas.Size = new System.Drawing.Size(115, 32);
+            this.lblDateRepas.Size = new System.Drawing.Size(115, 34);
             this.lblDateRepas.TabIndex = 0;
             this.lblDateRepas.Text = "Date du repas";
             this.lblDateRepas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -460,9 +337,9 @@ namespace OurResto
             // 
             this.lblMoment.AutoSize = true;
             this.lblMoment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMoment.Location = new System.Drawing.Point(3, 96);
+            this.lblMoment.Location = new System.Drawing.Point(3, 102);
             this.lblMoment.Name = "lblMoment";
-            this.lblMoment.Size = new System.Drawing.Size(115, 32);
+            this.lblMoment.Size = new System.Drawing.Size(115, 34);
             this.lblMoment.TabIndex = 1;
             this.lblMoment.Text = "Moment";
             this.lblMoment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -473,7 +350,7 @@ namespace OurResto
             this.cBMoment.DisplayMember = "Nom";
             this.cBMoment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBMoment.FormattingEnabled = true;
-            this.cBMoment.Location = new System.Drawing.Point(124, 99);
+            this.cBMoment.Location = new System.Drawing.Point(124, 105);
             this.cBMoment.Name = "cBMoment";
             this.cBMoment.Size = new System.Drawing.Size(268, 28);
             this.cBMoment.TabIndex = 2;
@@ -487,7 +364,6 @@ namespace OurResto
             this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPDateSemaine.Controls.Add(this.dTPWeek, 0, 0);
             this.tLPDateSemaine.Controls.Add(this.lblSemaine, 2, 0);
             this.tLPDateSemaine.Controls.Add(this.btBefore, 1, 0);
             this.tLPDateSemaine.Controls.Add(this.btAfter, 3, 0);
@@ -499,24 +375,12 @@ namespace OurResto
             this.tLPDateSemaine.Size = new System.Drawing.Size(1030, 54);
             this.tLPDateSemaine.TabIndex = 101;
             // 
-            // dTPWeek
-            // 
-            this.dTPWeek.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dTPWeek.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dTPWeek.Location = new System.Drawing.Point(3, 14);
-            this.dTPWeek.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dTPWeek.Name = "dTPWeek";
-            this.dTPWeek.Size = new System.Drawing.Size(285, 26);
-            this.dTPWeek.TabIndex = 0;
-            this.dTPWeek.TabStop = false;
-            this.dTPWeek.Value = new System.DateTime(2021, 12, 5, 9, 10, 2, 0);
-            // 
             // lblSemaine
             // 
             this.lblSemaine.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblSemaine.AutoSize = true;
             this.lblSemaine.Font = new System.Drawing.Font("Britannic Bold", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSemaine.Location = new System.Drawing.Point(442, 13);
+            this.lblSemaine.Location = new System.Drawing.Point(297, 13);
             this.lblSemaine.Name = "lblSemaine";
             this.lblSemaine.Size = new System.Drawing.Size(460, 27);
             this.lblSemaine.TabIndex = 1;
@@ -525,7 +389,7 @@ namespace OurResto
             // btBefore
             // 
             this.btBefore.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btBefore.Location = new System.Drawing.Point(308, 7);
+            this.btBefore.Location = new System.Drawing.Point(17, 7);
             this.btBefore.Name = "btBefore";
             this.btBefore.Size = new System.Drawing.Size(80, 40);
             this.btBefore.TabIndex = 2;
@@ -545,9 +409,11 @@ namespace OurResto
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.btAddRandom, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.fLPButtons, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btQuitter, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -567,7 +433,7 @@ namespace OurResto
             this.fLPButtons.Controls.Add(this.btAjouter);
             this.fLPButtons.Controls.Add(this.btModifier);
             this.fLPButtons.Controls.Add(this.btSupprimer);
-            this.fLPButtons.Location = new System.Drawing.Point(299, 3);
+            this.fLPButtons.Location = new System.Drawing.Point(227, 3);
             this.fLPButtons.Name = "fLPButtons";
             this.fLPButtons.Size = new System.Drawing.Size(576, 64);
             this.fLPButtons.TabIndex = 3;
@@ -629,6 +495,135 @@ namespace OurResto
             this.btQuitter.UseVisualStyleBackColor = false;
             this.btQuitter.Click += new System.EventHandler(this.BtQuitter_Click);
             // 
+            // repasDateDataGridViewTextBoxColumn
+            // 
+            this.repasDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.repasDateDataGridViewTextBoxColumn.DataPropertyName = "RepasDate";
+            this.repasDateDataGridViewTextBoxColumn.HeaderText = "Date du repas";
+            this.repasDateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.repasDateDataGridViewTextBoxColumn.Name = "repasDateDataGridViewTextBoxColumn";
+            this.repasDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.repasDateDataGridViewTextBoxColumn.Width = 144;
+            // 
+            // momentDataGridViewTextBoxColumn
+            // 
+            this.momentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.momentDataGridViewTextBoxColumn.DataPropertyName = "Moment";
+            this.momentDataGridViewTextBoxColumn.HeaderText = "Moment";
+            this.momentDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.momentDataGridViewTextBoxColumn.Name = "momentDataGridViewTextBoxColumn";
+            this.momentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.momentDataGridViewTextBoxColumn.Width = 98;
+            // 
+            // idPlatEntreeDataGridViewTextBoxColumn
+            // 
+            this.idPlatEntreeDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Entree";
+            this.idPlatEntreeDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Entree";
+            this.idPlatEntreeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idPlatEntreeDataGridViewTextBoxColumn.Name = "idPlatEntreeDataGridViewTextBoxColumn";
+            this.idPlatEntreeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idPlatEntreeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // entreeDataGridViewTextBoxColumn
+            // 
+            this.entreeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.entreeDataGridViewTextBoxColumn.DataPropertyName = "Entree";
+            this.entreeDataGridViewTextBoxColumn.HeaderText = "Entree";
+            this.entreeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.entreeDataGridViewTextBoxColumn.Name = "entreeDataGridViewTextBoxColumn";
+            this.entreeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idPlatPrincipalDataGridViewTextBoxColumn
+            // 
+            this.idPlatPrincipalDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Principal";
+            this.idPlatPrincipalDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Principal";
+            this.idPlatPrincipalDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idPlatPrincipalDataGridViewTextBoxColumn.Name = "idPlatPrincipalDataGridViewTextBoxColumn";
+            this.idPlatPrincipalDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idPlatPrincipalDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // platDataGridViewTextBoxColumn
+            // 
+            this.platDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.platDataGridViewTextBoxColumn.DataPropertyName = "Plat";
+            this.platDataGridViewTextBoxColumn.HeaderText = "Plat";
+            this.platDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.platDataGridViewTextBoxColumn.Name = "platDataGridViewTextBoxColumn";
+            this.platDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idPlatAccompagnementDataGridViewTextBoxColumn
+            // 
+            this.idPlatAccompagnementDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Accompagnement";
+            this.idPlatAccompagnementDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Accompagnement";
+            this.idPlatAccompagnementDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idPlatAccompagnementDataGridViewTextBoxColumn.Name = "idPlatAccompagnementDataGridViewTextBoxColumn";
+            this.idPlatAccompagnementDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idPlatAccompagnementDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // accompagnementDataGridViewTextBoxColumn
+            // 
+            this.accompagnementDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.accompagnementDataGridViewTextBoxColumn.DataPropertyName = "Accompagnement";
+            this.accompagnementDataGridViewTextBoxColumn.HeaderText = "Accompagnement";
+            this.accompagnementDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.accompagnementDataGridViewTextBoxColumn.Name = "accompagnementDataGridViewTextBoxColumn";
+            this.accompagnementDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idPlatFromageDataGridViewTextBoxColumn
+            // 
+            this.idPlatFromageDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Fromage";
+            this.idPlatFromageDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Fromage";
+            this.idPlatFromageDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idPlatFromageDataGridViewTextBoxColumn.Name = "idPlatFromageDataGridViewTextBoxColumn";
+            this.idPlatFromageDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idPlatFromageDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // fromageDataGridViewTextBoxColumn
+            // 
+            this.fromageDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.fromageDataGridViewTextBoxColumn.DataPropertyName = "Fromage";
+            this.fromageDataGridViewTextBoxColumn.HeaderText = "Fromage";
+            this.fromageDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.fromageDataGridViewTextBoxColumn.Name = "fromageDataGridViewTextBoxColumn";
+            this.fromageDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idPlatDessertDataGridViewTextBoxColumn
+            // 
+            this.idPlatDessertDataGridViewTextBoxColumn.DataPropertyName = "Id_Plat_Dessert";
+            this.idPlatDessertDataGridViewTextBoxColumn.HeaderText = "Id_Plat_Dessert";
+            this.idPlatDessertDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idPlatDessertDataGridViewTextBoxColumn.Name = "idPlatDessertDataGridViewTextBoxColumn";
+            this.idPlatDessertDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idPlatDessertDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // dessertDataGridViewTextBoxColumn
+            // 
+            this.dessertDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dessertDataGridViewTextBoxColumn.DataPropertyName = "Dessert";
+            this.dessertDataGridViewTextBoxColumn.HeaderText = "Dessert";
+            this.dessertDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.dessertDataGridViewTextBoxColumn.Name = "dessertDataGridViewTextBoxColumn";
+            this.dessertDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idMomentDataGridViewTextBoxColumn
+            // 
+            this.idMomentDataGridViewTextBoxColumn.DataPropertyName = "Id_Moment";
+            this.idMomentDataGridViewTextBoxColumn.HeaderText = "Id_Moment";
+            this.idMomentDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idMomentDataGridViewTextBoxColumn.Name = "idMomentDataGridViewTextBoxColumn";
+            this.idMomentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idMomentDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // vaffichermenuBindingSource
+            // 
+            this.vaffichermenuBindingSource.DataMember = "v_affichermenu";
+            this.vaffichermenuBindingSource.DataSource = this.cda68_bd1DataSet;
+            // 
+            // cda68_bd1DataSet
+            // 
+            this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
+            this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // momentTableAdapter
             // 
             this.momentTableAdapter.ClearBeforeFill = true;
@@ -655,6 +650,19 @@ namespace OurResto
             // 
             this.v_affichermenuTableAdapter.ClearBeforeFill = true;
             // 
+            // btAddRandom
+            // 
+            this.btAddRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btAddRandom.BackColor = System.Drawing.SystemColors.Control;
+            this.btAddRandom.Location = new System.Drawing.Point(889, 3);
+            this.btAddRandom.Name = "btAddRandom";
+            this.btAddRandom.Size = new System.Drawing.Size(138, 64);
+            this.btAddRandom.TabIndex = 13;
+            this.btAddRandom.Text = "Aj&out aléatoires";
+            this.btAddRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btAddRandom.UseVisualStyleBackColor = false;
+            this.btAddRandom.Click += new System.EventHandler(this.BtAddRandom_Click);
+            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -670,8 +678,6 @@ namespace OurResto
             this.Text = "Menus";
             this.Load += new System.EventHandler(this.FormMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).EndInit();
             this.tLPMain.ResumeLayout(false);
             this.tLPMain.PerformLayout();
             this.tLPInputBox.ResumeLayout(false);
@@ -681,6 +687,8 @@ namespace OurResto
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.fLPButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vplatsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -693,7 +701,6 @@ namespace OurResto
         private cda68_bd1DataSet cda68_bd1DataSet;
         //private System.Windows.Forms.DataGridViewTextBoxColumn nomDataGridViewTextBoxColumn;
         private System.Windows.Forms.TableLayoutPanel tLPMain;
-        private System.Windows.Forms.DateTimePicker dTPWeek;
         private System.Windows.Forms.TableLayoutPanel tLPInputBox;
         private System.Windows.Forms.Label lblPlat;
         private System.Windows.Forms.Label lblDessert;
@@ -720,6 +727,13 @@ namespace OurResto
         private cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter v_affichermenuTableAdapter;
         private System.Windows.Forms.Button btBefore;
         private System.Windows.Forms.Button btAfter;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel fLPButtons;
+        private System.Windows.Forms.Button btActualiser;
+        private System.Windows.Forms.Button btAjouter;
+        private System.Windows.Forms.Button btModifier;
+        private System.Windows.Forms.Button btSupprimer;
+        private System.Windows.Forms.Button btQuitter;
         private System.Windows.Forms.DataGridViewTextBoxColumn repasDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn momentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPlatEntreeDataGridViewTextBoxColumn;
@@ -733,12 +747,6 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn idPlatDessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel fLPButtons;
-        private System.Windows.Forms.Button btActualiser;
-        private System.Windows.Forms.Button btAjouter;
-        private System.Windows.Forms.Button btModifier;
-        private System.Windows.Forms.Button btSupprimer;
-        private System.Windows.Forms.Button btQuitter;
+        private System.Windows.Forms.Button btAddRandom;
     }
 }

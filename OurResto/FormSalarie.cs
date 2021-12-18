@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace OurResto
 {
     public partial class FormSalarie : Form
     {
+        List<cda68_bd1DataSet.SalarieRow> salaries = new List<cda68_bd1DataSet.SalarieRow>();
+
         public FormSalarie()
         {
             InitializeComponent();
@@ -40,7 +43,9 @@ namespace OurResto
                 transactionTableAdapter.Fill(cda68_bd1DataSet.Transaction);
                 salarieTableAdapter.Fill(cda68_bd1DataSet.Salarie);
 
-                salarieBindingSource.DataSource = cda68_bd1DataSet.Salarie.OrderBy(r => r.Nom).ToList();
+                salaries = cda68_bd1DataSet.Salarie.OrderBy(r => r.Nom).ToList();
+
+                salarieBindingSource.DataSource = salaries;
                 typePaiementBindingSource.DataSource = cda68_bd1DataSet.TypePaiement.Select(r => r.Nom).ToList();
             }
             catch (Exception)
@@ -249,17 +254,20 @@ namespace OurResto
 
         private void DGVSalarie_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            switch (e.ColumnIndex)
+            DataGridViewColumn column = dGVSalarie.Columns[e.ColumnIndex];
+
+            if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
             {
-                case 0:
-                    
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                default:
-                    break;
+                string columnName = column.DataPropertyName;
+
+                SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+
+                salaries.Sort(new SalarieComparer(columnName, sortOrder));
+
+                dGVSalarie.Refresh();
+
+
+                column.HeaderCell.SortGlyphDirection = sortOrder;
             }
         }
     }

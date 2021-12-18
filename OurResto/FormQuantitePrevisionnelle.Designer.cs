@@ -38,7 +38,6 @@ namespace OurResto
             this.btQuitter = new System.Windows.Forms.Button();
             this.dGVQuantitePrevisionelle = new System.Windows.Forms.DataGridView();
             this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idMomentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ingredientDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantiteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uniteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,14 +76,14 @@ namespace OurResto
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(567, 605);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(482, 553);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btQuitter
             // 
             this.btQuitter.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btQuitter.BackColor = System.Drawing.Color.Transparent;
-            this.btQuitter.Location = new System.Drawing.Point(201, 538);
+            this.btQuitter.Location = new System.Drawing.Point(159, 486);
             this.btQuitter.Name = "btQuitter";
             this.btQuitter.Size = new System.Drawing.Size(164, 64);
             this.btQuitter.TabIndex = 9;
@@ -106,7 +105,6 @@ namespace OurResto
             this.dGVQuantitePrevisionelle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGVQuantitePrevisionelle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.repasDateDataGridViewTextBoxColumn,
-            this.idMomentDataGridViewTextBoxColumn,
             this.ingredientDataGridViewTextBoxColumn,
             this.quantiteDataGridViewTextBoxColumn,
             this.uniteDataGridViewTextBoxColumn});
@@ -117,7 +115,7 @@ namespace OurResto
             this.dGVQuantitePrevisionelle.ReadOnly = true;
             this.dGVQuantitePrevisionelle.RowHeadersVisible = false;
             this.dGVQuantitePrevisionelle.RowHeadersWidth = 51;
-            this.dGVQuantitePrevisionelle.Size = new System.Drawing.Size(561, 489);
+            this.dGVQuantitePrevisionelle.Size = new System.Drawing.Size(476, 437);
             this.dGVQuantitePrevisionelle.TabIndex = 1;
             // 
             // repasDateDataGridViewTextBoxColumn
@@ -128,15 +126,6 @@ namespace OurResto
             this.repasDateDataGridViewTextBoxColumn.Name = "repasDateDataGridViewTextBoxColumn";
             this.repasDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.repasDateDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // idMomentDataGridViewTextBoxColumn
-            // 
-            this.idMomentDataGridViewTextBoxColumn.DataPropertyName = "Id_Moment";
-            this.idMomentDataGridViewTextBoxColumn.HeaderText = "Id_Moment";
-            this.idMomentDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idMomentDataGridViewTextBoxColumn.Name = "idMomentDataGridViewTextBoxColumn";
-            this.idMomentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idMomentDataGridViewTextBoxColumn.Visible = false;
             // 
             // ingredientDataGridViewTextBoxColumn
             // 
@@ -173,7 +162,7 @@ namespace OurResto
             this.tBTitle.Location = new System.Drawing.Point(3, 3);
             this.tBTitle.Name = "tBTitle";
             this.tBTitle.ReadOnly = true;
-            this.tBTitle.Size = new System.Drawing.Size(561, 34);
+            this.tBTitle.Size = new System.Drawing.Size(476, 34);
             this.tBTitle.TabIndex = 2;
             this.tBTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -181,12 +170,12 @@ namespace OurResto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 605);
+            this.ClientSize = new System.Drawing.Size(482, 553);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(583, 644);
+            this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "FormQuantitePrevisionnelle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quantite Previsionnelle d\'ingrédients";

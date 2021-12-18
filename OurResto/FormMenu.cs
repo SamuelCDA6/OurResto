@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Transactions;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace OurResto
 {
@@ -13,6 +14,9 @@ namespace OurResto
         DateTime dateMonday;
         DateTime dateFriday;
         DateTime dateAdd;
+
+        List<cda68_bd1DataSet.v_affichermenuRow> menus = new List<cda68_bd1DataSet.v_affichermenuRow>();
+
         public FormMenu()
         {
             InitializeComponent();
@@ -21,7 +25,7 @@ namespace OurResto
         private void FormMenu_Load(object sender, EventArgs e)
         {
             Initialisation();
-            
+
             RefreshDisplay();
         }
 
@@ -84,15 +88,20 @@ namespace OurResto
             try
             {
                 // Pour la vue menu récupérer seulement les menus compris entre ces dates
-                var rows = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= begin && r.RepasDate.Date <= end)
+                menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= begin && r.RepasDate.Date <= end)
                                                           .OrderBy(r => r.RepasDate)
                                                           .ThenBy(r => r.Id_Moment).ToList();
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
-                vaffichermenuBindingSource.DataSource = rows;
+                vaffichermenuBindingSource.DataSource = menus;
 
                 // Et repositionner la position de la BindingSource sur la date
-                SetPositionBindingSource(dTPUpdateDate.Value.Date);
+                if (cda68_bd1DataSet.Moment.Count > 0)
+                {
+                    var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+                    SetPositionBindingSource(dTPUpdateDate.Value.Date, idMoment);
+                }
             }
             catch (Exception)
             {
@@ -203,7 +212,8 @@ namespace OurResto
 
             RefreshDisplay();
 
-            SetPositionBindingSource(dateAdd);
+            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+            SetPositionBindingSource(dateAdd, idMoment);
         }
 
         /// <summary>
@@ -303,9 +313,17 @@ namespace OurResto
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(Properties.Resources.TXTUPDATEMENU);
+                    if (ex is ArgumentNullException || ex is InvalidOperationException)
+                    {
+                        MessageBox.Show(Properties.Resources.TXTPLATINVALIDE);
+                    }
+                    else
+                    {
+                        MessageBox.Show(Properties.Resources.TXTUPDATEMENU);
+                    }
+
                 }
 
 
@@ -370,20 +388,24 @@ namespace OurResto
                 UpdateWeekMenus(date);
             }
 
-            // Si il y a un menu qui correspond à la date et au moment, positionner la BindingSource dessus
-            SetPositionBindingSource(date);
+            if (cda68_bd1DataSet.Moment.Count > 0)
+            {
+                var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+                SetPositionBindingSource(date, idMoment);
+            }
+
+
         }
 
         /// <summary>
         /// Méthode pour placer la position de la BindingSource sur une position donnée
         /// </summary>
         /// <param name="date">la date ou placer la BindingSource</param>
-        private void SetPositionBindingSource(DateTime date)
+        private void SetPositionBindingSource(DateTime date, int idMoment)
         {
-            if (vaffichermenuBindingSource.Current != null && cda68_bd1DataSet.Moment.Count > 0)
+            if (vaffichermenuBindingSource.Current != null)
             {
-                var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
-
                 // Chercher si un menu du DataGridView correspond à la date et au moment
                 if (dGVMenu.Rows.OfType<DataGridViewRow>()
                                             .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
@@ -428,6 +450,109 @@ namespace OurResto
                 cBPlatAccompagnement.SelectedIndex = -1;
                 cBPlatDessert.SelectedIndex = -1;
             }
+        }
+
+        private void dGVMenu_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewColumn column = dGVMenu.Columns[e.ColumnIndex];
+
+            if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
+            {
+                string columnName = column.DataPropertyName;
+
+                SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+
+                menus.Sort(new MenuComparer(columnName, sortOrder));
+
+                dGVMenu.Refresh();
+
+                column.HeaderCell.SortGlyphDirection = sortOrder;
+            }
+        }
+
+        private void BtAddRandom_Click(object sender, EventArgs e)
+        {
+            AddRandomWeekMeals();
+
+            RefreshDisplay();
+        }
+
+        /// <summary>
+        /// Méthode pour ajouter des menus aléatoires pour toute la semaine sans plat identique
+        /// </summary>
+        private void AddRandomWeekMeals()
+        {
+            Random random = new Random();
+
+            // Récupere tous les plats de chaque type
+            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
+            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
+            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
+            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4).ToList();
+            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5).ToList();
+
+            // Les stocker dans un tableau de liste de plats
+            List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
+
+            try
+            {
+                // Si pas de plat inscrit pour la semaine
+                if (cda68_bd1DataSet.Menu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).Count() == 0)
+                {
+                    using (TransactionScope trans = new TransactionScope())
+                    {
+                        bool IsFailed = false;
+
+                        // Pour chaque jour de la semaine
+                        foreach (DateTime dt in EachDay(dateMonday, dateFriday))
+                        {
+                            // Pour chaque moment repas
+                            foreach (int moment in cda68_bd1DataSet.Moment.Select(r => r.Id_Moment))
+                            {
+                                // Pour chaque type de plat
+                                foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
+                                {
+                                    // Recuperer un plat aléatoire
+                                    int i = random.Next(0, plats.Count);
+
+                                    // Ajouter le plat dans le SGBD
+                                    if (menuTableAdapter.Insert(plats[i].Id_Plat, moment, dt) != 1)
+                                    {
+                                        // Si l'insert n'a pas réussi mettre le 
+                                        IsFailed = true;
+                                        return;
+                                    }
+
+                                    // Enlever le plat de la liste pour ne pas le réutiliser
+                                    plats.RemoveAt(i);
+                                }
+                            }
+                        }
+
+                        // Si tous les plats on bien étés insérer valider la transaction 
+                        if (!IsFailed)
+                        {
+                            trans.Complete();
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Properties.Resources.TXTADDMENU);
+            }
+        }
+
+        /// <summary>
+        /// Méthode pour renvoyer toutes les dates comprises entre 2 dates
+        /// </summary>
+        /// <param name="start">date de debut</param>
+        /// <param name="end">date de fin</param>
+        /// <returns>Enumerable des dates comprise entre date de debut et de fin</returns>
+        private IEnumerable<DateTime> EachDay(DateTime start, DateTime end)
+        {
+            for (var day = start.Date; day.Date <= end.Date; day = day.AddDays(1))
+                yield return day;
         }
     }
 }
