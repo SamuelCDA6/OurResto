@@ -12,7 +12,7 @@ namespace OurResto
     {
         DateTime dateMonday;
         DateTime dateFriday;
-        DateTime date;
+        DateTime dateAdd;
         public FormMenu()
         {
             InitializeComponent();
@@ -41,6 +41,7 @@ namespace OurResto
                 cb.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.Never;
             }
 
+            // 
             foreach (DataGridViewColumn c in dGVMenu.Columns)
             {
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -65,6 +66,7 @@ namespace OurResto
             // Si le lundi est sur le mois precedent prendre le mois aussi sinon que le jour
             string monday = (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("M") : dateMonday.Day.ToString();
 
+            // Remettre à jour le label de la semaine
             lblSemaine.Text = String.Format("Semaine du {0} au {1}", monday, dateFriday.ToString("M"));
 
             ChangeDataGridDisplayedMenus(dateMonday, dateFriday);
@@ -86,9 +88,11 @@ namespace OurResto
                                                           .OrderBy(r => r.RepasDate)
                                                           .ThenBy(r => r.Id_Moment).ToList();
 
+                // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
                 vaffichermenuBindingSource.DataSource = rows;
 
-                SetPositionBindingSource(date);
+                // Et repositionner la position de la BindingSource sur la date
+                SetPositionBindingSource(dTPUpdateDate.Value.Date);
             }
             catch (Exception)
             {
@@ -97,6 +101,9 @@ namespace OurResto
         }
         #endregion
 
+        /// <summary>
+        /// Méthode pour remettre à jour le DataSet avec le SGBD et mettre à jour l'affichage en conséquence
+        /// </summary>
         private void RefreshDisplay()
         {
             try
@@ -108,7 +115,7 @@ namespace OurResto
 
                 SetupComboBoxs();
 
-                UpdateWeekMenus(date);
+                UpdateWeekMenus(dTPUpdateDate.Value.Date);
             }
             catch (Exception)
             {
@@ -181,7 +188,7 @@ namespace OurResto
 
         private void BtAjouter_Click(object sender, EventArgs e)
         {
-            date = dTPUpdateDate.Value.Date;
+            dateAdd = dTPUpdateDate.Value.Date;
             using (TransactionScope trans = new TransactionScope())
             {
                 int nb = AddMenus();
@@ -196,21 +203,23 @@ namespace OurResto
 
             RefreshDisplay();
 
-            SetPositionBindingSource(date);
+            SetPositionBindingSource(dateAdd);
         }
 
         /// <summary>
         /// Méthode pour ajouter les menus dans le SGBD
         /// </summary>
+        /// <returns>Retourne le résultat des requêtes d'ajouts</returns>
         private int AddMenus()
         {
             try
             {
                 var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
-                date = dTPUpdateDate.Value;
+                DateTime date = dTPUpdateDate.Value;
 
                 int nb = 0;
 
+                // Si pas de plat à cette date ajouter les menus dans le SGBD
                 if (cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == idMoment && r.RepasDate == date).Count() == 0)
                 {
                     nb += AddPlat(cBPlatEntree, idMoment, date);
@@ -243,28 +252,19 @@ namespace OurResto
         /// <param name="cb">ComboBox lié au plat à ajouter</param>
         /// <param name="idmoment">Id du moment pour le plat à ajouter</param>
         /// <param name="daterepas">date du repas pour le plat à ajouter</param>
+        /// <returns> entier retourner par l'insert du menu</returns>
         private int AddPlat(ComboBox cb, int idmoment, DateTime daterepas)
         {
-            //var id = (int)cb.SelectedValue;
+            // Récupérer l'id qui correspond au plat
             var id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cb.Text).Id_Plat;
 
+            // Inserer le menu dans le SGBD et retourner le resultat
             return menuTableAdapter.Insert(id, idmoment, daterepas);
         }
 
 
         private void BtModifier_Click(object sender, EventArgs e)
         {
-            //using (TransactionScope trans = new TransactionScope())
-            //{
-            //    DeleteMenuCurrentRow();
-
-            //    AddMenus();
-
-            //    trans.Complete();
-            //}
-
-            //MySqlConnection.ClearAllPools();
-
             UpdateMenus();
 
             RefreshDisplay();
@@ -363,8 +363,8 @@ namespace OurResto
 
         private void DTPUpdateDate_ValueChanged(object sender, EventArgs e)
         {
-            date = dTPUpdateDate.Value.Date;
-            // Si la date choisit n'est pas dans la même semaine remettre à jour le DataGridView
+            DateTime date = dTPUpdateDate.Value.Date;
+            // Si la date choisit n'est pas dans la semaine afficher en cours remettre à jour le DataGridView
             if (date < dateMonday || date > dateFriday)
             {
                 UpdateWeekMenus(date);
@@ -374,17 +374,23 @@ namespace OurResto
             SetPositionBindingSource(date);
         }
 
+        /// <summary>
+        /// Méthode pour placer la position de la BindingSource sur une position donnée
+        /// </summary>
+        /// <param name="date">la date ou placer la BindingSource</param>
         private void SetPositionBindingSource(DateTime date)
         {
             if (vaffichermenuBindingSource.Current != null && cda68_bd1DataSet.Moment.Count > 0)
             {
                 var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
 
+                // Chercher si un menu du DataGridView correspond à la date et au moment
                 if (dGVMenu.Rows.OfType<DataGridViewRow>()
                                             .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
                                                                     (int)r.Cells[12].Value == idMoment)
                                             is DataGridViewRow row)
                 {
+                    // Si oui placer la BindingSource dessus
                     vaffichermenuBindingSource.Position = row.Index;
                 }
                 else // Si pas de menu vider les ComboBox
@@ -414,7 +420,7 @@ namespace OurResto
         {
             var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
 
-            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == date && r.Id_Moment == idMoment))
+            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == dTPUpdateDate.Value.Date && r.Id_Moment == idMoment))
             {
                 cBPlatEntree.SelectedIndex = -1;
                 cBPlatPrincipal.SelectedIndex = -1;
