@@ -54,6 +54,22 @@ namespace OurResto
             dGVMenu.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dTPUpdateDate.Value = DateTime.Today;
+
+            toolTip.SetToolTip(btAddRandom, "Ajouter des plats aléatoires pour toute la semaine");
+            toolTip.SetToolTip(btActualiser, "Remetre l'affichage à jour");
+            toolTip.SetToolTip(btModifier, "Modifier le menu actuellement sélectionné");
+            toolTip.SetToolTip(btAjouter, "Ajouter un menu");
+            toolTip.SetToolTip(btSupprimer, "Supprimer le menu actuellement sélectionné");
+            toolTip.SetToolTip(btBefore, "Aller à la semaine précédente");
+            toolTip.SetToolTip(btAfter, "Aller à la semaine suivante");
+            toolTip.SetToolTip(btQuitter, "Revenir à la fenêtre principale");
+            toolTip.SetToolTip(cBMoment, "Moment du repas");
+            toolTip.SetToolTip(cBPlatEntree, "Nom du plat pour l'entrée");
+            toolTip.SetToolTip(cBPlatPrincipal, "Nom du plat pour le plat principal");
+            toolTip.SetToolTip(cBPlatAccompagnement, "Nom du plat pour l'accompagnement");
+            toolTip.SetToolTip(cBPlatFromage, "Nom du plat pour le fromage");
+            toolTip.SetToolTip(cBPlatDessert, "Nom du plat pour le dessert");
+            toolTip.SetToolTip(dTPUpdateDate, "Date pour le repas");
         }
         #endregion
 

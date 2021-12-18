@@ -32,6 +32,11 @@ namespace OurResto
             Manager.ResizeImage(btExit, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
             Manager.ResizeImage(btToday, Properties.Resources.Calendar_256x256, ContentAlignment.MiddleLeft);
 
+            toolTip.SetToolTip(btExit, "Revenir à la fenêtre principale");
+            toolTip.SetToolTip(btAfter, "Aller au jour suivant");
+            toolTip.SetToolTip(btBefore, "Aller au jour précédent");
+            toolTip.SetToolTip(btToday, "Revenir à aujoud'hui");
+
             dGVPlanProduction.DefaultCellStyle.BackColor = Color.White;
 
             lblJour.Text = date.ToString("M");

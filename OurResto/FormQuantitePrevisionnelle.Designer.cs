@@ -42,6 +42,7 @@ namespace OurResto
             this.quantiteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.uniteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tBTitle = new System.Windows.Forms.TextBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.vquantiteprevisionnelleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -202,5 +203,6 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn uniteDataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox tBTitle;
         private System.Windows.Forms.Button btQuitter;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

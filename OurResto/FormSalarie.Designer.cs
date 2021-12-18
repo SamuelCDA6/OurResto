@@ -80,6 +80,7 @@ namespace OurResto
             this.v_soldesalarieTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter();
             this.typePaiementTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.TypePaiementTableAdapter();
             this.timerRechercheSalarie = new System.Windows.Forms.Timer(this.components);
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tLPMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSalarie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salarieBindingSource)).BeginInit();
@@ -717,5 +718,6 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn estActifDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idGradeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

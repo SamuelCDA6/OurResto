@@ -24,6 +24,8 @@ namespace OurResto
         {
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
 
+            toolTip.SetToolTip(btQuitter, "Revenir à la fenêtre principale");
+
             v_quantiteprevisionnelleTableAdapter.Fill(cda68_bd1DataSet.v_quantiteprevisionnelle);
 
             DateTime dateMonday = DateTime.Today.AddDays(7).WeekDay(DayOfWeek.Monday).Date;

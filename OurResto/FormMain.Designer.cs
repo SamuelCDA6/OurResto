@@ -29,6 +29,7 @@ namespace OurResto
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btQuitter = new System.Windows.Forms.Button();
@@ -40,6 +41,7 @@ namespace OurResto
             this.btPlanProduction = new System.Windows.Forms.Button();
             this.lblIntendant = new System.Windows.Forms.Label();
             this.lblTitre = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -213,6 +215,7 @@ namespace OurResto
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblIntendant;
         private System.Windows.Forms.Button btQuitter;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

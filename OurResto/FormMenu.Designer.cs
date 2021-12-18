@@ -33,6 +33,21 @@ namespace OurResto
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenu));
             this.dGVMenu = new System.Windows.Forms.DataGridView();
+            this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.momentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatEntreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatPrincipalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.platDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatAccompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.accompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatFromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idPlatDessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idMomentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vaffichermenuBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cda68_bd1DataSet = new OurResto.cda68_bd1DataSet();
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.tLPInputBox = new System.Windows.Forms.TableLayoutPanel();
             this.cBPlatFromage = new System.Windows.Forms.ComboBox();
@@ -54,42 +69,28 @@ namespace OurResto
             this.btBefore = new System.Windows.Forms.Button();
             this.btAfter = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btAddRandom = new System.Windows.Forms.Button();
             this.fLPButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btActualiser = new System.Windows.Forms.Button();
             this.btAjouter = new System.Windows.Forms.Button();
             this.btModifier = new System.Windows.Forms.Button();
             this.btSupprimer = new System.Windows.Forms.Button();
             this.btQuitter = new System.Windows.Forms.Button();
-            this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.momentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatEntreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.entreeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatPrincipalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.platDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatAccompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.accompagnementDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatFromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fromageDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idPlatDessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dessertDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idMomentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vaffichermenuBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.cda68_bd1DataSet = new OurResto.cda68_bd1DataSet();
             this.momentTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.MomentTableAdapter();
             this.vplatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.v_platsTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_platsTableAdapter();
             this.menuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.MenuTableAdapter();
             this.menuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.v_affichermenuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter();
-            this.btAddRandom = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             this.tLPMain.SuspendLayout();
             this.tLPInputBox.SuspendLayout();
             this.tLPDateSemaine.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.fLPButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vplatsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -137,363 +138,13 @@ namespace OurResto
             this.dGVMenu.RowHeadersVisible = false;
             this.dGVMenu.RowHeadersWidth = 51;
             this.dGVMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVMenu.Size = new System.Drawing.Size(1028, 261);
+            this.dGVMenu.Size = new System.Drawing.Size(1028, 271);
             this.dGVMenu.StandardTab = true;
             this.dGVMenu.TabIndex = 100;
             this.dGVMenu.TabStop = false;
             this.dGVMenu.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVMenu_CellFormatting);
             this.dGVMenu.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dGVMenu_ColumnHeaderMouseClick);
             this.dGVMenu.SelectionChanged += new System.EventHandler(this.DGVMenu_SelectionChanged);
-            // 
-            // tLPMain
-            // 
-            this.tLPMain.ColumnCount = 1;
-            this.tLPMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPMain.Controls.Add(this.dGVMenu, 0, 1);
-            this.tLPMain.Controls.Add(this.tLPInputBox, 0, 2);
-            this.tLPMain.Controls.Add(this.tLPDateSemaine, 0, 0);
-            this.tLPMain.Controls.Add(this.tableLayoutPanel1, 0, 3);
-            this.tLPMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPMain.Location = new System.Drawing.Point(0, 0);
-            this.tLPMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tLPMain.Name = "tLPMain";
-            this.tLPMain.RowCount = 4;
-            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPMain.Size = new System.Drawing.Size(1036, 581);
-            this.tLPMain.TabIndex = 1;
-            // 
-            // tLPInputBox
-            // 
-            this.tLPInputBox.AutoSize = true;
-            this.tLPInputBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tLPInputBox.ColumnCount = 4;
-            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tLPInputBox.Controls.Add(this.cBPlatFromage, 3, 3);
-            this.tLPInputBox.Controls.Add(this.cBPlatAccompagnement, 3, 2);
-            this.tLPInputBox.Controls.Add(this.cBPlatPrincipal, 3, 1);
-            this.tLPInputBox.Controls.Add(this.cBPlatEntree, 3, 0);
-            this.tLPInputBox.Controls.Add(this.lblPlat, 2, 1);
-            this.tLPInputBox.Controls.Add(this.lblDessert, 2, 4);
-            this.tLPInputBox.Controls.Add(this.lblFromage, 2, 3);
-            this.tLPInputBox.Controls.Add(this.lblEntree, 2, 0);
-            this.tLPInputBox.Controls.Add(this.lblAccompagnement, 2, 2);
-            this.tLPInputBox.Controls.Add(this.dTPUpdateDate, 1, 1);
-            this.tLPInputBox.Controls.Add(this.cBPlatDessert, 3, 4);
-            this.tLPInputBox.Controls.Add(this.lblDateRepas, 0, 1);
-            this.tLPInputBox.Controls.Add(this.lblMoment, 0, 3);
-            this.tLPInputBox.Controls.Add(this.cBMoment, 1, 3);
-            this.tLPInputBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPInputBox.Location = new System.Drawing.Point(3, 332);
-            this.tLPInputBox.Name = "tLPInputBox";
-            this.tLPInputBox.RowCount = 5;
-            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLPInputBox.Size = new System.Drawing.Size(1030, 170);
-            this.tLPInputBox.TabIndex = 3;
-            // 
-            // cBPlatFromage
-            // 
-            this.cBPlatFromage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cBPlatFromage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cBPlatFromage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cBPlatFromage.FormattingEnabled = true;
-            this.cBPlatFromage.Location = new System.Drawing.Point(653, 105);
-            this.cBPlatFromage.Name = "cBPlatFromage";
-            this.cBPlatFromage.Size = new System.Drawing.Size(374, 28);
-            this.cBPlatFromage.TabIndex = 6;
-            // 
-            // cBPlatAccompagnement
-            // 
-            this.cBPlatAccompagnement.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cBPlatAccompagnement.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cBPlatAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cBPlatAccompagnement.FormattingEnabled = true;
-            this.cBPlatAccompagnement.Location = new System.Drawing.Point(653, 71);
-            this.cBPlatAccompagnement.Name = "cBPlatAccompagnement";
-            this.cBPlatAccompagnement.Size = new System.Drawing.Size(374, 28);
-            this.cBPlatAccompagnement.TabIndex = 5;
-            // 
-            // cBPlatPrincipal
-            // 
-            this.cBPlatPrincipal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cBPlatPrincipal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cBPlatPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cBPlatPrincipal.FormattingEnabled = true;
-            this.cBPlatPrincipal.Location = new System.Drawing.Point(653, 37);
-            this.cBPlatPrincipal.Name = "cBPlatPrincipal";
-            this.cBPlatPrincipal.Size = new System.Drawing.Size(374, 28);
-            this.cBPlatPrincipal.TabIndex = 4;
-            // 
-            // cBPlatEntree
-            // 
-            this.cBPlatEntree.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cBPlatEntree.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cBPlatEntree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cBPlatEntree.FormattingEnabled = true;
-            this.cBPlatEntree.Location = new System.Drawing.Point(653, 3);
-            this.cBPlatEntree.Name = "cBPlatEntree";
-            this.cBPlatEntree.Size = new System.Drawing.Size(374, 28);
-            this.cBPlatEntree.TabIndex = 3;
-            // 
-            // lblPlat
-            // 
-            this.lblPlat.AutoSize = true;
-            this.lblPlat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPlat.Location = new System.Drawing.Point(504, 34);
-            this.lblPlat.Name = "lblPlat";
-            this.lblPlat.Size = new System.Drawing.Size(143, 34);
-            this.lblPlat.TabIndex = 6;
-            this.lblPlat.Text = "Plat";
-            this.lblPlat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblDessert
-            // 
-            this.lblDessert.AutoSize = true;
-            this.lblDessert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDessert.Location = new System.Drawing.Point(504, 136);
-            this.lblDessert.Name = "lblDessert";
-            this.lblDessert.Size = new System.Drawing.Size(143, 34);
-            this.lblDessert.TabIndex = 5;
-            this.lblDessert.Text = "Dessert";
-            this.lblDessert.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblFromage
-            // 
-            this.lblFromage.AutoSize = true;
-            this.lblFromage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFromage.Location = new System.Drawing.Point(504, 102);
-            this.lblFromage.Name = "lblFromage";
-            this.lblFromage.Size = new System.Drawing.Size(143, 34);
-            this.lblFromage.TabIndex = 4;
-            this.lblFromage.Text = "Fromage";
-            this.lblFromage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblEntree
-            // 
-            this.lblEntree.AutoSize = true;
-            this.lblEntree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblEntree.Location = new System.Drawing.Point(504, 0);
-            this.lblEntree.Name = "lblEntree";
-            this.lblEntree.Size = new System.Drawing.Size(143, 34);
-            this.lblEntree.TabIndex = 3;
-            this.lblEntree.Text = "Entrée";
-            this.lblEntree.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblAccompagnement
-            // 
-            this.lblAccompagnement.AutoSize = true;
-            this.lblAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAccompagnement.Location = new System.Drawing.Point(504, 68);
-            this.lblAccompagnement.Name = "lblAccompagnement";
-            this.lblAccompagnement.Size = new System.Drawing.Size(143, 34);
-            this.lblAccompagnement.TabIndex = 2;
-            this.lblAccompagnement.Text = "Accompagnement";
-            this.lblAccompagnement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dTPUpdateDate
-            // 
-            this.dTPUpdateDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dTPUpdateDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.vaffichermenuBindingSource, "RepasDate", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.dTPUpdateDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dTPUpdateDate.Location = new System.Drawing.Point(124, 38);
-            this.dTPUpdateDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dTPUpdateDate.Name = "dTPUpdateDate";
-            this.dTPUpdateDate.Size = new System.Drawing.Size(268, 26);
-            this.dTPUpdateDate.TabIndex = 1;
-            this.dTPUpdateDate.ValueChanged += new System.EventHandler(this.DTPUpdateDate_ValueChanged);
-            // 
-            // cBPlatDessert
-            // 
-            this.cBPlatDessert.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.cBPlatDessert.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cBPlatDessert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cBPlatDessert.FormattingEnabled = true;
-            this.cBPlatDessert.Location = new System.Drawing.Point(653, 139);
-            this.cBPlatDessert.Name = "cBPlatDessert";
-            this.cBPlatDessert.Size = new System.Drawing.Size(374, 28);
-            this.cBPlatDessert.TabIndex = 7;
-            // 
-            // lblDateRepas
-            // 
-            this.lblDateRepas.AutoSize = true;
-            this.lblDateRepas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDateRepas.Location = new System.Drawing.Point(3, 34);
-            this.lblDateRepas.Name = "lblDateRepas";
-            this.lblDateRepas.Size = new System.Drawing.Size(115, 34);
-            this.lblDateRepas.TabIndex = 0;
-            this.lblDateRepas.Text = "Date du repas";
-            this.lblDateRepas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblMoment
-            // 
-            this.lblMoment.AutoSize = true;
-            this.lblMoment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMoment.Location = new System.Drawing.Point(3, 102);
-            this.lblMoment.Name = "lblMoment";
-            this.lblMoment.Size = new System.Drawing.Size(115, 34);
-            this.lblMoment.TabIndex = 1;
-            this.lblMoment.Text = "Moment";
-            this.lblMoment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cBMoment
-            // 
-            this.cBMoment.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cBMoment.DisplayMember = "Nom";
-            this.cBMoment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBMoment.FormattingEnabled = true;
-            this.cBMoment.Location = new System.Drawing.Point(124, 105);
-            this.cBMoment.Name = "cBMoment";
-            this.cBMoment.Size = new System.Drawing.Size(268, 28);
-            this.cBMoment.TabIndex = 2;
-            this.cBMoment.ValueMember = "Id_Nom";
-            // 
-            // tLPDateSemaine
-            // 
-            this.tLPDateSemaine.AutoSize = true;
-            this.tLPDateSemaine.ColumnCount = 4;
-            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPDateSemaine.Controls.Add(this.lblSemaine, 2, 0);
-            this.tLPDateSemaine.Controls.Add(this.btBefore, 1, 0);
-            this.tLPDateSemaine.Controls.Add(this.btAfter, 3, 0);
-            this.tLPDateSemaine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPDateSemaine.Location = new System.Drawing.Point(3, 3);
-            this.tLPDateSemaine.Name = "tLPDateSemaine";
-            this.tLPDateSemaine.RowCount = 1;
-            this.tLPDateSemaine.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPDateSemaine.Size = new System.Drawing.Size(1030, 54);
-            this.tLPDateSemaine.TabIndex = 101;
-            // 
-            // lblSemaine
-            // 
-            this.lblSemaine.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lblSemaine.AutoSize = true;
-            this.lblSemaine.Font = new System.Drawing.Font("Britannic Bold", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSemaine.Location = new System.Drawing.Point(297, 13);
-            this.lblSemaine.Name = "lblSemaine";
-            this.lblSemaine.Size = new System.Drawing.Size(460, 27);
-            this.lblSemaine.TabIndex = 1;
-            this.lblSemaine.Text = "Semaine du 29 novembre au 5 decembre";
-            // 
-            // btBefore
-            // 
-            this.btBefore.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btBefore.Location = new System.Drawing.Point(17, 7);
-            this.btBefore.Name = "btBefore";
-            this.btBefore.Size = new System.Drawing.Size(80, 40);
-            this.btBefore.TabIndex = 2;
-            this.btBefore.UseVisualStyleBackColor = true;
-            this.btBefore.Click += new System.EventHandler(this.BtBefore_Click);
-            // 
-            // btAfter
-            // 
-            this.btAfter.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btAfter.Location = new System.Drawing.Point(957, 7);
-            this.btAfter.Name = "btAfter";
-            this.btAfter.Size = new System.Drawing.Size(70, 40);
-            this.btAfter.TabIndex = 3;
-            this.btAfter.UseVisualStyleBackColor = true;
-            this.btAfter.Click += new System.EventHandler(this.BtAfter_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.btAddRandom, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.fLPButtons, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btQuitter, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 508);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1030, 70);
-            this.tableLayoutPanel1.TabIndex = 102;
-            // 
-            // fLPButtons
-            // 
-            this.fLPButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.fLPButtons.AutoSize = true;
-            this.fLPButtons.BackColor = System.Drawing.SystemColors.Control;
-            this.fLPButtons.Controls.Add(this.btActualiser);
-            this.fLPButtons.Controls.Add(this.btAjouter);
-            this.fLPButtons.Controls.Add(this.btModifier);
-            this.fLPButtons.Controls.Add(this.btSupprimer);
-            this.fLPButtons.Location = new System.Drawing.Point(227, 3);
-            this.fLPButtons.Name = "fLPButtons";
-            this.fLPButtons.Size = new System.Drawing.Size(576, 64);
-            this.fLPButtons.TabIndex = 3;
-            // 
-            // btActualiser
-            // 
-            this.btActualiser.Location = new System.Drawing.Point(3, 3);
-            this.btActualiser.Name = "btActualiser";
-            this.btActualiser.Size = new System.Drawing.Size(138, 61);
-            this.btActualiser.TabIndex = 11;
-            this.btActualiser.Text = "&Actualiser";
-            this.btActualiser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btActualiser.UseVisualStyleBackColor = true;
-            this.btActualiser.Click += new System.EventHandler(this.BtActualiser_Click);
-            // 
-            // btAjouter
-            // 
-            this.btAjouter.Location = new System.Drawing.Point(147, 3);
-            this.btAjouter.Name = "btAjouter";
-            this.btAjouter.Size = new System.Drawing.Size(138, 61);
-            this.btAjouter.TabIndex = 8;
-            this.btAjouter.Text = "A&jouter";
-            this.btAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btAjouter.UseVisualStyleBackColor = true;
-            this.btAjouter.Click += new System.EventHandler(this.BtAjouter_Click);
-            // 
-            // btModifier
-            // 
-            this.btModifier.Location = new System.Drawing.Point(291, 3);
-            this.btModifier.Name = "btModifier";
-            this.btModifier.Size = new System.Drawing.Size(138, 61);
-            this.btModifier.TabIndex = 9;
-            this.btModifier.Text = "&Modifier";
-            this.btModifier.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btModifier.UseVisualStyleBackColor = true;
-            this.btModifier.Click += new System.EventHandler(this.BtModifier_Click);
-            // 
-            // btSupprimer
-            // 
-            this.btSupprimer.Location = new System.Drawing.Point(435, 3);
-            this.btSupprimer.Name = "btSupprimer";
-            this.btSupprimer.Size = new System.Drawing.Size(138, 61);
-            this.btSupprimer.TabIndex = 10;
-            this.btSupprimer.Text = "&Supprimer";
-            this.btSupprimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btSupprimer.UseVisualStyleBackColor = true;
-            this.btSupprimer.Click += new System.EventHandler(this.BtSupprimer_Click);
-            // 
-            // btQuitter
-            // 
-            this.btQuitter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btQuitter.BackColor = System.Drawing.SystemColors.Control;
-            this.btQuitter.Location = new System.Drawing.Point(3, 3);
-            this.btQuitter.Name = "btQuitter";
-            this.btQuitter.Size = new System.Drawing.Size(138, 64);
-            this.btQuitter.TabIndex = 12;
-            this.btQuitter.Text = "&Quitter";
-            this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btQuitter.UseVisualStyleBackColor = false;
-            this.btQuitter.Click += new System.EventHandler(this.BtQuitter_Click);
             // 
             // repasDateDataGridViewTextBoxColumn
             // 
@@ -624,6 +275,369 @@ namespace OurResto
             this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
             this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
+            // tLPMain
+            // 
+            this.tLPMain.ColumnCount = 1;
+            this.tLPMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPMain.Controls.Add(this.dGVMenu, 0, 1);
+            this.tLPMain.Controls.Add(this.tLPInputBox, 0, 2);
+            this.tLPMain.Controls.Add(this.tLPDateSemaine, 0, 0);
+            this.tLPMain.Controls.Add(this.tableLayoutPanel1, 0, 3);
+            this.tLPMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLPMain.Location = new System.Drawing.Point(0, 0);
+            this.tLPMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tLPMain.Name = "tLPMain";
+            this.tLPMain.RowCount = 4;
+            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tLPMain.Size = new System.Drawing.Size(1036, 581);
+            this.tLPMain.TabIndex = 1;
+            // 
+            // tLPInputBox
+            // 
+            this.tLPInputBox.AutoSize = true;
+            this.tLPInputBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tLPInputBox.ColumnCount = 4;
+            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tLPInputBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tLPInputBox.Controls.Add(this.cBPlatFromage, 3, 3);
+            this.tLPInputBox.Controls.Add(this.cBPlatAccompagnement, 3, 2);
+            this.tLPInputBox.Controls.Add(this.cBPlatPrincipal, 3, 1);
+            this.tLPInputBox.Controls.Add(this.cBPlatEntree, 3, 0);
+            this.tLPInputBox.Controls.Add(this.lblPlat, 2, 1);
+            this.tLPInputBox.Controls.Add(this.lblDessert, 2, 4);
+            this.tLPInputBox.Controls.Add(this.lblFromage, 2, 3);
+            this.tLPInputBox.Controls.Add(this.lblEntree, 2, 0);
+            this.tLPInputBox.Controls.Add(this.lblAccompagnement, 2, 2);
+            this.tLPInputBox.Controls.Add(this.dTPUpdateDate, 1, 1);
+            this.tLPInputBox.Controls.Add(this.cBPlatDessert, 3, 4);
+            this.tLPInputBox.Controls.Add(this.lblDateRepas, 0, 1);
+            this.tLPInputBox.Controls.Add(this.lblMoment, 0, 3);
+            this.tLPInputBox.Controls.Add(this.cBMoment, 1, 3);
+            this.tLPInputBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLPInputBox.Location = new System.Drawing.Point(3, 342);
+            this.tLPInputBox.Name = "tLPInputBox";
+            this.tLPInputBox.RowCount = 5;
+            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tLPInputBox.Size = new System.Drawing.Size(1030, 160);
+            this.tLPInputBox.TabIndex = 3;
+            // 
+            // cBPlatFromage
+            // 
+            this.cBPlatFromage.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cBPlatFromage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cBPlatFromage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cBPlatFromage.FormattingEnabled = true;
+            this.cBPlatFromage.Location = new System.Drawing.Point(653, 99);
+            this.cBPlatFromage.Name = "cBPlatFromage";
+            this.cBPlatFromage.Size = new System.Drawing.Size(374, 28);
+            this.cBPlatFromage.TabIndex = 6;
+            // 
+            // cBPlatAccompagnement
+            // 
+            this.cBPlatAccompagnement.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cBPlatAccompagnement.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cBPlatAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cBPlatAccompagnement.FormattingEnabled = true;
+            this.cBPlatAccompagnement.Location = new System.Drawing.Point(653, 67);
+            this.cBPlatAccompagnement.Name = "cBPlatAccompagnement";
+            this.cBPlatAccompagnement.Size = new System.Drawing.Size(374, 28);
+            this.cBPlatAccompagnement.TabIndex = 5;
+            // 
+            // cBPlatPrincipal
+            // 
+            this.cBPlatPrincipal.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cBPlatPrincipal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cBPlatPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cBPlatPrincipal.FormattingEnabled = true;
+            this.cBPlatPrincipal.Location = new System.Drawing.Point(653, 35);
+            this.cBPlatPrincipal.Name = "cBPlatPrincipal";
+            this.cBPlatPrincipal.Size = new System.Drawing.Size(374, 28);
+            this.cBPlatPrincipal.TabIndex = 4;
+            // 
+            // cBPlatEntree
+            // 
+            this.cBPlatEntree.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cBPlatEntree.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cBPlatEntree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cBPlatEntree.FormattingEnabled = true;
+            this.cBPlatEntree.Location = new System.Drawing.Point(653, 3);
+            this.cBPlatEntree.Name = "cBPlatEntree";
+            this.cBPlatEntree.Size = new System.Drawing.Size(374, 28);
+            this.cBPlatEntree.TabIndex = 3;
+            // 
+            // lblPlat
+            // 
+            this.lblPlat.AutoSize = true;
+            this.lblPlat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPlat.Location = new System.Drawing.Point(504, 32);
+            this.lblPlat.Name = "lblPlat";
+            this.lblPlat.Size = new System.Drawing.Size(143, 32);
+            this.lblPlat.TabIndex = 6;
+            this.lblPlat.Text = "Plat";
+            this.lblPlat.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblDessert
+            // 
+            this.lblDessert.AutoSize = true;
+            this.lblDessert.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDessert.Location = new System.Drawing.Point(504, 128);
+            this.lblDessert.Name = "lblDessert";
+            this.lblDessert.Size = new System.Drawing.Size(143, 32);
+            this.lblDessert.TabIndex = 5;
+            this.lblDessert.Text = "Dessert";
+            this.lblDessert.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblFromage
+            // 
+            this.lblFromage.AutoSize = true;
+            this.lblFromage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblFromage.Location = new System.Drawing.Point(504, 96);
+            this.lblFromage.Name = "lblFromage";
+            this.lblFromage.Size = new System.Drawing.Size(143, 32);
+            this.lblFromage.TabIndex = 4;
+            this.lblFromage.Text = "Fromage";
+            this.lblFromage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblEntree
+            // 
+            this.lblEntree.AutoSize = true;
+            this.lblEntree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblEntree.Location = new System.Drawing.Point(504, 0);
+            this.lblEntree.Name = "lblEntree";
+            this.lblEntree.Size = new System.Drawing.Size(143, 32);
+            this.lblEntree.TabIndex = 3;
+            this.lblEntree.Text = "Entrée";
+            this.lblEntree.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblAccompagnement
+            // 
+            this.lblAccompagnement.AutoSize = true;
+            this.lblAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblAccompagnement.Location = new System.Drawing.Point(504, 64);
+            this.lblAccompagnement.Name = "lblAccompagnement";
+            this.lblAccompagnement.Size = new System.Drawing.Size(143, 32);
+            this.lblAccompagnement.TabIndex = 2;
+            this.lblAccompagnement.Text = "Accompagnement";
+            this.lblAccompagnement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // dTPUpdateDate
+            // 
+            this.dTPUpdateDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.dTPUpdateDate.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.vaffichermenuBindingSource, "RepasDate", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.dTPUpdateDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dTPUpdateDate.Location = new System.Drawing.Point(124, 35);
+            this.dTPUpdateDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dTPUpdateDate.Name = "dTPUpdateDate";
+            this.dTPUpdateDate.Size = new System.Drawing.Size(268, 26);
+            this.dTPUpdateDate.TabIndex = 1;
+            this.dTPUpdateDate.ValueChanged += new System.EventHandler(this.DTPUpdateDate_ValueChanged);
+            // 
+            // cBPlatDessert
+            // 
+            this.cBPlatDessert.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cBPlatDessert.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cBPlatDessert.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cBPlatDessert.FormattingEnabled = true;
+            this.cBPlatDessert.Location = new System.Drawing.Point(653, 131);
+            this.cBPlatDessert.Name = "cBPlatDessert";
+            this.cBPlatDessert.Size = new System.Drawing.Size(374, 28);
+            this.cBPlatDessert.TabIndex = 7;
+            // 
+            // lblDateRepas
+            // 
+            this.lblDateRepas.AutoSize = true;
+            this.lblDateRepas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDateRepas.Location = new System.Drawing.Point(3, 32);
+            this.lblDateRepas.Name = "lblDateRepas";
+            this.lblDateRepas.Size = new System.Drawing.Size(115, 32);
+            this.lblDateRepas.TabIndex = 0;
+            this.lblDateRepas.Text = "Date du repas";
+            this.lblDateRepas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblMoment
+            // 
+            this.lblMoment.AutoSize = true;
+            this.lblMoment.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMoment.Location = new System.Drawing.Point(3, 96);
+            this.lblMoment.Name = "lblMoment";
+            this.lblMoment.Size = new System.Drawing.Size(115, 32);
+            this.lblMoment.TabIndex = 1;
+            this.lblMoment.Text = "Moment";
+            this.lblMoment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cBMoment
+            // 
+            this.cBMoment.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cBMoment.DisplayMember = "Nom";
+            this.cBMoment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBMoment.FormattingEnabled = true;
+            this.cBMoment.Location = new System.Drawing.Point(124, 99);
+            this.cBMoment.Name = "cBMoment";
+            this.cBMoment.Size = new System.Drawing.Size(268, 28);
+            this.cBMoment.TabIndex = 2;
+            this.cBMoment.ValueMember = "Id_Nom";
+            // 
+            // tLPDateSemaine
+            // 
+            this.tLPDateSemaine.AutoSize = true;
+            this.tLPDateSemaine.ColumnCount = 4;
+            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPDateSemaine.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
+            this.tLPDateSemaine.Controls.Add(this.lblSemaine, 2, 0);
+            this.tLPDateSemaine.Controls.Add(this.btBefore, 1, 0);
+            this.tLPDateSemaine.Controls.Add(this.btAfter, 3, 0);
+            this.tLPDateSemaine.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLPDateSemaine.Location = new System.Drawing.Point(3, 3);
+            this.tLPDateSemaine.Name = "tLPDateSemaine";
+            this.tLPDateSemaine.RowCount = 1;
+            this.tLPDateSemaine.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPDateSemaine.Size = new System.Drawing.Size(1030, 54);
+            this.tLPDateSemaine.TabIndex = 101;
+            // 
+            // lblSemaine
+            // 
+            this.lblSemaine.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblSemaine.AutoSize = true;
+            this.lblSemaine.Font = new System.Drawing.Font("Britannic Bold", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSemaine.Location = new System.Drawing.Point(297, 13);
+            this.lblSemaine.Name = "lblSemaine";
+            this.lblSemaine.Size = new System.Drawing.Size(460, 27);
+            this.lblSemaine.TabIndex = 1;
+            this.lblSemaine.Text = "Semaine du 29 novembre au 5 decembre";
+            // 
+            // btBefore
+            // 
+            this.btBefore.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btBefore.Location = new System.Drawing.Point(17, 7);
+            this.btBefore.Name = "btBefore";
+            this.btBefore.Size = new System.Drawing.Size(80, 40);
+            this.btBefore.TabIndex = 2;
+            this.btBefore.UseVisualStyleBackColor = true;
+            this.btBefore.Click += new System.EventHandler(this.BtBefore_Click);
+            // 
+            // btAfter
+            // 
+            this.btAfter.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btAfter.Location = new System.Drawing.Point(957, 7);
+            this.btAfter.Name = "btAfter";
+            this.btAfter.Size = new System.Drawing.Size(70, 40);
+            this.btAfter.TabIndex = 3;
+            this.btAfter.UseVisualStyleBackColor = true;
+            this.btAfter.Click += new System.EventHandler(this.BtAfter_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.btAddRandom, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.fLPButtons, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btQuitter, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 508);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1030, 70);
+            this.tableLayoutPanel1.TabIndex = 102;
+            // 
+            // btAddRandom
+            // 
+            this.btAddRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btAddRandom.BackColor = System.Drawing.SystemColors.Control;
+            this.btAddRandom.Location = new System.Drawing.Point(889, 3);
+            this.btAddRandom.Name = "btAddRandom";
+            this.btAddRandom.Size = new System.Drawing.Size(138, 64);
+            this.btAddRandom.TabIndex = 13;
+            this.btAddRandom.Text = "Aj&out aléatoires";
+            this.btAddRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btAddRandom.UseVisualStyleBackColor = false;
+            this.btAddRandom.Click += new System.EventHandler(this.BtAddRandom_Click);
+            // 
+            // fLPButtons
+            // 
+            this.fLPButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.fLPButtons.AutoSize = true;
+            this.fLPButtons.BackColor = System.Drawing.SystemColors.Control;
+            this.fLPButtons.Controls.Add(this.btActualiser);
+            this.fLPButtons.Controls.Add(this.btAjouter);
+            this.fLPButtons.Controls.Add(this.btModifier);
+            this.fLPButtons.Controls.Add(this.btSupprimer);
+            this.fLPButtons.Location = new System.Drawing.Point(227, 3);
+            this.fLPButtons.Name = "fLPButtons";
+            this.fLPButtons.Size = new System.Drawing.Size(576, 64);
+            this.fLPButtons.TabIndex = 3;
+            // 
+            // btActualiser
+            // 
+            this.btActualiser.Location = new System.Drawing.Point(3, 3);
+            this.btActualiser.Name = "btActualiser";
+            this.btActualiser.Size = new System.Drawing.Size(138, 61);
+            this.btActualiser.TabIndex = 11;
+            this.btActualiser.Text = "&Actualiser";
+            this.btActualiser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btActualiser.UseVisualStyleBackColor = true;
+            this.btActualiser.Click += new System.EventHandler(this.BtActualiser_Click);
+            // 
+            // btAjouter
+            // 
+            this.btAjouter.Location = new System.Drawing.Point(147, 3);
+            this.btAjouter.Name = "btAjouter";
+            this.btAjouter.Size = new System.Drawing.Size(138, 61);
+            this.btAjouter.TabIndex = 8;
+            this.btAjouter.Text = "A&jouter";
+            this.btAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btAjouter.UseVisualStyleBackColor = true;
+            this.btAjouter.Click += new System.EventHandler(this.BtAjouter_Click);
+            // 
+            // btModifier
+            // 
+            this.btModifier.Location = new System.Drawing.Point(291, 3);
+            this.btModifier.Name = "btModifier";
+            this.btModifier.Size = new System.Drawing.Size(138, 61);
+            this.btModifier.TabIndex = 9;
+            this.btModifier.Text = "&Modifier";
+            this.btModifier.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btModifier.UseVisualStyleBackColor = true;
+            this.btModifier.Click += new System.EventHandler(this.BtModifier_Click);
+            // 
+            // btSupprimer
+            // 
+            this.btSupprimer.Location = new System.Drawing.Point(435, 3);
+            this.btSupprimer.Name = "btSupprimer";
+            this.btSupprimer.Size = new System.Drawing.Size(138, 61);
+            this.btSupprimer.TabIndex = 10;
+            this.btSupprimer.Text = "&Supprimer";
+            this.btSupprimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSupprimer.UseVisualStyleBackColor = true;
+            this.btSupprimer.Click += new System.EventHandler(this.BtSupprimer_Click);
+            // 
+            // btQuitter
+            // 
+            this.btQuitter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btQuitter.BackColor = System.Drawing.SystemColors.Control;
+            this.btQuitter.Location = new System.Drawing.Point(3, 3);
+            this.btQuitter.Name = "btQuitter";
+            this.btQuitter.Size = new System.Drawing.Size(138, 64);
+            this.btQuitter.TabIndex = 12;
+            this.btQuitter.Text = "&Quitter";
+            this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btQuitter.UseVisualStyleBackColor = false;
+            this.btQuitter.Click += new System.EventHandler(this.BtQuitter_Click);
+            // 
             // momentTableAdapter
             // 
             this.momentTableAdapter.ClearBeforeFill = true;
@@ -650,19 +664,6 @@ namespace OurResto
             // 
             this.v_affichermenuTableAdapter.ClearBeforeFill = true;
             // 
-            // btAddRandom
-            // 
-            this.btAddRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btAddRandom.BackColor = System.Drawing.SystemColors.Control;
-            this.btAddRandom.Location = new System.Drawing.Point(889, 3);
-            this.btAddRandom.Name = "btAddRandom";
-            this.btAddRandom.Size = new System.Drawing.Size(138, 64);
-            this.btAddRandom.TabIndex = 13;
-            this.btAddRandom.Text = "Aj&out aléatoires";
-            this.btAddRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btAddRandom.UseVisualStyleBackColor = false;
-            this.btAddRandom.Click += new System.EventHandler(this.BtAddRandom_Click);
-            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -678,6 +679,8 @@ namespace OurResto
             this.Text = "Menus";
             this.Load += new System.EventHandler(this.FormMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).EndInit();
             this.tLPMain.ResumeLayout(false);
             this.tLPMain.PerformLayout();
             this.tLPInputBox.ResumeLayout(false);
@@ -687,8 +690,6 @@ namespace OurResto
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.fLPButtons.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vplatsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -748,5 +749,6 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn dessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button btAddRandom;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

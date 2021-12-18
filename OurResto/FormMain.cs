@@ -14,6 +14,12 @@ namespace OurResto
         private void FormMain_Load(object sender, EventArgs e)
         {
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
+
+            toolTip.SetToolTip(btQuitter, "Quitter l'application");
+            toolTip.SetToolTip(btSalarie, "Gérer les comptes repas des salariés");
+            toolTip.SetToolTip(btMenu, "Gérer les menus");
+            toolTip.SetToolTip(btPlanProduction, "Voir le nombre de plats à préparer");
+            toolTip.SetToolTip(btQuantitePrevisionelle, "Voir la quantité d'ingrédients nécessaires pour la semaine suivante");
         }
 
         private void BtSalarie_Click(object sender, EventArgs e)

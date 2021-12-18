@@ -49,6 +49,7 @@
             this.btExit = new System.Windows.Forms.Button();
             this.btToday = new System.Windows.Forms.Button();
             this.v_plancuisineTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_plancuisineTableAdapter();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dGVPlanProduction)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vplancuisineBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
@@ -117,7 +118,7 @@
             this.momentDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.momentDataGridViewTextBoxColumn.Name = "momentDataGridViewTextBoxColumn";
             this.momentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.momentDataGridViewTextBoxColumn.Width = 83;
+            this.momentDataGridViewTextBoxColumn.Width = 98;
             // 
             // idPlatDataGridViewTextBoxColumn
             // 
@@ -153,7 +154,7 @@
             this.nombreDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
             this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nombreDataGridViewTextBoxColumn.Width = 83;
+            this.nombreDataGridViewTextBoxColumn.Width = 97;
             // 
             // vplancuisineBindingSource
             // 
@@ -206,9 +207,9 @@
             this.lblJour.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblJour.AutoSize = true;
             this.lblJour.Font = new System.Drawing.Font("Britannic Bold", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJour.Location = new System.Drawing.Point(159, 9);
+            this.lblJour.Location = new System.Drawing.Point(146, 7);
             this.lblJour.Name = "lblJour";
-            this.lblJour.Size = new System.Drawing.Size(127, 25);
+            this.lblJour.Size = new System.Drawing.Size(154, 30);
             this.lblJour.TabIndex = 6;
             this.lblJour.Text = "9 décembre";
             // 
@@ -280,7 +281,7 @@
             // 
             // FormPlanProduction
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(452, 393);
@@ -326,5 +327,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btExit;
         private System.Windows.Forms.Button btToday;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
