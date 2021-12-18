@@ -70,6 +70,7 @@ namespace OurResto
             toolTip.SetToolTip(cBPlatFromage, "Nom du plat pour le fromage");
             toolTip.SetToolTip(cBPlatDessert, "Nom du plat pour le dessert");
             toolTip.SetToolTip(dTPUpdateDate, "Date pour le repas");
+            toolTip.SetToolTip(dGVMenu, "Contient la liste des menus");
         }
         #endregion
 
@@ -512,18 +513,32 @@ namespace OurResto
 
             try
             {
-                // Si pas de plat inscrit pour la semaine
-                if (cda68_bd1DataSet.Menu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).Count() == 0)
-                {
-                    using (TransactionScope trans = new TransactionScope())
-                    {
-                        bool IsFailed = false;
+                // Récupére tous les menus de la semaine en cours
+                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday);
 
-                        // Pour chaque jour de la semaine
-                        foreach (DateTime dt in EachDay(dateMonday, dateFriday))
+                // Si des menus sont deja remplit pour la semaine
+                if (menus.Count() != 0)
+                {
+                    // Les supprimer des listes pour ne pas les réinsérer
+                    Entrees.RemoveAll(e => menus.Select(m => m.Id_Plat_Entree).Contains(e.Id_Plat));
+                    PlatsPrincipaux.RemoveAll(p => menus.Select(m => m.Id_Plat_Principal).Contains(p.Id_Plat));
+                    Accompagnements.RemoveAll(a => menus.Select(m => m.Id_Plat_Accompagnement).Contains(a.Id_Plat));
+                    Fromages.RemoveAll(f => menus.Select(m => m.Id_Plat_Fromage).Contains(f.Id_Plat));
+                    Desserts.RemoveAll(d => menus.Select(m => m.Id_Plat_Dessert).Contains(d.Id_Plat));
+                }
+
+                using (TransactionScope trans = new TransactionScope())
+                {
+                    var IsFailed = false;
+
+                    // Pour chaque jour de la semaine
+                    foreach (DateTime dt in EachDay(dateMonday, dateFriday))
+                    {
+                        // Pour chaque moment repas
+                        foreach (int moment in cda68_bd1DataSet.Moment.Select(r => r.Id_Moment))
                         {
-                            // Pour chaque moment repas
-                            foreach (int moment in cda68_bd1DataSet.Moment.Select(r => r.Id_Moment))
+                            // Si il n'y a pas deja de menu à cette date et ce moment
+                            if (!menus.Any(m => m.Id_Moment == moment && m.RepasDate == dt))
                             {
                                 // Pour chaque type de plat
                                 foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
@@ -534,7 +549,7 @@ namespace OurResto
                                     // Ajouter le plat dans le SGBD
                                     if (menuTableAdapter.Insert(plats[i].Id_Plat, moment, dt) != 1)
                                     {
-                                        // Si l'insert n'a pas réussi mettre le 
+                                        // Si l'insert n'a pas réussi inserer le plat
                                         IsFailed = true;
                                         return;
                                     }
@@ -544,12 +559,12 @@ namespace OurResto
                                 }
                             }
                         }
+                    }
 
-                        // Si tous les plats on bien étés insérer valider la transaction 
-                        if (!IsFailed)
-                        {
-                            trans.Complete();
-                        }
+                    // Si tous les plats on bien étés insérés, valider la transaction 
+                    if (!IsFailed)
+                    {
+                        trans.Complete();
                     }
                 }
             }

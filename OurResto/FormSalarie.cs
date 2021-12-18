@@ -138,9 +138,7 @@ namespace OurResto
                     currentRow.Prenom = tBPrenom.Text;
                     currentRow.Email = tBEmail.Text;
 
-                    int nb = salarieTableAdapter.Update(currentRow);
-
-                    if (nb != 1)
+                    if (salarieTableAdapter.Update(currentRow) != 1)
                     {
                         MessageBox.Show(Properties.Resources.TXTUPDATESALARIE);
                     }
@@ -172,9 +170,7 @@ namespace OurResto
                         {
                             using (TransactionScope trans = new TransactionScope())
                             {
-                                int nb = transactionTableAdapter.Insert(currentSalarieRow.Matricule, Id_TypePaiement, DateTime.Now, montant);
-
-                                if (nb != 1)
+                                if (transactionTableAdapter.Insert(currentSalarieRow.Matricule, Id_TypePaiement, DateTime.Now, montant) != 1)
                                 {
                                     MessageBox.Show(Properties.Resources.TXTINSERTTRANSAC);
                                 }
@@ -182,9 +178,7 @@ namespace OurResto
                                 {
                                     currentSalarieRow.EstActif = true;
 
-                                    nb = salarieTableAdapter.Update(currentSalarieRow);
-
-                                    if (nb != 1)
+                                    if (salarieTableAdapter.Update(currentSalarieRow) != 1)
                                     {
                                         MessageBox.Show(Properties.Resources.TXTINSERTTRANSAC);
                                     }
@@ -234,9 +228,7 @@ namespace OurResto
 
                             currentRow.EstActif = false;
 
-                            int nb = salarieTableAdapter.Update(currentRow);
-
-                            if (nb != 1)
+                            if(salarieTableAdapter.Update(currentRow) != 1)
                             {
                                 MessageBox.Show(Properties.Resources.TXTSOLDERCOMPTE);
                             }
