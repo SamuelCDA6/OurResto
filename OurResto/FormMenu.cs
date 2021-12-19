@@ -529,8 +529,6 @@ namespace OurResto
 
                 using (TransactionScope trans = new TransactionScope())
                 {
-                    var IsFailed = false;
-
                     // Pour chaque jour de la semaine
                     foreach (DateTime dt in EachDay(dateMonday, dateFriday))
                     {
@@ -549,8 +547,9 @@ namespace OurResto
                                     // Ajouter le plat dans le SGBD
                                     if (menuTableAdapter.Insert(plats[i].Id_Plat, moment, dt) != 1)
                                     {
-                                        // Si l'insert n'a pas réussi inserer le plat
-                                        IsFailed = true;
+                                        // Si le plat n'a pas été insérer quitter la méthode pour ne pas continuer
+                                        // inutilement les insertions et ne pas valider la transaction
+                                        MessageBox.Show(Properties.Resources.TXTADDMENU);
                                         return;
                                     }
 
@@ -561,11 +560,8 @@ namespace OurResto
                         }
                     }
 
-                    // Si tous les plats on bien étés insérés, valider la transaction 
-                    if (!IsFailed)
-                    {
-                        trans.Complete();
-                    }
+                    // Si tous les plats on bien étés insérés, valider la transaction
+                    trans.Complete();
                 }
             }
             catch (Exception)
@@ -579,11 +575,13 @@ namespace OurResto
         /// </summary>
         /// <param name="start">date de debut</param>
         /// <param name="end">date de fin</param>
-        /// <returns>Enumerable des dates comprise entre date de debut et de fin</returns>
+        /// <returns>Enumerable des dates comprise entre la date de debut et de fin</returns>
         private IEnumerable<DateTime> EachDay(DateTime start, DateTime end)
         {
             for (var day = start.Date; day.Date <= end.Date; day = day.AddDays(1))
+            {
                 yield return day;
+            }
         }
     }
 }
