@@ -247,7 +247,7 @@ namespace OurResto
                 int nb = 0;
 
                 // Si pas de plat à cette date ajouter les menus dans le SGBD
-                if (cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == idMoment && r.RepasDate == date).Count() == 0)
+                if (!cda68_bd1DataSet.Menu.Any(r => r.Id_Moment == idMoment && r.RepasDate == date))
                 {
                     nb += AddPlat(cBPlatEntree, idMoment, date);
                     nb += AddPlat(cBPlatPrincipal, idMoment, date);
@@ -315,7 +315,7 @@ namespace OurResto
                         var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
                         DateTime dateRepas = dTPUpdateDate.Value;
 
-                        if (cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == idMoment && r.RepasDate == dateRepas).Count() == 0)
+                        if (!cda68_bd1DataSet.Menu.Any(r => r.Id_Moment == idMoment && r.RepasDate == dateRepas))
                         {
                             nb += AddPlat(cBPlatEntree, idMoment, dateRepas);
                             nb += AddPlat(cBPlatPrincipal, idMoment, dateRepas);
