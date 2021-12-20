@@ -118,7 +118,7 @@ namespace OurResto
             this.btQuantitePrevisionelle.Name = "btQuantitePrevisionelle";
             this.btQuantitePrevisionelle.Size = new System.Drawing.Size(136, 51);
             this.btQuantitePrevisionelle.TabIndex = 2;
-            this.btQuantitePrevisionelle.Text = "Quantité Prévisionelle";
+            this.btQuantitePrevisionelle.Text = "Quantité Prévisionnelle";
             this.btQuantitePrevisionelle.UseVisualStyleBackColor = true;
             this.btQuantitePrevisionelle.Click += new System.EventHandler(this.BtQuantitePrevisionelle_Click);
             // 

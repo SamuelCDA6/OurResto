@@ -285,7 +285,7 @@ namespace OurResto
             // Récupérer l'id qui correspond au plat
             var id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cb.Text).Id_Plat;
 
-            // Inserer le menu dans le SGBD et retourner le resultat
+            // Insérer le menu dans le SGBD et retourner le résultat
             return menuTableAdapter.Insert(id, idmoment, daterepas);
         }
 
@@ -501,7 +501,7 @@ namespace OurResto
         {
             Random random = new Random();
 
-            // Récupere tous les plats de chaque type
+            // Récupère tous les plats de chaque type
             var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
             var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
             var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
@@ -513,7 +513,7 @@ namespace OurResto
 
             try
             {
-                // Récupére tous les menus de la semaine en cours
+                // Récupère tous les menus de la semaine en cours
                 var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday);
 
                 // Si des menus sont deja remplit pour la semaine
@@ -541,14 +541,14 @@ namespace OurResto
                                 // Pour chaque type de plat
                                 foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
                                 {
-                                    // Recuperer un plat aléatoire
+                                    // Récupérer un plat aléatoire
                                     int i = random.Next(0, plats.Count);
 
                                     // Ajouter le plat dans le SGBD
                                     if (menuTableAdapter.Insert(plats[i].Id_Plat, moment, dt) != 1)
                                     {
-                                        // Si le plat n'a pas été insérer quitter la méthode pour ne pas continuer
-                                        // inutilement les insertions et ne pas valider la transaction
+                                        // Si le plat n'a pas pus être insérer quitter la méthode pour ne pas
+                                        // continuer inutilement les insertions et ne pas valider la transaction
                                         MessageBox.Show(Properties.Resources.TXTADDMENU);
                                         return;
                                     }

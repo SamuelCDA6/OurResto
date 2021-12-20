@@ -29,9 +29,9 @@ namespace OurResto
             toolTip.SetToolTip(btCredit, "Créditer le compte repas du salarié");
             toolTip.SetToolTip(btEdit, "Modifier les informations du salarié");
             toolTip.SetToolTip(btQuitter, "Revenir à la fenêtre principale");
-            toolTip.SetToolTip(btRefresh, "Remetre l'affichage à jour");
+            toolTip.SetToolTip(btRefresh, "Remettre l'affichage à jour");
             toolTip.SetToolTip(btSellOff, "Solder le compte repas du salarié");
-            toolTip.SetToolTip(cBTypePaiement, "Type de paiement pour la creditation du compte repas");
+            toolTip.SetToolTip(cBTypePaiement, "Type de paiement pour l'accréditation du compte repas");
 
             RefreshDisplay();
 
