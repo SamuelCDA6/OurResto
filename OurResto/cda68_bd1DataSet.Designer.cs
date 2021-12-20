@@ -12901,11 +12901,32 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
+            this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[2];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT `Id_Plat`, `Id_Moment`, `RepasDate` FROM `Menu`";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM Menu\r\nWHERE        (Id_Moment = @Id_Moment) AND (RepasDate = @RepasDa" +
+                "te)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@Id_Moment";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "Id_Moment";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._commandCollection[1].Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@RepasDate";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
+            param.IsNullable = true;
+            param.SourceColumn = "RepasDate";
+            param.SourceVersion = global::System.Data.DataRowVersion.Original;
+            this._commandCollection[1].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -13042,6 +13063,31 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(int OldId_Plat, int OldId_Moment, System.DateTime OldRepasDate) {
             return this.Update(OldId_Plat, OldId_Moment, OldRepasDate, OldId_Plat, OldId_Moment, OldRepasDate);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteByDateAndMoment(int Id_Moment, System.DateTime RepasDate) {
+            global::MySql.Data.MySqlClient.MySqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(Id_Moment));
+            command.Parameters[1].Value = ((System.DateTime)(RepasDate));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     

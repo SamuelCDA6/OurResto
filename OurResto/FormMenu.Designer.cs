@@ -138,12 +138,12 @@ namespace OurResto
             this.dGVMenu.RowHeadersVisible = false;
             this.dGVMenu.RowHeadersWidth = 51;
             this.dGVMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVMenu.Size = new System.Drawing.Size(1028, 261);
+            this.dGVMenu.Size = new System.Drawing.Size(1028, 233);
             this.dGVMenu.StandardTab = true;
             this.dGVMenu.TabIndex = 100;
             this.dGVMenu.TabStop = false;
             this.dGVMenu.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVMenu_CellFormatting);
-            this.dGVMenu.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dGVMenu_ColumnHeaderMouseClick);
+            this.dGVMenu.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVMenu_ColumnHeaderMouseClick);
             this.dGVMenu.SelectionChanged += new System.EventHandler(this.DGVMenu_SelectionChanged);
             // 
             // repasDateDataGridViewTextBoxColumn
@@ -292,7 +292,7 @@ namespace OurResto
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPMain.Size = new System.Drawing.Size(1036, 581);
+            this.tLPMain.Size = new System.Drawing.Size(1036, 553);
             this.tLPMain.TabIndex = 1;
             // 
             // tLPInputBox
@@ -320,7 +320,7 @@ namespace OurResto
             this.tLPInputBox.Controls.Add(this.cBMoment, 1, 3);
             this.tLPInputBox.Controls.Add(this.progressBar, 1, 4);
             this.tLPInputBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPInputBox.Location = new System.Drawing.Point(3, 332);
+            this.tLPInputBox.Location = new System.Drawing.Point(3, 304);
             this.tLPInputBox.Name = "tLPInputBox";
             this.tLPInputBox.RowCount = 5;
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -559,7 +559,7 @@ namespace OurResto
             this.tableLayoutPanel1.Controls.Add(this.fLPButtons, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btQuitter, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 508);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 480);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -680,12 +680,12 @@ namespace OurResto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1036, 581);
+            this.ClientSize = new System.Drawing.Size(1036, 553);
             this.Controls.Add(this.tLPMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1052, 620);
+            this.MinimumSize = new System.Drawing.Size(1052, 500);
             this.Name = "FormMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menus";

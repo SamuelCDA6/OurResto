@@ -161,13 +161,16 @@
     <value>"Voulez-vous vraiment solder le compte de {0} {1} ?"</value>
   </data>
   <data name="TXTCONFIRMATIONSUPPRMENU" xml:space="preserve">
-    <value>"Voulez-vous vraiment supprimer ce menu ?"</value>
+    <value>"Voulez-vous vraiment supprimer le menu du {0} du {1} ?"</value>
+  </data>
+  <data name="TXTCONFIRMATIONSUPPRMENUS" xml:space="preserve">
+    <value>"Voulez-vous vraiment supprimer ces menus ?"</value>
   </data>
   <data name="TXTCREDITCOMPTE" xml:space="preserve">
-    <value>"Le compte du salarié n'a pas pus être crédité"</value>
+    <value>"Le compte du salarié {0} {1} n'a pas pus être crédité"</value>
   </data>
   <data name="TXTDELMENU" xml:space="preserve">
-    <value>"Le menu n'a pas pus être supprimé"</value>
+    <value>"Le menu du {0} du {1} n'a pas pus être supprimé"</value>
   </data>
   <data name="TXTDLMENU" xml:space="preserve">
     <value>"Impossible de récuperer la liste des menus"</value>
@@ -203,9 +206,9 @@
     <value>"Impossible de mettre à jour"</value>
   </data>
   <data name="TXTUPDATEMENU" xml:space="preserve">
-    <value>"Le menu n'a pas été mis a jour"</value>
+    <value>"Le menu du {0} du {1} n'a pas été mis a jour"</value>
   </data>
   <data name="TXTUPDATESALARIE" xml:space="preserve">
-    <value>"Le salarié n'a pas été mis a jour"</value>
+    <value>"Le salarié {0} {1} n'a pas été mis a jour"</value>
   </data>
 </root>

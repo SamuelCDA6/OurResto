@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Transactions;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace OurResto
 {
@@ -15,7 +16,7 @@ namespace OurResto
         DateTime dateFriday;
         DateTime dateAdd;
 
-        List<cda68_bd1DataSet.v_affichermenuRow> menus = new List<cda68_bd1DataSet.v_affichermenuRow>();
+        List<cda68_bd1DataSet.v_affichermenuRow> weekMenus = new List<cda68_bd1DataSet.v_affichermenuRow>();
 
         public FormMenu()
         {
@@ -105,12 +106,12 @@ namespace OurResto
             try
             {
                 // Pour la vue menu récupérer seulement les menus compris entre ces dates
-                menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= begin && r.RepasDate.Date <= end)
+                weekMenus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= begin && r.RepasDate.Date <= end)
                                                           .OrderBy(r => r.RepasDate)
                                                           .ThenBy(r => r.Id_Moment).ToList();
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
-                vaffichermenuBindingSource.DataSource = menus;
+                vaffichermenuBindingSource.DataSource = weekMenus;
 
                 // Et repositionner la position de la BindingSource sur la date
                 if (cda68_bd1DataSet.Moment.Count > 0)
@@ -249,11 +250,11 @@ namespace OurResto
                 // Si pas de plat à cette date ajouter les menus dans le SGBD
                 if (!cda68_bd1DataSet.Menu.Any(r => r.Id_Moment == idMoment && r.RepasDate == date))
                 {
-                    nb += AddPlat(cBPlatEntree, idMoment, date);
-                    nb += AddPlat(cBPlatPrincipal, idMoment, date);
-                    nb += AddPlat(cBPlatAccompagnement, idMoment, date);
-                    nb += AddPlat(cBPlatFromage, idMoment, date);
-                    nb += AddPlat(cBPlatDessert, idMoment, date);
+                    nb += AddOneMenu(cBPlatEntree, idMoment, date);
+                    nb += AddOneMenu(cBPlatPrincipal, idMoment, date);
+                    nb += AddOneMenu(cBPlatAccompagnement, idMoment, date);
+                    nb += AddOneMenu(cBPlatFromage, idMoment, date);
+                    nb += AddOneMenu(cBPlatDessert, idMoment, date);
                 }
 
                 return nb;
@@ -280,7 +281,7 @@ namespace OurResto
         /// <param name="idmoment">Id du moment pour le plat à ajouter</param>
         /// <param name="daterepas">date du repas pour le plat à ajouter</param>
         /// <returns> entier retourner par l'insert du menu</returns>
-        private int AddPlat(ComboBox cb, int idmoment, DateTime daterepas)
+        private int AddOneMenu(ComboBox cb, int idmoment, DateTime daterepas)
         {
             // Récupérer l'id qui correspond au plat
             var id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cb.Text).Id_Plat;
@@ -301,49 +302,42 @@ namespace OurResto
         {
             using (TransactionScope trans = new TransactionScope())
             {
-                try
+                if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
                 {
-                    if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
+                    try
                     {
-                        cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == currentRow.Id_Moment &&
-                                                         r.RepasDate == currentRow.RepasDate)
-                                             .ToList()
-                                             .ForEach(r => r.Delete());
+                        var id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cBPlatEntree.Text).Id_Plat;
+                        int nb = menuTableAdapter.Update(id, currentRow.Id_Moment, currentRow.RepasDate, currentRow.Id_Plat_Entree, currentRow.Id_Moment, currentRow.RepasDate);
 
-                        int nb = menuTableAdapter.Update(cda68_bd1DataSet.Menu.Select(null, null, DataViewRowState.Deleted));
+                        id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cBPlatPrincipal.Text).Id_Plat;
+                        nb += menuTableAdapter.Update(id, currentRow.Id_Moment, currentRow.RepasDate, currentRow.Id_Plat_Principal, currentRow.Id_Moment, currentRow.RepasDate);
 
-                        var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
-                        DateTime dateRepas = dTPUpdateDate.Value;
+                        id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cBPlatAccompagnement.Text).Id_Plat;
+                        nb += menuTableAdapter.Update(id, currentRow.Id_Moment, currentRow.RepasDate, currentRow.Id_Plat_Accompagnement, currentRow.Id_Moment, currentRow.RepasDate);
 
-                        if (!cda68_bd1DataSet.Menu.Any(r => r.Id_Moment == idMoment && r.RepasDate == dateRepas))
+                        id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cBPlatFromage.Text).Id_Plat;
+                        nb += menuTableAdapter.Update(id, currentRow.Id_Moment, currentRow.RepasDate, currentRow.Id_Plat_Fromage, currentRow.Id_Moment, currentRow.RepasDate);
+
+                        id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cBPlatDessert.Text).Id_Plat;
+                        nb += menuTableAdapter.Update(id, currentRow.Id_Moment, currentRow.RepasDate, currentRow.Id_Plat_Dessert, currentRow.Id_Moment, currentRow.RepasDate);
+
+                        if (nb == 5)
                         {
-                            nb += AddPlat(cBPlatEntree, idMoment, dateRepas);
-                            nb += AddPlat(cBPlatPrincipal, idMoment, dateRepas);
-                            nb += AddPlat(cBPlatAccompagnement, idMoment, dateRepas);
-                            nb += AddPlat(cBPlatFromage, idMoment, dateRepas);
-                            nb += AddPlat(cBPlatDessert, idMoment, dateRepas);
-
-                            if (nb == 10)
-                            {
-                                trans.Complete();
-                            }
+                            trans.Complete();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is ArgumentNullException || ex is InvalidOperationException)
+                        {
+                            MessageBox.Show(Properties.Resources.TXTPLATINVALIDE);
+                        }
+                        else
+                        {
+                            MessageBox.Show(String.Format(Properties.Resources.TXTUPDATEMENU, currentRow.Moment, currentRow.RepasDate.ToString("D")));
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    if (ex is ArgumentNullException || ex is InvalidOperationException)
-                    {
-                        MessageBox.Show(Properties.Resources.TXTPLATINVALIDE);
-                    }
-                    else
-                    {
-                        MessageBox.Show(Properties.Resources.TXTUPDATEMENU);
-                    }
-
-                }
-
-
             }
 
             MySqlConnection.ClearAllPools();
@@ -351,48 +345,58 @@ namespace OurResto
 
         private void BtSupprimer_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                using (TransactionScope trans = new TransactionScope())
-                {
-                    DeleteMenuCurrentRow();
 
-                    trans.Complete();
-                }
+            DeleteMenuSelectedRows();
 
-                MySqlConnection.ClearAllPools();
+            RefreshDisplay();
 
-                RefreshDisplay();
-            }
         }
 
         /// <summary>
         /// Méthode pour supprimer les menus correspondant à la ligne sélectionnée
         /// </summary>
-        private void DeleteMenuCurrentRow()
+        private void DeleteMenuSelectedRows()
         {
-            try
+            if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
             {
-                if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
+                try
                 {
-                    foreach (DataGridViewRow row in dGVMenu.SelectedRows)
+                    string message = dGVMenu.SelectedRows.Count == 1 ? String.Format(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, currentRow.Moment, currentRow.RepasDate.ToString("D")) : Properties.Resources.TXTCONFIRMATIONSUPPRMENUS;
+                    if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        
-                    }
-                    // Supprimer les lignes de la data-table menu du dataset qui correspondent au jour et au moment
-                    cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == currentRow.Id_Moment &&
-                                                     r.RepasDate == currentRow.RepasDate)
-                                         .ToList()
-                                         .ForEach(r => r.Delete());
+                        progressBar.Value = 0;
+                        progressBar.Maximum = dGVMenu.SelectedRows.Count;
+                        progressBar.Visible = true;
 
-                    // Mettre a jour la SGBD de ses lignes supprimées
-                    menuTableAdapter.Update(cda68_bd1DataSet.Menu.Select(null, null, DataViewRowState.Deleted));
+                        using (TransactionScope trans = new TransactionScope())
+                        {
+                            foreach (DataGridViewRow dGVRow in dGVMenu.SelectedRows)
+                            {
+                                int nb = menuTableAdapter.DeleteByDateAndMoment((int)dGVRow.Cells[12].Value, (DateTime)dGVRow.Cells[0].Value);
+
+                                if (nb != 5)
+                                {
+                                    progressBar.Visible = false;
+                                    return;
+                                }
+
+                                progressBar.PerformStep();
+                                Thread.Sleep(100);
+                            }
+
+                            trans.Complete();
+                            progressBar.Visible = false;
+                        }
+                    }
+
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(String.Format(Properties.Resources.TXTDELMENU, currentRow.Moment, currentRow.RepasDate.ToString("D")));
                 }
             }
-            catch (Exception)
-            {
-                MessageBox.Show(Properties.Resources.TXTDELMENU);
-            }
+
+            MySqlConnection.ClearAllPools();
         }
 
         private void BtQuitter_Click(object sender, EventArgs e)
@@ -429,15 +433,16 @@ namespace OurResto
             {
                 // Chercher si un menu du DataGridView correspond à la date et au moment
                 if (dGVMenu.Rows.OfType<DataGridViewRow>()
-                                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
-                                                                    (int)r.Cells[12].Value == idMoment)
-                                            is DataGridViewRow row)
+                                .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
+                                                     (int)r.Cells[12].Value == idMoment)
+                                is DataGridViewRow row)
                 {
                     // Si oui placer la BindingSource dessus
                     vaffichermenuBindingSource.Position = row.Index;
                 }
-                else // Si pas de menu vider les ComboBox
+                else
                 {
+                    // Sinon vider les ComboBox
                     cBPlatEntree.SelectedIndex = -1;
                     cBPlatPrincipal.SelectedIndex = -1;
                     cBPlatFromage.SelectedIndex = -1;
@@ -473,7 +478,7 @@ namespace OurResto
             }
         }
 
-        private void dGVMenu_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DGVMenu_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewColumn column = dGVMenu.Columns[e.ColumnIndex];
 
@@ -483,7 +488,7 @@ namespace OurResto
 
                 SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
-                menus.Sort(new MenuComparer(columnName, sortOrder));
+                weekMenus.Sort(new MenuComparer(columnName, sortOrder));
 
                 dGVMenu.Refresh();
 
@@ -505,8 +510,8 @@ namespace OurResto
         {
             Random random = new Random();
 
-            progressBar.Visible = true;
             progressBar.Value = 0;
+            progressBar.Visible = true;
 
             // Récupère tous les plats de chaque type
             var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
@@ -521,7 +526,11 @@ namespace OurResto
             try
             {
                 // Récupère tous les menus de la semaine en cours
-                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday);
+                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+
+                var dates = EachDay(dateMonday, dateFriday).ToList();
+
+                progressBar.Maximum = (cda68_bd1DataSet.Moment.Count * dates.Count * PlatsLists.Length) - (menus.Count * 5);
 
                 // Si des menus sont deja remplit pour la semaine
                 if (menus.Count() != 0)
@@ -537,7 +546,7 @@ namespace OurResto
                 using (TransactionScope trans = new TransactionScope())
                 {
                     // Pour chaque jour de la semaine
-                    foreach (DateTime dt in EachDay(dateMonday, dateFriday))
+                    foreach (DateTime dt in dates)
                     {
                         // Pour chaque moment repas
                         foreach (int moment in cda68_bd1DataSet.Moment.Select(r => r.Id_Moment))
@@ -565,22 +574,19 @@ namespace OurResto
                                     progressBar.PerformStep();
                                 }
                             }
-                            else
-                            {
-                                progressBar.Value += 5;
-                            }
                         }
                     }
 
                     // Si tous les plats on bien étés insérés, valider la transaction
                     trans.Complete();
-                    progressBar.Visible = false;
                 }
             }
             catch (Exception)
             {
                 MessageBox.Show(Properties.Resources.TXTADDMENU);
             }
+
+            progressBar.Visible = false;
         }
 
         /// <summary>

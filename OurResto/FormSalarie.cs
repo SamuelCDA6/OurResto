@@ -130,9 +130,9 @@ namespace OurResto
 
         private void BtEdit_Click(object sender, EventArgs e)
         {
-            try
+            if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentRow)
             {
-                if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentRow)
+                try
                 {
                     currentRow.Nom = tBNom.Text;
                     currentRow.Prenom = tBPrenom.Text;
@@ -140,13 +140,13 @@ namespace OurResto
 
                     if (salarieTableAdapter.Update(currentRow) != 1)
                     {
-                        MessageBox.Show(Properties.Resources.TXTUPDATESALARIE);
+                        MessageBox.Show(String.Format(Properties.Resources.TXTUPDATESALARIE, currentRow.Prenom, currentRow.Nom));
                     }
                 }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Properties.Resources.TXTUPDATESALARIE);
+                catch (Exception)
+                {
+                    MessageBox.Show(String.Format(Properties.Resources.TXTUPDATESALARIE, currentRow.Prenom, currentRow.Nom));
+                }
             }
 
             RefreshDisplay();
@@ -154,9 +154,9 @@ namespace OurResto
 
         private void BtCredit_Click(object sender, EventArgs e)
         {
-            try
+            if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentSalarieRow)
             {
-                if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentSalarieRow)
+                try
                 {
                     int Id_TypePaiement = cda68_bd1DataSet.TypePaiement.First(r => r.Nom == cBTypePaiement.Text).Id_TypePaiement;
 
@@ -191,17 +191,16 @@ namespace OurResto
 
                             MySqlConnection.ClearAllPools();
                         }
-
                     }
                     else
                     {
                         MessageBox.Show(Properties.Resources.TXTMONTANTINCORRECT);
                     }
                 }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Properties.Resources.TXTCREDITCOMPTE);
+                catch (Exception)
+                {
+                    MessageBox.Show(String.Format(Properties.Resources.TXTCREDITCOMPTE, currentSalarieRow.Prenom, currentSalarieRow.Nom));
+                }
             }
 
             RefreshDisplay();
@@ -228,7 +227,7 @@ namespace OurResto
 
                             currentRow.EstActif = false;
 
-                            if(salarieTableAdapter.Update(currentRow) != 1)
+                            if (salarieTableAdapter.Update(currentRow) != 1)
                             {
                                 MessageBox.Show(Properties.Resources.TXTSOLDERCOMPTE);
                             }
@@ -270,7 +269,6 @@ namespace OurResto
                 salaries.Sort(new SalarieComparer(columnName, sortOrder));
 
                 dGVSalarie.Refresh();
-
 
                 column.HeaderCell.SortGlyphDirection = sortOrder;
             }

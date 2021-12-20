@@ -199,7 +199,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Voulez-vous vraiment supprimer ce menu ?&quot;.
+        ///   Looks up a localized string similar to &quot;Voulez-vous vraiment supprimer le menu du {0} du {1} ?&quot;.
         /// </summary>
         internal static string TXTCONFIRMATIONSUPPRMENU {
             get {
@@ -208,7 +208,16 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le compte du salarié n&apos;a pas pus être crédité&quot;.
+        ///   Looks up a localized string similar to &quot;Voulez-vous vraiment supprimer ces menus ?&quot;.
+        /// </summary>
+        internal static string TXTCONFIRMATIONSUPPRMENUS {
+            get {
+                return ResourceManager.GetString("TXTCONFIRMATIONSUPPRMENUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Le compte du salarié {0} {1} n&apos;a pas pus être crédité&quot;.
         /// </summary>
         internal static string TXTCREDITCOMPTE {
             get {
@@ -217,7 +226,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le menu n&apos;a pas pus être supprimé&quot;.
+        ///   Looks up a localized string similar to &quot;Le menu du {0} du {1} n&apos;a pas pus être supprimé&quot;.
         /// </summary>
         internal static string TXTDELMENU {
             get {
@@ -325,7 +334,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le menu n&apos;a pas été mis a jour&quot;.
+        ///   Looks up a localized string similar to &quot;Le menu du {0} du {1} n&apos;a pas été mis a jour&quot;.
         /// </summary>
         internal static string TXTUPDATEMENU {
             get {
@@ -334,7 +343,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le salarié n&apos;a pas été mis a jour&quot;.
+        ///   Looks up a localized string similar to &quot;Le salarié {0} {1} n&apos;a pas été mis a jour&quot;.
         /// </summary>
         internal static string TXTUPDATESALARIE {
             get {
