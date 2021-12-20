@@ -375,6 +375,10 @@ namespace OurResto
             {
                 if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
                 {
+                    foreach (DataGridViewRow row in dGVMenu.SelectedRows)
+                    {
+                        
+                    }
                     // Supprimer les lignes de la data-table menu du dataset qui correspondent au jour et au moment
                     cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == currentRow.Id_Moment &&
                                                      r.RepasDate == currentRow.RepasDate)
@@ -501,6 +505,9 @@ namespace OurResto
         {
             Random random = new Random();
 
+            progressBar.Visible = true;
+            progressBar.Value = 0;
+
             // Récupère tous les plats de chaque type
             var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
             var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
@@ -555,13 +562,19 @@ namespace OurResto
 
                                     // Enlever le plat de la liste pour ne pas le réutiliser
                                     plats.RemoveAt(i);
+                                    progressBar.PerformStep();
                                 }
+                            }
+                            else
+                            {
+                                progressBar.Value += 5;
                             }
                         }
                     }
 
                     // Si tous les plats on bien étés insérés, valider la transaction
                     trans.Complete();
+                    progressBar.Visible = false;
                 }
             }
             catch (Exception)
