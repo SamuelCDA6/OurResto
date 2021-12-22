@@ -179,6 +179,7 @@ namespace OurResto
         private void DGVMenu_SelectionChanged(object sender, EventArgs e)
         {
             UpdateComboboxs();
+
         }
 
         /// <summary>
@@ -381,7 +382,6 @@ namespace OurResto
                                 }
 
                                 progressBar.PerformStep();
-                                Thread.Sleep(100);
                             }
 
                             trans.Complete();
@@ -452,6 +452,9 @@ namespace OurResto
             }
         }
 
+        /// <summary>
+        /// Event qui se produit lors de l'affichage du contenu d'une cellule
+        /// </summary>
         private void DGVMenu_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Pour ne pas ré afficher la date si la même que celle d'au dessus
@@ -476,18 +479,26 @@ namespace OurResto
                 cBPlatAccompagnement.SelectedIndex = -1;
                 cBPlatDessert.SelectedIndex = -1;
             }
+            else
+            {
+                SetPositionBindingSource(dTPUpdateDate.Value.Date, idMoment);
+            }
         }
 
+        /// <summary>
+        /// Méthode quand l'on clique sur un titre d'une colonne
+        /// </summary>
         private void DGVMenu_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridViewColumn column = dGVMenu.Columns[e.ColumnIndex];
 
             if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
             {
-                string columnName = column.DataPropertyName;
-
                 SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                dGVMenu.Columns.OfType<DataGridViewColumn>().ToList()
+                               .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
 
+                string columnName = column.DataPropertyName;
                 weekMenus.Sort(new MenuComparer(columnName, sortOrder));
 
                 dGVMenu.Refresh();

@@ -486,6 +486,7 @@ namespace OurResto
             this.cBMoment.Size = new System.Drawing.Size(268, 28);
             this.cBMoment.TabIndex = 2;
             this.cBMoment.ValueMember = "Id_Nom";
+            this.cBMoment.SelectedIndexChanged += new System.EventHandler(this.CBMoment_SelectedIndexChanged);
             // 
             // progressBar
             // 

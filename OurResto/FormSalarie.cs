@@ -20,6 +20,11 @@ namespace OurResto
 
         private void FormSalarie_Load(object sender, EventArgs e)
         {
+            foreach (DataGridViewColumn c in dGVSalarie.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
             toolTip.SetToolTip(tBNom, "Nom du salarié");
             toolTip.SetToolTip(tBPrenom, "Prénom du salarié");
             toolTip.SetToolTip(tBEmail, "Email du salarié");
@@ -162,7 +167,7 @@ namespace OurResto
 
                     if (decimal.TryParse(tBMontant.Text, out decimal montant))
                     {
-                        if (decimal.Parse(tBSolde.Text) + montant >= 100)
+                        if (decimal.Parse(tBSolde.Text) + montant > 100)
                         {
                             MessageBox.Show(Properties.Resources.TXTSOLDE_100);
                         }
@@ -220,14 +225,15 @@ namespace OurResto
 
                         using (TransactionScope trans = new TransactionScope())
                         {
+                            bool IsInsert = true;
                             if (montant != 0)
                             {
-                                transactionTableAdapter.Insert(currentRow.Matricule, Id_TypePaiement, DateTime.Now, -montant);
+                                IsInsert = transactionTableAdapter.Insert(currentRow.Matricule, Id_TypePaiement, DateTime.Now, -montant) == 1;
                             }
 
                             currentRow.EstActif = false;
 
-                            if (salarieTableAdapter.Update(currentRow) != 1)
+                            if (!IsInsert || salarieTableAdapter.Update(currentRow) != 1)
                             {
                                 MessageBox.Show(Properties.Resources.TXTSOLDERCOMPTE);
                             }
@@ -262,10 +268,11 @@ namespace OurResto
 
             if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
             {
-                string columnName = column.DataPropertyName;
-
                 SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                dGVSalarie.Columns.OfType<DataGridViewColumn>().ToList()
+                                  .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
 
+                string columnName = column.DataPropertyName;
                 salaries.Sort(new SalarieComparer(columnName, sortOrder));
 
                 dGVSalarie.Refresh();

@@ -197,7 +197,7 @@ namespace OurResto
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.DataGridView dGVQuantitePrevisionelle;
         private System.Windows.Forms.DataGridViewTextBoxColumn repasDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ingredientDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantiteDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn uniteDataGridViewTextBoxColumn;
