@@ -66,9 +66,9 @@ namespace OurResto
             // btQuitter
             // 
             this.btQuitter.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btQuitter.Location = new System.Drawing.Point(249, 375);
+            this.btQuitter.Location = new System.Drawing.Point(247, 375);
             this.btQuitter.Name = "btQuitter";
-            this.btQuitter.Size = new System.Drawing.Size(136, 58);
+            this.btQuitter.Size = new System.Drawing.Size(140, 58);
             this.btQuitter.TabIndex = 2;
             this.btQuitter.Text = "Quitter";
             this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -103,7 +103,7 @@ namespace OurResto
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(319, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(304, 40);
@@ -114,9 +114,9 @@ namespace OurResto
             // btQuantitePrevisionelle
             // 
             this.btQuantitePrevisionelle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btQuantitePrevisionelle.Location = new System.Drawing.Point(90, 185);
+            this.btQuantitePrevisionelle.Location = new System.Drawing.Point(88, 185);
             this.btQuantitePrevisionelle.Name = "btQuantitePrevisionelle";
-            this.btQuantitePrevisionelle.Size = new System.Drawing.Size(136, 51);
+            this.btQuantitePrevisionelle.Size = new System.Drawing.Size(140, 51);
             this.btQuantitePrevisionelle.TabIndex = 2;
             this.btQuantitePrevisionelle.Text = "Quantité Prévisionnelle";
             this.btQuantitePrevisionelle.UseVisualStyleBackColor = true;
@@ -125,9 +125,9 @@ namespace OurResto
             // btSalarie
             // 
             this.btSalarie.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btSalarie.Location = new System.Drawing.Point(90, 52);
+            this.btSalarie.Location = new System.Drawing.Point(88, 52);
             this.btSalarie.Name = "btSalarie";
-            this.btSalarie.Size = new System.Drawing.Size(136, 51);
+            this.btSalarie.Size = new System.Drawing.Size(140, 51);
             this.btSalarie.TabIndex = 0;
             this.btSalarie.Text = "Comptes Repas";
             this.btSalarie.UseVisualStyleBackColor = true;
@@ -136,9 +136,9 @@ namespace OurResto
             // btMenu
             // 
             this.btMenu.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btMenu.Location = new System.Drawing.Point(90, 118);
+            this.btMenu.Location = new System.Drawing.Point(88, 118);
             this.btMenu.Name = "btMenu";
-            this.btMenu.Size = new System.Drawing.Size(136, 51);
+            this.btMenu.Size = new System.Drawing.Size(140, 51);
             this.btMenu.TabIndex = 1;
             this.btMenu.Text = "Gestion des Menus";
             this.btMenu.UseVisualStyleBackColor = true;
@@ -147,9 +147,9 @@ namespace OurResto
             // btPlanProduction
             // 
             this.btPlanProduction.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btPlanProduction.Location = new System.Drawing.Point(403, 118);
+            this.btPlanProduction.Location = new System.Drawing.Point(401, 118);
             this.btPlanProduction.Name = "btPlanProduction";
-            this.btPlanProduction.Size = new System.Drawing.Size(136, 51);
+            this.btPlanProduction.Size = new System.Drawing.Size(140, 51);
             this.btPlanProduction.TabIndex = 3;
             this.btPlanProduction.Text = "Plan de production";
             this.btPlanProduction.UseVisualStyleBackColor = true;
@@ -160,7 +160,7 @@ namespace OurResto
             this.lblIntendant.AutoSize = true;
             this.lblIntendant.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.lblIntendant.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblIntendant.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblIntendant.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblIntendant.Location = new System.Drawing.Point(6, 3);
             this.lblIntendant.Name = "lblIntendant";
             this.lblIntendant.Size = new System.Drawing.Size(304, 40);
@@ -173,7 +173,7 @@ namespace OurResto
             this.lblTitre.AutoSize = true;
             this.lblTitre.BackColor = System.Drawing.Color.LightGreen;
             this.lblTitre.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTitre.Font = new System.Drawing.Font("Matura MT Script Capitals", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitre.Font = new System.Drawing.Font("Matura MT Script Capitals", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTitre.Location = new System.Drawing.Point(3, 0);
             this.lblTitre.Name = "lblTitre";
             this.lblTitre.Size = new System.Drawing.Size(629, 120);
@@ -187,7 +187,7 @@ namespace OurResto
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(635, 436);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(651, 475);

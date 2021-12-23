@@ -7,6 +7,8 @@ using System.Transactions;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace OurResto
 {
@@ -41,7 +43,7 @@ namespace OurResto
             Manager.ResizeImage(btAfter, Properties.Resources.Arrow_right_256x256, ContentAlignment.MiddleCenter);
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
 
-            foreach (ComboBox cb in Controls.OfType<ComboBox>())
+            foreach (ComboBox cb in tLPInputBox.Controls.OfType<ComboBox>())
             {
                 cb.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.Never;
             }
@@ -55,6 +57,7 @@ namespace OurResto
             dGVMenu.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dTPUpdateDate.Value = DateTime.Today;
+            UpdateWeekMenus(dTPUpdateDate.Value);
 
             toolTip.SetToolTip(btAddRandom, "Ajouter des plats aléatoires pour toute la semaine");
             toolTip.SetToolTip(btActualiser, "Remetre l'affichage à jour");
@@ -94,8 +97,6 @@ namespace OurResto
             ChangeDataGridDisplayedMenus(dateMonday, dateFriday);
         }
 
-
-
         /// <summary>
         /// Modifie l'affichage du datagridview pour seulement les menus compris entre les date de debut et de fin
         /// </summary>
@@ -112,9 +113,10 @@ namespace OurResto
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
                 vaffichermenuBindingSource.DataSource = weekMenus;
+                dGVMenu.DataSource = vaffichermenuBindingSource;
 
                 // Et repositionner la position de la BindingSource sur la date
-                if (cda68_bd1DataSet.Moment.Count > 0)
+                if (cda68_bd1DataSet.Moment.Count > 0 && cBMoment.Text != String.Empty)
                 {
                     var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
 
@@ -143,6 +145,7 @@ namespace OurResto
                 SetupComboBoxs();
 
                 UpdateWeekMenus(dTPUpdateDate.Value.Date);
+
             }
             catch (Exception)
             {
@@ -176,12 +179,6 @@ namespace OurResto
             cb.DataSource = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == sorte).ToList();
         }
 
-        private void DGVMenu_SelectionChanged(object sender, EventArgs e)
-        {
-            UpdateComboboxs();
-
-        }
-
         /// <summary>
         /// Méthode pour remettre la valeur sélectionnée des ComboBoxs à jour
         /// </summary>
@@ -189,24 +186,63 @@ namespace OurResto
         {
             if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
             {
+                dTPUpdateDate.Value = currentRow.RepasDate;
+                cBMoment.SelectedItem = currentRow.Moment;
                 cBPlatEntree.SelectedValue = currentRow.Id_Plat_Entree;
                 cBPlatPrincipal.SelectedValue = currentRow.Id_Plat_Principal;
                 cBPlatAccompagnement.SelectedValue = currentRow.Id_Plat_Accompagnement;
                 cBPlatFromage.SelectedValue = currentRow.Id_Plat_Fromage;
                 cBPlatDessert.SelectedValue = currentRow.Id_Plat_Dessert;
+            }
+            else
+            {
+                cBPlatEntree.SelectedItem = -1;
+                cBPlatPrincipal.SelectedItem = -1;
+                cBPlatAccompagnement.SelectedItem = -1;
+                cBPlatFromage.SelectedItem = -1;
+                cBPlatDessert.SelectedItem = -1;
+            }
+        }
 
-                cBMoment.SelectedItem = currentRow.Moment;
+        private void vaffichermenuBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            UpdateComboboxs();
+        }
+
+        private void CBMoment_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+            SetPositionBindingSource(dTPUpdateDate.Value, idMoment);
+        }
+
+        private void dTPUpdateDate_CloseUp(object sender, EventArgs e)
+        {
+            DateTime date = dTPUpdateDate.Value.Date;
+            // Si la date choisit n'est pas dans la semaine affichée en cours remettre à jour le DataGridView
+            if (date < dateMonday || date > dateFriday)
+            {
+                UpdateWeekMenus(date);
+            }
+
+            if (cda68_bd1DataSet.Moment.Count > 0)
+            {
+                var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+                SetPositionBindingSource(date, idMoment);
             }
         }
 
         private void BtBefore_Click(object sender, EventArgs e)
         {
             dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(-7);
+            UpdateWeekMenus(dTPUpdateDate.Value);
         }
 
         private void BtAfter_Click(object sender, EventArgs e)
         {
             dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(7);
+            UpdateWeekMenus(dTPUpdateDate.Value);
         }
 
         private void BtActualiser_Click(object sender, EventArgs e)
@@ -233,6 +269,27 @@ namespace OurResto
 
             var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
             SetPositionBindingSource(dateAdd, idMoment);
+        }
+
+        /// <summary>
+        /// Méthode pour placer la position de la BindingSource sur une position donnée
+        /// </summary>
+        /// <param name="date">la date ou placer la BindingSource</param>
+        private void SetPositionBindingSource(DateTime date, int idMoment)
+        {
+            //Chercher si un menu du DataGridView correspond à la date et au moment
+            if (dGVMenu.Rows.OfType<DataGridViewRow>()
+                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
+                                                (int)r.Cells[12].Value == idMoment)
+                            is DataGridViewRow row)
+            {
+                //Si oui placer la BindingSource dessus
+                vaffichermenuBindingSource.Position = row.Index;
+            }
+            else
+            {
+                UpdateComboboxs();
+            }
         }
 
         /// <summary>
@@ -351,6 +408,7 @@ namespace OurResto
 
             RefreshDisplay();
 
+            progressBar.Visible = false;
         }
 
         /// <summary>
@@ -377,7 +435,6 @@ namespace OurResto
 
                                 if (nb != 5)
                                 {
-                                    progressBar.Visible = false;
                                     return;
                                 }
 
@@ -385,7 +442,6 @@ namespace OurResto
                             }
 
                             trans.Complete();
-                            progressBar.Visible = false;
                         }
                     }
 
@@ -404,53 +460,7 @@ namespace OurResto
             Close();
         }
 
-        private void DTPUpdateDate_ValueChanged(object sender, EventArgs e)
-        {
-            DateTime date = dTPUpdateDate.Value.Date;
-            // Si la date choisit n'est pas dans la semaine afficher en cours remettre à jour le DataGridView
-            if (date < dateMonday || date > dateFriday)
-            {
-                UpdateWeekMenus(date);
-            }
 
-            if (cda68_bd1DataSet.Moment.Count > 0)
-            {
-                var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
-
-                SetPositionBindingSource(date, idMoment);
-            }
-
-
-        }
-
-        /// <summary>
-        /// Méthode pour placer la position de la BindingSource sur une position donnée
-        /// </summary>
-        /// <param name="date">la date ou placer la BindingSource</param>
-        private void SetPositionBindingSource(DateTime date, int idMoment)
-        {
-            if (vaffichermenuBindingSource.Current != null)
-            {
-                // Chercher si un menu du DataGridView correspond à la date et au moment
-                if (dGVMenu.Rows.OfType<DataGridViewRow>()
-                                .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
-                                                     (int)r.Cells[12].Value == idMoment)
-                                is DataGridViewRow row)
-                {
-                    // Si oui placer la BindingSource dessus
-                    vaffichermenuBindingSource.Position = row.Index;
-                }
-                else
-                {
-                    // Sinon vider les ComboBox
-                    cBPlatEntree.SelectedIndex = -1;
-                    cBPlatPrincipal.SelectedIndex = -1;
-                    cBPlatFromage.SelectedIndex = -1;
-                    cBPlatAccompagnement.SelectedIndex = -1;
-                    cBPlatDessert.SelectedIndex = -1;
-                }
-            }
-        }
 
         /// <summary>
         /// Event qui se produit lors de l'affichage du contenu d'une cellule
@@ -464,24 +474,6 @@ namespace OurResto
                 {
                     e.Value = String.Empty;
                 }
-            }
-        }
-
-        private void CBMoment_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
-
-            if (!cda68_bd1DataSet.Menu.Any(r => r.RepasDate == dTPUpdateDate.Value.Date && r.Id_Moment == idMoment))
-            {
-                cBPlatEntree.SelectedIndex = -1;
-                cBPlatPrincipal.SelectedIndex = -1;
-                cBPlatFromage.SelectedIndex = -1;
-                cBPlatAccompagnement.SelectedIndex = -1;
-                cBPlatDessert.SelectedIndex = -1;
-            }
-            else
-            {
-                SetPositionBindingSource(dTPUpdateDate.Value.Date, idMoment);
             }
         }
 
@@ -512,6 +504,8 @@ namespace OurResto
             AddRandomWeekMeals();
 
             RefreshDisplay();
+
+            progressBar.Visible = false;
         }
 
         /// <summary>
@@ -582,7 +576,9 @@ namespace OurResto
 
                                     // Enlever le plat de la liste pour ne pas le réutiliser
                                     plats.RemoveAt(i);
-                                    progressBar.PerformStep();
+
+                                    Task.Run(() => progressBar.PerformStep());
+                                    progressBar.Refresh();
                                 }
                             }
                         }
@@ -596,8 +592,6 @@ namespace OurResto
             {
                 MessageBox.Show(Properties.Resources.TXTADDMENU);
             }
-
-            progressBar.Visible = false;
         }
 
         /// <summary>
