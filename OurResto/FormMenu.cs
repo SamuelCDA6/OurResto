@@ -86,7 +86,7 @@ namespace OurResto
             dateFriday = date.WeekDay(DayOfWeek.Friday);
 
             // Si le lundi est sur le mois precedent prendre le mois aussi sinon que le jour
-            string monday = dateMonday.Year < dateFriday.Year ? dateMonday.ToString("D") : (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("M") : dateMonday.Day.ToString();
+            string monday = dateMonday.Year < dateFriday.Year ? dateMonday.ToString("D") : (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("dddd dd MMMM") : dateMonday.ToString("dddd dd");
 
             // Remettre à jour le label de la semaine
             lblSemaine.Text = String.Format("Semaine du {0} au {1}", monday, dateFriday.ToString("D"));
