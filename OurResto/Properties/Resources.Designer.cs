@@ -19,7 +19,7 @@ namespace OurResto.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -181,11 +181,20 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le menu n&apos;a pas pus être ajouté&quot;.
+        ///   Looks up a localized string similar to &quot;Le menu du {0} du {1} n&apos;a pas pus être ajouté&quot;.
         /// </summary>
         internal static string TXTADDMENU {
             get {
                 return ResourceManager.GetString("TXTADDMENU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Les menus n&apos;ont pas pus être ajoutés&quot;.
+        /// </summary>
+        internal static string TXTADDMENUS {
+            get {
+                return ResourceManager.GetString("TXTADDMENUS", resourceCulture);
             }
         }
         

@@ -84,7 +84,7 @@ namespace OurResto
             this.menuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.v_affichermenuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
@@ -145,6 +145,7 @@ namespace OurResto
             this.dGVMenu.TabStop = false;
             this.dGVMenu.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVMenu_CellFormatting);
             this.dGVMenu.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVMenu_ColumnHeaderMouseClick);
+            this.dGVMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dGVMenu_PreviewKeyDown);
             // 
             // repasDateDataGridViewTextBoxColumn
             // 
@@ -197,7 +198,7 @@ namespace OurResto
             // 
             this.platDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.platDataGridViewTextBoxColumn.DataPropertyName = "Plat";
-            this.platDataGridViewTextBoxColumn.HeaderText = "Plat";
+            this.platDataGridViewTextBoxColumn.HeaderText = "Plat principal";
             this.platDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.platDataGridViewTextBoxColumn.Name = "platDataGridViewTextBoxColumn";
             this.platDataGridViewTextBoxColumn.ReadOnly = true;
@@ -321,7 +322,6 @@ namespace OurResto
             this.tLPInputBox.Controls.Add(this.lblMoment, 0, 3);
             this.tLPInputBox.Controls.Add(this.cBMoment, 1, 3);
             this.tLPInputBox.Controls.Add(this.progressBar, 1, 4);
-            this.tLPInputBox.Controls.Add(this.label1, 0, 4);
             this.tLPInputBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tLPInputBox.Location = new System.Drawing.Point(3, 354);
             this.tLPInputBox.Name = "tLPInputBox";
@@ -680,15 +680,6 @@ namespace OurResto
             // 
             this.v_affichermenuTableAdapter.ClearBeforeFill = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 136);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 20);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "label1";
-            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -725,7 +716,6 @@ namespace OurResto
 
         private System.Windows.Forms.DataGridView dGVMenu;
         private cda68_bd1DataSet cda68_bd1DataSet;
-        //private System.Windows.Forms.DataGridViewTextBoxColumn nomDataGridViewTextBoxColumn;
         private System.Windows.Forms.TableLayoutPanel tLPMain;
         private System.Windows.Forms.TableLayoutPanel tLPInputBox;
         private System.Windows.Forms.Label lblPlat;
@@ -760,6 +750,10 @@ namespace OurResto
         private System.Windows.Forms.Button btModifier;
         private System.Windows.Forms.Button btSupprimer;
         private System.Windows.Forms.Button btQuitter;
+        private System.Windows.Forms.Button btAddRandom;
+        private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.DataGridViewTextBoxColumn repasDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn momentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPlatEntreeDataGridViewTextBoxColumn;
@@ -773,9 +767,5 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn idPlatDessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button btAddRandom;
-        private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.Label label1;
     }
 }

@@ -280,5 +280,17 @@ namespace OurResto
                 column.HeaderCell.SortGlyphDirection = sortOrder;
             }
         }
+
+        private void tBMontant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == ',')
+            {
+                e.KeyChar = '.';
+            }
+            else if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

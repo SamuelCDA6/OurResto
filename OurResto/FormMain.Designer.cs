@@ -57,7 +57,7 @@ namespace OurResto
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(635, 436);
@@ -88,14 +88,14 @@ namespace OurResto
             this.tableLayoutPanel2.Controls.Add(this.btPlanProduction, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblIntendant, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 123);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 115);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 4;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(629, 246);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(629, 254);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -106,15 +106,15 @@ namespace OurResto
             this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(319, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(304, 40);
+            this.label1.Size = new System.Drawing.Size(304, 46);
             this.label1.TabIndex = 5;
             this.label1.Text = "Cuisinier";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // btQuantitePrevisionelle
             // 
             this.btQuantitePrevisionelle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btQuantitePrevisionelle.Location = new System.Drawing.Point(88, 185);
+            this.btQuantitePrevisionelle.Location = new System.Drawing.Point(88, 193);
             this.btQuantitePrevisionelle.Name = "btQuantitePrevisionelle";
             this.btQuantitePrevisionelle.Size = new System.Drawing.Size(140, 51);
             this.btQuantitePrevisionelle.TabIndex = 2;
@@ -125,7 +125,7 @@ namespace OurResto
             // btSalarie
             // 
             this.btSalarie.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btSalarie.Location = new System.Drawing.Point(88, 52);
+            this.btSalarie.Location = new System.Drawing.Point(88, 58);
             this.btSalarie.Name = "btSalarie";
             this.btSalarie.Size = new System.Drawing.Size(140, 51);
             this.btSalarie.TabIndex = 0;
@@ -136,7 +136,7 @@ namespace OurResto
             // btMenu
             // 
             this.btMenu.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btMenu.Location = new System.Drawing.Point(88, 118);
+            this.btMenu.Location = new System.Drawing.Point(88, 125);
             this.btMenu.Name = "btMenu";
             this.btMenu.Size = new System.Drawing.Size(140, 51);
             this.btMenu.TabIndex = 1;
@@ -147,7 +147,7 @@ namespace OurResto
             // btPlanProduction
             // 
             this.btPlanProduction.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btPlanProduction.Location = new System.Drawing.Point(401, 118);
+            this.btPlanProduction.Location = new System.Drawing.Point(401, 125);
             this.btPlanProduction.Name = "btPlanProduction";
             this.btPlanProduction.Size = new System.Drawing.Size(140, 51);
             this.btPlanProduction.TabIndex = 3;
@@ -163,10 +163,10 @@ namespace OurResto
             this.lblIntendant.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblIntendant.Location = new System.Drawing.Point(6, 3);
             this.lblIntendant.Name = "lblIntendant";
-            this.lblIntendant.Size = new System.Drawing.Size(304, 40);
+            this.lblIntendant.Size = new System.Drawing.Size(304, 46);
             this.lblIntendant.TabIndex = 4;
             this.lblIntendant.Text = "Intendant";
-            this.lblIntendant.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblIntendant.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblTitre
             // 
@@ -176,7 +176,7 @@ namespace OurResto
             this.lblTitre.Font = new System.Drawing.Font("Matura MT Script Capitals", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTitre.Location = new System.Drawing.Point(3, 0);
             this.lblTitre.Name = "lblTitre";
-            this.lblTitre.Size = new System.Drawing.Size(629, 120);
+            this.lblTitre.Size = new System.Drawing.Size(629, 112);
             this.lblTitre.TabIndex = 1;
             this.lblTitre.Text = "Our Resto";
             this.lblTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

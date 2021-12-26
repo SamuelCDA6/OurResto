@@ -57,6 +57,7 @@ namespace OurResto
             // cda68_bd1DataSet
             // 
             this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
+            this.cda68_bd1DataSet.Namespace = "http://tempuri.org/cda68_bd1DataSet.xsd";
             this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // v_quantiteprevisionnelleTableAdapter
@@ -77,14 +78,14 @@ namespace OurResto
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(482, 553);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(522, 553);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // btQuitter
             // 
             this.btQuitter.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btQuitter.BackColor = System.Drawing.Color.Transparent;
-            this.btQuitter.Location = new System.Drawing.Point(159, 486);
+            this.btQuitter.Location = new System.Drawing.Point(179, 486);
             this.btQuitter.Name = "btQuitter";
             this.btQuitter.Size = new System.Drawing.Size(164, 64);
             this.btQuitter.TabIndex = 9;
@@ -116,7 +117,7 @@ namespace OurResto
             this.dGVQuantitePrevisionelle.ReadOnly = true;
             this.dGVQuantitePrevisionelle.RowHeadersVisible = false;
             this.dGVQuantitePrevisionelle.RowHeadersWidth = 51;
-            this.dGVQuantitePrevisionelle.Size = new System.Drawing.Size(476, 437);
+            this.dGVQuantitePrevisionelle.Size = new System.Drawing.Size(516, 437);
             this.dGVQuantitePrevisionelle.TabIndex = 1;
             // 
             // repasDateDataGridViewTextBoxColumn
@@ -159,11 +160,11 @@ namespace OurResto
             // tBTitle
             // 
             this.tBTitle.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tBTitle.Font = new System.Drawing.Font("Britannic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tBTitle.Font = new System.Drawing.Font("Britannic Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tBTitle.Location = new System.Drawing.Point(3, 3);
             this.tBTitle.Name = "tBTitle";
             this.tBTitle.ReadOnly = true;
-            this.tBTitle.Size = new System.Drawing.Size(476, 34);
+            this.tBTitle.Size = new System.Drawing.Size(516, 34);
             this.tBTitle.TabIndex = 2;
             this.tBTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -171,9 +172,9 @@ namespace OurResto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(482, 553);
+            this.ClientSize = new System.Drawing.Size(522, 553);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(500, 400);

@@ -33,6 +33,13 @@ namespace OurResto
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSalarie));
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.dGVSalarie = new System.Windows.Forms.DataGridView();
+            this.matriculeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prenomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estActifDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idGradeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salarieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cda68_bd1DataSet = new OurResto.cda68_bd1DataSet();
             this.tLPSalaries = new System.Windows.Forms.TableLayoutPanel();
@@ -74,13 +81,6 @@ namespace OurResto
             this.typePaiementTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.TypePaiementTableAdapter();
             this.timerRechercheSalarie = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.matriculeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prenomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estActifDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.idGradeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tLPMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSalarie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salarieBindingSource)).BeginInit();
@@ -118,7 +118,7 @@ namespace OurResto
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPMain.Size = new System.Drawing.Size(1053, 540);
+            this.tLPMain.Size = new System.Drawing.Size(1182, 603);
             this.tLPMain.TabIndex = 0;
             // 
             // dGVSalarie
@@ -149,428 +149,10 @@ namespace OurResto
             this.dGVSalarie.RowHeadersVisible = false;
             this.dGVSalarie.RowHeadersWidth = 51;
             this.dGVSalarie.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVSalarie.Size = new System.Drawing.Size(735, 312);
+            this.dGVSalarie.Size = new System.Drawing.Size(826, 375);
             this.dGVSalarie.TabIndex = 100;
             this.dGVSalarie.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVSalarie_ColumnHeaderMouseClick);
             this.dGVSalarie.SelectionChanged += new System.EventHandler(this.DGVSalarie_SelectionChanged);
-            // 
-            // salarieBindingSource
-            // 
-            this.salarieBindingSource.DataMember = "Salarie";
-            this.salarieBindingSource.DataSource = this.cda68_bd1DataSet;
-            // 
-            // cda68_bd1DataSet
-            // 
-            this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
-            this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // tLPSalaries
-            // 
-            this.tLPSalaries.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tLPSalaries.ColumnCount = 2;
-            this.tLPSalaries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tLPSalaries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPSalaries.Controls.Add(this.lblEmail, 0, 2);
-            this.tLPSalaries.Controls.Add(this.tBPrenom, 1, 1);
-            this.tLPSalaries.Controls.Add(this.tBEmail, 1, 2);
-            this.tLPSalaries.Controls.Add(this.tBNom, 1, 0);
-            this.tLPSalaries.Controls.Add(this.lblNom, 0, 0);
-            this.tLPSalaries.Controls.Add(this.lblPrenom, 0, 1);
-            this.tLPSalaries.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPSalaries.Location = new System.Drawing.Point(4, 362);
-            this.tLPSalaries.Margin = new System.Windows.Forms.Padding(4);
-            this.tLPSalaries.Name = "tLPSalaries";
-            this.tLPSalaries.RowCount = 3;
-            this.tLPSalaries.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tLPSalaries.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tLPSalaries.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tLPSalaries.Size = new System.Drawing.Size(735, 98);
-            this.tLPSalaries.TabIndex = 1;
-            // 
-            // lblEmail
-            // 
-            this.lblEmail.AutoSize = true;
-            this.lblEmail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblEmail.Location = new System.Drawing.Point(4, 68);
-            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(65, 34);
-            this.lblEmail.TabIndex = 4;
-            this.lblEmail.Text = "Email";
-            this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tBPrenom
-            // 
-            this.tBPrenom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Prenom", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.tBPrenom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tBPrenom.Location = new System.Drawing.Point(77, 38);
-            this.tBPrenom.Margin = new System.Windows.Forms.Padding(4);
-            this.tBPrenom.Name = "tBPrenom";
-            this.tBPrenom.Size = new System.Drawing.Size(654, 26);
-            this.tBPrenom.TabIndex = 2;
-            // 
-            // tBEmail
-            // 
-            this.tBEmail.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Email", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.tBEmail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tBEmail.Location = new System.Drawing.Point(77, 72);
-            this.tBEmail.Margin = new System.Windows.Forms.Padding(4);
-            this.tBEmail.Name = "tBEmail";
-            this.tBEmail.Size = new System.Drawing.Size(654, 26);
-            this.tBEmail.TabIndex = 3;
-            // 
-            // tBNom
-            // 
-            this.tBNom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Nom", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.tBNom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tBNom.Location = new System.Drawing.Point(77, 4);
-            this.tBNom.Margin = new System.Windows.Forms.Padding(4);
-            this.tBNom.Name = "tBNom";
-            this.tBNom.Size = new System.Drawing.Size(654, 26);
-            this.tBNom.TabIndex = 1;
-            // 
-            // lblNom
-            // 
-            this.lblNom.AutoSize = true;
-            this.lblNom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblNom.Location = new System.Drawing.Point(4, 0);
-            this.lblNom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNom.Name = "lblNom";
-            this.lblNom.Size = new System.Drawing.Size(65, 34);
-            this.lblNom.TabIndex = 3;
-            this.lblNom.Text = "Nom";
-            this.lblNom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblPrenom
-            // 
-            this.lblPrenom.AutoSize = true;
-            this.lblPrenom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPrenom.Location = new System.Drawing.Point(3, 34);
-            this.lblPrenom.Name = "lblPrenom";
-            this.lblPrenom.Size = new System.Drawing.Size(67, 34);
-            this.lblPrenom.TabIndex = 5;
-            this.lblPrenom.Text = "Prénom";
-            this.lblPrenom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // fLPTransactionButtons
-            // 
-            this.fLPTransactionButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.fLPTransactionButtons.AutoSize = true;
-            this.fLPTransactionButtons.Controls.Add(this.btCredit);
-            this.fLPTransactionButtons.Controls.Add(this.btSellOff);
-            this.fLPTransactionButtons.Location = new System.Drawing.Point(754, 467);
-            this.fLPTransactionButtons.Name = "fLPTransactionButtons";
-            this.fLPTransactionButtons.Size = new System.Drawing.Size(288, 70);
-            this.fLPTransactionButtons.TabIndex = 3;
-            // 
-            // btCredit
-            // 
-            this.btCredit.Location = new System.Drawing.Point(3, 3);
-            this.btCredit.Name = "btCredit";
-            this.btCredit.Size = new System.Drawing.Size(138, 61);
-            this.btCredit.TabIndex = 9;
-            this.btCredit.Text = "&Crediter";
-            this.btCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btCredit.UseVisualStyleBackColor = true;
-            this.btCredit.Click += new System.EventHandler(this.BtCredit_Click);
-            // 
-            // btSellOff
-            // 
-            this.btSellOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSellOff.Location = new System.Drawing.Point(147, 3);
-            this.btSellOff.Name = "btSellOff";
-            this.btSellOff.Size = new System.Drawing.Size(138, 61);
-            this.btSellOff.TabIndex = 10;
-            this.btSellOff.Text = "&Solder";
-            this.btSellOff.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btSellOff.UseVisualStyleBackColor = true;
-            this.btSellOff.Click += new System.EventHandler(this.BtSellOff_Click);
-            // 
-            // dGVTransaction
-            // 
-            this.dGVTransaction.AllowUserToAddRows = false;
-            this.dGVTransaction.AllowUserToDeleteRows = false;
-            this.dGVTransaction.AllowUserToResizeColumns = false;
-            this.dGVTransaction.AllowUserToResizeRows = false;
-            this.dGVTransaction.AutoGenerateColumns = false;
-            this.dGVTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dGVTransaction.BackgroundColor = System.Drawing.Color.White;
-            this.dGVTransaction.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
-            this.dGVTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGVTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.matriculeDataGridViewTextBoxColumn1,
-            this.idTypePaiementDataGridViewTextBoxColumn,
-            this.horodateDataGridViewTextBoxColumn,
-            this.montantDataGridViewTextBoxColumn});
-            this.dGVTransaction.DataSource = this.transactionBindingSource;
-            this.dGVTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dGVTransaction.Location = new System.Drawing.Point(746, 41);
-            this.dGVTransaction.MultiSelect = false;
-            this.dGVTransaction.Name = "dGVTransaction";
-            this.dGVTransaction.ReadOnly = true;
-            this.dGVTransaction.RowHeadersVisible = false;
-            this.dGVTransaction.RowHeadersWidth = 51;
-            this.dGVTransaction.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dGVTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVTransaction.Size = new System.Drawing.Size(304, 314);
-            this.dGVTransaction.TabIndex = 100;
-            // 
-            // matriculeDataGridViewTextBoxColumn1
-            // 
-            this.matriculeDataGridViewTextBoxColumn1.DataPropertyName = "Matricule";
-            this.matriculeDataGridViewTextBoxColumn1.HeaderText = "Matricule";
-            this.matriculeDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.matriculeDataGridViewTextBoxColumn1.Name = "matriculeDataGridViewTextBoxColumn1";
-            this.matriculeDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.matriculeDataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // idTypePaiementDataGridViewTextBoxColumn
-            // 
-            this.idTypePaiementDataGridViewTextBoxColumn.DataPropertyName = "Id_TypePaiement";
-            this.idTypePaiementDataGridViewTextBoxColumn.HeaderText = "Id_TypePaiement";
-            this.idTypePaiementDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idTypePaiementDataGridViewTextBoxColumn.Name = "idTypePaiementDataGridViewTextBoxColumn";
-            this.idTypePaiementDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idTypePaiementDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // horodateDataGridViewTextBoxColumn
-            // 
-            this.horodateDataGridViewTextBoxColumn.DataPropertyName = "Horodate";
-            this.horodateDataGridViewTextBoxColumn.HeaderText = "Horodate";
-            this.horodateDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.horodateDataGridViewTextBoxColumn.Name = "horodateDataGridViewTextBoxColumn";
-            this.horodateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // montantDataGridViewTextBoxColumn
-            // 
-            this.montantDataGridViewTextBoxColumn.DataPropertyName = "Montant";
-            this.montantDataGridViewTextBoxColumn.HeaderText = "Montant";
-            this.montantDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.montantDataGridViewTextBoxColumn.Name = "montantDataGridViewTextBoxColumn";
-            this.montantDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // transactionBindingSource
-            // 
-            this.transactionBindingSource.DataMember = "Transaction";
-            this.transactionBindingSource.DataSource = this.cda68_bd1DataSet;
-            // 
-            // tLPTransactions
-            // 
-            this.tLPTransactions.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tLPTransactions.ColumnCount = 2;
-            this.tLPTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tLPTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPTransactions.Controls.Add(this.lblType, 0, 2);
-            this.tLPTransactions.Controls.Add(this.lblMontant, 0, 1);
-            this.tLPTransactions.Controls.Add(this.lblSolde, 0, 0);
-            this.tLPTransactions.Controls.Add(this.tBMontant, 1, 1);
-            this.tLPTransactions.Controls.Add(this.tBSolde, 1, 0);
-            this.tLPTransactions.Controls.Add(this.cBTypePaiement, 1, 2);
-            this.tLPTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPTransactions.Location = new System.Drawing.Point(746, 361);
-            this.tLPTransactions.Name = "tLPTransactions";
-            this.tLPTransactions.RowCount = 3;
-            this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tLPTransactions.Size = new System.Drawing.Size(304, 100);
-            this.tLPTransactions.TabIndex = 5;
-            // 
-            // lblType
-            // 
-            this.lblType.AutoSize = true;
-            this.lblType.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblType.Location = new System.Drawing.Point(3, 66);
-            this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(145, 34);
-            this.lblType.TabIndex = 4;
-            this.lblType.Text = "Type de paiement";
-            this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblMontant
-            // 
-            this.lblMontant.AutoSize = true;
-            this.lblMontant.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblMontant.Location = new System.Drawing.Point(3, 33);
-            this.lblMontant.Name = "lblMontant";
-            this.lblMontant.Size = new System.Drawing.Size(145, 33);
-            this.lblMontant.TabIndex = 1;
-            this.lblMontant.Text = "Montant à créditer";
-            this.lblMontant.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lblSolde
-            // 
-            this.lblSolde.AutoSize = true;
-            this.lblSolde.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSolde.Location = new System.Drawing.Point(3, 0);
-            this.lblSolde.Name = "lblSolde";
-            this.lblSolde.Size = new System.Drawing.Size(145, 33);
-            this.lblSolde.TabIndex = 0;
-            this.lblSolde.Text = "Solde";
-            this.lblSolde.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tBMontant
-            // 
-            this.tBMontant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tBMontant.Location = new System.Drawing.Point(154, 36);
-            this.tBMontant.Name = "tBMontant";
-            this.tBMontant.Size = new System.Drawing.Size(147, 26);
-            this.tBMontant.TabIndex = 7;
-            this.tBMontant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tBSolde
-            // 
-            this.tBSolde.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tBSolde.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vsoldesalarieBindingSource, "Solde", true, System.Windows.Forms.DataSourceUpdateMode.Never));
-            this.tBSolde.Location = new System.Drawing.Point(154, 3);
-            this.tBSolde.Name = "tBSolde";
-            this.tBSolde.ReadOnly = true;
-            this.tBSolde.Size = new System.Drawing.Size(147, 26);
-            this.tBSolde.TabIndex = 3;
-            this.tBSolde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // vsoldesalarieBindingSource
-            // 
-            this.vsoldesalarieBindingSource.DataMember = "v_soldesalarie";
-            this.vsoldesalarieBindingSource.DataSource = this.cda68_bd1DataSet;
-            // 
-            // cBTypePaiement
-            // 
-            this.cBTypePaiement.DataSource = this.typePaiementBindingSource;
-            this.cBTypePaiement.DisplayMember = "Nom";
-            this.cBTypePaiement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cBTypePaiement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBTypePaiement.FormattingEnabled = true;
-            this.cBTypePaiement.Location = new System.Drawing.Point(154, 69);
-            this.cBTypePaiement.Name = "cBTypePaiement";
-            this.cBTypePaiement.Size = new System.Drawing.Size(147, 28);
-            this.cBTypePaiement.TabIndex = 8;
-            this.cBTypePaiement.ValueMember = "Nom";
-            // 
-            // typePaiementBindingSource
-            // 
-            this.typePaiementBindingSource.DataMember = "TypePaiement";
-            this.typePaiementBindingSource.DataSource = this.cda68_bd1DataSet;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.lblRechercheSalarie, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tBRechercheSalarie, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(737, 32);
-            this.tableLayoutPanel1.TabIndex = 101;
-            // 
-            // lblRechercheSalarie
-            // 
-            this.lblRechercheSalarie.AutoSize = true;
-            this.lblRechercheSalarie.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblRechercheSalarie.Location = new System.Drawing.Point(3, 0);
-            this.lblRechercheSalarie.Name = "lblRechercheSalarie";
-            this.lblRechercheSalarie.Size = new System.Drawing.Size(90, 32);
-            this.lblRechercheSalarie.TabIndex = 0;
-            this.lblRechercheSalarie.Text = "Recherche";
-            this.lblRechercheSalarie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // tBRechercheSalarie
-            // 
-            this.tBRechercheSalarie.Location = new System.Drawing.Point(99, 3);
-            this.tBRechercheSalarie.Name = "tBRechercheSalarie";
-            this.tBRechercheSalarie.Size = new System.Drawing.Size(306, 26);
-            this.tBRechercheSalarie.TabIndex = 0;
-            this.tBRechercheSalarie.TextChanged += new System.EventHandler(this.TBRechercheSalarie_TextChanged);
-            // 
-            // tLPButtons
-            // 
-            this.tLPButtons.ColumnCount = 2;
-            this.tLPButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tLPButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPButtons.Controls.Add(this.fLPSalarieButtons, 1, 0);
-            this.tLPButtons.Controls.Add(this.btQuitter, 0, 0);
-            this.tLPButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPButtons.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.tLPButtons.Location = new System.Drawing.Point(3, 467);
-            this.tLPButtons.Name = "tLPButtons";
-            this.tLPButtons.RowCount = 1;
-            this.tLPButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPButtons.Size = new System.Drawing.Size(737, 70);
-            this.tLPButtons.TabIndex = 102;
-            // 
-            // fLPSalarieButtons
-            // 
-            this.fLPSalarieButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.fLPSalarieButtons.AutoSize = true;
-            this.fLPSalarieButtons.Controls.Add(this.btRefresh);
-            this.fLPSalarieButtons.Controls.Add(this.btEdit);
-            this.fLPSalarieButtons.Location = new System.Drawing.Point(296, 3);
-            this.fLPSalarieButtons.Name = "fLPSalarieButtons";
-            this.fLPSalarieButtons.Size = new System.Drawing.Size(288, 64);
-            this.fLPSalarieButtons.TabIndex = 3;
-            // 
-            // btRefresh
-            // 
-            this.btRefresh.Location = new System.Drawing.Point(3, 3);
-            this.btRefresh.Name = "btRefresh";
-            this.btRefresh.Size = new System.Drawing.Size(138, 61);
-            this.btRefresh.TabIndex = 4;
-            this.btRefresh.Text = "&Actualiser";
-            this.btRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btRefresh.UseVisualStyleBackColor = true;
-            this.btRefresh.Click += new System.EventHandler(this.BtRefresh_Click);
-            // 
-            // btEdit
-            // 
-            this.btEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btEdit.Location = new System.Drawing.Point(147, 3);
-            this.btEdit.Name = "btEdit";
-            this.btEdit.Size = new System.Drawing.Size(138, 61);
-            this.btEdit.TabIndex = 6;
-            this.btEdit.Text = "&Modifier";
-            this.btEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btEdit.UseVisualStyleBackColor = true;
-            this.btEdit.Click += new System.EventHandler(this.BtEdit_Click);
-            // 
-            // btQuitter
-            // 
-            this.btQuitter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.btQuitter.BackColor = System.Drawing.Color.Transparent;
-            this.btQuitter.Location = new System.Drawing.Point(3, 3);
-            this.btQuitter.Name = "btQuitter";
-            this.btQuitter.Size = new System.Drawing.Size(138, 64);
-            this.btQuitter.TabIndex = 7;
-            this.btQuitter.Text = "&Quitter";
-            this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btQuitter.UseVisualStyleBackColor = false;
-            this.btQuitter.Click += new System.EventHandler(this.BtQuitter_Click);
-            // 
-            // salarieTableAdapter
-            // 
-            this.salarieTableAdapter.ClearBeforeFill = true;
-            // 
-            // transactionTableAdapter
-            // 
-            this.transactionTableAdapter.ClearBeforeFill = true;
-            // 
-            // v_soldesalarieTableAdapter
-            // 
-            this.v_soldesalarieTableAdapter.ClearBeforeFill = true;
-            // 
-            // typePaiementTableAdapter
-            // 
-            this.typePaiementTableAdapter.ClearBeforeFill = true;
-            // 
-            // timerRechercheSalarie
-            // 
-            this.timerRechercheSalarie.Interval = 400;
-            this.timerRechercheSalarie.Tick += new System.EventHandler(this.TimerRechercheSalarie_Tick);
             // 
             // matriculeDataGridViewTextBoxColumn
             // 
@@ -634,13 +216,433 @@ namespace OurResto
             this.idGradeDataGridViewTextBoxColumn.ReadOnly = true;
             this.idGradeDataGridViewTextBoxColumn.Visible = false;
             // 
+            // salarieBindingSource
+            // 
+            this.salarieBindingSource.DataMember = "Salarie";
+            this.salarieBindingSource.DataSource = this.cda68_bd1DataSet;
+            // 
+            // cda68_bd1DataSet
+            // 
+            this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
+            this.cda68_bd1DataSet.Namespace = "http://tempuri.org/cda68_bd1DataSet.xsd";
+            this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // tLPSalaries
+            // 
+            this.tLPSalaries.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tLPSalaries.ColumnCount = 2;
+            this.tLPSalaries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tLPSalaries.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPSalaries.Controls.Add(this.lblEmail, 0, 2);
+            this.tLPSalaries.Controls.Add(this.tBPrenom, 1, 1);
+            this.tLPSalaries.Controls.Add(this.tBEmail, 1, 2);
+            this.tLPSalaries.Controls.Add(this.tBNom, 1, 0);
+            this.tLPSalaries.Controls.Add(this.lblNom, 0, 0);
+            this.tLPSalaries.Controls.Add(this.lblPrenom, 0, 1);
+            this.tLPSalaries.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLPSalaries.Location = new System.Drawing.Point(4, 425);
+            this.tLPSalaries.Margin = new System.Windows.Forms.Padding(4);
+            this.tLPSalaries.Name = "tLPSalaries";
+            this.tLPSalaries.RowCount = 3;
+            this.tLPSalaries.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tLPSalaries.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tLPSalaries.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tLPSalaries.Size = new System.Drawing.Size(826, 98);
+            this.tLPSalaries.TabIndex = 1;
+            // 
+            // lblEmail
+            // 
+            this.lblEmail.AutoSize = true;
+            this.lblEmail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblEmail.Location = new System.Drawing.Point(4, 68);
+            this.lblEmail.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEmail.Name = "lblEmail";
+            this.lblEmail.Size = new System.Drawing.Size(65, 34);
+            this.lblEmail.TabIndex = 4;
+            this.lblEmail.Text = "Email";
+            this.lblEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tBPrenom
+            // 
+            this.tBPrenom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Prenom", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.tBPrenom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tBPrenom.Location = new System.Drawing.Point(77, 38);
+            this.tBPrenom.Margin = new System.Windows.Forms.Padding(4);
+            this.tBPrenom.Name = "tBPrenom";
+            this.tBPrenom.Size = new System.Drawing.Size(745, 26);
+            this.tBPrenom.TabIndex = 2;
+            // 
+            // tBEmail
+            // 
+            this.tBEmail.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Email", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.tBEmail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tBEmail.Location = new System.Drawing.Point(77, 72);
+            this.tBEmail.Margin = new System.Windows.Forms.Padding(4);
+            this.tBEmail.Name = "tBEmail";
+            this.tBEmail.Size = new System.Drawing.Size(745, 26);
+            this.tBEmail.TabIndex = 3;
+            // 
+            // tBNom
+            // 
+            this.tBNom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salarieBindingSource, "Nom", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.tBNom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tBNom.Location = new System.Drawing.Point(77, 4);
+            this.tBNom.Margin = new System.Windows.Forms.Padding(4);
+            this.tBNom.Name = "tBNom";
+            this.tBNom.Size = new System.Drawing.Size(745, 26);
+            this.tBNom.TabIndex = 1;
+            // 
+            // lblNom
+            // 
+            this.lblNom.AutoSize = true;
+            this.lblNom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblNom.Location = new System.Drawing.Point(4, 0);
+            this.lblNom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNom.Name = "lblNom";
+            this.lblNom.Size = new System.Drawing.Size(65, 34);
+            this.lblNom.TabIndex = 3;
+            this.lblNom.Text = "Nom";
+            this.lblNom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblPrenom
+            // 
+            this.lblPrenom.AutoSize = true;
+            this.lblPrenom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPrenom.Location = new System.Drawing.Point(3, 34);
+            this.lblPrenom.Name = "lblPrenom";
+            this.lblPrenom.Size = new System.Drawing.Size(67, 34);
+            this.lblPrenom.TabIndex = 5;
+            this.lblPrenom.Text = "Prénom";
+            this.lblPrenom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // fLPTransactionButtons
+            // 
+            this.fLPTransactionButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.fLPTransactionButtons.AutoSize = true;
+            this.fLPTransactionButtons.Controls.Add(this.btCredit);
+            this.fLPTransactionButtons.Controls.Add(this.btSellOff);
+            this.fLPTransactionButtons.Location = new System.Drawing.Point(864, 530);
+            this.fLPTransactionButtons.Name = "fLPTransactionButtons";
+            this.fLPTransactionButtons.Size = new System.Drawing.Size(288, 70);
+            this.fLPTransactionButtons.TabIndex = 3;
+            // 
+            // btCredit
+            // 
+            this.btCredit.Location = new System.Drawing.Point(3, 3);
+            this.btCredit.Name = "btCredit";
+            this.btCredit.Size = new System.Drawing.Size(138, 61);
+            this.btCredit.TabIndex = 9;
+            this.btCredit.Text = "&Crediter";
+            this.btCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btCredit.UseVisualStyleBackColor = true;
+            this.btCredit.Click += new System.EventHandler(this.BtCredit_Click);
+            // 
+            // btSellOff
+            // 
+            this.btSellOff.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSellOff.Location = new System.Drawing.Point(147, 3);
+            this.btSellOff.Name = "btSellOff";
+            this.btSellOff.Size = new System.Drawing.Size(138, 61);
+            this.btSellOff.TabIndex = 10;
+            this.btSellOff.Text = "&Solder";
+            this.btSellOff.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btSellOff.UseVisualStyleBackColor = true;
+            this.btSellOff.Click += new System.EventHandler(this.BtSellOff_Click);
+            // 
+            // dGVTransaction
+            // 
+            this.dGVTransaction.AllowUserToAddRows = false;
+            this.dGVTransaction.AllowUserToDeleteRows = false;
+            this.dGVTransaction.AllowUserToResizeColumns = false;
+            this.dGVTransaction.AllowUserToResizeRows = false;
+            this.dGVTransaction.AutoGenerateColumns = false;
+            this.dGVTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dGVTransaction.BackgroundColor = System.Drawing.Color.White;
+            this.dGVTransaction.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.Disable;
+            this.dGVTransaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVTransaction.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.matriculeDataGridViewTextBoxColumn1,
+            this.idTypePaiementDataGridViewTextBoxColumn,
+            this.horodateDataGridViewTextBoxColumn,
+            this.montantDataGridViewTextBoxColumn});
+            this.dGVTransaction.DataSource = this.transactionBindingSource;
+            this.dGVTransaction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dGVTransaction.Location = new System.Drawing.Point(837, 41);
+            this.dGVTransaction.MultiSelect = false;
+            this.dGVTransaction.Name = "dGVTransaction";
+            this.dGVTransaction.ReadOnly = true;
+            this.dGVTransaction.RowHeadersVisible = false;
+            this.dGVTransaction.RowHeadersWidth = 51;
+            this.dGVTransaction.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dGVTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dGVTransaction.Size = new System.Drawing.Size(342, 377);
+            this.dGVTransaction.TabIndex = 100;
+            // 
+            // matriculeDataGridViewTextBoxColumn1
+            // 
+            this.matriculeDataGridViewTextBoxColumn1.DataPropertyName = "Matricule";
+            this.matriculeDataGridViewTextBoxColumn1.HeaderText = "Matricule";
+            this.matriculeDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.matriculeDataGridViewTextBoxColumn1.Name = "matriculeDataGridViewTextBoxColumn1";
+            this.matriculeDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.matriculeDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // idTypePaiementDataGridViewTextBoxColumn
+            // 
+            this.idTypePaiementDataGridViewTextBoxColumn.DataPropertyName = "Id_TypePaiement";
+            this.idTypePaiementDataGridViewTextBoxColumn.HeaderText = "Id_TypePaiement";
+            this.idTypePaiementDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idTypePaiementDataGridViewTextBoxColumn.Name = "idTypePaiementDataGridViewTextBoxColumn";
+            this.idTypePaiementDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idTypePaiementDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // horodateDataGridViewTextBoxColumn
+            // 
+            this.horodateDataGridViewTextBoxColumn.DataPropertyName = "Horodate";
+            this.horodateDataGridViewTextBoxColumn.HeaderText = "Horodate";
+            this.horodateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.horodateDataGridViewTextBoxColumn.Name = "horodateDataGridViewTextBoxColumn";
+            this.horodateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // montantDataGridViewTextBoxColumn
+            // 
+            this.montantDataGridViewTextBoxColumn.DataPropertyName = "Montant";
+            this.montantDataGridViewTextBoxColumn.HeaderText = "Montant";
+            this.montantDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.montantDataGridViewTextBoxColumn.Name = "montantDataGridViewTextBoxColumn";
+            this.montantDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // transactionBindingSource
+            // 
+            this.transactionBindingSource.DataMember = "Transaction";
+            this.transactionBindingSource.DataSource = this.cda68_bd1DataSet;
+            // 
+            // tLPTransactions
+            // 
+            this.tLPTransactions.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.tLPTransactions.ColumnCount = 2;
+            this.tLPTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tLPTransactions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPTransactions.Controls.Add(this.lblType, 0, 2);
+            this.tLPTransactions.Controls.Add(this.lblMontant, 0, 1);
+            this.tLPTransactions.Controls.Add(this.lblSolde, 0, 0);
+            this.tLPTransactions.Controls.Add(this.tBMontant, 1, 1);
+            this.tLPTransactions.Controls.Add(this.tBSolde, 1, 0);
+            this.tLPTransactions.Controls.Add(this.cBTypePaiement, 1, 2);
+            this.tLPTransactions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLPTransactions.Location = new System.Drawing.Point(837, 424);
+            this.tLPTransactions.Name = "tLPTransactions";
+            this.tLPTransactions.RowCount = 3;
+            this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tLPTransactions.Size = new System.Drawing.Size(342, 100);
+            this.tLPTransactions.TabIndex = 5;
+            // 
+            // lblType
+            // 
+            this.lblType.AutoSize = true;
+            this.lblType.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblType.Location = new System.Drawing.Point(3, 66);
+            this.lblType.Name = "lblType";
+            this.lblType.Size = new System.Drawing.Size(145, 34);
+            this.lblType.TabIndex = 4;
+            this.lblType.Text = "Type de paiement";
+            this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMontant
+            // 
+            this.lblMontant.AutoSize = true;
+            this.lblMontant.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblMontant.Location = new System.Drawing.Point(3, 33);
+            this.lblMontant.Name = "lblMontant";
+            this.lblMontant.Size = new System.Drawing.Size(145, 33);
+            this.lblMontant.TabIndex = 1;
+            this.lblMontant.Text = "Montant à créditer";
+            this.lblMontant.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSolde
+            // 
+            this.lblSolde.AutoSize = true;
+            this.lblSolde.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSolde.Location = new System.Drawing.Point(3, 0);
+            this.lblSolde.Name = "lblSolde";
+            this.lblSolde.Size = new System.Drawing.Size(145, 33);
+            this.lblSolde.TabIndex = 0;
+            this.lblSolde.Text = "Solde";
+            this.lblSolde.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tBMontant
+            // 
+            this.tBMontant.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tBMontant.Location = new System.Drawing.Point(154, 36);
+            this.tBMontant.Name = "tBMontant";
+            this.tBMontant.Size = new System.Drawing.Size(185, 26);
+            this.tBMontant.TabIndex = 7;
+            this.tBMontant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tBMontant.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBMontant_KeyPress);
+            // 
+            // tBSolde
+            // 
+            this.tBSolde.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tBSolde.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.vsoldesalarieBindingSource, "Solde", true, System.Windows.Forms.DataSourceUpdateMode.Never));
+            this.tBSolde.Location = new System.Drawing.Point(154, 3);
+            this.tBSolde.Name = "tBSolde";
+            this.tBSolde.ReadOnly = true;
+            this.tBSolde.Size = new System.Drawing.Size(185, 26);
+            this.tBSolde.TabIndex = 3;
+            this.tBSolde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // vsoldesalarieBindingSource
+            // 
+            this.vsoldesalarieBindingSource.DataMember = "v_soldesalarie";
+            this.vsoldesalarieBindingSource.DataSource = this.cda68_bd1DataSet;
+            // 
+            // cBTypePaiement
+            // 
+            this.cBTypePaiement.DataSource = this.typePaiementBindingSource;
+            this.cBTypePaiement.DisplayMember = "Nom";
+            this.cBTypePaiement.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cBTypePaiement.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBTypePaiement.FormattingEnabled = true;
+            this.cBTypePaiement.Location = new System.Drawing.Point(154, 69);
+            this.cBTypePaiement.Name = "cBTypePaiement";
+            this.cBTypePaiement.Size = new System.Drawing.Size(185, 28);
+            this.cBTypePaiement.TabIndex = 8;
+            this.cBTypePaiement.ValueMember = "Nom";
+            // 
+            // typePaiementBindingSource
+            // 
+            this.typePaiementBindingSource.DataMember = "TypePaiement";
+            this.typePaiementBindingSource.DataSource = this.cda68_bd1DataSet;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.lblRechercheSalarie, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tBRechercheSalarie, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(828, 32);
+            this.tableLayoutPanel1.TabIndex = 101;
+            // 
+            // lblRechercheSalarie
+            // 
+            this.lblRechercheSalarie.AutoSize = true;
+            this.lblRechercheSalarie.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblRechercheSalarie.Location = new System.Drawing.Point(3, 0);
+            this.lblRechercheSalarie.Name = "lblRechercheSalarie";
+            this.lblRechercheSalarie.Size = new System.Drawing.Size(90, 32);
+            this.lblRechercheSalarie.TabIndex = 0;
+            this.lblRechercheSalarie.Text = "Recherche";
+            this.lblRechercheSalarie.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tBRechercheSalarie
+            // 
+            this.tBRechercheSalarie.Location = new System.Drawing.Point(99, 3);
+            this.tBRechercheSalarie.Name = "tBRechercheSalarie";
+            this.tBRechercheSalarie.Size = new System.Drawing.Size(306, 26);
+            this.tBRechercheSalarie.TabIndex = 0;
+            this.tBRechercheSalarie.TextChanged += new System.EventHandler(this.TBRechercheSalarie_TextChanged);
+            // 
+            // tLPButtons
+            // 
+            this.tLPButtons.ColumnCount = 2;
+            this.tLPButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tLPButtons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPButtons.Controls.Add(this.fLPSalarieButtons, 1, 0);
+            this.tLPButtons.Controls.Add(this.btQuitter, 0, 0);
+            this.tLPButtons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tLPButtons.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.tLPButtons.Location = new System.Drawing.Point(3, 530);
+            this.tLPButtons.Name = "tLPButtons";
+            this.tLPButtons.RowCount = 1;
+            this.tLPButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tLPButtons.Size = new System.Drawing.Size(828, 70);
+            this.tLPButtons.TabIndex = 102;
+            // 
+            // fLPSalarieButtons
+            // 
+            this.fLPSalarieButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.fLPSalarieButtons.AutoSize = true;
+            this.fLPSalarieButtons.Controls.Add(this.btRefresh);
+            this.fLPSalarieButtons.Controls.Add(this.btEdit);
+            this.fLPSalarieButtons.Location = new System.Drawing.Point(342, 3);
+            this.fLPSalarieButtons.Name = "fLPSalarieButtons";
+            this.fLPSalarieButtons.Size = new System.Drawing.Size(288, 64);
+            this.fLPSalarieButtons.TabIndex = 3;
+            // 
+            // btRefresh
+            // 
+            this.btRefresh.Location = new System.Drawing.Point(3, 3);
+            this.btRefresh.Name = "btRefresh";
+            this.btRefresh.Size = new System.Drawing.Size(138, 61);
+            this.btRefresh.TabIndex = 4;
+            this.btRefresh.Text = "&Actualiser";
+            this.btRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btRefresh.UseVisualStyleBackColor = true;
+            this.btRefresh.Click += new System.EventHandler(this.BtRefresh_Click);
+            // 
+            // btEdit
+            // 
+            this.btEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btEdit.Location = new System.Drawing.Point(147, 3);
+            this.btEdit.Name = "btEdit";
+            this.btEdit.Size = new System.Drawing.Size(138, 61);
+            this.btEdit.TabIndex = 6;
+            this.btEdit.Text = "&Modifier";
+            this.btEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btEdit.UseVisualStyleBackColor = true;
+            this.btEdit.Click += new System.EventHandler(this.BtEdit_Click);
+            // 
+            // btQuitter
+            // 
+            this.btQuitter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.btQuitter.BackColor = System.Drawing.Color.Transparent;
+            this.btQuitter.Location = new System.Drawing.Point(3, 3);
+            this.btQuitter.Name = "btQuitter";
+            this.btQuitter.Size = new System.Drawing.Size(138, 64);
+            this.btQuitter.TabIndex = 7;
+            this.btQuitter.Text = "&Quitter";
+            this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btQuitter.UseVisualStyleBackColor = false;
+            this.btQuitter.Click += new System.EventHandler(this.BtQuitter_Click);
+            // 
+            // salarieTableAdapter
+            // 
+            this.salarieTableAdapter.ClearBeforeFill = true;
+            // 
+            // transactionTableAdapter
+            // 
+            this.transactionTableAdapter.ClearBeforeFill = true;
+            // 
+            // v_soldesalarieTableAdapter
+            // 
+            this.v_soldesalarieTableAdapter.ClearBeforeFill = true;
+            // 
+            // typePaiementTableAdapter
+            // 
+            this.typePaiementTableAdapter.ClearBeforeFill = true;
+            // 
+            // timerRechercheSalarie
+            // 
+            this.timerRechercheSalarie.Interval = 400;
+            this.timerRechercheSalarie.Tick += new System.EventHandler(this.TimerRechercheSalarie_Tick);
+            // 
             // FormSalarie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1053, 540);
+            this.ClientSize = new System.Drawing.Size(1182, 603);
             this.Controls.Add(this.tLPMain);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MinimumSize = new System.Drawing.Size(1069, 579);

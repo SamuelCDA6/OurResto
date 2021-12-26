@@ -39,7 +39,12 @@ namespace OurResto
 
             dGVPlanProduction.DefaultCellStyle.BackColor = Color.White;
 
-            lblJour.Text = date.ToString("M");
+            foreach (DataGridViewColumn c in dGVPlanProduction.Columns)
+            {
+                c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            UpdateDate(0);
         }
 
         private void BtBefore_Click(object sender, EventArgs e)
@@ -55,8 +60,10 @@ namespace OurResto
         private void UpdateDate(int nbjour)
         {
             date = date.AddDays(nbjour);
+            if (date.DayOfWeek == DayOfWeek.Sunday) date = nbjour < 0 ?  date.AddDays(-2) : date.AddDays(1);
+            else if (date.DayOfWeek == DayOfWeek.Saturday) date = nbjour < 0 ? date.AddDays(-1) : date.AddDays(2);
 
-            lblJour.Text = date.ToString("M");
+            lblJour.Text = date.ToString("D");
 
             vplancuisineBindingSource.DataSource = cda68_bd1DataSet.v_plancuisine.Where(r => r.RepasDate == date)
                                                                                  .OrderBy(r => r.Id_Moment).ToList();

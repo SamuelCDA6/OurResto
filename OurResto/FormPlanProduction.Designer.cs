@@ -88,7 +88,7 @@
             this.dGVPlanProduction.RowHeadersWidth = 51;
             this.dGVPlanProduction.RowTemplate.Height = 24;
             this.dGVPlanProduction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVPlanProduction.Size = new System.Drawing.Size(446, 263);
+            this.dGVPlanProduction.Size = new System.Drawing.Size(576, 323);
             this.dGVPlanProduction.TabIndex = 0;
             this.dGVPlanProduction.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVPlanProduction_CellFormatting);
             // 
@@ -164,6 +164,7 @@
             // cda68_bd1DataSet
             // 
             this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
+            this.cda68_bd1DataSet.Namespace = "http://tempuri.org/cda68_bd1DataSet.xsd";
             this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // tLPMain
@@ -181,7 +182,7 @@
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tLPMain.Size = new System.Drawing.Size(452, 393);
+            this.tLPMain.Size = new System.Drawing.Size(582, 453);
             this.tLPMain.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -199,15 +200,15 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(446, 44);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(576, 44);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // lblJour
             // 
             this.lblJour.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblJour.AutoSize = true;
-            this.lblJour.Font = new System.Drawing.Font("Britannic Bold", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblJour.Location = new System.Drawing.Point(146, 7);
+            this.lblJour.Font = new System.Drawing.Font("Britannic Bold", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblJour.Location = new System.Drawing.Point(211, 7);
             this.lblJour.Name = "lblJour";
             this.lblJour.Size = new System.Drawing.Size(154, 30);
             this.lblJour.TabIndex = 6;
@@ -226,7 +227,7 @@
             // btAfter
             // 
             this.btAfter.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btAfter.Location = new System.Drawing.Point(349, 3);
+            this.btAfter.Location = new System.Drawing.Point(479, 3);
             this.btAfter.Name = "btAfter";
             this.btAfter.Size = new System.Drawing.Size(80, 38);
             this.btAfter.TabIndex = 4;
@@ -242,18 +243,18 @@
             this.tableLayoutPanel2.Controls.Add(this.btExit, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btToday, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 320);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 380);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(446, 70);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(576, 70);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // btExit
             // 
             this.btExit.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btExit.BackColor = System.Drawing.Color.Transparent;
-            this.btExit.Location = new System.Drawing.Point(29, 3);
+            this.btExit.Location = new System.Drawing.Point(62, 3);
             this.btExit.Name = "btExit";
             this.btExit.Size = new System.Drawing.Size(164, 64);
             this.btExit.TabIndex = 8;
@@ -266,7 +267,7 @@
             // 
             this.btToday.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btToday.BackColor = System.Drawing.Color.Transparent;
-            this.btToday.Location = new System.Drawing.Point(252, 3);
+            this.btToday.Location = new System.Drawing.Point(350, 3);
             this.btToday.Name = "btToday";
             this.btToday.Size = new System.Drawing.Size(164, 64);
             this.btToday.TabIndex = 9;
@@ -284,12 +285,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(452, 393);
+            this.ClientSize = new System.Drawing.Size(582, 453);
             this.Controls.Add(this.tLPMain);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(409, 373);
+            this.MinimumSize = new System.Drawing.Size(500, 373);
             this.Name = "FormPlanProduction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Plan de production";
