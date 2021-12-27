@@ -12,7 +12,7 @@ namespace OurResto
 {
     public partial class FormSalarie : Form
     {
-        List<cda68_bd1DataSet.SalarieRow> salaries = new List<cda68_bd1DataSet.SalarieRow>();
+        List<cda68_bd1DataSet.SalarieRow> salaries = new();
 
         public FormSalarie()
         {
@@ -119,7 +119,7 @@ namespace OurResto
                                                       .OrderBy(r => r.Nom);
 
                 // Met a jour la binding source et n'afficher que ses lignes de salariés dans le DataGridView
-                if (rowList.Count() > 0)
+                if (rowList.Any())
                 {
                     salarieBindingSource.DataSource = rowList;
                 }
@@ -176,7 +176,7 @@ namespace OurResto
                         }
                         else
                         {
-                            using (TransactionScope trans = new TransactionScope())
+                            using (var trans = new TransactionScope())
                             {
                                 if (transactionTableAdapter.Insert(currentSalarieRow.Matricule, Id_TypePaiement, DateTime.Now, montant) != 1)
                                 {
@@ -226,7 +226,7 @@ namespace OurResto
 
                         decimal montant = decimal.Parse(tBSolde.Text);
 
-                        using (TransactionScope trans = new TransactionScope())
+                        using (var trans = new TransactionScope())
                         {
                             bool IsInsert = true;
                             if (montant != 0)

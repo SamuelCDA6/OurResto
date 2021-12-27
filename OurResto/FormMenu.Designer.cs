@@ -145,7 +145,7 @@ namespace OurResto
             this.dGVMenu.TabStop = false;
             this.dGVMenu.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVMenu_CellFormatting);
             this.dGVMenu.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVMenu_ColumnHeaderMouseClick);
-            this.dGVMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.dGVMenu_PreviewKeyDown);
+            this.dGVMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.DGVMenu_PreviewKeyDown);
             // 
             // repasDateDataGridViewTextBoxColumn
             // 
@@ -270,7 +270,7 @@ namespace OurResto
             // 
             this.vaffichermenuBindingSource.DataMember = "v_affichermenu";
             this.vaffichermenuBindingSource.DataSource = this.cda68_bd1DataSet;
-            this.vaffichermenuBindingSource.CurrentChanged += new System.EventHandler(this.vaffichermenuBindingSource_CurrentChanged);
+            this.vaffichermenuBindingSource.CurrentChanged += new System.EventHandler(this.VAfficherMenuBindingSource_CurrentChanged);
             // 
             // cda68_bd1DataSet
             // 
@@ -443,7 +443,7 @@ namespace OurResto
             this.dTPUpdateDate.Name = "dTPUpdateDate";
             this.dTPUpdateDate.Size = new System.Drawing.Size(268, 26);
             this.dTPUpdateDate.TabIndex = 3;
-            this.dTPUpdateDate.CloseUp += new System.EventHandler(this.dTPUpdateDate_CloseUp);
+            this.dTPUpdateDate.CloseUp += new System.EventHandler(this.DTPUpdateDate_CloseUp);
             // 
             // cBPlatDessert
             // 

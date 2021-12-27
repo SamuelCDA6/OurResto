@@ -15,7 +15,7 @@ namespace OurResto
         DateTime dateFriday;
         DateTime dateAdd;
 
-        List<cda68_bd1DataSet.v_affichermenuRow> weekMenus = new List<cda68_bd1DataSet.v_affichermenuRow>();
+        List<cda68_bd1DataSet.v_affichermenuRow> weekMenus = new();
 
         public FormMenu()
         {
@@ -192,7 +192,7 @@ namespace OurResto
             }
         }
 
-        private void vaffichermenuBindingSource_CurrentChanged(object sender, EventArgs e)
+        private void VAfficherMenuBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             UpdateComboboxs();
         }
@@ -204,7 +204,7 @@ namespace OurResto
             SetPositionBindingSource(dTPUpdateDate.Value, idMoment);
         }
 
-        private void dTPUpdateDate_CloseUp(object sender, EventArgs e)
+        private void DTPUpdateDate_CloseUp(object sender, EventArgs e)
         {
             DateTime date = dTPUpdateDate.Value.Date;
             if (date.DayOfWeek == DayOfWeek.Sunday) date = date.AddDays(-2);
@@ -245,7 +245,7 @@ namespace OurResto
         private void BtAjouter_Click(object sender, EventArgs e)
         {
             dateAdd = dTPUpdateDate.Value.Date;
-            using (TransactionScope trans = new TransactionScope())
+            using (var trans = new TransactionScope())
             {
                 int nb = AddMeals();
 
@@ -360,7 +360,7 @@ namespace OurResto
 
         private void UpdateMeals()
         {
-            using (TransactionScope trans = new TransactionScope())
+            using (var trans = new TransactionScope())
             {
                 if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
                 {
@@ -426,7 +426,7 @@ namespace OurResto
                 {
                     try
                     {
-                        using (TransactionScope trans = new TransactionScope())
+                        using (var trans = new TransactionScope())
                         {
                             foreach (DataGridViewRow dGVRow in dGVMenu.SelectedRows)
                             {
@@ -509,7 +509,7 @@ namespace OurResto
         /// </summary>
         private void AddRandomWeekMeals()
         {
-            Random random = new Random();
+            var random = new Random();
 
             progressBar.Value = 0;
             progressBar.Visible = true;
@@ -544,7 +544,7 @@ namespace OurResto
                     Desserts.RemoveAll(d => menus.Select(m => m.Id_Plat_Dessert).Contains(d.Id_Plat));
                 }
 
-                using (TransactionScope trans = new TransactionScope())
+                using (var trans = new TransactionScope())
                 {
                     // Pour chaque jour de la semaine
                     foreach (DateTime dt in dates)
@@ -610,7 +610,7 @@ namespace OurResto
             }
         }
 
-        private void dGVMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void DGVMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyData == Keys.Delete)
             {
