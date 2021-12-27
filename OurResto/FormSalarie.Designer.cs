@@ -480,7 +480,7 @@ namespace OurResto
             this.tBMontant.Size = new System.Drawing.Size(185, 26);
             this.tBMontant.TabIndex = 7;
             this.tBMontant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tBMontant.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tBMontant_KeyPress);
+            this.tBMontant.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBMontant_KeyPress);
             // 
             // tBSolde
             // 

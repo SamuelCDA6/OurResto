@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Transactions;
 using System.Windows.Forms;
 
@@ -74,6 +75,8 @@ namespace OurResto
 
         private void DGVSalarie_SelectionChanged(object sender, EventArgs e)
         {
+            tBMontant.Text = String.Empty;
+
             try
             {
                 if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentRow)
@@ -281,13 +284,14 @@ namespace OurResto
             }
         }
 
-        private void tBMontant_KeyPress(object sender, KeyPressEventArgs e)
+        private void TBMontant_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == ',')
             {
                 e.KeyChar = '.';
             }
-            else if (!char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != (char)Keys.Back)
+
+            if (e.KeyChar != (char)Keys.Delete && e.KeyChar != (char)Keys.Back && !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{1,2})?$"))
             {
                 e.Handled = true;
             }
