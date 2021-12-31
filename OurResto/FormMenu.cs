@@ -15,7 +15,7 @@ namespace OurResto
         DateTime dateFriday;
         DateTime dateAdd;
 
-        List<cda68_bd1DataSet.v_affichermenuRow> weekMenus = new();
+        List<cda68_bd1DataSet.v_affichermenuRow> weekMeals = new();
 
         public FormMenu()
         {
@@ -104,12 +104,12 @@ namespace OurResto
             try
             {
                 // Pour la vue menu récupérer seulement les menus compris entre ces dates
-                weekMenus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= begin && r.RepasDate.Date <= end)
+                weekMeals = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= begin && r.RepasDate.Date <= end)
                                                           .OrderBy(r => r.RepasDate)
                                                           .ThenBy(r => r.Id_Moment).ToList();
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
-                vaffichermenuBindingSource.DataSource = weekMenus;
+                vaffichermenuBindingSource.DataSource = weekMeals;
 
                 // Et repositionner la position de la BindingSource sur la date
                 if (cda68_bd1DataSet.Moment.Count > 0 && cBMoment.Text != String.Empty)
@@ -487,7 +487,7 @@ namespace OurResto
 
                 var columnName = column.DataPropertyName;
 
-                weekMenus.Sort(new MenuComparer(columnName, sortOrder));
+                weekMeals.Sort(new MenuComparer(columnName, sortOrder));
 
                 dGVMenu.Refresh();
 

@@ -32,5 +32,16 @@ namespace OurResto.Properties {
                 return ((string)(this["cda68_bd1ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("server=sylph.ignorelist.com;user id=OurResto;password=z76aFEbO8a4e;database=FilRo" +
+            "uge2")]
+        public string FilRouge2ConnectionString {
+            get {
+                return ((string)(this["FilRouge2ConnectionString"]));
+            }
+        }
     }
 }

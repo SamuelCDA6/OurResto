@@ -121,7 +121,7 @@ namespace OurResto
                 // Met a jour la binding source et n'afficher que ses lignes de salariés dans le DataGridView
                 if (rowList.Any())
                 {
-                    salarieBindingSource.DataSource = rowList;
+                    salarieBindingSource.DataSource = rowList.ToList();
                 }
             }
             catch (Exception)

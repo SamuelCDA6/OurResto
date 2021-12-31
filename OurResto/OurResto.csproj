@@ -21,6 +21,11 @@
     <Compile Update="cda68_bd1DataSet.cs">
       <DependentUpon>cda68_bd1DataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Update="cda68_bd1DataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>cda68_bd1DataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
