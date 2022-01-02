@@ -1,7 +1,1 @@
-﻿namespace OurResto
-{
-}
-
-namespace OurResto
-{
-}
+﻿

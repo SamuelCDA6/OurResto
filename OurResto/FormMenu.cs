@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Transactions;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OurResto
 {
@@ -197,6 +198,32 @@ namespace OurResto
             UpdateComboboxs();
         }
 
+        private void DGVMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyData == Keys.Delete)
+            {
+                DeleteMenuSelectedRows();
+                RefreshDisplay();
+            }
+        }
+
+        private void BtBefore_Click(object sender, EventArgs e)
+        {
+            dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(-7);
+            UpdateWeekMenus(dTPUpdateDate.Value);
+        }
+
+        private void BtAfter_Click(object sender, EventArgs e)
+        {
+            dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(7);
+            UpdateWeekMenus(dTPUpdateDate.Value);
+        }
+
+        private void BtActualiser_Click(object sender, EventArgs e)
+        {
+            RefreshDisplay();
+        }
+
         private void CBMoment_SelectionChangeCommitted(object sender, EventArgs e)
         {
             var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
@@ -225,44 +252,6 @@ namespace OurResto
             }
         }
 
-        private void BtBefore_Click(object sender, EventArgs e)
-        {
-            dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(-7);
-            UpdateWeekMenus(dTPUpdateDate.Value);
-        }
-
-        private void BtAfter_Click(object sender, EventArgs e)
-        {
-            dTPUpdateDate.Value = dTPUpdateDate.Value.AddDays(7);
-            UpdateWeekMenus(dTPUpdateDate.Value);
-        }
-
-        private void BtActualiser_Click(object sender, EventArgs e)
-        {
-            RefreshDisplay();
-        }
-
-        private void BtAjouter_Click(object sender, EventArgs e)
-        {
-            dateAdd = dTPUpdateDate.Value.Date;
-            using (var trans = new TransactionScope())
-            {
-                int nb = AddMeals();
-
-                if (nb == 5)
-                {
-                    trans.Complete();
-                }
-            }
-
-            MySqlConnection.ClearAllPools();
-
-            RefreshDisplay();
-
-            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
-            SetPositionBindingSource(dateAdd, idMoment);
-        }
-
         /// <summary>
         /// Méthode pour placer la position de la BindingSource sur une position donnée
         /// </summary>
@@ -279,20 +268,48 @@ namespace OurResto
                 vaffichermenuBindingSource.Position = row.Index;
 
                 // Mettre à jour les boutons en conséquence
-                btAjouter.Enabled = false;
-                btSupprimer.Enabled = true;
-                btModifier.Enabled = true;
+                SetButtons(true);
             }
             else
             {
                 // Si pas de menu enlever la ou les lignes selectionnées du DataGridView 
                 dGVMenu.ClearSelection();
 
-                // Activer le bouton pour ajouter un menu et desactiver les autres
-                btAjouter.Enabled = true;
-                btSupprimer.Enabled = false;
-                btModifier.Enabled = false;
+                // Mettre
+                SetButtons(false);
             }
+        }
+
+        /// <summary>
+        /// Méthode pour mettre à jour l'activation des boutons
+        /// </summary>
+        /// <param name="isPositionValid"> booléen qui précise si cela correspond à une date et un moment déjà dans le SGBD</param>
+        private void SetButtons(bool isPositionValid)
+        {
+            btAjouter.Enabled = !isPositionValid;
+            btSupprimer.Enabled = isPositionValid;
+            btModifier.Enabled = isPositionValid;
+        }
+        private void BtAjouter_Click(object sender, EventArgs e)
+        {
+            dateAdd = dTPUpdateDate.Value.Date;
+            var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
+
+            using (var trans = new TransactionScope())
+            {
+                int nb = AddMeals();
+
+                if (nb == 5)
+                {
+                    trans.Complete();
+                }
+            }
+
+            MySqlConnection.ClearAllPools();
+
+            RefreshDisplay();
+
+            SetPositionBindingSource(dateAdd, idMoment);
         }
 
         /// <summary>
@@ -415,33 +432,38 @@ namespace OurResto
         }
 
         /// <summary>
-        /// Méthode pour supprimer les menus correspondant à la ligne sélectionnée
+        /// Méthode pour supprimer les menus correspondant aux lignes sélectionnées
         /// </summary>
         private void DeleteMenuSelectedRows()
         {
             if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
             {
-                var message = dGVMenu.SelectedRows.Count == 1 ? String.Format(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, currentRow.Moment, currentRow.RepasDate.ToString("D")) : Properties.Resources.TXTCONFIRMATIONSUPPRMENUS;
-                if (MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                var message = dGVMenu.SelectedRows.Count == 1 ? String.Format(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, 
+                                                                              currentRow.Moment, 
+                                                                              currentRow.RepasDate.ToString("D")) :
+                                                                Properties.Resources.TXTCONFIRMATIONSUPPRMENUS;
+                if (MessageBox.Show(this, message, "Confirmation", MessageBoxButtons.YesNo, 
+                    MessageBoxIcon.Warning ,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     try
                     {
-                        using (var trans = new TransactionScope())
+                        using var trans = new TransactionScope();
+
+                        foreach (DataGridViewRow dGVRow in dGVMenu.SelectedRows)
                         {
-                            foreach (DataGridViewRow dGVRow in dGVMenu.SelectedRows)
+                            var idMoment = (int)dGVRow.Cells[12].Value;
+                            var dateMenu = (DateTime)dGVRow.Cells[0].Value;
+
+                            int nb = menuTableAdapter.DeleteByDateAndMoment(idMoment, dateMenu);
+
+                            if (nb != 5)
                             {
-                                int nb = menuTableAdapter.DeleteByDateAndMoment((int)dGVRow.Cells[12].Value, (DateTime)dGVRow.Cells[0].Value);
-
-                                if (nb != 5)
-                                {
-                                    return;
-                                }
-
-                                progressBar.PerformStep();
+                                MessageBox.Show(String.Format(Properties.Resources.TXTDELMENU, idMoment, dateMenu.ToString("D")));
+                                return;
                             }
-
-                            trans.Complete();
                         }
+
+                        trans.Complete();
                     }
                     catch (Exception)
                     {
@@ -454,6 +476,120 @@ namespace OurResto
         private void BtQuitter_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void BtAddRandom_Click(object sender, EventArgs e)
+        {
+            AddRandomWeekMeals();
+            RefreshDisplay();
+
+            progressBar.Visible = false;
+        }
+
+        /// <summary>
+        /// Méthode pour ajouter des menus aléatoires pour toute la semaine sans plat identique
+        /// </summary>
+        private void AddRandomWeekMeals()
+        {
+            var random = new Random();
+
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+
+            // Récupère tous les plats de chaque type
+            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
+            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
+            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
+            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4).ToList();
+            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5).ToList();
+
+            // Les stocker dans un tableau de liste de plats
+            List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
+
+            try
+            {
+                var dates = EachDay(dateMonday, dateFriday).ToList();
+                var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToList();
+
+                // Récupère tous les menus de la semaine en cours
+                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+
+                // Si des menus sont deja remplit pour la semaine
+                if (menus.Any())
+                {
+                    // Les supprimer des listes pour ne pas les réinsérer
+                    Entrees.RemoveAll(e => menus.Select(m => m.Id_Plat_Entree).Contains(e.Id_Plat));
+                    PlatsPrincipaux.RemoveAll(p => menus.Select(m => m.Id_Plat_Principal).Contains(p.Id_Plat));
+                    Accompagnements.RemoveAll(a => menus.Select(m => m.Id_Plat_Accompagnement).Contains(a.Id_Plat));
+                    Fromages.RemoveAll(f => menus.Select(m => m.Id_Plat_Fromage).Contains(f.Id_Plat));
+                    Desserts.RemoveAll(d => menus.Select(m => m.Id_Plat_Dessert).Contains(d.Id_Plat));
+                }
+
+                progressBar.Maximum = (moments.Count * dates.Count - menus.Count) * PlatsLists.Length;
+
+                using (var trans = new TransactionScope())
+                {
+                    // Pour chaque jour de la semaine
+                    foreach (DateTime dt in dates)
+                    {
+                        // Pour chaque moment repas
+                        foreach (int idmoment in moments)
+                        {
+                            // Si il n'y a pas deja de menu à cette date et ce moment
+                            if (!menus.Any(m => m.Id_Moment == idmoment && m.RepasDate == dt))
+                            {
+                                // Pour chaque type de plat
+                                foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
+                                {
+                                    // Récupérer un plat aléatoire
+                                    int i = random.Next(0, plats.Count);
+
+                                    // Ajouter le plat dans le SGBD
+                                    if (menuTableAdapter.Insert(plats[i].Id_Plat, idmoment, dt) != 1)
+                                    {
+                                        // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
+                                        // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
+                                        MessageBox.Show(menus.Count == 49 ?
+                                                            String.Format(Properties.Resources.TXTADDMENU,
+                                                                          cda68_bd1DataSet.Moment.First(m => m.Id_Moment == idmoment).Nom,
+                                                                          dt.ToString("D")) :
+                                                            Properties.Resources.TXTADDMENUS);
+                                        return;
+                                    }
+
+                                    // Enlever le plat de la liste pour ne pas le réutiliser
+                                    plats.RemoveAt(i);
+
+                                    // Incrémenter et mettre à jour la barre de progression
+                                    progressBar.PerformStep();
+                                    progressBar.Update();
+                                }
+                            }
+                        }
+                    }
+
+                    // Si tous les plats on bien étés insérés, valider la transaction
+                    trans.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Properties.Resources.TXTADDMENUS);
+            }
+        }
+
+        /// <summary>
+        /// Méthode pour renvoyer toutes les dates comprises entre 2 dates
+        /// </summary>
+        /// <param name="start">date de debut</param>
+        /// <param name="end">date de fin</param>
+        /// <returns>Enumerable des dates comprises entre la date de debut et de fin</returns>
+        private static IEnumerable<DateTime> EachDay(DateTime start, DateTime end)
+        {
+            for (var day = start.Date; day.Date <= end.Date; day = day.AddDays(1))
+            {
+                yield return day;
+            }
         }
 
         /// <summary>
@@ -492,130 +628,6 @@ namespace OurResto
                 dGVMenu.Refresh();
 
                 column.HeaderCell.SortGlyphDirection = sortOrder;
-            }
-        }
-
-        private void BtAddRandom_Click(object sender, EventArgs e)
-        {
-            AddRandomWeekMeals();
-
-            RefreshDisplay();
-
-            progressBar.Visible = false;
-        }
-
-        /// <summary>
-        /// Méthode pour ajouter des menus aléatoires pour toute la semaine sans plat identique
-        /// </summary>
-        private void AddRandomWeekMeals()
-        {
-            var random = new Random();
-
-            progressBar.Value = 0;
-            progressBar.Visible = true;
-
-            // Récupère tous les plats de chaque type
-            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
-            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
-            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
-            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4).ToList();
-            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5).ToList();
-
-            // Les stocker dans un tableau de liste de plats
-            List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
-
-            try
-            {
-                // Récupère tous les menus de la semaine en cours
-                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
-
-                var dates = EachDay(dateMonday, dateFriday);
-
-                progressBar.Maximum = (cda68_bd1DataSet.Moment.Count * dates.Count() * PlatsLists.Length) - (menus.Count * 5);
-
-                // Si des menus sont deja remplit pour la semaine
-                if (menus.Count != 0)
-                {
-                    // Les supprimer des listes pour ne pas les réinsérer
-                    Entrees.RemoveAll(e => menus.Select(m => m.Id_Plat_Entree).Contains(e.Id_Plat));
-                    PlatsPrincipaux.RemoveAll(p => menus.Select(m => m.Id_Plat_Principal).Contains(p.Id_Plat));
-                    Accompagnements.RemoveAll(a => menus.Select(m => m.Id_Plat_Accompagnement).Contains(a.Id_Plat));
-                    Fromages.RemoveAll(f => menus.Select(m => m.Id_Plat_Fromage).Contains(f.Id_Plat));
-                    Desserts.RemoveAll(d => menus.Select(m => m.Id_Plat_Dessert).Contains(d.Id_Plat));
-                }
-
-                using (var trans = new TransactionScope())
-                {
-                    // Pour chaque jour de la semaine
-                    foreach (DateTime dt in dates)
-                    {
-                        // Pour chaque moment repas
-                        foreach (int moment in cda68_bd1DataSet.Moment.Select(r => r.Id_Moment))
-                        {
-                            // Si il n'y a pas deja de menu à cette date et ce moment
-                            if (!menus.Any(m => m.Id_Moment == moment && m.RepasDate == dt))
-                            {
-                                // Pour chaque type de plat
-                                foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
-                                {
-                                    // Récupérer un plat aléatoire
-                                    int i = random.Next(0, plats.Count);
-
-                                    // Ajouter le plat dans le SGBD
-                                    if (menuTableAdapter.Insert(plats[i].Id_Plat, moment, dt) != 1)
-                                    {
-                                        // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
-                                        // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
-                                        MessageBox.Show(menus.Count == 49 ?
-                                                            String.Format(Properties.Resources.TXTADDMENU,
-                                                                          cda68_bd1DataSet.Moment.Where(m => m.Id_Moment == moment)
-                                                                                                 .Select(m => m.Nom),
-                                                                          dt.ToString("D")) :
-                                                            Properties.Resources.TXTADDMENUS);
-                                        return;
-                                    }
-
-                                    // Enlever le plat de la liste pour ne pas le réutiliser
-                                    plats.RemoveAt(i);
-
-                                    // Incrémenter et mettre à jour la barre de progression
-                                    progressBar.PerformStep();
-                                    progressBar.Refresh();
-                                }
-                            }
-                        }
-                    }
-
-                    // Si tous les plats on bien étés insérés, valider la transaction
-                    trans.Complete();
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Properties.Resources.TXTADDMENUS);
-            }
-        }
-
-        /// <summary>
-        /// Méthode pour renvoyer toutes les dates comprises entre 2 dates
-        /// </summary>
-        /// <param name="start">date de debut</param>
-        /// <param name="end">date de fin</param>
-        /// <returns>Enumerable des dates comprises entre la date de debut et de fin</returns>
-        private static IEnumerable<DateTime> EachDay(DateTime start, DateTime end)
-        {
-            for (var day = start.Date; day.Date <= end.Date; day = day.AddDays(1))
-            {
-                yield return day;
-            }
-        }
-
-        private void DGVMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            if (e.KeyData == Keys.Delete)
-            {
-                DeleteMenuSelectedRows();
-                RefreshDisplay();
             }
         }
     }
