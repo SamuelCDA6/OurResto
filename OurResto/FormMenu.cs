@@ -135,6 +135,7 @@ namespace OurResto
         {
             try
             {
+                sorteTableAdapter.Fill(cda68_bd1DataSet.Sorte);
                 momentTableAdapter.Fill(cda68_bd1DataSet.Moment);
                 v_platsTableAdapter.Fill(cda68_bd1DataSet.v_plats);
                 menuTableAdapter.Fill(cda68_bd1DataSet.Menu);
@@ -373,9 +374,15 @@ namespace OurResto
                         {
                             foreach (DataGridViewRow dGVRow in dGVMenu.SelectedRows)
                             {
-                                int nb = menuTableAdapter.DeleteByDateAndMoment((int)dGVRow.Cells[12].Value, (DateTime)dGVRow.Cells[0].Value);
+                                //int nb = menuTableAdapter.DeleteByDateAndMoment((int)dGVRow.Cells[12].Value, (DateTime)dGVRow.Cells[0].Value);
 
-                                if (nb != 5)
+                                cda68_bd1DataSet.Menu.Where(r => r.Id_Moment == (int)dGVRow.Cells[12].Value && 
+                                                                 r.RepasDate == (DateTime)dGVRow.Cells[0].Value)
+                                                     .ToList()
+                                                     .ForEach(r => r.Delete());
+                                int nb = menuTableAdapter.Update(cda68_bd1DataSet.Menu.Select(null, null, DataViewRowState.Deleted));
+                                
+                                if (nb != cda68_bd1DataSet.Sorte.Rows.Count)
                                 {
                                     progressBar.Visible = false;
                                     return;
@@ -524,36 +531,25 @@ namespace OurResto
             progressBar.Value = 0;
             progressBar.Visible = true;
 
-            // Récupère tous les plats de chaque type
-            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
-            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
-            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
-            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4).ToList();
-            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5).ToList();
+            var dates = EachDay(dateMonday, dateFriday).ToList();
+
+            // Récupère tous les menus de la semaine en cours
+            var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+
+            // Récupère tous les plats de chaque type sauf ceux qui sont déjà enregistrés
+            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Select(m => m.Id_Plat_Entree).Contains(r.Id_Plat)).ToList();
+            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2 && !menus.Select(m => m.Id_Plat_Principal).Contains(r.Id_Plat)).ToList();
+            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Select(m => m.Id_Plat_Accompagnement).Contains(r.Id_Plat)).ToList();
+            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Select(m => m.Id_Plat_Fromage).Contains(r.Id_Plat)).ToList();
+            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Select(m => m.Id_Plat_Dessert).Contains(r.Id_Plat)).ToList();
 
             // Les stocker dans un tableau de liste de plats
             List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
 
+            progressBar.Maximum = (cda68_bd1DataSet.Moment.Count * dates.Count * PlatsLists.Length) - (menus.Count * 5);
+
             try
             {
-                // Récupère tous les menus de la semaine en cours
-                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
-
-                var dates = EachDay(dateMonday, dateFriday).ToList();
-
-                progressBar.Maximum = (cda68_bd1DataSet.Moment.Count * dates.Count * PlatsLists.Length) - (menus.Count * 5);
-
-                // Si des menus sont deja remplit pour la semaine
-                if (menus.Count() != 0)
-                {
-                    // Les supprimer des listes pour ne pas les réinsérer
-                    Entrees.RemoveAll(e => menus.Select(m => m.Id_Plat_Entree).Contains(e.Id_Plat));
-                    PlatsPrincipaux.RemoveAll(p => menus.Select(m => m.Id_Plat_Principal).Contains(p.Id_Plat));
-                    Accompagnements.RemoveAll(a => menus.Select(m => m.Id_Plat_Accompagnement).Contains(a.Id_Plat));
-                    Fromages.RemoveAll(f => menus.Select(m => m.Id_Plat_Fromage).Contains(f.Id_Plat));
-                    Desserts.RemoveAll(d => menus.Select(m => m.Id_Plat_Dessert).Contains(d.Id_Plat));
-                }
-
                 using (TransactionScope trans = new TransactionScope())
                 {
                     // Pour chaque jour de la semaine
