@@ -233,14 +233,14 @@ namespace OurResto
 
         private void DTPUpdateDate_CloseUp(object sender, EventArgs e)
         {
+            if (dTPUpdateDate.Value.DayOfWeek == DayOfWeek.Sunday) dTPUpdateDate.Value = dTPUpdateDate.Value.Date.AddDays(-2);
+            else if (dTPUpdateDate.Value.DayOfWeek == DayOfWeek.Saturday) dTPUpdateDate.Value = dTPUpdateDate.Value.Date.AddDays(-1);
+
             DateTime date = dTPUpdateDate.Value.Date;
-            if (date.DayOfWeek == DayOfWeek.Sunday) date = date.AddDays(-2);
-            else if (date.DayOfWeek == DayOfWeek.Saturday) date = date.AddDays(-1);
 
             // Si la date choisit n'est pas dans la semaine affichée en cours remettre à jour le DataGridView
             if (date < dateMonday || date > dateFriday)
             {
-                dTPUpdateDate.Value = date;
                 UpdateWeekMenus(date);
             }
 
@@ -259,7 +259,7 @@ namespace OurResto
         private void SetPositionBindingSource(DateTime date, int idMoment)
         {
             //Chercher si un menu du DataGridView correspond à la date et au moment
-            if (dGVMenu.Rows.OfType<DataGridViewRow>()
+            if (dGVMenu.Rows.Cast<DataGridViewRow>()
                             .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
                                                 (int)r.Cells[12].Value == idMoment)
                             is DataGridViewRow row)
@@ -451,8 +451,9 @@ namespace OurResto
 
                         foreach (DataGridViewRow dGVRow in dGVMenu.SelectedRows)
                         {
-                            var idMoment = (int)dGVRow.Cells[12].Value;
-                            var dateMenu = (DateTime)dGVRow.Cells[0].Value;
+                            cda68_bd1DataSet.v_affichermenuRow row = (cda68_bd1DataSet.v_affichermenuRow)dGVRow.DataBoundItem;
+                            var idMoment = row.Id_Moment;
+                            var dateMenu = row.RepasDate;
 
                             int nb = menuTableAdapter.DeleteByDateAndMoment(idMoment, dateMenu);
 
@@ -496,40 +497,29 @@ namespace OurResto
             progressBar.Value = 0;
             progressBar.Visible = true;
 
-            // Récupère tous les plats de chaque type
-            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
-            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
-            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
-            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4).ToList();
-            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5).ToList();
+            var dates = EachDay(dateMonday, dateFriday).ToList();
+            var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToList();
+
+            // Récupère tous les menus de la semaine en cours
+            var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+
+            // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
+            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Select(m => m.Id_Plat_Entree).Contains(r.Id_Plat)).ToList();
+            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2 && !menus.Select(m => m.Id_Plat_Principal).Contains(r.Id_Plat)).ToList();
+            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Select(m => m.Id_Plat_Accompagnement).Contains(r.Id_Plat)).ToList();
+            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Select(m => m.Id_Plat_Fromage).Contains(r.Id_Plat)).ToList();
+            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Select(m => m.Id_Plat_Dessert).Contains(r.Id_Plat)).ToList();
 
             // Les stocker dans un tableau de liste de plats
             List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
 
+            progressBar.Maximum = ((moments.Count * dates.Count) - menus.Count) * PlatsLists.Length;
+
             try
             {
-                var dates = EachDay(dateMonday, dateFriday).ToList();
-                var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToList();
-
-                // Récupère tous les menus de la semaine en cours
-                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
-
-                // Si des menus sont deja remplit pour la semaine
-                if (menus.Any())
-                {
-                    // Les supprimer des listes pour ne pas les réinsérer
-                    Entrees.RemoveAll(e => menus.Select(m => m.Id_Plat_Entree).Contains(e.Id_Plat));
-                    PlatsPrincipaux.RemoveAll(p => menus.Select(m => m.Id_Plat_Principal).Contains(p.Id_Plat));
-                    Accompagnements.RemoveAll(a => menus.Select(m => m.Id_Plat_Accompagnement).Contains(a.Id_Plat));
-                    Fromages.RemoveAll(f => menus.Select(m => m.Id_Plat_Fromage).Contains(f.Id_Plat));
-                    Desserts.RemoveAll(d => menus.Select(m => m.Id_Plat_Dessert).Contains(d.Id_Plat));
-                }
-
-                progressBar.Maximum = (moments.Count * dates.Count - menus.Count) * PlatsLists.Length;
-
                 using (var trans = new TransactionScope())
                 {
-                    // Pour chaque jour de la semaine
+                    // Pour chaque date de la semaine
                     foreach (DateTime dt in dates)
                     {
                         // Pour chaque moment repas
