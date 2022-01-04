@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Transactions;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace OurResto
 {
@@ -438,12 +438,12 @@ namespace OurResto
         {
             if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
             {
-                var message = dGVMenu.SelectedRows.Count == 1 ? String.Format(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, 
-                                                                              currentRow.Moment, 
+                var message = dGVMenu.SelectedRows.Count == 1 ? String.Format(Properties.Resources.TXTCONFIRMATIONSUPPRMENU,
+                                                                              currentRow.Moment,
                                                                               currentRow.RepasDate.ToString("D")) :
                                                                 Properties.Resources.TXTCONFIRMATIONSUPPRMENUS;
-                if (MessageBox.Show(this, message, "Confirmation", MessageBoxButtons.YesNo, 
-                    MessageBoxIcon.Warning ,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (MessageBox.Show(this, message, "Confirmation", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     try
                     {
@@ -481,7 +481,13 @@ namespace OurResto
 
         private void BtAddRandom_Click(object sender, EventArgs e)
         {
-            AddRandomWeekMeals();
+
+            progressBar.Value = 0;
+            progressBar.Maximum = 100;
+            progressBar.Visible = true;
+
+            backgroundWorker.RunWorkerAsync();
+            //AddRandomWeekMeals();
             RefreshDisplay();
 
             progressBar.Visible = false;
@@ -551,8 +557,9 @@ namespace OurResto
                                     plats.RemoveAt(i);
 
                                     // Incrémenter et mettre à jour la barre de progression
-                                    progressBar.PerformStep();
-                                    progressBar.Update();
+                                    backgroundWorker.ReportProgress(1);
+                                    //progressBar.PerformStep();
+                                    //progressBar.Update();
                                 }
                             }
                         }
@@ -619,6 +626,96 @@ namespace OurResto
 
                 column.HeaderCell.SortGlyphDirection = sortOrder;
             }
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                var random = new Random();
+
+                var dates = EachDay(dateMonday, dateFriday).ToList();
+                var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToList();
+
+                // Récupère tous les menus de la semaine en cours
+                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+
+                // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
+                var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
+                var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
+                var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
+                var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4).ToList();
+                var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5).ToList();
+
+                Entrees.RemoveAll(r => menus.Select(m => m.Id_Plat_Entree).Contains(r.Id_Plat));
+                PlatsPrincipaux.RemoveAll(r => menus.Select(m => m.Id_Plat_Principal).Contains(r.Id_Plat));
+                Accompagnements.RemoveAll(r => menus.Select(m => m.Id_Plat_Accompagnement).Contains(r.Id_Plat));
+                Fromages.RemoveAll(r => menus.Select(m => m.Id_Plat_Fromage).Contains(r.Id_Plat));
+                Desserts.RemoveAll(r => menus.Select(m => m.Id_Plat_Dessert).Contains(r.Id_Plat));
+
+                // Les stocker dans un tableau de liste de plats
+                List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
+
+                using (var trans = new TransactionScope())
+                {
+                    int max = ((moments.Count * dates.Count) - menus.Count) * PlatsLists.Length;
+                    int j = 0;
+                    // Pour chaque date de la semaine
+                    foreach (DateTime dt in dates)
+                    {
+                        // Pour chaque moment repas
+                        foreach (int idmoment in moments)
+                        {
+                            // Si il n'y a pas deja de menu à cette date et ce moment
+                            if (!menus.Any(m => m.Id_Moment == idmoment && m.RepasDate == dt))
+                            {
+                                // Pour chaque type de plat
+                                foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
+                                {
+                                    // Récupérer un plat aléatoire
+                                    int i = random.Next(0, plats.Count);
+
+                                    // Ajouter le plat dans le SGBD
+                                    if (menuTableAdapter.Insert(plats[i].Id_Plat, idmoment, dt) != 1)
+                                    {
+                                        // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
+                                        // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
+                                        MessageBox.Show(menus.Count == 49 ?
+                                                            String.Format(Properties.Resources.TXTADDMENU,
+                                                                          cda68_bd1DataSet.Moment.First(m => m.Id_Moment == idmoment).Nom,
+                                                                          dt.ToString("D")) :
+                                                            Properties.Resources.TXTADDMENUS);
+                                        return;
+                                    }
+
+                                    // Enlever le plat de la liste pour ne pas le réutiliser
+                                    plats.RemoveAt(i);
+
+                                    // Incrémenter et mettre à jour la barre de progression
+                                    backgroundWorker.ReportProgress(j * 100 / max);
+                                }
+                            }
+                        }
+                    }
+
+                    // Si tous les plats on bien étés insérés, valider la transaction
+                    trans.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(Properties.Resources.TXTADDMENUS);
+            }
+        }
+
+        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
         }
     }
 }
