@@ -9,25 +9,25 @@ namespace OurResto
 {
     class MenuComparer : IComparer<cda68_bd1DataSet.v_affichermenuRow>
     {
-        private readonly string _memberName = string.Empty;
-        private readonly SortOrder _sortOrder = SortOrder.None;
+        private readonly string memberName = string.Empty;
+        private readonly SortOrder sortOrder = SortOrder.None;
 
         public MenuComparer(string memberName, SortOrder sortingOrder)
         {
-            _memberName = memberName;
-            _sortOrder = sortingOrder;
+            this.memberName = memberName;
+            sortOrder = sortingOrder;
         }
 
         public int Compare(cda68_bd1DataSet.v_affichermenuRow x, cda68_bd1DataSet.v_affichermenuRow y)
         {
-            if (_sortOrder != SortOrder.Ascending)
+            if (sortOrder != SortOrder.Ascending)
             {
                 var tmp = x;
                 x = y;
                 y = tmp;
             }
 
-            switch (_memberName)
+            switch (memberName)
             {
                 case "RepasDate":
                     return x.RepasDate.CompareTo(y.RepasDate);

@@ -291,7 +291,8 @@ namespace OurResto
                 e.KeyChar = '.';
             }
 
-            if (e.KeyChar != (char)Keys.Delete && e.KeyChar != (char)Keys.Back && !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{1,2})?$"))
+            if (e.KeyChar != (char)Keys.Delete && e.KeyChar != (char)Keys.Back && 
+                !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{1,2})?$"))
             {
                 e.Handled = true;
             }

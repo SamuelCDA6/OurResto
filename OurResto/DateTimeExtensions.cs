@@ -9,12 +9,12 @@ namespace OurResto
         /// </summary>
         /// <param name="date">date à partir de laquelle calculer le jour</param>
         /// <param name="day">jour de la semaine pour lequel on veut la date</param>
+        /// <param name="hour">heure à laquelle l'on veux la date</param>
         /// <returns>la nouvelle date au jour de la semaine voulue</returns>
-        public static DateTime WeekDay(this DateTime date, DayOfWeek day)
+        public static DateTime WeekDay(this DateTime date, DayOfWeek day, int hour)
         {
-            //int diff = (7 + (date.DayOfWeek - day)) % 7;
-            //return date.AddDays(-1 * diff).Date;
-            return date.AddDays(day - date.DayOfWeek).Date;
+            int nbDays = (date.DayOfWeek == DayOfWeek.Sunday) ? (int)day - 7 : day - date.DayOfWeek;
+            return date.AddDays(nbDays).AddHours(hour);
         }
     }
 }

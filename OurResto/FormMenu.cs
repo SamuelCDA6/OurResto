@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Transactions;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.Collections.Immutable;
 
 namespace OurResto
 {
@@ -14,9 +14,8 @@ namespace OurResto
     {
         DateTime dateMonday;
         DateTime dateFriday;
-        DateTime dateAdd;
 
-        List<cda68_bd1DataSet.v_affichermenuRow> weekMeals = new();
+        ImmutableList<cda68_bd1DataSet.v_affichermenuRow> weekMeals;
 
         public FormMenu()
         {
@@ -83,8 +82,8 @@ namespace OurResto
         /// <param name="date">date comprise dans la semaine à afficher</param>
         private void UpdateWeekMenus(DateTime date)
         {
-            dateMonday = date.WeekDay(DayOfWeek.Monday);
-            dateFriday = date.WeekDay(DayOfWeek.Friday);
+            dateMonday = date.WeekDay(DayOfWeek.Monday, 0);
+            dateFriday = date.WeekDay(DayOfWeek.Friday, 0);
 
             // Si le lundi est sur le mois precedent prendre le mois aussi sinon que le jour
             string monday = dateMonday.Year < dateFriday.Year ? dateMonday.ToString("D") : (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("dddd dd MMMM") : dateMonday.ToString("dddd dd");
@@ -98,16 +97,16 @@ namespace OurResto
         /// <summary>
         /// Modifie l'affichage du datagridview pour seulement les menus compris entre les date de debut et de fin
         /// </summary>
-        /// <param name="begin">date de debut</param>
-        /// <param name="end">date de fin</param>
-        private void ChangeDataGridDisplayedMenus(DateTime begin, DateTime end)
+        /// <param name="beginDate">date de debut</param>
+        /// <param name="endDate">date de fin</param>
+        private void ChangeDataGridDisplayedMenus(DateTime beginDate, DateTime endDate)
         {
             try
             {
                 // Pour la vue menu récupérer seulement les menus compris entre ces dates
-                weekMeals = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= begin && r.RepasDate.Date <= end)
+                weekMeals = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= beginDate && r.RepasDate.Date <= endDate)
                                                           .OrderBy(r => r.RepasDate)
-                                                          .ThenBy(r => r.Id_Moment).ToList();
+                                                          .ThenBy(r => r.Id_Moment).ToImmutableList();
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
                 vaffichermenuBindingSource.DataSource = weekMeals;
@@ -196,6 +195,10 @@ namespace OurResto
         private void VAfficherMenuBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             UpdateComboboxs();
+
+            bool isCurrent = vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow;
+
+            SetButtons(isCurrent);
         }
 
         private void DGVMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -287,12 +290,18 @@ namespace OurResto
         private void SetButtons(bool isPositionValid)
         {
             btAjouter.Enabled = !isPositionValid;
-            btSupprimer.Enabled = isPositionValid;
-            btModifier.Enabled = isPositionValid;
+
+            DateTime dateMonday = DateTime.Now.WeekDay(DayOfWeek.Monday, 8);
+            DateTime dateLimit = DateTime.Now < dateMonday ? dateMonday.AddDays(7).Date : dateMonday.AddDays(14).Date;
+
+            bool isUpdatable = isPositionValid && dTPUpdateDate.Value >= dateLimit;
+            btSupprimer.Enabled = isUpdatable;
+            btModifier.Enabled = isUpdatable;
         }
+
         private void BtAjouter_Click(object sender, EventArgs e)
         {
-            dateAdd = dTPUpdateDate.Value.Date;
+            var dateAdd = dTPUpdateDate.Value.Date;
             var idMoment = cda68_bd1DataSet.Moment.First(r => r.Nom == cBMoment.Text).Id_Moment;
 
             using (var trans = new TransactionScope())
@@ -356,16 +365,16 @@ namespace OurResto
         /// Méthode pour ajouter un plat dans la SGBD
         /// </summary>
         /// <param name="cb">ComboBox lié au plat à ajouter</param>
-        /// <param name="idmoment">Id du moment pour le plat à ajouter</param>
-        /// <param name="daterepas">date du repas pour le plat à ajouter</param>
+        /// <param name="idMoment">Id du moment pour le plat à ajouter</param>
+        /// <param name="dateRepas">date du repas pour le plat à ajouter</param>
         /// <returns> entier retourner par l'insert du menu</returns>
-        private int AddOneMeal(ComboBox cb, int idmoment, DateTime daterepas)
+        private int AddOneMeal(ComboBox cb, int idMoment, DateTime dateRepas)
         {
             // Récupérer l'id qui correspond au plat
             var id = cda68_bd1DataSet.v_plats.First(r => r.Nom == cb.Text).Id_Plat;
 
             // Insérer le menu dans le SGBD et retourner le résultat
-            return menuTableAdapter.Insert(id, idmoment, daterepas);
+            return menuTableAdapter.Insert(id, idMoment, dateRepas);
         }
 
         private void BtModifier_Click(object sender, EventArgs e)
@@ -438,12 +447,12 @@ namespace OurResto
         {
             if (vaffichermenuBindingSource.Current is cda68_bd1DataSet.v_affichermenuRow currentRow)
             {
-                var message = dGVMenu.SelectedRows.Count == 1 ? String.Format(Properties.Resources.TXTCONFIRMATIONSUPPRMENU, 
-                                                                              currentRow.Moment, 
+                var message = dGVMenu.SelectedRows.Count == 1 ? String.Format(Properties.Resources.TXTCONFIRMATIONSUPPRMENU,
+                                                                              currentRow.Moment,
                                                                               currentRow.RepasDate.ToString("D")) :
                                                                 Properties.Resources.TXTCONFIRMATIONSUPPRMENUS;
-                if (MessageBox.Show(this, message, "Confirmation", MessageBoxButtons.YesNo, 
-                    MessageBoxIcon.Warning ,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                if (MessageBox.Show(this, message, "Confirmation", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                 {
                     try
                     {
@@ -497,18 +506,18 @@ namespace OurResto
             progressBar.Value = 0;
             progressBar.Visible = true;
 
-            var dates = EachDay(dateMonday, dateFriday).ToList();
-            var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToList();
+            var dates = EachDay(dateMonday, dateFriday).ToImmutableList();
+            var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToImmutableList();
 
             // Récupère tous les menus de la semaine en cours
-            var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+            var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToImmutableList();
 
             // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
-            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Select(m => m.Id_Plat_Entree).Contains(r.Id_Plat)).ToList();
-            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2 && !menus.Select(m => m.Id_Plat_Principal).Contains(r.Id_Plat)).ToList();
-            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Select(m => m.Id_Plat_Accompagnement).Contains(r.Id_Plat)).ToList();
-            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Select(m => m.Id_Plat_Fromage).Contains(r.Id_Plat)).ToList();
-            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Select(m => m.Id_Plat_Dessert).Contains(r.Id_Plat)).ToList();
+            var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Any(m => m.Id_Plat_Entree == r.Id_Plat)).ToList();
+            var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2 && !menus.Any(m => m.Id_Plat_Principal == r.Id_Plat)).ToList();
+            var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Any(m => m.Id_Plat_Accompagnement == r.Id_Plat)).ToList();
+            var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Any(m => m.Id_Plat_Fromage == r.Id_Plat)).ToList();
+            var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Any(m => m.Id_Plat_Dessert == r.Id_Plat)).ToList();
 
             // Les stocker dans un tableau de liste de plats
             List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
@@ -571,12 +580,12 @@ namespace OurResto
         /// <summary>
         /// Méthode pour renvoyer toutes les dates comprises entre 2 dates
         /// </summary>
-        /// <param name="start">date de debut</param>
-        /// <param name="end">date de fin</param>
+        /// <param name="startDate">date de debut</param>
+        /// <param name="endDate">date de fin</param>
         /// <returns>Enumerable des dates comprises entre la date de debut et de fin</returns>
-        private static IEnumerable<DateTime> EachDay(DateTime start, DateTime end)
+        private static IEnumerable<DateTime> EachDay(DateTime startDate, DateTime endDate)
         {
-            for (var day = start.Date; day.Date <= end.Date; day = day.AddDays(1))
+            for (var day = startDate.Date; day.Date <= endDate.Date; day = day.AddDays(1))
             {
                 yield return day;
             }
@@ -606,14 +615,13 @@ namespace OurResto
 
             if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
             {
-                var sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                var sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : 
+                                                                                              SortOrder.Ascending;
 
                 dGVMenu.Columns.OfType<DataGridViewColumn>().ToList()
                                .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
 
-                var columnName = column.DataPropertyName;
-
-                weekMeals.Sort(new MenuComparer(columnName, sortOrder));
+                weekMeals.Sort(new MenuComparer(column.DataPropertyName, sortOrder));
 
                 dGVMenu.Refresh();
 
