@@ -7,6 +7,10 @@ using System.Transactions;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Data.Entity;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace OurResto
 {
@@ -15,7 +19,9 @@ namespace OurResto
         DateTime dateMonday;
         DateTime dateFriday;
 
-        ImmutableList<cda68_bd1DataSet.v_affichermenuRow> weekMeals;
+        List<cda68_bd1DataSet.v_affichermenuRow> weekMeals;
+
+        private Thread trd;
 
         public FormMenu()
         {
@@ -86,7 +92,9 @@ namespace OurResto
             dateFriday = date.WeekDay(DayOfWeek.Friday, 0);
 
             // Si le lundi est sur le mois precedent prendre le mois aussi sinon que le jour
-            string monday = dateMonday.Year < dateFriday.Year ? dateMonday.ToString("D") : (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("dddd dd MMMM") : dateMonday.ToString("dddd dd");
+            string monday = dateMonday.Year < dateFriday.Year ? dateMonday.ToString("D") : 
+                                                               (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("dddd dd MMMM") : 
+                                                                                                   dateMonday.ToString("dddd dd");
 
             // Remettre à jour le label de la semaine
             lblSemaine.Text = String.Format("Semaine du {0} au {1}", monday, dateFriday.ToString("D"));
@@ -106,7 +114,7 @@ namespace OurResto
                 // Pour la vue menu récupérer seulement les menus compris entre ces dates
                 weekMeals = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate.Date >= beginDate && r.RepasDate.Date <= endDate)
                                                           .OrderBy(r => r.RepasDate)
-                                                          .ThenBy(r => r.Id_Moment).ToImmutableList();
+                                                          .ThenBy(r => r.Id_Moment).ToList();
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
                 vaffichermenuBindingSource.DataSource = weekMeals;
@@ -490,13 +498,12 @@ namespace OurResto
 
         private void BtAddRandom_Click(object sender, EventArgs e)
         {
+            AddRandomWeekMeals();
+            //if(!backgroundWorker.IsBusy) backgroundWorker.RunWorkerAsync();
+            //Thread trd = new Thread(new ThreadStart(AddRandomWeekMeals));
+            //trd.IsBackground = true;
+            //trd.Start();
 
-            progressBar.Value = 0;
-            progressBar.Maximum = 100;
-            progressBar.Visible = true;
-
-            backgroundWorker.RunWorkerAsync();
-            //AddRandomWeekMeals();
             RefreshDisplay();
 
             progressBar.Visible = false;
@@ -566,9 +573,8 @@ namespace OurResto
                                     plats.RemoveAt(i);
 
                                     // Incrémenter et mettre à jour la barre de progression
-                                    backgroundWorker.ReportProgress(1);
-                                    //progressBar.PerformStep();
-                                    //progressBar.Update();
+                                    progressBar.PerformStep();
+                                    progressBar.Update();
                                 }
                             }
                         }
@@ -590,7 +596,7 @@ namespace OurResto
         /// <param name="startDate">date de debut</param>
         /// <param name="endDate">date de fin</param>
         /// <returns>Enumerable des dates comprises entre la date de debut et de fin</returns>
-        private static IEnumerable<DateTime> EachDay(DateTime startDate, DateTime endDate)
+        private IEnumerable<DateTime> EachDay(DateTime startDate, DateTime endDate)
         {
             for (var day = startDate.Date; day.Date <= endDate.Date; day = day.AddDays(1))
             {
@@ -622,7 +628,7 @@ namespace OurResto
 
             if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
             {
-                var sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : 
+                var sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending :
                                                                                               SortOrder.Ascending;
 
                 dGVMenu.Columns.OfType<DataGridViewColumn>().ToList()
@@ -647,13 +653,13 @@ namespace OurResto
 
                 // Récupère tous les menus de la semaine en cours
                 var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
-
+                
                 // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
-                var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1).ToList();
-                var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2).ToList();
-                var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3).ToList();
-                var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4).ToList();
-                var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5).ToList();
+                var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Any(m => m.Id_Plat_Principal == r.Id_Plat)).ToList();
+                var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2 && !menus.Any(m => m.Id_Plat_Principal == r.Id_Plat)).ToList();
+                var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Any(m => m.Id_Plat_Accompagnement == r.Id_Plat)).ToList();
+                var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Any(m => m.Id_Plat_Fromage == r.Id_Plat)).ToList();
+                var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Any(m => m.Id_Plat_Dessert == r.Id_Plat)).ToList();
 
                 Entrees.RemoveAll(r => menus.Select(m => m.Id_Plat_Entree).Contains(r.Id_Plat));
                 PlatsPrincipaux.RemoveAll(r => menus.Select(m => m.Id_Plat_Principal).Contains(r.Id_Plat));
@@ -713,6 +719,18 @@ namespace OurResto
             catch (Exception)
             {
                 MessageBox.Show(Properties.Resources.TXTADDMENUS);
+            }
+        }
+
+        private IEnumerable<cda68_bd1DataSet.v_platsRow> NewMethod(int sortePlat)
+        {
+            // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
+            foreach (cda68_bd1DataSet.v_platsRow row in cda68_bd1DataSet.v_plats)
+            {
+                if (row.Id_Sorte == sortePlat)
+                {
+                    yield return row;
+                }
             }
         }
 

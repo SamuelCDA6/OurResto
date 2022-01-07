@@ -489,9 +489,9 @@ namespace OurResto
             this.cBMoment.Size = new System.Drawing.Size(268, 28);
             this.cBMoment.TabIndex = 3;
             this.cBMoment.SelectionChangeCommitted += new System.EventHandler(this.CBMoment_SelectionChangeCommitted);
-            // 
-            // progressBar
-            // 
+            //// 
+            //// progressBar
+            //// 
             this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.progressBar.Location = new System.Drawing.Point(174, 142);
             this.progressBar.Maximum = 50;

@@ -286,13 +286,9 @@ namespace OurResto
 
         private void TBMontant_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == ',')
-            {
-                e.KeyChar = '.';
-            }
+            if (e.KeyChar == ',') e.KeyChar = '.';
 
-            if (e.KeyChar != (char)Keys.Delete && e.KeyChar != (char)Keys.Back && 
-                !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{1,2})?$"))
+            if (e.KeyChar != (char)Keys.Delete && e.KeyChar != (char)Keys.Back && !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]{1}\d{0,2})?$"))
             {
                 e.Handled = true;
             }
