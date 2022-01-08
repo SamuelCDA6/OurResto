@@ -8,9 +8,6 @@ using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
-using System.Data.Entity;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace OurResto
 {
@@ -20,8 +17,6 @@ namespace OurResto
         DateTime dateFriday;
 
         List<cda68_bd1DataSet.v_affichermenuRow> weekMeals;
-
-        private Thread trd;
 
         public FormMenu()
         {
@@ -539,50 +534,48 @@ namespace OurResto
 
             try
             {
-                using (var trans = new TransactionScope())
+                using var trans = new TransactionScope();
+                // Pour chaque date de la semaine
+                foreach (DateTime dt in dates)
                 {
-                    // Pour chaque date de la semaine
-                    foreach (DateTime dt in dates)
+                    // Pour chaque moment repas
+                    foreach (int idmoment in moments)
                     {
-                        // Pour chaque moment repas
-                        foreach (int idmoment in moments)
+                        // Si il n'y a pas deja de menu à cette date et ce moment
+                        if (!menus.Any(m => m.Id_Moment == idmoment && m.RepasDate == dt))
                         {
-                            // Si il n'y a pas deja de menu à cette date et ce moment
-                            if (!menus.Any(m => m.Id_Moment == idmoment && m.RepasDate == dt))
+                            // Pour chaque type de plat
+                            foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
                             {
-                                // Pour chaque type de plat
-                                foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
+                                // Récupérer un plat aléatoire
+                                int i = random.Next(0, plats.Count);
+
+                                // Ajouter le plat dans le SGBD
+                                if (menuTableAdapter.Insert(plats[i].Id_Plat, idmoment, dt) != 1)
                                 {
-                                    // Récupérer un plat aléatoire
-                                    int i = random.Next(0, plats.Count);
-
-                                    // Ajouter le plat dans le SGBD
-                                    if (menuTableAdapter.Insert(plats[i].Id_Plat, idmoment, dt) != 1)
-                                    {
-                                        // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
-                                        // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
-                                        MessageBox.Show(menus.Count == 49 ?
-                                                            String.Format(Properties.Resources.TXTADDMENU,
-                                                                          cda68_bd1DataSet.Moment.First(m => m.Id_Moment == idmoment).Nom,
-                                                                          dt.ToString("D")) :
-                                                            Properties.Resources.TXTADDMENUS);
-                                        return;
-                                    }
-
-                                    // Enlever le plat de la liste pour ne pas le réutiliser
-                                    plats.RemoveAt(i);
-
-                                    // Incrémenter et mettre à jour la barre de progression
-                                    progressBar.PerformStep();
-                                    progressBar.Update();
+                                    // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
+                                    // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
+                                    MessageBox.Show(menus.Count == 49 ?
+                                                        String.Format(Properties.Resources.TXTADDMENU,
+                                                                      cda68_bd1DataSet.Moment.First(m => m.Id_Moment == idmoment).Nom,
+                                                                      dt.ToString("D")) :
+                                                        Properties.Resources.TXTADDMENUS);
+                                    return;
                                 }
+
+                                // Enlever le plat de la liste pour ne pas le réutiliser
+                                plats.RemoveAt(i);
+
+                                // Incrémenter et mettre à jour la barre de progression
+                                progressBar.PerformStep();
+                                progressBar.Update();
                             }
                         }
                     }
-
-                    // Si tous les plats on bien étés insérés, valider la transaction
-                    trans.Complete();
                 }
+
+                // Si tous les plats on bien étés insérés, valider la transaction
+                trans.Complete();
             }
             catch (Exception)
             {
@@ -596,7 +589,7 @@ namespace OurResto
         /// <param name="startDate">date de debut</param>
         /// <param name="endDate">date de fin</param>
         /// <returns>Enumerable des dates comprises entre la date de debut et de fin</returns>
-        private IEnumerable<DateTime> EachDay(DateTime startDate, DateTime endDate)
+        private static IEnumerable<DateTime> EachDay(DateTime startDate, DateTime endDate)
         {
             for (var day = startDate.Date; day.Date <= endDate.Date; day = day.AddDays(1))
             {
@@ -670,67 +663,54 @@ namespace OurResto
                 // Les stocker dans un tableau de liste de plats
                 List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
 
-                using (var trans = new TransactionScope())
+                using var trans = new TransactionScope();
+
+                int max = ((moments.Count * dates.Count) - menus.Count) * PlatsLists.Length;
+                int j = 0;
+                // Pour chaque date de la semaine
+                foreach (DateTime dt in dates)
                 {
-                    int max = ((moments.Count * dates.Count) - menus.Count) * PlatsLists.Length;
-                    int j = 0;
-                    // Pour chaque date de la semaine
-                    foreach (DateTime dt in dates)
+                    // Pour chaque moment repas
+                    foreach (int idmoment in moments)
                     {
-                        // Pour chaque moment repas
-                        foreach (int idmoment in moments)
+                        // Si il n'y a pas deja de menu à cette date et ce moment
+                        if (!menus.Any(m => m.Id_Moment == idmoment && m.RepasDate == dt))
                         {
-                            // Si il n'y a pas deja de menu à cette date et ce moment
-                            if (!menus.Any(m => m.Id_Moment == idmoment && m.RepasDate == dt))
+                            // Pour chaque type de plat
+                            foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
                             {
-                                // Pour chaque type de plat
-                                foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
+                                // Récupérer un plat aléatoire
+                                int i = random.Next(0, plats.Count);
+
+                                // Ajouter le plat dans le SGBD
+                                if (menuTableAdapter.Insert(plats[i].Id_Plat, idmoment, dt) != 1)
                                 {
-                                    // Récupérer un plat aléatoire
-                                    int i = random.Next(0, plats.Count);
-
-                                    // Ajouter le plat dans le SGBD
-                                    if (menuTableAdapter.Insert(plats[i].Id_Plat, idmoment, dt) != 1)
-                                    {
-                                        // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
-                                        // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
-                                        MessageBox.Show(menus.Count == 49 ?
-                                                            String.Format(Properties.Resources.TXTADDMENU,
-                                                                          cda68_bd1DataSet.Moment.First(m => m.Id_Moment == idmoment).Nom,
-                                                                          dt.ToString("D")) :
-                                                            Properties.Resources.TXTADDMENUS);
-                                        return;
-                                    }
-
-                                    // Enlever le plat de la liste pour ne pas le réutiliser
-                                    plats.RemoveAt(i);
-
-                                    // Incrémenter et mettre à jour la barre de progression
-                                    backgroundWorker.ReportProgress(j * 100 / max);
+                                    // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
+                                    // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
+                                    MessageBox.Show(menus.Count == 49 ?
+                                                        String.Format(Properties.Resources.TXTADDMENU,
+                                                                      cda68_bd1DataSet.Moment.First(m => m.Id_Moment == idmoment).Nom,
+                                                                      dt.ToString("D")) :
+                                                        Properties.Resources.TXTADDMENUS);
+                                    return;
                                 }
+
+                                // Enlever le plat de la liste pour ne pas le réutiliser
+                                plats.RemoveAt(i);
+
+                                // Incrémenter et mettre à jour la barre de progression
+                                backgroundWorker.ReportProgress(j * 100 / max);
                             }
                         }
                     }
-
-                    // Si tous les plats on bien étés insérés, valider la transaction
-                    trans.Complete();
                 }
+
+                // Si tous les plats on bien étés insérés, valider la transaction
+                trans.Complete();
             }
             catch (Exception)
             {
                 MessageBox.Show(Properties.Resources.TXTADDMENUS);
-            }
-        }
-
-        private IEnumerable<cda68_bd1DataSet.v_platsRow> NewMethod(int sortePlat)
-        {
-            // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
-            foreach (cda68_bd1DataSet.v_platsRow row in cda68_bd1DataSet.v_plats)
-            {
-                if (row.Id_Sorte == sortePlat)
-                {
-                    yield return row;
-                }
             }
         }
 

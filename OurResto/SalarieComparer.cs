@@ -27,19 +27,14 @@ namespace OurResto
                 y = tmp;
             }
 
-            switch (_memberName)
+            return _memberName switch
             {
-                case "Nom":
-                    return x.Nom.CompareTo(y.Nom);
-                case "Prenom":
-                    return x.Prenom.CompareTo(y.Prenom);
-                case "Matricule":
-                    return x.Matricule.CompareTo(y.Matricule);
-                case "Email":
-                    return x.Email.CompareTo(y.Email);
-                default:
-                    return x.Matricule.CompareTo(y.Matricule);
-            }
+                "Nom" => x.Nom.CompareTo(y.Nom),
+                "Prenom" => x.Prenom.CompareTo(y.Prenom),
+                "Matricule" => x.Matricule.CompareTo(y.Matricule),
+                "Email" => x.Email.CompareTo(y.Email),
+                _ => x.Matricule.CompareTo(y.Matricule),
+            };
         }
     }
 }

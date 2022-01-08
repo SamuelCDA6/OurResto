@@ -218,7 +218,7 @@ namespace OurResto
             {
                 if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentRow)
                 {
-                    if (MessageBox.Show(String.Format(Properties.Resources.TXTCONFIRMATIONSOLDER, currentRow.Prenom, currentRow.Nom), "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show(this,String.Format(Properties.Resources.TXTCONFIRMATIONSOLDER, currentRow.Prenom, currentRow.Nom), "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                     {
                         int Id_TypePaiement = cda68_bd1DataSet.TypePaiement[cBTypePaiement.SelectedIndex].Id_TypePaiement;
 

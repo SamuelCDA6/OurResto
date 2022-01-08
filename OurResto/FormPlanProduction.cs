@@ -12,7 +12,7 @@ namespace OurResto
 {
     public partial class FormPlanProduction : Form
     {
-        DateTime date = DateTime.Today;
+        DateTime mealDate = DateTime.Today;
 
         public FormPlanProduction()
         {
@@ -22,10 +22,6 @@ namespace OurResto
         private void FormPlanProduction_Load(object sender, EventArgs e)
         {
             v_plancuisineTableAdapter.Fill(cda68_bd1DataSet.v_plancuisine);
-
-            vplancuisineBindingSource.DataSource = cda68_bd1DataSet.v_plancuisine.Where(r => r.RepasDate == date)
-                                                                                 .OrderBy(r => r.Id_Moment)
-                                                                                 .ThenBy(r => r.Id_Sorte).ToList();
 
             Manager.ResizeImage(btBefore, Properties.Resources.Arrow_left_256x256, ContentAlignment.MiddleCenter);
             Manager.ResizeImage(btAfter, Properties.Resources.Arrow_right_256x256, ContentAlignment.MiddleCenter);
@@ -44,29 +40,74 @@ namespace OurResto
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
-            UpdateDate(0);
+            SetDate(mealDate);
+        }
+
+        private void SetDate(DateTime date)
+        {
+            var rows = cda68_bd1DataSet.v_plancuisine.OrderBy(r => Math.Abs((r.RepasDate - date).Days)).ToList();
+
+            // Mettre à jour avec ses lignes
+            UpdateDate(rows);
+        }
+
+        private void BtToday_Click(object sender, EventArgs e)
+        {
+            mealDate = DateTime.Today;
+            SetDate(mealDate);
+        }
+        private void BtQuitter_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void BtBefore_Click(object sender, EventArgs e)
         {
-            UpdateDate(-1);
+            var rows = ResearchDate(mealDate, false);
+
+            // Mettre à jour avec ses lignes
+            UpdateDate(rows);
         }
 
         private void BtAfter_Click(object sender, EventArgs e)
         {
-            UpdateDate(1);
+            // Récupère les lignes après la date du repas
+            var rows = ResearchDate(mealDate, true);
+
+            // Mettre à jour avec ses lignes
+            UpdateDate(rows);
         }
 
-        private void UpdateDate(int nbjour)
+        /// <summary>
+        /// Méthode de recherche de plan de repas à une date et un sens donné
+        /// </summary>
+        /// <param name="date"> date à partir de laquelle on recherche (date non incluse)</param>
+        /// <param name="searchDirection"> sens de recherche : true = repas après cette date</param>
+        /// <returns> les lignes qui sont correspondent à cette recherche dans l'ordre de la proche à la plus éloigné de la date initiale</returns>
+        private List<cda68_bd1DataSet.v_plancuisineRow> ResearchDate(DateTime date, bool searchDirection)
         {
-            date = date.AddDays(nbjour);
-            if (date.DayOfWeek == DayOfWeek.Sunday) date = nbjour < 0 ?  date.AddDays(-2) : date.AddDays(1);
-            else if (date.DayOfWeek == DayOfWeek.Saturday) date = nbjour < 0 ? date.AddDays(-1) : date.AddDays(2);
+            // Sélectionne les lignes qui sont supérieur ou inférieur et les ordonne par la différence de jours
+            return cda68_bd1DataSet.v_plancuisine.Where(r => searchDirection ? r.RepasDate > date : r.RepasDate < date)
+                                                 .OrderBy(r => Math.Abs((r.RepasDate - date).Days))
+                                                 .ToList();
+        }
 
-            lblJour.Text = date.ToString("D");
+        /// <summary>
+        /// Méthode de mise à jour de l'affichage du plan de production de repas avec les lignes 
+        /// qui correspondent à la date de la première ligne 
+        /// </summary>
+        /// <param name="rows"> lignes qui contiennent les repas par ordre de date</param>
+        private void UpdateDate(List<cda68_bd1DataSet.v_plancuisineRow> rows)
+        {
+            if (rows.Any())
+            {
+                mealDate = rows.First().RepasDate;
+                lblJour.Text = mealDate.ToString("D");
 
-            vplancuisineBindingSource.DataSource = cda68_bd1DataSet.v_plancuisine.Where(r => r.RepasDate == date)
-                                                                                 .OrderBy(r => r.Id_Moment).ToList();
+                vplancuisineBindingSource.DataSource = rows.TakeWhile(r => r.RepasDate == mealDate)
+                                                           .OrderBy(r => r.Id_Moment)
+                                                           .ThenBy(r => r.Id_Sorte).ToList();
+            }
         }
 
         private void DGVPlanProduction_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -78,17 +119,6 @@ namespace OurResto
                     e.Value = String.Empty;
                 }
             }
-        }
-
-        private void BtQuitter_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void BtToday_Click(object sender, EventArgs e)
-        {
-            date = DateTime.Today;
-            UpdateDate(0);
         }
     }
 }

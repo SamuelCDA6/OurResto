@@ -27,25 +27,17 @@ namespace OurResto
                 y = tmp;
             }
 
-            switch (memberName)
+            return memberName switch
             {
-                case "RepasDate":
-                    return x.RepasDate.CompareTo(y.RepasDate);
-                case "Moment":
-                    return x.Moment.CompareTo(y.Moment);
-                case "Entree":
-                    return x.Entree.CompareTo(y.Entree);
-                case "Plat":
-                    return x.Plat.CompareTo(y.Plat);
-                case "Accompagnement":
-                    return x.Accompagnement.CompareTo(y.Accompagnement);
-                case "Fromage":
-                    return x.Fromage.CompareTo(y.Fromage);
-                case "Dessert":
-                    return x.Dessert.CompareTo(y.Dessert);
-                default:
-                    return x.RepasDate.CompareTo(y.RepasDate);
-            }
+                "RepasDate" => x.RepasDate.CompareTo(y.RepasDate),
+                "Moment" => x.Moment.CompareTo(y.Moment),
+                "Entree" => x.Entree.CompareTo(y.Entree),
+                "Plat" => x.Plat.CompareTo(y.Plat),
+                "Accompagnement" => x.Accompagnement.CompareTo(y.Accompagnement),
+                "Fromage" => x.Fromage.CompareTo(y.Fromage),
+                "Dessert" => x.Dessert.CompareTo(y.Dessert),
+                _ => x.RepasDate.CompareTo(y.RepasDate),
+            };
         }
     }
 }

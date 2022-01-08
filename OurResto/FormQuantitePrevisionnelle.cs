@@ -29,7 +29,7 @@ namespace OurResto
             v_quantiteprevisionnelleTableAdapter.Fill(cda68_bd1DataSet.v_quantiteprevisionnelle);
 
             DateTime dateMonday = DateTime.Today.AddDays(7).WeekDay(DayOfWeek.Monday, 0).Date;
-            DateTime dateFriday = DateTime.Today.AddDays(7).WeekDay(DayOfWeek.Friday, 0).Date;
+            DateTime dateFriday = dateMonday.WeekDay(DayOfWeek.Friday, 0).Date;
 
             // Si le lundi est sur le mois précédent prendre le mois aussi sinon que le jour
             string monday = (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("M") : dateMonday.Day.ToString();
