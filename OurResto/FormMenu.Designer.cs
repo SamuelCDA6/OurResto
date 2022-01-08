@@ -30,7 +30,7 @@ namespace OurResto
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenu));
             this.dGVMenu = new System.Windows.Forms.DataGridView();
             this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -107,14 +107,14 @@ namespace OurResto
             this.dGVMenu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGVMenu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dGVMenu.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dGVMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dGVMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dGVMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGVMenu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.repasDateDataGridViewTextBoxColumn,
@@ -332,7 +332,7 @@ namespace OurResto
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tLPInputBox.Size = new System.Drawing.Size(1126, 170);
-            this.tLPInputBox.TabIndex = 3;
+            this.tLPInputBox.TabIndex = 1;
             // 
             // cBPlatFromage
             // 
@@ -343,7 +343,7 @@ namespace OurResto
             this.cBPlatFromage.Location = new System.Drawing.Point(701, 105);
             this.cBPlatFromage.Name = "cBPlatFromage";
             this.cBPlatFromage.Size = new System.Drawing.Size(422, 28);
-            this.cBPlatFromage.TabIndex = 7;
+            this.cBPlatFromage.TabIndex = 8;
             // 
             // cBPlatAccompagnement
             // 
@@ -354,7 +354,7 @@ namespace OurResto
             this.cBPlatAccompagnement.Location = new System.Drawing.Point(701, 71);
             this.cBPlatAccompagnement.Name = "cBPlatAccompagnement";
             this.cBPlatAccompagnement.Size = new System.Drawing.Size(422, 28);
-            this.cBPlatAccompagnement.TabIndex = 6;
+            this.cBPlatAccompagnement.TabIndex = 7;
             // 
             // cBPlatPrincipal
             // 
@@ -365,7 +365,7 @@ namespace OurResto
             this.cBPlatPrincipal.Location = new System.Drawing.Point(701, 37);
             this.cBPlatPrincipal.Name = "cBPlatPrincipal";
             this.cBPlatPrincipal.Size = new System.Drawing.Size(422, 28);
-            this.cBPlatPrincipal.TabIndex = 5;
+            this.cBPlatPrincipal.TabIndex = 6;
             // 
             // cBPlatEntree
             // 
@@ -376,7 +376,7 @@ namespace OurResto
             this.cBPlatEntree.Location = new System.Drawing.Point(701, 3);
             this.cBPlatEntree.Name = "cBPlatEntree";
             this.cBPlatEntree.Size = new System.Drawing.Size(422, 28);
-            this.cBPlatEntree.TabIndex = 4;
+            this.cBPlatEntree.TabIndex = 5;
             // 
             // lblPlat
             // 
@@ -454,7 +454,7 @@ namespace OurResto
             this.cBPlatDessert.Location = new System.Drawing.Point(701, 139);
             this.cBPlatDessert.Name = "cBPlatDessert";
             this.cBPlatDessert.Size = new System.Drawing.Size(422, 28);
-            this.cBPlatDessert.TabIndex = 8;
+            this.cBPlatDessert.TabIndex = 9;
             // 
             // lblDateRepas
             // 
@@ -487,11 +487,11 @@ namespace OurResto
             this.cBMoment.Location = new System.Drawing.Point(124, 105);
             this.cBMoment.Name = "cBMoment";
             this.cBMoment.Size = new System.Drawing.Size(268, 28);
-            this.cBMoment.TabIndex = 3;
+            this.cBMoment.TabIndex = 4;
             this.cBMoment.SelectionChangeCommitted += new System.EventHandler(this.CBMoment_SelectionChangeCommitted);
-            //// 
-            //// progressBar
-            //// 
+            // 
+            // progressBar
+            // 
             this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.progressBar.Location = new System.Drawing.Point(174, 142);
             this.progressBar.Maximum = 50;
@@ -519,7 +519,7 @@ namespace OurResto
             this.tLPDateSemaine.RowCount = 1;
             this.tLPDateSemaine.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPDateSemaine.Size = new System.Drawing.Size(1126, 54);
-            this.tLPDateSemaine.TabIndex = 101;
+            this.tLPDateSemaine.TabIndex = 0;
             // 
             // lblSemaine
             // 
@@ -538,7 +538,7 @@ namespace OurResto
             this.btBefore.Location = new System.Drawing.Point(17, 7);
             this.btBefore.Name = "btBefore";
             this.btBefore.Size = new System.Drawing.Size(80, 40);
-            this.btBefore.TabIndex = 1;
+            this.btBefore.TabIndex = 0;
             this.btBefore.UseVisualStyleBackColor = true;
             this.btBefore.Click += new System.EventHandler(this.BtBefore_Click);
             // 
@@ -548,7 +548,7 @@ namespace OurResto
             this.btAfter.Location = new System.Drawing.Point(1053, 7);
             this.btAfter.Name = "btAfter";
             this.btAfter.Size = new System.Drawing.Size(70, 40);
-            this.btAfter.TabIndex = 2;
+            this.btAfter.TabIndex = 1;
             this.btAfter.UseVisualStyleBackColor = true;
             this.btAfter.Click += new System.EventHandler(this.BtAfter_Click);
             // 
@@ -568,7 +568,7 @@ namespace OurResto
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1126, 70);
-            this.tableLayoutPanel1.TabIndex = 102;
+            this.tableLayoutPanel1.TabIndex = 1;
             // 
             // btAddRandom
             // 
@@ -577,7 +577,7 @@ namespace OurResto
             this.btAddRandom.Location = new System.Drawing.Point(985, 3);
             this.btAddRandom.Name = "btAddRandom";
             this.btAddRandom.Size = new System.Drawing.Size(138, 64);
-            this.btAddRandom.TabIndex = 14;
+            this.btAddRandom.TabIndex = 15;
             this.btAddRandom.Text = "Aj&outs aléatoires";
             this.btAddRandom.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btAddRandom.UseVisualStyleBackColor = false;
@@ -595,14 +595,14 @@ namespace OurResto
             this.fLPButtons.Location = new System.Drawing.Point(275, 3);
             this.fLPButtons.Name = "fLPButtons";
             this.fLPButtons.Size = new System.Drawing.Size(576, 64);
-            this.fLPButtons.TabIndex = 3;
+            this.fLPButtons.TabIndex = 1;
             // 
             // btActualiser
             // 
             this.btActualiser.Location = new System.Drawing.Point(3, 3);
             this.btActualiser.Name = "btActualiser";
             this.btActualiser.Size = new System.Drawing.Size(138, 61);
-            this.btActualiser.TabIndex = 10;
+            this.btActualiser.TabIndex = 11;
             this.btActualiser.Text = "&Actualiser";
             this.btActualiser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btActualiser.UseVisualStyleBackColor = true;
@@ -613,7 +613,7 @@ namespace OurResto
             this.btAjouter.Location = new System.Drawing.Point(147, 3);
             this.btAjouter.Name = "btAjouter";
             this.btAjouter.Size = new System.Drawing.Size(138, 61);
-            this.btAjouter.TabIndex = 11;
+            this.btAjouter.TabIndex = 12;
             this.btAjouter.Text = "A&jouter";
             this.btAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btAjouter.UseVisualStyleBackColor = true;
@@ -624,7 +624,7 @@ namespace OurResto
             this.btModifier.Location = new System.Drawing.Point(291, 3);
             this.btModifier.Name = "btModifier";
             this.btModifier.Size = new System.Drawing.Size(138, 61);
-            this.btModifier.TabIndex = 12;
+            this.btModifier.TabIndex = 13;
             this.btModifier.Text = "&Modifier";
             this.btModifier.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btModifier.UseVisualStyleBackColor = true;
@@ -635,7 +635,7 @@ namespace OurResto
             this.btSupprimer.Location = new System.Drawing.Point(435, 3);
             this.btSupprimer.Name = "btSupprimer";
             this.btSupprimer.Size = new System.Drawing.Size(138, 61);
-            this.btSupprimer.TabIndex = 13;
+            this.btSupprimer.TabIndex = 14;
             this.btSupprimer.Text = "&Supprimer";
             this.btSupprimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btSupprimer.UseVisualStyleBackColor = true;
@@ -648,7 +648,7 @@ namespace OurResto
             this.btQuitter.Location = new System.Drawing.Point(3, 3);
             this.btQuitter.Name = "btQuitter";
             this.btQuitter.Size = new System.Drawing.Size(138, 64);
-            this.btQuitter.TabIndex = 9;
+            this.btQuitter.TabIndex = 10;
             this.btQuitter.Text = "&Quitter";
             this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btQuitter.UseVisualStyleBackColor = false;

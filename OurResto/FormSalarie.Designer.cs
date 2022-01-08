@@ -151,6 +151,7 @@ namespace OurResto
             this.dGVSalarie.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dGVSalarie.Size = new System.Drawing.Size(826, 375);
             this.dGVSalarie.TabIndex = 100;
+            this.dGVSalarie.TabStop = false;
             this.dGVSalarie.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVSalarie_ColumnHeaderMouseClick);
             this.dGVSalarie.SelectionChanged += new System.EventHandler(this.DGVSalarie_SelectionChanged);
             // 
@@ -270,7 +271,7 @@ namespace OurResto
             this.tBPrenom.Margin = new System.Windows.Forms.Padding(4);
             this.tBPrenom.Name = "tBPrenom";
             this.tBPrenom.Size = new System.Drawing.Size(745, 26);
-            this.tBPrenom.TabIndex = 2;
+            this.tBPrenom.TabIndex = 3;
             // 
             // tBEmail
             // 
@@ -280,7 +281,7 @@ namespace OurResto
             this.tBEmail.Margin = new System.Windows.Forms.Padding(4);
             this.tBEmail.Name = "tBEmail";
             this.tBEmail.Size = new System.Drawing.Size(745, 26);
-            this.tBEmail.TabIndex = 3;
+            this.tBEmail.TabIndex = 4;
             // 
             // tBNom
             // 
@@ -290,7 +291,7 @@ namespace OurResto
             this.tBNom.Margin = new System.Windows.Forms.Padding(4);
             this.tBNom.Name = "tBNom";
             this.tBNom.Size = new System.Drawing.Size(745, 26);
-            this.tBNom.TabIndex = 1;
+            this.tBNom.TabIndex = 2;
             // 
             // lblNom
             // 
@@ -324,14 +325,14 @@ namespace OurResto
             this.fLPTransactionButtons.Location = new System.Drawing.Point(864, 530);
             this.fLPTransactionButtons.Name = "fLPTransactionButtons";
             this.fLPTransactionButtons.Size = new System.Drawing.Size(288, 70);
-            this.fLPTransactionButtons.TabIndex = 3;
+            this.fLPTransactionButtons.TabIndex = 4;
             // 
             // btCredit
             // 
             this.btCredit.Location = new System.Drawing.Point(3, 3);
             this.btCredit.Name = "btCredit";
             this.btCredit.Size = new System.Drawing.Size(138, 61);
-            this.btCredit.TabIndex = 9;
+            this.btCredit.TabIndex = 11;
             this.btCredit.Text = "&Crediter";
             this.btCredit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btCredit.UseVisualStyleBackColor = true;
@@ -343,7 +344,7 @@ namespace OurResto
             this.btSellOff.Location = new System.Drawing.Point(147, 3);
             this.btSellOff.Name = "btSellOff";
             this.btSellOff.Size = new System.Drawing.Size(138, 61);
-            this.btSellOff.TabIndex = 10;
+            this.btSellOff.TabIndex = 12;
             this.btSellOff.Text = "&Solder";
             this.btSellOff.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btSellOff.UseVisualStyleBackColor = true;
@@ -377,6 +378,7 @@ namespace OurResto
             this.dGVTransaction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dGVTransaction.Size = new System.Drawing.Size(342, 377);
             this.dGVTransaction.TabIndex = 100;
+            this.dGVTransaction.TabStop = false;
             // 
             // matriculeDataGridViewTextBoxColumn1
             // 
@@ -437,7 +439,7 @@ namespace OurResto
             this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tLPTransactions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tLPTransactions.Size = new System.Drawing.Size(342, 100);
-            this.tLPTransactions.TabIndex = 5;
+            this.tLPTransactions.TabIndex = 2;
             // 
             // lblType
             // 
@@ -478,7 +480,7 @@ namespace OurResto
             this.tBMontant.Location = new System.Drawing.Point(154, 36);
             this.tBMontant.Name = "tBMontant";
             this.tBMontant.Size = new System.Drawing.Size(185, 26);
-            this.tBMontant.TabIndex = 7;
+            this.tBMontant.TabIndex = 6;
             this.tBMontant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.tBMontant.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBMontant_KeyPress);
             // 
@@ -490,7 +492,7 @@ namespace OurResto
             this.tBSolde.Name = "tBSolde";
             this.tBSolde.ReadOnly = true;
             this.tBSolde.Size = new System.Drawing.Size(185, 26);
-            this.tBSolde.TabIndex = 3;
+            this.tBSolde.TabIndex = 5;
             this.tBSolde.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // vsoldesalarieBindingSource
@@ -508,7 +510,7 @@ namespace OurResto
             this.cBTypePaiement.Location = new System.Drawing.Point(154, 69);
             this.cBTypePaiement.Name = "cBTypePaiement";
             this.cBTypePaiement.Size = new System.Drawing.Size(185, 28);
-            this.cBTypePaiement.TabIndex = 8;
+            this.cBTypePaiement.TabIndex = 7;
             this.cBTypePaiement.ValueMember = "Nom";
             // 
             // typePaiementBindingSource
@@ -531,7 +533,7 @@ namespace OurResto
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(828, 32);
-            this.tableLayoutPanel1.TabIndex = 101;
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblRechercheSalarie
             // 
@@ -566,7 +568,7 @@ namespace OurResto
             this.tLPButtons.RowCount = 1;
             this.tLPButtons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPButtons.Size = new System.Drawing.Size(828, 70);
-            this.tLPButtons.TabIndex = 102;
+            this.tLPButtons.TabIndex = 3;
             // 
             // fLPSalarieButtons
             // 
@@ -577,14 +579,14 @@ namespace OurResto
             this.fLPSalarieButtons.Location = new System.Drawing.Point(342, 3);
             this.fLPSalarieButtons.Name = "fLPSalarieButtons";
             this.fLPSalarieButtons.Size = new System.Drawing.Size(288, 64);
-            this.fLPSalarieButtons.TabIndex = 3;
+            this.fLPSalarieButtons.TabIndex = 1;
             // 
             // btRefresh
             // 
             this.btRefresh.Location = new System.Drawing.Point(3, 3);
             this.btRefresh.Name = "btRefresh";
             this.btRefresh.Size = new System.Drawing.Size(138, 61);
-            this.btRefresh.TabIndex = 4;
+            this.btRefresh.TabIndex = 9;
             this.btRefresh.Text = "&Actualiser";
             this.btRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btRefresh.UseVisualStyleBackColor = true;
@@ -596,7 +598,7 @@ namespace OurResto
             this.btEdit.Location = new System.Drawing.Point(147, 3);
             this.btEdit.Name = "btEdit";
             this.btEdit.Size = new System.Drawing.Size(138, 61);
-            this.btEdit.TabIndex = 6;
+            this.btEdit.TabIndex = 10;
             this.btEdit.Text = "&Modifier";
             this.btEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btEdit.UseVisualStyleBackColor = true;
@@ -609,7 +611,7 @@ namespace OurResto
             this.btQuitter.Location = new System.Drawing.Point(3, 3);
             this.btQuitter.Name = "btQuitter";
             this.btQuitter.Size = new System.Drawing.Size(138, 64);
-            this.btQuitter.TabIndex = 7;
+            this.btQuitter.TabIndex = 0;
             this.btQuitter.Text = "&Quitter";
             this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btQuitter.UseVisualStyleBackColor = false;

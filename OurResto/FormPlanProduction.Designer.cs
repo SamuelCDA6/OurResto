@@ -90,6 +90,7 @@
             this.dGVPlanProduction.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dGVPlanProduction.Size = new System.Drawing.Size(576, 323);
             this.dGVPlanProduction.TabIndex = 0;
+            this.dGVPlanProduction.TabStop = false;
             this.dGVPlanProduction.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVPlanProduction_CellFormatting);
             // 
             // repasDateDataGridViewTextBoxColumn
@@ -220,7 +221,7 @@
             this.btBefore.Location = new System.Drawing.Point(17, 3);
             this.btBefore.Name = "btBefore";
             this.btBefore.Size = new System.Drawing.Size(80, 38);
-            this.btBefore.TabIndex = 5;
+            this.btBefore.TabIndex = 0;
             this.btBefore.UseVisualStyleBackColor = true;
             this.btBefore.Click += new System.EventHandler(this.BtBefore_Click);
             // 
@@ -230,7 +231,7 @@
             this.btAfter.Location = new System.Drawing.Point(479, 3);
             this.btAfter.Name = "btAfter";
             this.btAfter.Size = new System.Drawing.Size(80, 38);
-            this.btAfter.TabIndex = 4;
+            this.btAfter.TabIndex = 1;
             this.btAfter.UseVisualStyleBackColor = true;
             this.btAfter.Click += new System.EventHandler(this.BtAfter_Click);
             // 
@@ -257,7 +258,7 @@
             this.btExit.Location = new System.Drawing.Point(62, 3);
             this.btExit.Name = "btExit";
             this.btExit.Size = new System.Drawing.Size(164, 64);
-            this.btExit.TabIndex = 8;
+            this.btExit.TabIndex = 2;
             this.btExit.Text = "&Quitter";
             this.btExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btExit.UseVisualStyleBackColor = false;
@@ -270,7 +271,7 @@
             this.btToday.Location = new System.Drawing.Point(350, 3);
             this.btToday.Name = "btToday";
             this.btToday.Size = new System.Drawing.Size(164, 64);
-            this.btToday.TabIndex = 9;
+            this.btToday.TabIndex = 3;
             this.btToday.Text = "&Aujourd\'hui";
             this.btToday.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btToday.UseVisualStyleBackColor = false;

@@ -46,8 +46,6 @@ namespace OurResto
             Manager.ResizeImage(btCredit, Properties.Resources.Credit_card_256x2561, ContentAlignment.MiddleLeft);
             Manager.ResizeImage(btSellOff, Properties.Resources.Delete_256x256, ContentAlignment.MiddleLeft);
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
-
-            btRefresh.Focus();
         }
 
         /// <summary>

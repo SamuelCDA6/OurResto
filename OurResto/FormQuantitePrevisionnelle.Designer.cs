@@ -119,6 +119,7 @@ namespace OurResto
             this.dGVQuantitePrevisionelle.RowHeadersWidth = 51;
             this.dGVQuantitePrevisionelle.Size = new System.Drawing.Size(516, 437);
             this.dGVQuantitePrevisionelle.TabIndex = 1;
+            this.dGVQuantitePrevisionelle.TabStop = false;
             // 
             // repasDateDataGridViewTextBoxColumn
             // 
@@ -166,6 +167,7 @@ namespace OurResto
             this.tBTitle.ReadOnly = true;
             this.tBTitle.Size = new System.Drawing.Size(516, 34);
             this.tBTitle.TabIndex = 2;
+            this.tBTitle.TabStop = false;
             this.tBTitle.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FormQuantitePrevisionnelle
