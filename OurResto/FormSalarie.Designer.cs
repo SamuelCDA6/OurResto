@@ -33,13 +33,6 @@ namespace OurResto
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSalarie));
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.dGVSalarie = new System.Windows.Forms.DataGridView();
-            this.matriculeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prenomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.estActifDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.idGradeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.salarieBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cda68_bd1DataSet = new OurResto.cda68_bd1DataSet();
             this.tLPSalaries = new System.Windows.Forms.TableLayoutPanel();
@@ -81,6 +74,13 @@ namespace OurResto
             this.typePaiementTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.TypePaiementTableAdapter();
             this.timerRechercheSalarie = new System.Windows.Forms.Timer(this.components);
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.matriculeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prenomDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.estActifDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.idGradeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tLPMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVSalarie)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salarieBindingSource)).BeginInit();
@@ -154,68 +154,6 @@ namespace OurResto
             this.dGVSalarie.TabStop = false;
             this.dGVSalarie.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVSalarie_ColumnHeaderMouseClick);
             this.dGVSalarie.SelectionChanged += new System.EventHandler(this.DGVSalarie_SelectionChanged);
-            // 
-            // matriculeDataGridViewTextBoxColumn
-            // 
-            this.matriculeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.matriculeDataGridViewTextBoxColumn.DataPropertyName = "Matricule";
-            this.matriculeDataGridViewTextBoxColumn.HeaderText = "Matricule";
-            this.matriculeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.matriculeDataGridViewTextBoxColumn.Name = "matriculeDataGridViewTextBoxColumn";
-            this.matriculeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.matriculeDataGridViewTextBoxColumn.Width = 107;
-            // 
-            // nomDataGridViewTextBoxColumn
-            // 
-            this.nomDataGridViewTextBoxColumn.DataPropertyName = "Nom";
-            this.nomDataGridViewTextBoxColumn.HeaderText = "Nom";
-            this.nomDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nomDataGridViewTextBoxColumn.Name = "nomDataGridViewTextBoxColumn";
-            this.nomDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // prenomDataGridViewTextBoxColumn
-            // 
-            this.prenomDataGridViewTextBoxColumn.DataPropertyName = "Prenom";
-            this.prenomDataGridViewTextBoxColumn.HeaderText = "Prenom";
-            this.prenomDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.prenomDataGridViewTextBoxColumn.Name = "prenomDataGridViewTextBoxColumn";
-            this.prenomDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // emailDataGridViewTextBoxColumn
-            // 
-            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            this.emailDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
-            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // passwordDataGridViewTextBoxColumn
-            // 
-            this.passwordDataGridViewTextBoxColumn.DataPropertyName = "Password";
-            this.passwordDataGridViewTextBoxColumn.HeaderText = "Password";
-            this.passwordDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.passwordDataGridViewTextBoxColumn.Name = "passwordDataGridViewTextBoxColumn";
-            this.passwordDataGridViewTextBoxColumn.ReadOnly = true;
-            this.passwordDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // estActifDataGridViewCheckBoxColumn
-            // 
-            this.estActifDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.estActifDataGridViewCheckBoxColumn.DataPropertyName = "EstActif";
-            this.estActifDataGridViewCheckBoxColumn.HeaderText = "Compte actif";
-            this.estActifDataGridViewCheckBoxColumn.MinimumWidth = 6;
-            this.estActifDataGridViewCheckBoxColumn.Name = "estActifDataGridViewCheckBoxColumn";
-            this.estActifDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.estActifDataGridViewCheckBoxColumn.Width = 110;
-            // 
-            // idGradeDataGridViewTextBoxColumn
-            // 
-            this.idGradeDataGridViewTextBoxColumn.DataPropertyName = "Id_Grade";
-            this.idGradeDataGridViewTextBoxColumn.HeaderText = "Id_Grade";
-            this.idGradeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idGradeDataGridViewTextBoxColumn.Name = "idGradeDataGridViewTextBoxColumn";
-            this.idGradeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idGradeDataGridViewTextBoxColumn.Visible = false;
             // 
             // salarieBindingSource
             // 
@@ -637,6 +575,75 @@ namespace OurResto
             // 
             this.timerRechercheSalarie.Interval = 400;
             this.timerRechercheSalarie.Tick += new System.EventHandler(this.TimerRechercheSalarie_Tick);
+            // 
+            // matriculeDataGridViewTextBoxColumn
+            // 
+            this.matriculeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.matriculeDataGridViewTextBoxColumn.DataPropertyName = "Matricule";
+            this.matriculeDataGridViewTextBoxColumn.HeaderText = "Matricule";
+            this.matriculeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.matriculeDataGridViewTextBoxColumn.Name = "matriculeDataGridViewTextBoxColumn";
+            this.matriculeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.matriculeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.matriculeDataGridViewTextBoxColumn.Width = 107;
+            // 
+            // nomDataGridViewTextBoxColumn
+            // 
+            this.nomDataGridViewTextBoxColumn.DataPropertyName = "Nom";
+            this.nomDataGridViewTextBoxColumn.HeaderText = "Nom";
+            this.nomDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nomDataGridViewTextBoxColumn.Name = "nomDataGridViewTextBoxColumn";
+            this.nomDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nomDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // prenomDataGridViewTextBoxColumn
+            // 
+            this.prenomDataGridViewTextBoxColumn.DataPropertyName = "Prenom";
+            this.prenomDataGridViewTextBoxColumn.HeaderText = "Prenom";
+            this.prenomDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.prenomDataGridViewTextBoxColumn.Name = "prenomDataGridViewTextBoxColumn";
+            this.prenomDataGridViewTextBoxColumn.ReadOnly = true;
+            this.prenomDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // emailDataGridViewTextBoxColumn
+            // 
+            this.emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
+            this.emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            this.emailDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            this.emailDataGridViewTextBoxColumn.ReadOnly = true;
+            this.emailDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // passwordDataGridViewTextBoxColumn
+            // 
+            this.passwordDataGridViewTextBoxColumn.DataPropertyName = "Password";
+            this.passwordDataGridViewTextBoxColumn.HeaderText = "Password";
+            this.passwordDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.passwordDataGridViewTextBoxColumn.Name = "passwordDataGridViewTextBoxColumn";
+            this.passwordDataGridViewTextBoxColumn.ReadOnly = true;
+            this.passwordDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.passwordDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // estActifDataGridViewCheckBoxColumn
+            // 
+            this.estActifDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.estActifDataGridViewCheckBoxColumn.DataPropertyName = "EstActif";
+            this.estActifDataGridViewCheckBoxColumn.HeaderText = "Compte actif";
+            this.estActifDataGridViewCheckBoxColumn.MinimumWidth = 6;
+            this.estActifDataGridViewCheckBoxColumn.Name = "estActifDataGridViewCheckBoxColumn";
+            this.estActifDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.estActifDataGridViewCheckBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.estActifDataGridViewCheckBoxColumn.Width = 133;
+            // 
+            // idGradeDataGridViewTextBoxColumn
+            // 
+            this.idGradeDataGridViewTextBoxColumn.DataPropertyName = "Id_Grade";
+            this.idGradeDataGridViewTextBoxColumn.HeaderText = "Id_Grade";
+            this.idGradeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idGradeDataGridViewTextBoxColumn.Name = "idGradeDataGridViewTextBoxColumn";
+            this.idGradeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idGradeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.idGradeDataGridViewTextBoxColumn.Visible = false;
             // 
             // FormSalarie
             // 

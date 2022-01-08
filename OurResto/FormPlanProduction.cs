@@ -101,12 +101,14 @@ namespace OurResto
         {
             if (rows.Any())
             {
+                // On 
                 mealDate = rows.First().RepasDate;
                 lblJour.Text = mealDate.ToString("D");
 
                 vplancuisineBindingSource.DataSource = rows.TakeWhile(r => r.RepasDate == mealDate)
                                                            .OrderBy(r => r.Id_Moment)
-                                                           .ThenBy(r => r.Id_Sorte).ToList();
+                                                           .ThenBy(r => r.Id_Sorte)
+                                                           .ToList();
             }
         }
 

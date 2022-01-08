@@ -33,6 +33,7 @@ namespace OurResto
                 "Prenom" => x.Prenom.CompareTo(y.Prenom),
                 "Matricule" => x.Matricule.CompareTo(y.Matricule),
                 "Email" => x.Email.CompareTo(y.Email),
+                "EstActif" => x.EstActif.CompareTo(y.EstActif),
                 _ => x.Matricule.CompareTo(y.Matricule),
             };
         }

@@ -87,8 +87,8 @@ namespace OurResto
             dateFriday = date.WeekDay(DayOfWeek.Friday, 0);
 
             // Si le lundi est sur le mois precedent prendre le mois aussi sinon que le jour
-            string monday = dateMonday.Year < dateFriday.Year ? dateMonday.ToString("D") : 
-                                                               (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("dddd dd MMMM") : 
+            string monday = dateMonday.Year < dateFriday.Year ? dateMonday.ToString("D") :
+                                                               (dateFriday.Day < dateMonday.Day) ? dateMonday.ToString("dddd dd MMMM") :
                                                                                                    dateMonday.ToString("dddd dd");
 
             // Remettre à jour le label de la semaine
@@ -619,20 +619,20 @@ namespace OurResto
         {
             var column = dGVMenu.Columns[e.ColumnIndex];
 
-            if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
-            {
-                var sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending :
-                                                                                              SortOrder.Ascending;
+            // Récupérer le sens de tri (ascendant par defaut)
+            var sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending :
+                                                                                          SortOrder.Ascending;
 
-                dGVMenu.Columns.OfType<DataGridViewColumn>().ToList()
-                               .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
+            // Supprimer les icones de direction des colonnes
+            dGVMenu.Columns.Cast<DataGridViewColumn>().ToList()
+                           .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
 
-                weekMeals.Sort(new MenuComparer(column.DataPropertyName, sortOrder));
+            // Trier les menus en fonction de la colonne et du sens de tri
+            weekMeals.Sort(new MenuComparer(column.DataPropertyName, sortOrder));
 
-                dGVMenu.Refresh();
+            dGVMenu.Refresh();
 
-                column.HeaderCell.SortGlyphDirection = sortOrder;
-            }
+            column.HeaderCell.SortGlyphDirection = sortOrder;
         }
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -646,7 +646,7 @@ namespace OurResto
 
                 // Récupère tous les menus de la semaine en cours
                 var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
-                
+
                 // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
                 var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Any(m => m.Id_Plat_Principal == r.Id_Plat)).ToList();
                 var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2 && !menus.Any(m => m.Id_Plat_Principal == r.Id_Plat)).ToList();

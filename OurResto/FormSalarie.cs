@@ -218,7 +218,7 @@ namespace OurResto
             {
                 if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentRow)
                 {
-                    if (MessageBox.Show(this,String.Format(Properties.Resources.TXTCONFIRMATIONSOLDER, currentRow.Prenom, currentRow.Nom), "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation,MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+                    if (MessageBox.Show(this, String.Format(Properties.Resources.TXTCONFIRMATIONSOLDER, currentRow.Prenom, currentRow.Nom), "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
                     {
                         int Id_TypePaiement = cda68_bd1DataSet.TypePaiement[cBTypePaiement.SelectedIndex].Id_TypePaiement;
 
@@ -267,26 +267,24 @@ namespace OurResto
         {
             DataGridViewColumn column = dGVSalarie.Columns[e.ColumnIndex];
 
-            if (column.SortMode != DataGridViewColumnSortMode.NotSortable)
-            {
-                SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-                dGVSalarie.Columns.OfType<DataGridViewColumn>().ToList()
-                                  .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
+            SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+            dGVSalarie.Columns.OfType<DataGridViewColumn>().ToList()
+                              .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
 
-                string columnName = column.DataPropertyName;
-                salaries.Sort(new SalarieComparer(columnName, sortOrder));
+            string columnName = column.DataPropertyName;
+            salaries.Sort(new SalarieComparer(columnName, sortOrder));
 
-                dGVSalarie.Refresh();
+            dGVSalarie.Refresh();
 
-                column.HeaderCell.SortGlyphDirection = sortOrder;
-            }
+            column.HeaderCell.SortGlyphDirection = sortOrder;
         }
 
         private void TBMontant_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == ',') e.KeyChar = '.';
 
-            if (e.KeyChar != (char)Keys.Delete && e.KeyChar != (char)Keys.Back && !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]{1}\d{0,2})?$"))
+            if (e.KeyChar != (char)Keys.Back && 
+                !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]{1}\d{0,2})?$"))
             {
                 e.Handled = true;
             }
