@@ -22,6 +22,13 @@ namespace OurResto
 
         private void FormQuantitePrevisionnelle_Load(object sender, EventArgs e)
         {
+            v_quantiteprevisionnelleTableAdapter.Connection.ConnectionString = Properties.Settings.Default.FilRouge2ConnectionString;
+            
+            if (!v_quantiteprevisionnelleTableAdapter.Connection.Ping())
+            {
+                v_quantiteprevisionnelleTableAdapter.Connection.ConnectionString = Properties.Settings.Default.cda68_bd1ConnectionString;
+            }
+            
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
 
             toolTip.SetToolTip(btQuitter, "Revenir à la fenêtre principale");

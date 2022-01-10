@@ -112,12 +112,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Add_256x256" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Add 256x256.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -155,63 +155,63 @@
     <value>..\Resources\Sync 256x256.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="TXTADDMENU" xml:space="preserve">
-    <value>"Le menu du {0} du {1} n'a pas pus être ajouté"</value>
+    <value>Le menu du {0} du {1} n'a pas pus être ajouté</value>
   </data>
   <data name="TXTADDMENUS" xml:space="preserve">
-    <value>"Les menus n'ont pas pus être ajoutés"</value>
+    <value>Les menus n'ont pas pus être ajoutés</value>
   </data>
   <data name="TXTCONFIRMATIONSOLDER" xml:space="preserve">
-    <value>"Voulez-vous vraiment solder le compte de {0} {1} ?"</value>
+    <value>Voulez-vous vraiment solder le compte de {0} {1} ?</value>
   </data>
   <data name="TXTCONFIRMATIONSUPPRMENU" xml:space="preserve">
-    <value>"Voulez-vous vraiment supprimer le menu du {0} du {1} ?"</value>
+    <value>Voulez-vous vraiment supprimer le menu du {0} du {1} ?</value>
   </data>
   <data name="TXTCONFIRMATIONSUPPRMENUS" xml:space="preserve">
-    <value>"Voulez-vous vraiment supprimer ces menus ?"</value>
+    <value>Voulez-vous vraiment supprimer ces menus ?</value>
   </data>
   <data name="TXTCREDITCOMPTE" xml:space="preserve">
-    <value>"Le compte du salarié {0} {1} n'a pas pus être crédité"</value>
+    <value>Le compte du salarié {0} {1} n'a pas pus être crédité</value>
   </data>
   <data name="TXTDELMENU" xml:space="preserve">
-    <value>"Le menu du {0} du {1} n'a pas pus être supprimé"</value>
+    <value>Le menu du {0} du {1} n'a pas pus être supprimé</value>
   </data>
   <data name="TXTDLMENU" xml:space="preserve">
-    <value>"Impossible de récuperer la liste des menus"</value>
+    <value>Impossible de récuperer la liste des menus</value>
   </data>
   <data name="TXTDLSALARIES" xml:space="preserve">
-    <value>"Impossible de récuperer la liste des salariés"</value>
+    <value>Impossible de récuperer la liste des salariés</value>
   </data>
   <data name="TXTDLTRANSAC" xml:space="preserve">
-    <value>"Impossible de récuperer les transactions"</value>
+    <value>Impossible de récuperer les transactions</value>
   </data>
   <data name="TXTINSERTTRANSAC" xml:space="preserve">
-    <value>"La transaction n'a pas été validé"</value>
+    <value>La transaction n'a pas été validé</value>
   </data>
   <data name="TXTMONTANTINCORRECT" xml:space="preserve">
-    <value>"Le montant entré n'est pas valide"</value>
+    <value>Le montant entré n'est pas valide</value>
   </data>
   <data name="TXTPLATINVALIDE" xml:space="preserve">
-    <value>"Un des plats entré est non valide"</value>
+    <value>Un des plats entré est non valide</value>
   </data>
   <data name="TXTRECHERCHESALARIE" xml:space="preserve">
-    <value>"La recherche de salariés à echoué"</value>
+    <value>La recherche de salariés à echoué</value>
   </data>
   <data name="TXTRETURNMONEY" xml:space="preserve">
-    <value>"Vous devez rendre {0} a {1} {2}"</value>
+    <value>Vous devez rendre {0} a {1} {2}</value>
   </data>
   <data name="TXTSOLDERCOMPTE" xml:space="preserve">
-    <value>"Le compte du salarié n'a pas pus être soldé"</value>
+    <value>Le compte du salarié n'a pas pus être soldé</value>
   </data>
   <data name="TXTSOLDE_100" xml:space="preserve">
-    <value>"Le solde du salarié ne doit pas dépasser 100€ après une créditation"</value>
+    <value>Le solde du salarié ne doit pas dépasser 100€ après une créditation</value>
   </data>
   <data name="TXTUPDATEFAIL" xml:space="preserve">
-    <value>"Impossible de mettre à jour"</value>
+    <value>Impossible de mettre à jour</value>
   </data>
   <data name="TXTUPDATEMENU" xml:space="preserve">
-    <value>"Le menu du {0} du {1} n'a pas été mis a jour"</value>
+    <value>Le menu du {0} du {1} n'a pas été mis a jour</value>
   </data>
   <data name="TXTUPDATESALARIE" xml:space="preserve">
-    <value>"Le salarié {0} {1} n'a pas été mis a jour"</value>
+    <value>Le salarié {0} {1} n'a pas été mis a jour</value>
   </data>
 </root>

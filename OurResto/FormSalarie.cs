@@ -63,7 +63,7 @@ namespace OurResto
                 salaries = cda68_bd1DataSet.Salarie.OrderBy(r => r.Nom).ToList();
 
                 salarieBindingSource.DataSource = salaries;
-                typePaiementBindingSource.DataSource = cda68_bd1DataSet.TypePaiement.Select(r => r.Nom).ToList();
+                typePaiementBindingSource.DataSource = cda68_bd1DataSet.TypePaiement.OrderByDescending(r => r.Nom).Select(r => r.Nom).ToList();
             }
             catch (Exception)
             {
@@ -140,13 +140,16 @@ namespace OurResto
             {
                 try
                 {
-                    currentRow.Nom = tBNom.Text;
-                    currentRow.Prenom = tBPrenom.Text;
-                    currentRow.Email = tBEmail.Text;
-
-                    if (salarieTableAdapter.Update(currentRow) != 1)
+                    if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))
                     {
-                        MessageBox.Show(String.Format(Properties.Resources.TXTUPDATESALARIE, currentRow.Prenom, currentRow.Nom));
+                        currentRow.Nom = tBNom.Text;
+                        currentRow.Prenom = tBPrenom.Text;
+                        currentRow.Email = tBEmail.Text;
+
+                        if (salarieTableAdapter.Update(currentRow) != 1)
+                        {
+                            MessageBox.Show(String.Format(Properties.Resources.TXTUPDATESALARIE, currentRow.Prenom, currentRow.Nom));
+                        }
                     }
                 }
                 catch (Exception)
@@ -166,11 +169,11 @@ namespace OurResto
                 {
                     int Id_TypePaiement = cda68_bd1DataSet.TypePaiement.First(r => r.Nom == cBTypePaiement.Text).Id_TypePaiement;
 
-                    if (decimal.TryParse(tBMontant.Text, out decimal montant))
+                    if (decimal.TryParse(tBMontant.Text, out decimal montant) && montant > 0)
                     {
                         if (decimal.Parse(tBSolde.Text) + montant > 100)
                         {
-                            MessageBox.Show(Properties.Resources.TXTSOLDE_100);
+                            MessageBox.Show(this, Properties.Resources.TXTSOLDE_100, "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         else
                         {
@@ -200,7 +203,7 @@ namespace OurResto
                     }
                     else
                     {
-                        MessageBox.Show(Properties.Resources.TXTMONTANTINCORRECT);
+                        MessageBox.Show(this ,Properties.Resources.TXTMONTANTINCORRECT, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception)
@@ -284,7 +287,7 @@ namespace OurResto
             if (e.KeyChar == ',') e.KeyChar = '.';
 
             if (e.KeyChar != (char)Keys.Back && 
-                !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]{1}\d{0,2})?$"))
+                !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{0,2})?$"))
             {
                 e.Handled = true;
             }

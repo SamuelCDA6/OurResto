@@ -181,7 +181,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le menu du {0} du {1} n&apos;a pas pus être ajouté&quot;.
+        ///   Looks up a localized string similar to Le menu du {0} du {1} n&apos;a pas pus être ajouté.
         /// </summary>
         internal static string TXTADDMENU {
             get {
@@ -190,7 +190,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Les menus n&apos;ont pas pus être ajoutés&quot;.
+        ///   Looks up a localized string similar to Les menus n&apos;ont pas pus être ajoutés.
         /// </summary>
         internal static string TXTADDMENUS {
             get {
@@ -199,7 +199,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Voulez-vous vraiment solder le compte de {0} {1} ?&quot;.
+        ///   Looks up a localized string similar to Voulez-vous vraiment solder le compte de {0} {1} ?.
         /// </summary>
         internal static string TXTCONFIRMATIONSOLDER {
             get {
@@ -208,7 +208,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Voulez-vous vraiment supprimer le menu du {0} du {1} ?&quot;.
+        ///   Looks up a localized string similar to Voulez-vous vraiment supprimer le menu du {0} du {1} ?.
         /// </summary>
         internal static string TXTCONFIRMATIONSUPPRMENU {
             get {
@@ -217,7 +217,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Voulez-vous vraiment supprimer ces menus ?&quot;.
+        ///   Looks up a localized string similar to Voulez-vous vraiment supprimer ces menus ?.
         /// </summary>
         internal static string TXTCONFIRMATIONSUPPRMENUS {
             get {
@@ -226,7 +226,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le compte du salarié {0} {1} n&apos;a pas pus être crédité&quot;.
+        ///   Looks up a localized string similar to Le compte du salarié {0} {1} n&apos;a pas pus être crédité.
         /// </summary>
         internal static string TXTCREDITCOMPTE {
             get {
@@ -235,7 +235,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le menu du {0} du {1} n&apos;a pas pus être supprimé&quot;.
+        ///   Looks up a localized string similar to Le menu du {0} du {1} n&apos;a pas pus être supprimé.
         /// </summary>
         internal static string TXTDELMENU {
             get {
@@ -244,7 +244,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Impossible de récuperer la liste des menus&quot;.
+        ///   Looks up a localized string similar to Impossible de récuperer la liste des menus.
         /// </summary>
         internal static string TXTDLMENU {
             get {
@@ -253,7 +253,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Impossible de récuperer la liste des salariés&quot;.
+        ///   Looks up a localized string similar to Impossible de récuperer la liste des salariés.
         /// </summary>
         internal static string TXTDLSALARIES {
             get {
@@ -262,7 +262,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Impossible de récuperer les transactions&quot;.
+        ///   Looks up a localized string similar to Impossible de récuperer les transactions.
         /// </summary>
         internal static string TXTDLTRANSAC {
             get {
@@ -271,7 +271,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;La transaction n&apos;a pas été validé&quot;.
+        ///   Looks up a localized string similar to La transaction n&apos;a pas été validé.
         /// </summary>
         internal static string TXTINSERTTRANSAC {
             get {
@@ -280,7 +280,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le montant entré n&apos;est pas valide&quot;.
+        ///   Looks up a localized string similar to Le montant entré n&apos;est pas valide.
         /// </summary>
         internal static string TXTMONTANTINCORRECT {
             get {
@@ -289,7 +289,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Un des plats entré est non valide&quot;.
+        ///   Looks up a localized string similar to Un des plats entré est non valide.
         /// </summary>
         internal static string TXTPLATINVALIDE {
             get {
@@ -298,7 +298,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;La recherche de salariés à echoué&quot;.
+        ///   Looks up a localized string similar to La recherche de salariés à echoué.
         /// </summary>
         internal static string TXTRECHERCHESALARIE {
             get {
@@ -307,7 +307,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Vous devez rendre {0} a {1} {2}&quot;.
+        ///   Looks up a localized string similar to Vous devez rendre {0} a {1} {2}.
         /// </summary>
         internal static string TXTRETURNMONEY {
             get {
@@ -316,7 +316,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le solde du salarié ne doit pas dépasser 100€ après une créditation&quot;.
+        ///   Looks up a localized string similar to Le solde du salarié ne doit pas dépasser 100€ après une créditation.
         /// </summary>
         internal static string TXTSOLDE_100 {
             get {
@@ -325,7 +325,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le compte du salarié n&apos;a pas pus être soldé&quot;.
+        ///   Looks up a localized string similar to Le compte du salarié n&apos;a pas pus être soldé.
         /// </summary>
         internal static string TXTSOLDERCOMPTE {
             get {
@@ -334,7 +334,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Impossible de mettre à jour&quot;.
+        ///   Looks up a localized string similar to Impossible de mettre à jour.
         /// </summary>
         internal static string TXTUPDATEFAIL {
             get {
@@ -343,7 +343,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le menu du {0} du {1} n&apos;a pas été mis a jour&quot;.
+        ///   Looks up a localized string similar to Le menu du {0} du {1} n&apos;a pas été mis a jour.
         /// </summary>
         internal static string TXTUPDATEMENU {
             get {
@@ -352,7 +352,7 @@ namespace OurResto.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;Le salarié {0} {1} n&apos;a pas été mis a jour&quot;.
+        ///   Looks up a localized string similar to Le salarié {0} {1} n&apos;a pas été mis a jour.
         /// </summary>
         internal static string TXTUPDATESALARIE {
             get {
