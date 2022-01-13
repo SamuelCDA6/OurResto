@@ -30,6 +30,8 @@ namespace OurResto
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSalarie));
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.dGVSalarie = new System.Windows.Forms.DataGridView();
@@ -127,6 +129,8 @@ namespace OurResto
             this.dGVSalarie.AllowUserToDeleteRows = false;
             this.dGVSalarie.AllowUserToResizeColumns = false;
             this.dGVSalarie.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dGVSalarie.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dGVSalarie.AutoGenerateColumns = false;
             this.dGVSalarie.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGVSalarie.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -365,6 +369,8 @@ namespace OurResto
             this.dGVTransaction.AllowUserToDeleteRows = false;
             this.dGVTransaction.AllowUserToResizeColumns = false;
             this.dGVTransaction.AllowUserToResizeRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dGVTransaction.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dGVTransaction.AutoGenerateColumns = false;
             this.dGVTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGVTransaction.BackgroundColor = System.Drawing.Color.White;

@@ -301,7 +301,7 @@ namespace OurResto
             bool isUpdatable = isPositionValid && dTPUpdateDate.Value.Date >= dateLimit;
             btSupprimer.Enabled = isUpdatable;
             btModifier.Enabled = isUpdatable;
-            btAddRandom.Enabled = isUpdatable;
+            btAddRandom.Enabled = dTPUpdateDate.Value.Date >= dateLimit && dGVMenu.Rows.Count < 10;
         }
 
         private void BtAjouter_Click(object sender, EventArgs e)
