@@ -208,7 +208,7 @@ namespace OurResto
 
         private void DGVMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyData == Keys.Delete)
+            if (e.KeyData == Keys.Delete && dGVMenu.SelectedRows.Count > 0)
             {
                 DeleteMenuSelectedRows();
                 RefreshDisplay();
@@ -268,19 +268,18 @@ namespace OurResto
         {
             //Chercher si un menu du DataGridView correspond à la date et au moment
             if (dGVMenu.Rows.Cast<DataGridViewRow>()
-                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
-                                                (int)r.Cells[12].Value == idMoment)
+                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date && 
+                                                 (int)r.Cells[12].Value == idMoment)
                             is DataGridViewRow row)
             {
                 //Si oui placer la BindingSource dessus
                 vaffichermenuBindingSource.Position = row.Index;
-
                 // Mettre à jour les boutons en conséquence
                 SetButtons(true);
             }
             else
             {
-                // Si pas de menu enlever la ou les lignes selectionnées du DataGridView 
+                // Si pas de menu enlever la ou les lignes sélectionnées du DataGridView 
                 dGVMenu.ClearSelection();
 
                 // Mettre
@@ -302,6 +301,7 @@ namespace OurResto
             bool isUpdatable = isPositionValid && dTPUpdateDate.Value.Date >= dateLimit;
             btSupprimer.Enabled = isUpdatable;
             btModifier.Enabled = isUpdatable;
+            btAddRandom.Enabled = isUpdatable;
         }
 
         private void BtAjouter_Click(object sender, EventArgs e)
@@ -528,7 +528,7 @@ namespace OurResto
             var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Any(m => m.Id_Plat_Accompagnement == r.Id_Plat)).ToList();
             var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Any(m => m.Id_Plat_Fromage == r.Id_Plat)).ToList();
             var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Any(m => m.Id_Plat_Dessert == r.Id_Plat)).ToList();
-
+            
             // Les stocker dans un tableau de liste de plats
             List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
 
@@ -645,10 +645,10 @@ namespace OurResto
                 var random = new Random();
 
                 var dates = EachDay(dateMonday, dateFriday).ToList();
-                var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToList();
+                var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToImmutableList();
 
                 // Récupère tous les menus de la semaine en cours
-                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToImmutableList();
 
                 // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
                 var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Any(m => m.Id_Plat_Entree == r.Id_Plat)).ToList();
@@ -656,12 +656,16 @@ namespace OurResto
                 var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Any(m => m.Id_Plat_Accompagnement == r.Id_Plat)).ToList();
                 var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Any(m => m.Id_Plat_Fromage == r.Id_Plat)).ToList();
                 var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Any(m => m.Id_Plat_Dessert == r.Id_Plat)).ToList();
-                var data = from Entree in cda68_bd1DataSet.v_plats
-                          where Entree.Id_Sorte == 1 && 
-                          !(from menu in menus 
-                            select menu.Id_Plat_Entree)
-                            .Contains(Entree.Id_Plat)
-                          select Entree.Id_Plat;
+                //var data = from Entree in cda68_bd1DataSet.v_plats
+                //          where Entree.Id_Sorte == 1 && 
+                //          !(from menu in menus 
+                //            select menu.Id_Plat_Entree)
+                //            .Contains(Entree.Id_Plat)
+                //          select Entree.Id_Plat;
+
+                //cda68_bd1DataSet.v_plats.Aggregate((a, b) => (a.Id_Plat > b.Id_Plat) ? a : b);
+                //cda68_bd1DataSet.v_plats.Max(a => a.Id_Plat + a.Id_Sorte);
+
                 // Les stocker dans un tableau de liste de plats
                 List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
 

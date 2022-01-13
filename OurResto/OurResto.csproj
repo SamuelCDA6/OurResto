@@ -7,6 +7,8 @@
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Configurations>Debug;Release;Test</Configurations>
     <StartupObject>OurResto.Program</StartupObject>
+    <PackageIcon>Display 256x256.png</PackageIcon>
+    <Authors>Samuel CHAPEL</Authors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604" />
@@ -55,7 +57,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="MySql.Data" Version="8.0.27" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
@@ -69,6 +70,10 @@
     <Content Include="appsettings.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\Images\Icônes\Lite\Display 256x256.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
