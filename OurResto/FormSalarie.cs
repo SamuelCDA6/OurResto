@@ -64,6 +64,7 @@ namespace OurResto
 
                 salarieBindingSource.DataSource = salaries;
                 typePaiementBindingSource.DataSource = cda68_bd1DataSet.TypePaiement.OrderByDescending(r => r.Nom).Select(r => r.Nom).ToList();
+                tBRechercheSalarie.Text = String.Empty;
             }
             catch (Exception)
             {
@@ -288,6 +289,14 @@ namespace OurResto
 
             if (e.KeyChar != (char)Keys.Back && 
                 !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{0,2})?$"))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TBNom_Prenom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }

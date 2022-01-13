@@ -283,6 +283,7 @@ namespace OurResto
             this.tBPrenom.Name = "tBPrenom";
             this.tBPrenom.Size = new System.Drawing.Size(745, 26);
             this.tBPrenom.TabIndex = 3;
+            this.tBPrenom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBNom_Prenom_KeyPress);
             // 
             // tBEmail
             // 
@@ -303,6 +304,7 @@ namespace OurResto
             this.tBNom.Name = "tBNom";
             this.tBNom.Size = new System.Drawing.Size(745, 26);
             this.tBNom.TabIndex = 2;
+            this.tBNom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBNom_Prenom_KeyPress);
             // 
             // lblNom
             // 
