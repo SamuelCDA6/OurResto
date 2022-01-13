@@ -44,10 +44,8 @@
             this.btExit = new System.Windows.Forms.Button();
             this.btToday = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dGVIngredients = new System.Windows.Forms.DataGridView();
             this.dGVPlanProduction = new System.Windows.Forms.DataGridView();
-            this.v_plancuisineTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_plancuisineTableAdapter();
-            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idMomentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.momentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,13 +53,15 @@
             this.platDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idSorteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.v_plancuisineTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_plancuisineTableAdapter();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.vplancuisineBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             this.tLPMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVIngredients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPlanProduction)).BeginInit();
             this.SuspendLayout();
             // 
@@ -191,7 +191,7 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.dataGridView1, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.dGVIngredients, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.dGVPlanProduction, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 53);
@@ -201,29 +201,29 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(1129, 375);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
-            // dataGridView1
+            // dGVIngredients
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(567, 2);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(559, 371);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.TabStop = false;
+            this.dGVIngredients.AllowUserToAddRows = false;
+            this.dGVIngredients.AllowUserToDeleteRows = false;
+            this.dGVIngredients.AllowUserToResizeColumns = false;
+            this.dGVIngredients.AllowUserToResizeRows = false;
+            this.dGVIngredients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dGVIngredients.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dGVIngredients.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dGVIngredients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGVIngredients.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dGVIngredients.Location = new System.Drawing.Point(567, 2);
+            this.dGVIngredients.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dGVIngredients.MultiSelect = false;
+            this.dGVIngredients.Name = "dGVIngredients";
+            this.dGVIngredients.ReadOnly = true;
+            this.dGVIngredients.RowHeadersVisible = false;
+            this.dGVIngredients.RowHeadersWidth = 51;
+            this.dGVIngredients.RowTemplate.Height = 24;
+            this.dGVIngredients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dGVIngredients.Size = new System.Drawing.Size(559, 371);
+            this.dGVIngredients.TabIndex = 2;
+            this.dGVIngredients.TabStop = false;
             // 
             // dGVPlanProduction
             // 
@@ -259,10 +259,6 @@
             this.dGVPlanProduction.TabIndex = 1;
             this.dGVPlanProduction.TabStop = false;
             this.dGVPlanProduction.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVPlanProduction_CellFormatting_1);
-            // 
-            // v_plancuisineTableAdapter
-            // 
-            this.v_plancuisineTableAdapter.ClearBeforeFill = true;
             // 
             // repasDateDataGridViewTextBoxColumn
             // 
@@ -334,6 +330,10 @@
             this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
             this.nombreDataGridViewTextBoxColumn.Width = 97;
             // 
+            // v_plancuisineTableAdapter
+            // 
+            this.v_plancuisineTableAdapter.ClearBeforeFill = true;
+            // 
             // FormPlanProduction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -357,7 +357,7 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dGVIngredients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVPlanProduction)).EndInit();
             this.ResumeLayout(false);
 
@@ -377,7 +377,7 @@
         private System.Windows.Forms.Button btToday;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dGVIngredients;
         private System.Windows.Forms.DataGridView dGVPlanProduction;
         private System.Windows.Forms.DataGridViewTextBoxColumn repasDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;

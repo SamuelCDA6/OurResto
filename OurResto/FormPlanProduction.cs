@@ -13,7 +13,10 @@ namespace OurResto
     public partial class FormPlanProduction : Form
     {
         DateTime mealDate = DateTime.Today;
+        
+        cda68_bd1DataSetTableAdapters.v_ingredient_platTableAdapter v_Ingredient_PlatTableAdapter = new cda68_bd1DataSetTableAdapters.v_ingredient_platTableAdapter();
 
+        bool start = true;
         public FormPlanProduction()
         {
             InitializeComponent();
@@ -128,7 +131,27 @@ namespace OurResto
         {
             if (vplancuisineBindingSource.Current is cda68_bd1DataSet.v_plancuisineRow currentRow)
             {
+                dGVIngredients.DataSource = v_Ingredient_PlatTableAdapter.GetDataBy(currentRow.RepasDate, currentRow.Id_Moment, currentRow.Id_Plat);
 
+                if (start)
+                {
+                    dGVIngredients.Columns[0].Visible = false;
+                    dGVIngredients.Columns[1].Visible = false;
+                    dGVIngredients.Columns[2].Visible = false;
+                    dGVIngredients.Columns[3].Visible = false;
+                    dGVIngredients.Columns[4].Visible = false;
+
+                    foreach (DataGridViewColumn c in dGVIngredients.Columns)
+                    {
+                        c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+
+                    start = false;
+                }
+            }
+            else
+            {
+                dGVIngredients.DataSource = null;
             }
         }
 
