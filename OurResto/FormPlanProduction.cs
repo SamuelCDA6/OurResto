@@ -38,6 +38,7 @@ namespace OurResto
             foreach (DataGridViewColumn c in dGVPlanProduction.Columns)
             {
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                
             }
 
             SetDate(mealDate);
@@ -119,6 +120,27 @@ namespace OurResto
                 if (dGVPlanProduction.Rows[e.RowIndex - 1].Cells[e.ColumnIndex].Value.Equals(e.Value))
                 {
                     e.Value = String.Empty;
+                }
+            }
+        }
+
+        private void VplancuisineBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+            if (vplancuisineBindingSource.Current is cda68_bd1DataSet.v_plancuisineRow currentRow)
+            {
+
+            }
+        }
+
+        private void DGVPlanProduction_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Pour ne pas ré afficher la date si la même que celle d'au dessus
+            if (e.RowIndex > 0 && e.ColumnIndex == 2)
+            {
+                if (dGVPlanProduction.Rows[e.RowIndex - 1].Cells[e.ColumnIndex].Value.Equals(e.Value))
+                {
+                    e.Value = String.Empty;
+                    e.CellStyle.BackColor = Color.LightGray;
                 }
             }
         }

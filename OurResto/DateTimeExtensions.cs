@@ -13,8 +13,23 @@ namespace OurResto
         /// <returns>la nouvelle date au jour et à l'heure de la semaine voulue</returns>
         public static DateTime WeekDay(this DateTime date, DayOfWeek day, int hour)
         {
-            int nbDays = (date.DayOfWeek == DayOfWeek.Sunday) ? (int)day - 7 : day - date.DayOfWeek;
+            int nbDays = (int)day - date.JourSemaine();
             return date.Date.AddDays(nbDays).AddHours(hour);
+        }
+
+        public static int JourSemaine(this DateTime date)
+        {
+            return date.DayOfWeek switch
+            {
+                DayOfWeek.Monday => 1,
+                DayOfWeek.Tuesday => 2,
+                DayOfWeek.Wednesday => 3,
+                DayOfWeek.Thursday => 4,
+                DayOfWeek.Friday => 5,
+                DayOfWeek.Saturday => 6,
+                DayOfWeek.Sunday => 7,
+                _ => 0,
+            };
         }
     }
 }

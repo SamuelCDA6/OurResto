@@ -48,7 +48,6 @@ namespace OurResto
                 cb.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.Never;
             }
 
-            // 
             foreach (DataGridViewColumn c in dGVMenu.Columns)
             {
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -662,6 +661,7 @@ namespace OurResto
                             select menu.Id_Plat_Entree)
                             .Contains(Entree.Id_Plat)
                           select Entree.Id_Plat;
+                
                 // Les stocker dans un tableau de liste de plats
                 List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
 

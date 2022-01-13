@@ -31,10 +31,10 @@
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tLPDates = new System.Windows.Forms.TableLayoutPanel();
-            this.lblDateDebut = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblDateDebut = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tLPMain.SuspendLayout();
@@ -91,16 +91,15 @@
             this.tLPDates.Size = new System.Drawing.Size(727, 94);
             this.tLPDates.TabIndex = 1;
             // 
-            // lblDateDebut
+            // dateTimePicker2
             // 
-            this.lblDateDebut.AutoSize = true;
-            this.lblDateDebut.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDateDebut.Location = new System.Drawing.Point(3, 0);
-            this.lblDateDebut.Name = "lblDateDebut";
-            this.lblDateDebut.Size = new System.Drawing.Size(357, 47);
-            this.lblDateDebut.TabIndex = 0;
-            this.lblDateDebut.Text = "Date de début";
-            this.lblDateDebut.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.dateTimePicker2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dateTimePicker2.Location = new System.Drawing.Point(366, 23);
+            this.dateTimePicker2.MinDate = new System.DateTime(2022, 1, 11, 0, 0, 0, 0);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(358, 27);
+            this.dateTimePicker2.TabIndex = 3;
+            this.dateTimePicker2.Value = new System.DateTime(2022, 1, 11, 13, 45, 13, 0);
             // 
             // label1
             // 
@@ -108,30 +107,31 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(366, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(358, 47);
+            this.label1.Size = new System.Drawing.Size(358, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Date de fin";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblDateDebut
+            // 
+            this.lblDateDebut.AutoSize = true;
+            this.lblDateDebut.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDateDebut.Location = new System.Drawing.Point(3, 0);
+            this.lblDateDebut.Name = "lblDateDebut";
+            this.lblDateDebut.Size = new System.Drawing.Size(357, 20);
+            this.lblDateDebut.TabIndex = 0;
+            this.lblDateDebut.Text = "Date de début";
+            this.lblDateDebut.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker1.Location = new System.Drawing.Point(3, 50);
+            this.dateTimePicker1.Location = new System.Drawing.Point(3, 23);
             this.dateTimePicker1.MinDate = new System.DateTime(2022, 1, 11, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(357, 27);
             this.dateTimePicker1.TabIndex = 2;
             this.dateTimePicker1.Value = new System.DateTime(2022, 1, 11, 13, 45, 13, 0);
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dateTimePicker2.Location = new System.Drawing.Point(366, 50);
-            this.dateTimePicker2.MinDate = new System.DateTime(2022, 1, 11, 0, 0, 0, 0);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(358, 27);
-            this.dateTimePicker2.TabIndex = 3;
-            this.dateTimePicker2.Value = new System.DateTime(2022, 1, 11, 13, 45, 13, 0);
             // 
             // tableLayoutPanel1
             // 
