@@ -204,7 +204,7 @@ namespace OurResto
                     }
                     else
                     {
-                        MessageBox.Show(this ,Properties.Resources.TXTMONTANTINCORRECT, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(this, Properties.Resources.TXTMONTANTINCORRECT, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception)
@@ -287,7 +287,7 @@ namespace OurResto
         {
             if (e.KeyChar == ',') e.KeyChar = '.';
 
-            if (e.KeyChar != (char)Keys.Back && 
+            if (e.KeyChar != (char)Keys.Back &&
                 !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{0,2})?$"))
             {
                 e.Handled = true;
@@ -299,6 +299,23 @@ namespace OurResto
             if (!Char.IsLetter(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
+            }
+        }
+
+        private void dGVSalarie_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                cMS.Items.Add("Supprimer");
+
+                int currentMouseOverRow = dGVSalarie.HitTest(e.X, e.Y).RowIndex;
+
+                if (currentMouseOverRow >= 0)
+                {
+                    m.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
+                }
+
+                m.Show(dataGridView1, new Point(e.X, e.Y));
             }
         }
     }

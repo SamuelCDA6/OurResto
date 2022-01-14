@@ -742,25 +742,27 @@ namespace OurResto
             Random random = new();
             progressBar.Visible = true;
             
-            var salarie = v_SoldesalarieTableAdapter.GetData().ToList();
+            var salarie = v_SoldesalarieTableAdapter.GetData().ToImmutableList();
             var formules = formuleTableAdapter.GetData().ToList();
-            var menus = cda68_bd1DataSet.v_affichermenu.ToList();
-            
+            var menus = cda68_bd1DataSet.v_affichermenu.Where(m => m.RepasDate > DateTime.Today).ToList();
+            var reservations = reservationTableAdapter.GetData().ToList();
+
+
             progressBar.Maximum = menus.Count;
 
             foreach (cda68_bd1DataSet.v_affichermenuRow menu in menus)
             {
-                if (reservationTableAdapter.CountReservationBy(menu.RepasDate, menu.Id_Moment) == 0)
+                if (!reservations.Any(r => r.RepasDate == menu.RepasDate && r.Id_Moment == menu.Id_Moment))
                 {
-                    int nbRes = random.Next(5, 15);
+                    int nbRes = random.Next(5, 16);
+                    var sal = salarie.ToList();
 
                     for (int i = 0; i < nbRes; i++)
                     {
-                        var sal = salarie;
                         int idFormule = random.Next(1, formules.Count + 1);
                         var indexSal = random.Next(0, sal.Count);
                         DateTime? datePassage = menu.RepasDate < DateTime.Today ? menu.RepasDate : null;
-                        reservationTableAdapter.Insert(salarie[indexSal].Matricule, idFormule, menu.Id_Moment, menu.RepasDate, 0, datePassage, formules[idFormule - 1].Prix);
+                        reservationTableAdapter.Insert(sal[indexSal].Matricule, idFormule, menu.Id_Moment, menu.RepasDate, 0, datePassage, formules[idFormule - 1].Prix);
                         sal.RemoveAt(indexSal);
                     }
                 }                
