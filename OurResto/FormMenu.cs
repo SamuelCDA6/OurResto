@@ -15,9 +15,9 @@ namespace OurResto
 {
     public partial class FormMenu : Form
     {
-        cda68_bd1DataSetTableAdapters.ReservationTableAdapter reservationTableAdapter = new cda68_bd1DataSetTableAdapters.ReservationTableAdapter();
-        cda68_bd1DataSetTableAdapters.FormuleTableAdapter formuleTableAdapter = new cda68_bd1DataSetTableAdapters.FormuleTableAdapter();
-        cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter v_SoldesalarieTableAdapter = new cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter();
+        readonly cda68_bd1DataSetTableAdapters.ReservationTableAdapter reservationTableAdapter = new();
+        readonly cda68_bd1DataSetTableAdapters.FormuleTableAdapter formuleTableAdapter = new();
+        readonly cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter v_SoldesalarieTableAdapter = new();
 
         DateTime dateMonday;
         DateTime dateFriday;
@@ -645,7 +645,7 @@ namespace OurResto
             column.HeaderCell.SortGlyphDirection = sortOrder;
         }
 
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             try
             {
@@ -727,12 +727,12 @@ namespace OurResto
             }
         }
 
-        private void backgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar.Value = e.ProgressPercentage;
         }
 
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
         }

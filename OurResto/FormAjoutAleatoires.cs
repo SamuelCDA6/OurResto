@@ -15,11 +15,10 @@ namespace OurResto
     public partial class FormAjoutAleatoires : Form
     {
         private Thread thread;
-
-        cda68_bd1DataSetTableAdapters.MenuTableAdapter menuTableAdapter = new cda68_bd1DataSetTableAdapters.MenuTableAdapter();
-        cda68_bd1DataSetTableAdapters.MomentTableAdapter momentTableAdapter = new cda68_bd1DataSetTableAdapters.MomentTableAdapter();
-        cda68_bd1DataSetTableAdapters.v_platsTableAdapter v_PlatsTableAdapter = new cda68_bd1DataSetTableAdapters.v_platsTableAdapter();
-        cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter v_AffichermenuTableAdapter = new cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter();
+        readonly cda68_bd1DataSetTableAdapters.MenuTableAdapter menuTableAdapter = new();
+        readonly cda68_bd1DataSetTableAdapters.MomentTableAdapter momentTableAdapter = new();
+        readonly cda68_bd1DataSetTableAdapters.v_platsTableAdapter v_PlatsTableAdapter = new();
+        readonly cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter v_AffichermenuTableAdapter = new();
 
         public FormAjoutAleatoires(DateTime dateMonday, DateTime dateFriday)
         {
@@ -34,12 +33,12 @@ namespace OurResto
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
         }
 
-        private void btQuitter_Click(object sender, EventArgs e)
+        private void BtQuitter_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btAjouter_Click(object sender, EventArgs e)
+        private void BtAjouter_Click(object sender, EventArgs e)
         {
             menuTableAdapter.Fill(cda68_bd1DataSet.Menu);
             momentTableAdapter.Fill(cda68_bd1DataSet.Moment);

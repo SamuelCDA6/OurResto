@@ -101,7 +101,7 @@
             this.btQuitter.Text = "&Quitter";
             this.btQuitter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btQuitter.UseVisualStyleBackColor = false;
-            this.btQuitter.Click += new System.EventHandler(this.btQuitter_Click);
+            this.btQuitter.Click += new System.EventHandler(this.BtQuitter_Click);
             // 
             // btAjouter
             // 
@@ -114,7 +114,7 @@
             this.btAjouter.Text = "&Ajouter";
             this.btAjouter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btAjouter.UseVisualStyleBackColor = false;
-            this.btAjouter.Click += new System.EventHandler(this.btAjouter_Click);
+            this.btAjouter.Click += new System.EventHandler(this.BtAjouter_Click);
             // 
             // tLPProgressBar
             // 
