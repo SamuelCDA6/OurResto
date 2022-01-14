@@ -82,11 +82,11 @@ namespace OurResto
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btQuantitePrevisionelle, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.btSalarie, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.btMenu, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.btPlanProduction, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.lblIntendant, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btQuantitePrevisionelle, 0, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 115);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";

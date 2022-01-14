@@ -14932,20 +14932,21 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(param);
             this._adapter.InsertCommand = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `Reservation` (`Matricule`, `Id_Formule`, `Id_Moment`, `RepasDate`, `" +
-                "EstEnBourse`, `HorodatePassage`, `Prix`) VALUES (@p1, @p2, @p3, @p4, @p5, @p6, @" +
-                "p7)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO Reservation\r\n                  (Matricule, Id_Formule, Id_Moment, Rep" +
+                "asDate, EstEnBourse, HorodatePassage, Prix)\r\nVALUES (@Matricule, @Id_Formule, @I" +
+                "d_Moment, @RepasDate, @EstEnBourse, @HorodatePassage, @Prix)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p1";
+            param.ParameterName = "@Matricule";
             param.DbType = global::System.Data.DbType.String;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.VarChar;
+            param.Size = 20;
             param.IsNullable = true;
             param.SourceColumn = "Matricule";
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p2";
+            param.ParameterName = "@Id_Formule";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -14953,7 +14954,7 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p3";
+            param.ParameterName = "@Id_Moment";
             param.DbType = global::System.Data.DbType.Int32;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
             param.IsNullable = true;
@@ -14961,23 +14962,24 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p4";
-            param.DbType = global::System.Data.DbType.Date;
+            param.ParameterName = "@RepasDate";
+            param.DbType = global::System.Data.DbType.DateTime;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
             param.IsNullable = true;
             param.SourceColumn = "RepasDate";
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p5";
-            param.DbType = global::System.Data.DbType.SByte;
+            param.ParameterName = "@EstEnBourse";
+            param.DbType = global::System.Data.DbType.Object;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Byte;
+            param.Size = 1024;
             param.IsNullable = true;
             param.SourceColumn = "EstEnBourse";
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p6";
+            param.ParameterName = "@HorodatePassage";
             param.DbType = global::System.Data.DbType.DateTime;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.DateTime;
             param.IsNullable = true;
@@ -14985,7 +14987,7 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
             param.SourceVersion = global::System.Data.DataRowVersion.Current;
             this._adapter.InsertCommand.Parameters.Add(param);
             param = new global::MySql.Data.MySqlClient.MySqlParameter();
-            param.ParameterName = "@p7";
+            param.ParameterName = "@Prix";
             param.DbType = global::System.Data.DbType.Decimal;
             param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.NewDecimal;
             param.IsNullable = true;
@@ -15138,12 +15140,33 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[1];
+            this._commandCollection = new global::MySql.Data.MySqlClient.MySqlCommand[2];
             this._commandCollection[0] = new global::MySql.Data.MySqlClient.MySqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT `Matricule`, `Id_Formule`, `Id_Moment`, `RepasDate`, `EstEnBourse`, `Horod" +
                 "atePassage`, `Prix` FROM `Reservation`";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::MySql.Data.MySqlClient.MySqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT COUNT(*) FROM Reservation R\r\nWHERE RepasDate = @RepasDate AND Id_Moment = " +
+                "@Id_Moment";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            global::MySql.Data.MySqlClient.MySqlParameter param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@RepasDate";
+            param.DbType = global::System.Data.DbType.DateTime;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Date;
+            param.IsNullable = true;
+            param.SourceColumn = "RepasDate";
+            param.SourceVersion = global::System.Data.DataRowVersion.Current;
+            this._commandCollection[1].Parameters.Add(param);
+            param = new global::MySql.Data.MySqlClient.MySqlParameter();
+            param.ParameterName = "@Id_Moment";
+            param.DbType = global::System.Data.DbType.Int32;
+            param.MySqlDbType = global::MySql.Data.MySqlClient.MySqlDbType.Int32;
+            param.IsNullable = true;
+            param.SourceColumn = "Id_Moment";
+            param.SourceVersion = global::System.Data.DataRowVersion.Current;
+            this._commandCollection[1].Parameters.Add(param);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15250,29 +15273,29 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string p1, int p2, int p3, System.DateTime p4, byte p5, global::System.Nullable<global::System.DateTime> p6, global::System.Nullable<decimal> p7) {
-            if ((p1 == null)) {
-                throw new global::System.ArgumentNullException("p1");
+        public virtual int Insert(string Matricule, int Id_Formule, int Id_Moment, System.DateTime RepasDate, object EstEnBourse, global::System.Nullable<global::System.DateTime> HorodatePassage, decimal Prix) {
+            if ((Matricule == null)) {
+                throw new global::System.ArgumentNullException("Matricule");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(p1));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Matricule));
             }
-            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(p2));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(p3));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(p4));
-            this.Adapter.InsertCommand.Parameters[4].Value = ((byte)(p5));
-            if ((p6.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(p6.Value));
+            this.Adapter.InsertCommand.Parameters[1].Value = ((int)(Id_Formule));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Id_Moment));
+            this.Adapter.InsertCommand.Parameters[3].Value = ((System.DateTime)(RepasDate));
+            if ((EstEnBourse == null)) {
+                throw new global::System.ArgumentNullException("EstEnBourse");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((object)(EstEnBourse));
+            }
+            if ((HorodatePassage.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((System.DateTime)(HorodatePassage.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((p7.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(p7.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
+            this.Adapter.InsertCommand.Parameters[6].Value = ((decimal)(Prix));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -15364,6 +15387,36 @@ namespace OurResto.cda68_bd1DataSetTableAdapters {
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(byte p5, global::System.Nullable<global::System.DateTime> p6, global::System.Nullable<decimal> p7, string p8, int p9, int p10, System.DateTime p11, byte p12, global::System.Nullable<global::System.DateTime> p14, global::System.Nullable<decimal> p16) {
             return this.Update(p8, p9, p10, p11, p5, p6, p7, p8, p9, p10, p11, p12, p14, p16);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual global::System.Nullable<long> CountReservationBy(System.DateTime RepasDate, int Id_Moment) {
+            global::MySql.Data.MySqlClient.MySqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((System.DateTime)(RepasDate));
+            command.Parameters[1].Value = ((int)(Id_Moment));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            object returnValue;
+            try {
+                returnValue = command.ExecuteScalar();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            if (((returnValue == null) 
+                        || (returnValue.GetType() == typeof(global::System.DBNull)))) {
+                return new global::System.Nullable<long>();
+            }
+            else {
+                return new global::System.Nullable<long>(((long)(returnValue)));
+            }
         }
     }
     

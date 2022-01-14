@@ -8,12 +8,17 @@ using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OurResto
 {
     public partial class FormMenu : Form
     {
+        cda68_bd1DataSetTableAdapters.ReservationTableAdapter reservationTableAdapter = new cda68_bd1DataSetTableAdapters.ReservationTableAdapter();
+        cda68_bd1DataSetTableAdapters.FormuleTableAdapter formuleTableAdapter = new cda68_bd1DataSetTableAdapters.FormuleTableAdapter();
+        cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter v_SoldesalarieTableAdapter = new cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter();
+
         DateTime dateMonday;
         DateTime dateFriday;
 
@@ -268,7 +273,7 @@ namespace OurResto
         {
             //Chercher si un menu du DataGridView correspond à la date et au moment
             if (dGVMenu.Rows.Cast<DataGridViewRow>()
-                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date && 
+                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
                                                  (int)r.Cells[12].Value == idMoment)
                             is DataGridViewRow row)
             {
@@ -495,11 +500,13 @@ namespace OurResto
 
         private void BtAddRandom_Click(object sender, EventArgs e)
         {
+            //using (FormAjoutAleatoires formAjout = new FormAjoutAleatoires(dateMonday, dateFriday))
+            //{
+            //    Visible = false;
+            //    formAjout.ShowDialog();
+            //    Visible = true;
+            //}
             AddRandomWeekMeals();
-            //if(!backgroundWorker.IsBusy) backgroundWorker.RunWorkerAsync();
-            //Thread trd = new Thread(new ThreadStart(AddRandomWeekMeals));
-            //trd.IsBackground = true;
-            //trd.Start();
 
             RefreshDisplay();
 
@@ -528,7 +535,7 @@ namespace OurResto
             var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Any(m => m.Id_Plat_Accompagnement == r.Id_Plat)).ToList();
             var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Any(m => m.Id_Plat_Fromage == r.Id_Plat)).ToList();
             var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Any(m => m.Id_Plat_Dessert == r.Id_Plat)).ToList();
-            
+
             // Les stocker dans un tableau de liste de plats
             List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
 
@@ -728,6 +735,42 @@ namespace OurResto
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
 
+        }
+
+        private void BtReserve_Click(object sender, EventArgs e)
+        {
+            Random random = new();
+            progressBar.Visible = true;
+            
+            var salarie = v_SoldesalarieTableAdapter.GetData().ToList();
+            var formules = formuleTableAdapter.GetData().ToList();
+            var menus = cda68_bd1DataSet.v_affichermenu.ToList();
+            
+            progressBar.Maximum = menus.Count;
+
+            foreach (cda68_bd1DataSet.v_affichermenuRow menu in menus)
+            {
+                if (reservationTableAdapter.CountReservationBy(menu.RepasDate, menu.Id_Moment) == 0)
+                {
+                    int nbRes = random.Next(5, 15);
+
+                    for (int i = 0; i < nbRes; i++)
+                    {
+                        var sal = salarie;
+                        int idFormule = random.Next(1, formules.Count + 1);
+                        var indexSal = random.Next(0, sal.Count);
+                        DateTime? datePassage = menu.RepasDate < DateTime.Today ? menu.RepasDate : null;
+                        reservationTableAdapter.Insert(salarie[indexSal].Matricule, idFormule, menu.Id_Moment, menu.RepasDate, 0, datePassage, formules[idFormule - 1].Prix);
+                        sal.RemoveAt(indexSal);
+                    }
+                }                
+
+                progressBar.PerformStep();
+                progressBar.Update();
+            }
+
+            progressBar.Visible = false;
+            progressBar.Value = 0;
         }
     }
 }

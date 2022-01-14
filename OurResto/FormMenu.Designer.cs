@@ -86,6 +86,7 @@ namespace OurResto
             this.v_affichermenuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.btReserve = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
@@ -495,11 +496,11 @@ namespace OurResto
             // 
             // progressBar
             // 
-            this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.progressBar.Location = new System.Drawing.Point(174, 142);
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressBar.Location = new System.Drawing.Point(124, 139);
             this.progressBar.Maximum = 50;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(322, 22);
+            this.progressBar.Size = new System.Drawing.Size(422, 28);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 8;
             this.toolTip.SetToolTip(this.progressBar, "Barre de progression");
@@ -595,9 +596,10 @@ namespace OurResto
             this.fLPButtons.Controls.Add(this.btAjouter);
             this.fLPButtons.Controls.Add(this.btModifier);
             this.fLPButtons.Controls.Add(this.btSupprimer);
-            this.fLPButtons.Location = new System.Drawing.Point(275, 3);
+            this.fLPButtons.Controls.Add(this.btReserve);
+            this.fLPButtons.Location = new System.Drawing.Point(202, 3);
             this.fLPButtons.Name = "fLPButtons";
-            this.fLPButtons.Size = new System.Drawing.Size(576, 64);
+            this.fLPButtons.Size = new System.Drawing.Size(722, 64);
             this.fLPButtons.TabIndex = 1;
             // 
             // btActualiser
@@ -690,6 +692,17 @@ namespace OurResto
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker_RunWorkerCompleted);
             // 
+            // btReserve
+            // 
+            this.btReserve.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btReserve.Location = new System.Drawing.Point(579, 8);
+            this.btReserve.Name = "btReserve";
+            this.btReserve.Size = new System.Drawing.Size(140, 51);
+            this.btReserve.TabIndex = 15;
+            this.btReserve.Text = "Reservations";
+            this.btReserve.UseVisualStyleBackColor = true;
+            this.btReserve.Click += new System.EventHandler(this.BtReserve_Click);
+            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -777,5 +790,6 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn idPlatDessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button btReserve;
     }
 }
