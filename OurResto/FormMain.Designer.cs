@@ -35,11 +35,11 @@ namespace OurResto
             this.btQuitter = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.btQuantitePrevisionelle = new System.Windows.Forms.Button();
             this.btSalarie = new System.Windows.Forms.Button();
             this.btMenu = new System.Windows.Forms.Button();
             this.btPlanProduction = new System.Windows.Forms.Button();
             this.lblIntendant = new System.Windows.Forms.Label();
+            this.btQuantitePrevisionelle = new System.Windows.Forms.Button();
             this.lblTitre = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
@@ -111,17 +111,6 @@ namespace OurResto
             this.label1.Text = "Cuisinier";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // btQuantitePrevisionelle
-            // 
-            this.btQuantitePrevisionelle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btQuantitePrevisionelle.Location = new System.Drawing.Point(88, 193);
-            this.btQuantitePrevisionelle.Name = "btQuantitePrevisionelle";
-            this.btQuantitePrevisionelle.Size = new System.Drawing.Size(140, 51);
-            this.btQuantitePrevisionelle.TabIndex = 2;
-            this.btQuantitePrevisionelle.Text = "Quantité Prévisionnelle";
-            this.btQuantitePrevisionelle.UseVisualStyleBackColor = true;
-            this.btQuantitePrevisionelle.Click += new System.EventHandler(this.BtQuantitePrevisionelle_Click);
-            // 
             // btSalarie
             // 
             this.btSalarie.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -168,10 +157,21 @@ namespace OurResto
             this.lblIntendant.Text = "Intendant";
             this.lblIntendant.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btQuantitePrevisionelle
+            // 
+            this.btQuantitePrevisionelle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btQuantitePrevisionelle.Location = new System.Drawing.Point(88, 193);
+            this.btQuantitePrevisionelle.Name = "btQuantitePrevisionelle";
+            this.btQuantitePrevisionelle.Size = new System.Drawing.Size(140, 51);
+            this.btQuantitePrevisionelle.TabIndex = 2;
+            this.btQuantitePrevisionelle.Text = "Quantité Prévisionnelle";
+            this.btQuantitePrevisionelle.UseVisualStyleBackColor = true;
+            this.btQuantitePrevisionelle.Click += new System.EventHandler(this.BtQuantitePrevisionelle_Click);
+            // 
             // lblTitre
             // 
             this.lblTitre.AutoSize = true;
-            this.lblTitre.BackColor = System.Drawing.Color.LightGreen;
+            this.lblTitre.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.lblTitre.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblTitre.Font = new System.Drawing.Font("Matura MT Script Capitals", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblTitre.Location = new System.Drawing.Point(3, 0);

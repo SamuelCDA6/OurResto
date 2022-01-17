@@ -302,21 +302,20 @@ namespace OurResto
             }
         }
 
-        private void dGVSalarie_MouseClick(object sender, MouseEventArgs e)
+        private void DGVSalarie_MouseClick(object sender, MouseEventArgs e)
         {
+            cMS.Items.Clear();
+
             if (e.Button == MouseButtons.Right)
             {
-                cMS.Items.Add("Supprimer");
-
-                int currentMouseOverRow = dGVSalarie.HitTest(e.X, e.Y).RowIndex;
-
-                if (currentMouseOverRow >= 0)
-                {
-                    m.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
-                }
-
-                m.Show(dataGridView1, new Point(e.X, e.Y));
+                cMS.Items.Add("Actualiser");
+                cMS.Show(dGVSalarie, new Point(e.X, e.Y));
             }
+        }
+
+        private void CMS_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            RefreshDisplay();
         }
     }
 }

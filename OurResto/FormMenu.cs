@@ -21,6 +21,9 @@ namespace OurResto
 
         DateTime dateMonday;
         DateTime dateFriday;
+        DateTime dateLimit;
+
+        Bitmap bitmap;
 
         List<cda68_bd1DataSet.v_affichermenuRow> weekMeals;
 
@@ -300,8 +303,8 @@ namespace OurResto
         {
             btAjouter.Enabled = !isPositionValid;
 
-            DateTime dateMonday = DateTime.Now.WeekDay(DayOfWeek.Monday, 8);
-            DateTime dateLimit = DateTime.Now < dateMonday ? dateMonday.AddDays(7).Date : dateMonday.AddDays(14).Date;
+            DateTime dateMonday8h = DateTime.Now.WeekDay(DayOfWeek.Monday, 8);
+            dateLimit = DateTime.Now < dateMonday8h ? dateMonday8h.AddDays(7).Date : dateMonday8h.AddDays(14).Date;
 
             bool isUpdatable = isPositionValid && dTPUpdateDate.Value.Date >= dateLimit;
             btSupprimer.Enabled = isUpdatable;
@@ -773,6 +776,69 @@ namespace OurResto
 
             progressBar.Visible = false;
             progressBar.Value = 0;
+        }
+
+        private void DGVMenu_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                cMS.Items.Clear();
+                int currentMouseRow = dGVMenu.HitTest(e.X, e.Y).RowIndex;
+
+                if (currentMouseRow >= 0)
+                {
+                    vaffichermenuBindingSource.Position = currentMouseRow;
+                    if (dTPUpdateDate.Value >= dateLimit)
+                    {
+                        cMS.Items.Add("Supprimer");
+                    }
+                }
+                cMS.Items.Add("Actualiser");
+                cMS.Show(dGVMenu, new Point(e.X, e.Y));
+            }
+        }
+
+        private void CMS_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem.Text.Equals("Supprimer"))
+            {
+                cMS.Close();
+                DeleteMenuSelectedRows();
+                RefreshDisplay();
+            }
+            else
+            {
+                cMS.Close();
+                RefreshDisplay();
+            }
+        }
+
+        private void BtPrint_Click(object sender, EventArgs e)
+        {
+            //Resize DataGridView to full height.
+            int height = dGVMenu.Height;
+            dGVMenu.Height = dGVMenu.RowCount * dGVMenu.RowTemplate.Height;
+
+            dGVMenu.ClearSelection();
+
+            //Create a Bitmap and draw the DataGridView on it.
+            bitmap = new Bitmap(dGVMenu.Width, dGVMenu.Height);
+            dGVMenu.DrawToBitmap(bitmap, new Rectangle(0, 0, dGVMenu.Width, dGVMenu.Height));
+
+            //Resize DataGridView back to original height.
+            dGVMenu.Height = height;
+
+            //Show the Print Preview Dialog.
+            printPreviewDialog.Document = printDocument;
+            printPreviewDialog.PrintPreviewControl.Zoom = 1;
+            printPreviewDialog.ShowDialog();
+        }
+
+        private void PrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.PageSettings.Landscape = true;
+            
+            e.Graphics.DrawImage(bitmap, 0, 0);            
         }
     }
 }

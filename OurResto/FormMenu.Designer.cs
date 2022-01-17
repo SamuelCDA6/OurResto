@@ -77,6 +77,8 @@ namespace OurResto
             this.btAjouter = new System.Windows.Forms.Button();
             this.btModifier = new System.Windows.Forms.Button();
             this.btSupprimer = new System.Windows.Forms.Button();
+            this.btPrint = new System.Windows.Forms.Button();
+            this.btReserve = new System.Windows.Forms.Button();
             this.btQuitter = new System.Windows.Forms.Button();
             this.momentTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.MomentTableAdapter();
             this.vplatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -86,7 +88,10 @@ namespace OurResto
             this.v_affichermenuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.btReserve = new System.Windows.Forms.Button();
+            this.cMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
@@ -143,12 +148,13 @@ namespace OurResto
             this.dGVMenu.RowHeadersVisible = false;
             this.dGVMenu.RowHeadersWidth = 51;
             this.dGVMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVMenu.Size = new System.Drawing.Size(1124, 283);
+            this.dGVMenu.Size = new System.Drawing.Size(1165, 279);
             this.dGVMenu.StandardTab = true;
             this.dGVMenu.TabIndex = 100;
             this.dGVMenu.TabStop = false;
             this.dGVMenu.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVMenu_CellFormatting);
             this.dGVMenu.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVMenu_ColumnHeaderMouseClick);
+            this.dGVMenu.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DGVMenu_MouseClick);
             this.dGVMenu.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.DGVMenu_PreviewKeyDown);
             // 
             // repasDateDataGridViewTextBoxColumn
@@ -299,7 +305,7 @@ namespace OurResto
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPMain.Size = new System.Drawing.Size(1132, 603);
+            this.tLPMain.Size = new System.Drawing.Size(1173, 599);
             this.tLPMain.TabIndex = 1;
             // 
             // tLPInputBox
@@ -327,7 +333,7 @@ namespace OurResto
             this.tLPInputBox.Controls.Add(this.cBMoment, 1, 3);
             this.tLPInputBox.Controls.Add(this.progressBar, 1, 4);
             this.tLPInputBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPInputBox.Location = new System.Drawing.Point(3, 354);
+            this.tLPInputBox.Location = new System.Drawing.Point(3, 350);
             this.tLPInputBox.Name = "tLPInputBox";
             this.tLPInputBox.RowCount = 5;
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -335,7 +341,7 @@ namespace OurResto
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tLPInputBox.Size = new System.Drawing.Size(1126, 170);
+            this.tLPInputBox.Size = new System.Drawing.Size(1167, 170);
             this.tLPInputBox.TabIndex = 1;
             // 
             // cBPlatFromage
@@ -344,9 +350,9 @@ namespace OurResto
             this.cBPlatFromage.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatFromage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatFromage.FormattingEnabled = true;
-            this.cBPlatFromage.Location = new System.Drawing.Point(701, 105);
+            this.cBPlatFromage.Location = new System.Drawing.Point(721, 105);
             this.cBPlatFromage.Name = "cBPlatFromage";
-            this.cBPlatFromage.Size = new System.Drawing.Size(422, 28);
+            this.cBPlatFromage.Size = new System.Drawing.Size(443, 28);
             this.cBPlatFromage.TabIndex = 8;
             // 
             // cBPlatAccompagnement
@@ -355,9 +361,9 @@ namespace OurResto
             this.cBPlatAccompagnement.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatAccompagnement.FormattingEnabled = true;
-            this.cBPlatAccompagnement.Location = new System.Drawing.Point(701, 71);
+            this.cBPlatAccompagnement.Location = new System.Drawing.Point(721, 71);
             this.cBPlatAccompagnement.Name = "cBPlatAccompagnement";
-            this.cBPlatAccompagnement.Size = new System.Drawing.Size(422, 28);
+            this.cBPlatAccompagnement.Size = new System.Drawing.Size(443, 28);
             this.cBPlatAccompagnement.TabIndex = 7;
             // 
             // cBPlatPrincipal
@@ -366,9 +372,9 @@ namespace OurResto
             this.cBPlatPrincipal.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatPrincipal.FormattingEnabled = true;
-            this.cBPlatPrincipal.Location = new System.Drawing.Point(701, 37);
+            this.cBPlatPrincipal.Location = new System.Drawing.Point(721, 37);
             this.cBPlatPrincipal.Name = "cBPlatPrincipal";
-            this.cBPlatPrincipal.Size = new System.Drawing.Size(422, 28);
+            this.cBPlatPrincipal.Size = new System.Drawing.Size(443, 28);
             this.cBPlatPrincipal.TabIndex = 6;
             // 
             // cBPlatEntree
@@ -377,16 +383,16 @@ namespace OurResto
             this.cBPlatEntree.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatEntree.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatEntree.FormattingEnabled = true;
-            this.cBPlatEntree.Location = new System.Drawing.Point(701, 3);
+            this.cBPlatEntree.Location = new System.Drawing.Point(721, 3);
             this.cBPlatEntree.Name = "cBPlatEntree";
-            this.cBPlatEntree.Size = new System.Drawing.Size(422, 28);
+            this.cBPlatEntree.Size = new System.Drawing.Size(443, 28);
             this.cBPlatEntree.TabIndex = 5;
             // 
             // lblPlat
             // 
             this.lblPlat.AutoSize = true;
             this.lblPlat.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblPlat.Location = new System.Drawing.Point(552, 34);
+            this.lblPlat.Location = new System.Drawing.Point(572, 34);
             this.lblPlat.Name = "lblPlat";
             this.lblPlat.Size = new System.Drawing.Size(143, 34);
             this.lblPlat.TabIndex = 6;
@@ -397,7 +403,7 @@ namespace OurResto
             // 
             this.lblDessert.AutoSize = true;
             this.lblDessert.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDessert.Location = new System.Drawing.Point(552, 136);
+            this.lblDessert.Location = new System.Drawing.Point(572, 136);
             this.lblDessert.Name = "lblDessert";
             this.lblDessert.Size = new System.Drawing.Size(143, 34);
             this.lblDessert.TabIndex = 5;
@@ -408,7 +414,7 @@ namespace OurResto
             // 
             this.lblFromage.AutoSize = true;
             this.lblFromage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblFromage.Location = new System.Drawing.Point(552, 102);
+            this.lblFromage.Location = new System.Drawing.Point(572, 102);
             this.lblFromage.Name = "lblFromage";
             this.lblFromage.Size = new System.Drawing.Size(143, 34);
             this.lblFromage.TabIndex = 4;
@@ -419,7 +425,7 @@ namespace OurResto
             // 
             this.lblEntree.AutoSize = true;
             this.lblEntree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblEntree.Location = new System.Drawing.Point(552, 0);
+            this.lblEntree.Location = new System.Drawing.Point(572, 0);
             this.lblEntree.Name = "lblEntree";
             this.lblEntree.Size = new System.Drawing.Size(143, 34);
             this.lblEntree.TabIndex = 3;
@@ -430,7 +436,7 @@ namespace OurResto
             // 
             this.lblAccompagnement.AutoSize = true;
             this.lblAccompagnement.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblAccompagnement.Location = new System.Drawing.Point(552, 68);
+            this.lblAccompagnement.Location = new System.Drawing.Point(572, 68);
             this.lblAccompagnement.Name = "lblAccompagnement";
             this.lblAccompagnement.Size = new System.Drawing.Size(143, 34);
             this.lblAccompagnement.TabIndex = 2;
@@ -455,9 +461,9 @@ namespace OurResto
             this.cBPlatDessert.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cBPlatDessert.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cBPlatDessert.FormattingEnabled = true;
-            this.cBPlatDessert.Location = new System.Drawing.Point(701, 139);
+            this.cBPlatDessert.Location = new System.Drawing.Point(721, 139);
             this.cBPlatDessert.Name = "cBPlatDessert";
-            this.cBPlatDessert.Size = new System.Drawing.Size(422, 28);
+            this.cBPlatDessert.Size = new System.Drawing.Size(443, 28);
             this.cBPlatDessert.TabIndex = 9;
             // 
             // lblDateRepas
@@ -500,7 +506,7 @@ namespace OurResto
             this.progressBar.Location = new System.Drawing.Point(124, 139);
             this.progressBar.Maximum = 50;
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(422, 28);
+            this.progressBar.Size = new System.Drawing.Size(442, 28);
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 8;
             this.toolTip.SetToolTip(this.progressBar, "Barre de progression");
@@ -522,7 +528,7 @@ namespace OurResto
             this.tLPDateSemaine.Name = "tLPDateSemaine";
             this.tLPDateSemaine.RowCount = 1;
             this.tLPDateSemaine.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tLPDateSemaine.Size = new System.Drawing.Size(1126, 54);
+            this.tLPDateSemaine.Size = new System.Drawing.Size(1167, 54);
             this.tLPDateSemaine.TabIndex = 0;
             // 
             // lblSemaine
@@ -530,7 +536,7 @@ namespace OurResto
             this.lblSemaine.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblSemaine.AutoSize = true;
             this.lblSemaine.Font = new System.Drawing.Font("Britannic Bold", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSemaine.Location = new System.Drawing.Point(345, 13);
+            this.lblSemaine.Location = new System.Drawing.Point(365, 13);
             this.lblSemaine.Name = "lblSemaine";
             this.lblSemaine.Size = new System.Drawing.Size(460, 27);
             this.lblSemaine.TabIndex = 1;
@@ -549,7 +555,7 @@ namespace OurResto
             // btAfter
             // 
             this.btAfter.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btAfter.Location = new System.Drawing.Point(1053, 7);
+            this.btAfter.Location = new System.Drawing.Point(1094, 7);
             this.btAfter.Name = "btAfter";
             this.btAfter.Size = new System.Drawing.Size(70, 40);
             this.btAfter.TabIndex = 1;
@@ -567,18 +573,18 @@ namespace OurResto
             this.tableLayoutPanel1.Controls.Add(this.fLPButtons, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btQuitter, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 530);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 526);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1126, 70);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1167, 70);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // btAddRandom
             // 
             this.btAddRandom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.btAddRandom.BackColor = System.Drawing.SystemColors.Control;
-            this.btAddRandom.Location = new System.Drawing.Point(985, 3);
+            this.btAddRandom.Location = new System.Drawing.Point(1026, 3);
             this.btAddRandom.Name = "btAddRandom";
             this.btAddRandom.Size = new System.Drawing.Size(138, 64);
             this.btAddRandom.TabIndex = 15;
@@ -596,10 +602,11 @@ namespace OurResto
             this.fLPButtons.Controls.Add(this.btAjouter);
             this.fLPButtons.Controls.Add(this.btModifier);
             this.fLPButtons.Controls.Add(this.btSupprimer);
+            this.fLPButtons.Controls.Add(this.btPrint);
             this.fLPButtons.Controls.Add(this.btReserve);
-            this.fLPButtons.Location = new System.Drawing.Point(202, 3);
+            this.fLPButtons.Location = new System.Drawing.Point(151, 3);
             this.fLPButtons.Name = "fLPButtons";
-            this.fLPButtons.Size = new System.Drawing.Size(722, 64);
+            this.fLPButtons.Size = new System.Drawing.Size(864, 64);
             this.fLPButtons.TabIndex = 1;
             // 
             // btActualiser
@@ -645,6 +652,28 @@ namespace OurResto
             this.btSupprimer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btSupprimer.UseVisualStyleBackColor = true;
             this.btSupprimer.Click += new System.EventHandler(this.BtSupprimer_Click);
+            // 
+            // btPrint
+            // 
+            this.btPrint.Location = new System.Drawing.Point(579, 3);
+            this.btPrint.Name = "btPrint";
+            this.btPrint.Size = new System.Drawing.Size(138, 61);
+            this.btPrint.TabIndex = 16;
+            this.btPrint.Text = "&Imprimer";
+            this.btPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btPrint.UseVisualStyleBackColor = true;
+            this.btPrint.Click += new System.EventHandler(this.BtPrint_Click);
+            // 
+            // btReserve
+            // 
+            this.btReserve.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btReserve.Location = new System.Drawing.Point(723, 3);
+            this.btReserve.Name = "btReserve";
+            this.btReserve.Size = new System.Drawing.Size(138, 61);
+            this.btReserve.TabIndex = 15;
+            this.btReserve.Text = "&Reservations";
+            this.btReserve.UseVisualStyleBackColor = true;
+            this.btReserve.Click += new System.EventHandler(this.BtReserve_Click);
             // 
             // btQuitter
             // 
@@ -692,27 +721,43 @@ namespace OurResto
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
             // 
-            // btReserve
+            // cMS
             // 
-            this.btReserve.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btReserve.Location = new System.Drawing.Point(579, 8);
-            this.btReserve.Name = "btReserve";
-            this.btReserve.Size = new System.Drawing.Size(140, 51);
-            this.btReserve.TabIndex = 15;
-            this.btReserve.Text = "Reservations";
-            this.btReserve.UseVisualStyleBackColor = true;
-            this.btReserve.Click += new System.EventHandler(this.BtReserve_Click);
+            this.cMS.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cMS.Name = "cMS";
+            this.cMS.Size = new System.Drawing.Size(61, 4);
+            this.cMS.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.CMS_ItemClicked);
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Document = this.printDocument;
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
+            // 
+            // printDocument
+            // 
+            this.printDocument.OriginAtMargins = true;
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument_PrintPage);
+            // 
+            // printDialog
+            // 
+            this.printDialog.UseEXDialog = true;
             // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1132, 603);
+            this.ClientSize = new System.Drawing.Size(1173, 599);
             this.Controls.Add(this.tLPMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1052, 500);
+            this.MinimumSize = new System.Drawing.Size(1191, 646);
             this.Name = "FormMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menus";
@@ -791,5 +836,10 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn dessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button btReserve;
+        private System.Windows.Forms.ContextMenuStrip cMS;
+        private System.Windows.Forms.Button btPrint;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Drawing.Printing.PrintDocument printDocument;
+        private System.Windows.Forms.PrintDialog printDialog;
     }
 }

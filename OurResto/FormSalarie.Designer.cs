@@ -30,8 +30,8 @@ namespace OurResto
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSalarie));
             this.tLPMain = new System.Windows.Forms.TableLayoutPanel();
             this.dGVSalarie = new System.Windows.Forms.DataGridView();
@@ -130,8 +130,8 @@ namespace OurResto
             this.dGVSalarie.AllowUserToDeleteRows = false;
             this.dGVSalarie.AllowUserToResizeColumns = false;
             this.dGVSalarie.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dGVSalarie.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dGVSalarie.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dGVSalarie.AutoGenerateColumns = false;
             this.dGVSalarie.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGVSalarie.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
@@ -159,7 +159,7 @@ namespace OurResto
             this.dGVSalarie.TabStop = false;
             this.dGVSalarie.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGVSalarie_ColumnHeaderMouseClick);
             this.dGVSalarie.SelectionChanged += new System.EventHandler(this.DGVSalarie_SelectionChanged);
-            this.dGVSalarie.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dGVSalarie_MouseClick);
+            this.dGVSalarie.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DGVSalarie_MouseClick);
             // 
             // matriculeDataGridViewTextBoxColumn
             // 
@@ -371,8 +371,8 @@ namespace OurResto
             this.dGVTransaction.AllowUserToDeleteRows = false;
             this.dGVTransaction.AllowUserToResizeColumns = false;
             this.dGVTransaction.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dGVTransaction.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dGVTransaction.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dGVTransaction.AutoGenerateColumns = false;
             this.dGVTransaction.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGVTransaction.BackgroundColor = System.Drawing.Color.White;
@@ -660,6 +660,7 @@ namespace OurResto
             this.cMS.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cMS.Name = "cMS";
             this.cMS.Size = new System.Drawing.Size(211, 32);
+            this.cMS.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.CMS_ItemClicked);
             // 
             // FormSalarie
             // 
