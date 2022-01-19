@@ -13,7 +13,7 @@ namespace OurResto
     public partial class FormPlanProduction : Form
     {
         DateTime mealDate = DateTime.Today;
-        
+
         cda68_bd1DataSetTableAdapters.v_ingredient_platTableAdapter v_Ingredient_PlatTableAdapter = new cda68_bd1DataSetTableAdapters.v_ingredient_platTableAdapter();
 
         bool start = true;
@@ -24,7 +24,15 @@ namespace OurResto
 
         private void FormPlanProduction_Load(object sender, EventArgs e)
         {
-            v_plancuisineTableAdapter.Fill(cda68_bd1DataSet.v_plancuisine);
+            try
+            {
+                v_plancuisineTableAdapter.Fill(cda68_bd1DataSet.v_plancuisine);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
             Manager.ResizeImage(btBefore, Properties.Resources.Arrow_left_256x256, ContentAlignment.MiddleCenter);
             Manager.ResizeImage(btAfter, Properties.Resources.Arrow_right_256x256, ContentAlignment.MiddleCenter);
@@ -41,7 +49,7 @@ namespace OurResto
             foreach (DataGridViewColumn c in dGVPlanProduction.Columns)
             {
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                
+
             }
 
             SetDate(mealDate);
@@ -166,6 +174,12 @@ namespace OurResto
                     e.CellStyle.BackColor = Color.LightGray;
                 }
             }
+        }
+
+        private void FormPlanProduction_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.formPlanProdX = DesktopLocation.X;
+            Properties.Settings.Default.formPlanProdY = DesktopLocation.Y;
         }
     }
 }

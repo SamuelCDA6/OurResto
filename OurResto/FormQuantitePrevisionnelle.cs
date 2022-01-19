@@ -22,18 +22,19 @@ namespace OurResto
 
         private void FormQuantitePrevisionnelle_Load(object sender, EventArgs e)
         {
-            v_quantiteprevisionnelleTableAdapter.Connection.ConnectionString = Properties.Settings.Default.FilRouge2ConnectionString;
-            
-            if (!v_quantiteprevisionnelleTableAdapter.Connection.Ping())
-            {
-                v_quantiteprevisionnelleTableAdapter.Connection.ConnectionString = Properties.Settings.Default.cda68_bd1ConnectionString;
-            }
-            
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
 
             toolTip.SetToolTip(btQuitter, "Revenir à la fenêtre principale");
 
-            v_quantiteprevisionnelleTableAdapter.Fill(cda68_bd1DataSet.v_quantiteprevisionnelle);
+            try
+            {
+                v_quantiteprevisionnelleTableAdapter.Fill(cda68_bd1DataSet.v_quantiteprevisionnelle);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
 
             DateTime dateMonday = DateTime.Today.AddDays(7).WeekDay(DayOfWeek.Monday, 0).Date;
             DateTime dateFriday = dateMonday.WeekDay(DayOfWeek.Friday, 0).Date;
@@ -49,6 +50,12 @@ namespace OurResto
         private void BtQuitter_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void FormQuantitePrevisionnelle_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.formQtPrevX = DesktopLocation.X;
+            Properties.Settings.Default.formQtPrevY = DesktopLocation.Y;
         }
     }
 }

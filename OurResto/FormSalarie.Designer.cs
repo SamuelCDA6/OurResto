@@ -659,7 +659,7 @@ namespace OurResto
             // 
             this.cMS.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cMS.Name = "cMS";
-            this.cMS.Size = new System.Drawing.Size(211, 32);
+            this.cMS.Size = new System.Drawing.Size(61, 4);
             this.cMS.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.CMS_ItemClicked);
             // 
             // FormSalarie
@@ -675,6 +675,7 @@ namespace OurResto
             this.Name = "FormSalarie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comptes repas des salariés";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSalarie_FormClosing);
             this.Load += new System.EventHandler(this.FormSalarie_Load);
             this.tLPMain.ResumeLayout(false);
             this.tLPMain.PerformLayout();

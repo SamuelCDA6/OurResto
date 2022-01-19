@@ -8,6 +8,7 @@ using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.ComponentModel;
+using System.Drawing.Printing;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +30,8 @@ namespace OurResto
 
         public FormMenu()
         {
-            InitializeComponent();
+            
+            InitializeComponent();            
         }
 
         private void FormMenu_Load(object sender, EventArgs e)
@@ -50,6 +52,7 @@ namespace OurResto
             Manager.ResizeImage(btBefore, Properties.Resources.Arrow_left_256x256, ContentAlignment.MiddleCenter);
             Manager.ResizeImage(btAfter, Properties.Resources.Arrow_right_256x256, ContentAlignment.MiddleCenter);
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
+            Manager.ResizeImage(btPrint, Properties.Resources.Printer_alt_256x256, ContentAlignment.MiddleLeft);
 
             foreach (ComboBox cb in tLPInputBox.Controls.OfType<ComboBox>())
             {
@@ -158,7 +161,7 @@ namespace OurResto
             }
             catch (Exception)
             {
-                MessageBox.Show(Properties.Resources.TXTUPDATEFAIL);
+                MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -740,15 +743,16 @@ namespace OurResto
 
         }
 
-        private void BtReserve_Click(object sender, EventArgs e)
+        private void Reservations()
         {
             Random random = new();
             progressBar.Visible = true;
-            
+
             var salarie = v_SoldesalarieTableAdapter.GetData().ToImmutableList();
-            var formules = formuleTableAdapter.GetData().ToList();
+            var formules = formuleTableAdapter.GetData().ToImmutableList();
+            var reservations = reservationTableAdapter.GetData().ToImmutableList();
             var menus = cda68_bd1DataSet.v_affichermenu.Where(m => m.RepasDate > DateTime.Today).ToList();
-            var reservations = reservationTableAdapter.GetData().ToList();
+            
 
 
             progressBar.Maximum = menus.Count;
@@ -768,7 +772,7 @@ namespace OurResto
                         reservationTableAdapter.Insert(sal[indexSal].Matricule, idFormule, menu.Id_Moment, menu.RepasDate, 0, datePassage, formules[idFormule - 1].Prix);
                         sal.RemoveAt(indexSal);
                     }
-                }                
+                }
 
                 progressBar.PerformStep();
                 progressBar.Update();
@@ -827,18 +831,27 @@ namespace OurResto
 
             //Resize DataGridView back to original height.
             dGVMenu.Height = height;
-
+            
             //Show the Print Preview Dialog.
+            printDocument.DefaultPageSettings.Landscape = true;
             printPreviewDialog.Document = printDocument;
             printPreviewDialog.PrintPreviewControl.Zoom = 1;
             printPreviewDialog.ShowDialog();
         }
 
-        private void PrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
-            e.PageSettings.Landscape = true;
-            
-            e.Graphics.DrawImage(bitmap, 0, 0);            
+            StringFormat stringFormat = new StringFormat();
+            stringFormat.Alignment = StringAlignment.Center;
+
+            e.Graphics.DrawString(lblSemaine.Text, lblSemaine.Font, Brushes.Black, ClientRectangle.Width / 2, 0, stringFormat);
+            e.Graphics.DrawImage(bitmap, 0, 20);
+        }
+
+        private void FormMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.formMenuX = DesktopLocation.X;
+            Properties.Settings.Default.formMenuY = DesktopLocation.Y;
         }
     }
 }

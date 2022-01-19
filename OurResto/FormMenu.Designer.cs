@@ -30,8 +30,8 @@ namespace OurResto
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenu));
             this.dGVMenu = new System.Windows.Forms.DataGridView();
             this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,7 +78,6 @@ namespace OurResto
             this.btModifier = new System.Windows.Forms.Button();
             this.btSupprimer = new System.Windows.Forms.Button();
             this.btPrint = new System.Windows.Forms.Button();
-            this.btReserve = new System.Windows.Forms.Button();
             this.btQuitter = new System.Windows.Forms.Button();
             this.momentTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.MomentTableAdapter();
             this.vplatsBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -110,20 +109,20 @@ namespace OurResto
             this.dGVMenu.AllowUserToDeleteRows = false;
             this.dGVMenu.AllowUserToResizeColumns = false;
             this.dGVMenu.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dGVMenu.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dGVMenu.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dGVMenu.AutoGenerateColumns = false;
             this.dGVMenu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGVMenu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dGVMenu.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dGVMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dGVMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dGVMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGVMenu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.repasDateDataGridViewTextBoxColumn,
@@ -603,10 +602,9 @@ namespace OurResto
             this.fLPButtons.Controls.Add(this.btModifier);
             this.fLPButtons.Controls.Add(this.btSupprimer);
             this.fLPButtons.Controls.Add(this.btPrint);
-            this.fLPButtons.Controls.Add(this.btReserve);
-            this.fLPButtons.Location = new System.Drawing.Point(151, 3);
+            this.fLPButtons.Location = new System.Drawing.Point(223, 3);
             this.fLPButtons.Name = "fLPButtons";
-            this.fLPButtons.Size = new System.Drawing.Size(864, 64);
+            this.fLPButtons.Size = new System.Drawing.Size(720, 64);
             this.fLPButtons.TabIndex = 1;
             // 
             // btActualiser
@@ -663,17 +661,6 @@ namespace OurResto
             this.btPrint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btPrint.UseVisualStyleBackColor = true;
             this.btPrint.Click += new System.EventHandler(this.BtPrint_Click);
-            // 
-            // btReserve
-            // 
-            this.btReserve.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btReserve.Location = new System.Drawing.Point(723, 3);
-            this.btReserve.Name = "btReserve";
-            this.btReserve.Size = new System.Drawing.Size(138, 61);
-            this.btReserve.TabIndex = 15;
-            this.btReserve.Text = "&Reservations";
-            this.btReserve.UseVisualStyleBackColor = true;
-            this.btReserve.Click += new System.EventHandler(this.BtReserve_Click);
             // 
             // btQuitter
             // 
@@ -761,6 +748,7 @@ namespace OurResto
             this.Name = "FormMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menus";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMenu_FormClosing);
             this.Load += new System.EventHandler(this.FormMenu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).EndInit();
@@ -835,7 +823,6 @@ namespace OurResto
         private System.Windows.Forms.DataGridViewTextBoxColumn idPlatDessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dessertDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idMomentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button btReserve;
         private System.Windows.Forms.ContextMenuStrip cMS;
         private System.Windows.Forms.Button btPrint;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;

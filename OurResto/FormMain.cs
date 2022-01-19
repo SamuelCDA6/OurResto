@@ -26,6 +26,16 @@ namespace OurResto
         {
             using (FormSalarie formSalarie = new FormSalarie())
             {
+                if (Properties.Settings.Default.formSalarieX != -1 && Properties.Settings.Default.formSalarieY != -1)
+                {
+                    formSalarie.StartPosition = FormStartPosition.Manual;
+                    formSalarie.Location = new Point(Properties.Settings.Default.formSalarieX, Properties.Settings.Default.formSalarieY);
+                }
+                else
+                {
+                    formSalarie.StartPosition = FormStartPosition.CenterScreen;
+                }
+
                 Visible = false;
                 formSalarie.ShowDialog();
                 Visible = true;
@@ -36,6 +46,16 @@ namespace OurResto
         {
             using (FormMenu formMenu = new FormMenu())
             {
+                if (Properties.Settings.Default.formMenuX != -1 && Properties.Settings.Default.formMenuY != -1)
+                {
+                    formMenu.StartPosition = FormStartPosition.Manual;
+                    formMenu.Location = new Point(Properties.Settings.Default.formMenuX, Properties.Settings.Default.formMenuY);
+                }
+                else
+                {
+                    formMenu.StartPosition = FormStartPosition.CenterScreen;
+                }
+
                 Visible = false;
                 formMenu.ShowDialog();
                 Visible = true;
@@ -46,6 +66,16 @@ namespace OurResto
         {
             using (FormQuantitePrevisionnelle formQuantitePrevisionnelle = new FormQuantitePrevisionnelle())
             {
+                if (Properties.Settings.Default.formQtPrevX != -1 && Properties.Settings.Default.formQtPrevY != -1)
+                {
+                    formQuantitePrevisionnelle.StartPosition = FormStartPosition.Manual;
+                    formQuantitePrevisionnelle.Location = new Point(Properties.Settings.Default.formQtPrevX, Properties.Settings.Default.formQtPrevY);
+                }
+                else
+                {
+                    formQuantitePrevisionnelle.StartPosition = FormStartPosition.CenterScreen;
+                }
+
                 Visible = false;
                 formQuantitePrevisionnelle.ShowDialog();
                 Visible = true;
@@ -56,6 +86,16 @@ namespace OurResto
         {
             using (FormPlanProduction formPlanProduction = new FormPlanProduction())
             {
+                if (Properties.Settings.Default.formPlanProdX != -1 && Properties.Settings.Default.formPlanProdY != -1)
+                {
+                    formPlanProduction.StartPosition = FormStartPosition.Manual;
+                    formPlanProduction.Location = new Point(Properties.Settings.Default.formPlanProdX, Properties.Settings.Default.formPlanProdY);
+                }
+                else
+                {
+                    formPlanProduction.StartPosition = FormStartPosition.CenterScreen;
+                }
+
                 Visible = false;
                 formPlanProduction.ShowDialog();
                 Visible = true;

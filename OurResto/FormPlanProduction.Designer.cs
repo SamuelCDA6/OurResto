@@ -348,6 +348,7 @@
             this.Name = "FormPlanProduction";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Plan de production";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormPlanProduction_FormClosing);
             this.Load += new System.EventHandler(this.FormPlanProduction_Load);
             ((System.ComponentModel.ISupportInitialize)(this.vplancuisineBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).EndInit();

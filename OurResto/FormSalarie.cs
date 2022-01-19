@@ -68,7 +68,7 @@ namespace OurResto
             }
             catch (Exception)
             {
-                MessageBox.Show(Properties.Resources.TXTUPDATEFAIL);
+                MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -143,8 +143,8 @@ namespace OurResto
                 {
                     if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))
                     {
-                        currentRow.Nom = tBNom.Text;
-                        currentRow.Prenom = tBPrenom.Text;
+                        currentRow.Nom = tBNom.Text.ToUpper();
+                        currentRow.Prenom = String.Concat(char.ToUpper(tBPrenom.Text[0]),tBPrenom.Text.Substring(1).ToLower());
                         currentRow.Email = tBEmail.Text;
 
                         if (salarieTableAdapter.Update(currentRow) != 1)
@@ -316,6 +316,12 @@ namespace OurResto
         private void CMS_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             RefreshDisplay();
+        }
+
+        private void FormSalarie_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.formSalarieX = DesktopLocation.X;
+            Properties.Settings.Default.formSalarieY = DesktopLocation.Y;
         }
     }
 }

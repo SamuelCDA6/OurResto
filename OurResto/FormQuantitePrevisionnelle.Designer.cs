@@ -183,6 +183,7 @@ namespace OurResto
             this.Name = "FormQuantitePrevisionnelle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quantite Previsionnelle d\'ingrédients";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormQuantitePrevisionnelle_FormClosing);
             this.Load += new System.EventHandler(this.FormQuantitePrevisionnelle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.vquantiteprevisionnelleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).EndInit();
