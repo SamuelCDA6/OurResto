@@ -126,7 +126,7 @@ namespace OurResto
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
                 vaffichermenuBindingSource.DataSource = weekMeals;
-
+                
                 // Et repositionner la position de la BindingSource sur la date
                 if (cda68_bd1DataSet.Moment.Count > 0 && cBMoment.Text != String.Empty)
                 {
@@ -506,12 +506,6 @@ namespace OurResto
 
         private void BtAddRandom_Click(object sender, EventArgs e)
         {
-            //using (FormAjoutAleatoires formAjout = new FormAjoutAleatoires(dateMonday, dateFriday))
-            //{
-            //    Visible = false;
-            //    formAjout.ShowDialog();
-            //    Visible = true;
-            //}
             AddRandomWeekMeals();
 
             RefreshDisplay();

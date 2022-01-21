@@ -9,6 +9,8 @@
     <StartupObject>OurResto.Program</StartupObject>
     <PackageIcon>Display 256x256.png</PackageIcon>
     <Authors>Samuel CHAPEL</Authors>
+    <ApplicationIcon>Utilities 256x256.ico</ApplicationIcon>
+    <NeutralLanguage>fr-FR</NeutralLanguage>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="FakesAssemblies\**" />
@@ -74,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="appsettings.json" />
+    <Content Include="Utilities 256x256.ico" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\Images\Icônes\Lite\Display 256x256.png">

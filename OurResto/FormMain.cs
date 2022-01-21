@@ -6,6 +6,8 @@ namespace OurResto
 {
     public partial class FormMain : Form
     {
+        cda68_bd1DataSetTableAdapters.MomentTableAdapter momentTableAdapter = new cda68_bd1DataSetTableAdapters.MomentTableAdapter();
+
         public FormMain()
         {
             InitializeComponent();
@@ -15,6 +17,15 @@ namespace OurResto
         {
             Manager.ResizeImage(btQuitter, Properties.Resources.Power_256x256, ContentAlignment.MiddleLeft);
 
+            if (!TestConnexion())
+            {
+                btMenu.Enabled = false;
+                btPlanProduction.Enabled = false;
+                btQuantitePrevisionelle.Enabled = false;
+                btSalarie.Enabled = false;
+                MessageBox.Show(this, "Impossible de se connecter à la base de données", "Erreur de connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             toolTip.SetToolTip(btQuitter, "Quitter l'application");
             toolTip.SetToolTip(btSalarie, "Gérer les comptes repas des salariés");
             toolTip.SetToolTip(btMenu, "Gérer les menus");
@@ -22,6 +33,22 @@ namespace OurResto
             toolTip.SetToolTip(btQuantitePrevisionelle, "Voir la quantité d'ingrédients nécessaires pour la semaine suivante");
         }
 
+        /// <summary>
+        /// Test la connexion avec le SGBD
+        /// </summary>
+        /// <returns> booleen true si connexion reussi sinon false</returns>
+        private bool TestConnexion()
+        {
+            try
+            {
+                momentTableAdapter.GetData();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         private void BtSalarie_Click(object sender, EventArgs e)
         {
             using (FormSalarie formSalarie = new FormSalarie())
