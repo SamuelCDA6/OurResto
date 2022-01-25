@@ -30,8 +30,8 @@ namespace OurResto
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenu));
             this.dGVMenu = new System.Windows.Forms.DataGridView();
             this.repasDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,6 +91,7 @@ namespace OurResto
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.btReserver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
@@ -109,20 +110,20 @@ namespace OurResto
             this.dGVMenu.AllowUserToDeleteRows = false;
             this.dGVMenu.AllowUserToResizeColumns = false;
             this.dGVMenu.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.dGVMenu.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.dGVMenu.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dGVMenu.AutoGenerateColumns = false;
             this.dGVMenu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dGVMenu.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dGVMenu.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dGVMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dGVMenu.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dGVMenu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGVMenu.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.repasDateDataGridViewTextBoxColumn,
@@ -602,9 +603,10 @@ namespace OurResto
             this.fLPButtons.Controls.Add(this.btModifier);
             this.fLPButtons.Controls.Add(this.btSupprimer);
             this.fLPButtons.Controls.Add(this.btPrint);
-            this.fLPButtons.Location = new System.Drawing.Point(223, 3);
+            this.fLPButtons.Controls.Add(this.btReserver);
+            this.fLPButtons.Location = new System.Drawing.Point(151, 3);
             this.fLPButtons.Name = "fLPButtons";
-            this.fLPButtons.Size = new System.Drawing.Size(720, 64);
+            this.fLPButtons.Size = new System.Drawing.Size(864, 64);
             this.fLPButtons.TabIndex = 1;
             // 
             // btActualiser
@@ -735,6 +737,17 @@ namespace OurResto
             // 
             this.printDialog.UseEXDialog = true;
             // 
+            // btReserver
+            // 
+            this.btReserver.Location = new System.Drawing.Point(723, 3);
+            this.btReserver.Name = "btReserver";
+            this.btReserver.Size = new System.Drawing.Size(138, 61);
+            this.btReserver.TabIndex = 17;
+            this.btReserver.Text = "Reserver";
+            this.btReserver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btReserver.UseVisualStyleBackColor = true;
+            this.btReserver.Click += new System.EventHandler(this.BtReserver_Click);
+            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -828,5 +841,6 @@ namespace OurResto
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.PrintDialog printDialog;
+        private System.Windows.Forms.Button btReserver;
     }
 }

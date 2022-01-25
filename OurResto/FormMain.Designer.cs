@@ -42,10 +42,8 @@ namespace OurResto
             this.btQuantitePrevisionelle = new System.Windows.Forms.Button();
             this.lblTitre = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.cda68_bd1DataSet = new OurResto.cda68_bd1DataSet();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -183,12 +181,6 @@ namespace OurResto
             this.lblTitre.Text = "Our Resto";
             this.lblTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // cda68_bd1DataSet
-            // 
-            this.cda68_bd1DataSet.DataSetName = "cda68_bd1DataSet";
-            this.cda68_bd1DataSet.Namespace = "http://tempuri.org/cda68_bd1DataSet.xsd";
-            this.cda68_bd1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -207,7 +199,6 @@ namespace OurResto
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,7 +216,6 @@ namespace OurResto
         private System.Windows.Forms.Label lblIntendant;
         private System.Windows.Forms.Button btQuitter;
         private System.Windows.Forms.ToolTip toolTip;
-        private cda68_bd1DataSet cda68_bd1DataSet;
     }
 }
 

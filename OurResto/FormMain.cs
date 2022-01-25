@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,8 +7,6 @@ namespace OurResto
 {
     public partial class FormMain : Form
     {
-        cda68_bd1DataSetTableAdapters.MomentTableAdapter momentTableAdapter = new cda68_bd1DataSetTableAdapters.MomentTableAdapter();
-
         public FormMain()
         {
             InitializeComponent();
@@ -37,11 +36,13 @@ namespace OurResto
         /// Test la connexion avec le SGBD
         /// </summary>
         /// <returns> booleen true si connexion reussi sinon false</returns>
-        private bool TestConnexion()
+        private static bool TestConnexion()
         {
+            var mySqlConnection = new MySqlConnection(Properties.Settings.Default.cda68_bd1ConnectionString);
+            
             try
             {
-                momentTableAdapter.GetData();
+                mySqlConnection.Open();
                 return true;
             }
             catch (Exception)

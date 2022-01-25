@@ -737,26 +737,27 @@ namespace OurResto
 
         }
 
+        private void BtReserver_Click(object sender, EventArgs e)
+        {
+            Reservations();
+        }
+
         private void Reservations()
         {
+            var transactionTableAdapter = new cda68_bd1DataSetTableAdapters.TransactionTableAdapter();
             Random random = new();
-            progressBar.Visible = true;
 
-            var salarie = v_SoldesalarieTableAdapter.GetData().ToImmutableList();
+            var salaries = v_SoldesalarieTableAdapter.GetData().ToImmutableList();
             var formules = formuleTableAdapter.GetData().ToImmutableList();
             var reservations = reservationTableAdapter.GetData().ToImmutableList();
-            var menus = cda68_bd1DataSet.v_affichermenu.Where(m => m.RepasDate > DateTime.Today).ToList();
-            
-
-
-            progressBar.Maximum = menus.Count;
+            var menus = cda68_bd1DataSet.v_affichermenu.Where(m => m.RepasDate > DateTime.Today).ToImmutableList();
 
             foreach (cda68_bd1DataSet.v_affichermenuRow menu in menus)
             {
                 if (!reservations.Any(r => r.RepasDate == menu.RepasDate && r.Id_Moment == menu.Id_Moment))
                 {
                     int nbRes = random.Next(5, 16);
-                    var sal = salarie.ToList();
+                    var sal = salaries.ToList();
 
                     for (int i = 0; i < nbRes; i++)
                     {
@@ -767,13 +768,17 @@ namespace OurResto
                         sal.RemoveAt(indexSal);
                     }
                 }
-
-                progressBar.PerformStep();
-                progressBar.Update();
             }
 
-            progressBar.Visible = false;
-            progressBar.Value = 0;
+            salaries = v_SoldesalarieTableAdapter.GetData().ToImmutableList();
+
+            foreach (cda68_bd1DataSet.v_soldesalarieRow salarie in salaries)
+            {
+                if (salarie.Solde < 0)
+                {
+                    transactionTableAdapter.Insert(salarie.Matricule, random.Next(1, 3), DateTime.Now, random.Next(1, 101) - salarie.Solde);
+                }
+            }
         }
 
         private void DGVMenu_MouseClick(object sender, MouseEventArgs e)

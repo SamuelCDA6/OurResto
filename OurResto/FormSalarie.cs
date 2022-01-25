@@ -144,7 +144,7 @@ namespace OurResto
                     if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))
                     {
                         currentRow.Nom = tBNom.Text.ToUpper();
-                        currentRow.Prenom = String.Concat(char.ToUpper(tBPrenom.Text[0]),tBPrenom.Text.Substring(1).ToLower());
+                        currentRow.Prenom = String.Concat(char.ToUpper(tBPrenom.Text[0]), tBPrenom.Text.Substring(1).ToLower());
                         currentRow.Email = tBEmail.Text;
 
                         if (salarieTableAdapter.Update(currentRow) != 1)
@@ -170,7 +170,7 @@ namespace OurResto
                 {
                     int Id_TypePaiement = cda68_bd1DataSet.TypePaiement.First(r => r.Nom == cBTypePaiement.Text).Id_TypePaiement;
 
-                    if (decimal.TryParse(tBMontant.Text, out decimal montant) && montant > 0)
+                    if (decimal.TryParse(tBMontant.Text, out decimal montant) && montant >= 0)
                     {
                         if (decimal.Parse(tBSolde.Text) + montant > 100)
                         {
@@ -231,10 +231,8 @@ namespace OurResto
                         using (var trans = new TransactionScope())
                         {
                             bool IsInsert = true;
-                            if (montant != 0)
-                            {
-                                IsInsert = transactionTableAdapter.Insert(currentRow.Matricule, Id_TypePaiement, DateTime.Now, -montant) == 1;
-                            }
+
+                            IsInsert = transactionTableAdapter.Insert(currentRow.Matricule, Id_TypePaiement, DateTime.Now, -montant) == 1;
 
                             currentRow.EstActif = false;
 
@@ -287,11 +285,20 @@ namespace OurResto
         {
             if (e.KeyChar == ',') e.KeyChar = '.';
 
+            var montant = String.Concat(tBMontant.Text, e.KeyChar);
+
             if (e.KeyChar != (char)Keys.Back &&
-                !Regex.IsMatch(String.Concat(tBMontant.Text, e.KeyChar), @"^-?(0|[1-9]\d{0,2})([\.]\d{0,2})?$"))
+                    (!Regex.IsMatch(montant, @"^-?(0|[1-9]\d{0,2})([\.]\d{0,2})?$") ||
+                     decimal.Parse(montant) + decimal.Parse(tBSolde.Text) > 100))
             {
                 e.Handled = true;
             }
+        }
+
+        private void TBMontant_TextChanged(object sender, EventArgs e)
+        {
+            btCredit.Enabled = decimal.TryParse(tBMontant.Text, out decimal montant);
+            tBSoldeFinal.Text = (decimal.Parse(tBSolde.Text) + montant).ToString();
         }
 
         private void TBNom_Prenom_KeyPress(object sender, KeyPressEventArgs e)
@@ -322,6 +329,21 @@ namespace OurResto
         {
             Properties.Settings.Default.formSalarieX = DesktopLocation.X;
             Properties.Settings.Default.formSalarieY = DesktopLocation.Y;
+        }
+
+        private void TBNom_Prenom_Email_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))
+            {
+                var isValid = Regex.IsMatch(tBEmail.Text, @"[a-z A-z 0-9_\-]+[@]+[a-z]+[\.][a-z]{2,4}$");
+                btEdit.Enabled = isValid;
+                lblInfo.Text = isValid ? "" : "L'email saisi n'est pas valide";
+            }
+            else
+            {
+                btEdit.Enabled = false;
+                lblInfo.Text = "Veuillez renseignez tout les champs";
+            }
         }
     }
 }
