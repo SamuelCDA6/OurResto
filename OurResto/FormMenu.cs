@@ -322,9 +322,7 @@ namespace OurResto
 
             using (var trans = new TransactionScope())
             {
-                int nb = AddMeals();
-
-                if (nb == 5)
+                if (AddMeals() == 5)
                 {
                     trans.Complete();
                 }
@@ -756,7 +754,7 @@ namespace OurResto
             {
                 if (!reservations.Any(r => r.RepasDate == menu.RepasDate && r.Id_Moment == menu.Id_Moment))
                 {
-                    int nbRes = random.Next(5, 16);
+                    int nbRes = random.Next(5, salaries.Count);
                     var sal = salaries.ToList();
 
                     for (int i = 0; i < nbRes; i++)
