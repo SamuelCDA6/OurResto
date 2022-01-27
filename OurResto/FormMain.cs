@@ -45,7 +45,7 @@ namespace OurResto
                 mySqlConnection.Open();
                 return true;
             }
-            catch (Exception)
+            catch (MySqlException)
             {
                 return false;
             }

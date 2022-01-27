@@ -113,14 +113,14 @@ namespace OurResto
                 // Récupérer les salariés dont le nom, ou le prénom commence par le texte ou 
                 var rowList = cda68_bd1DataSet.Salarie.Where(s => s.Matricule.Contains(tBRechercheSalarie.Text) ||
                                                                 s.Nom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase) ||
-                                                                s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase))
-                                                      .ToList()
-                                                      .OrderBy(r => r.Nom);
+                                                                s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase))                                                      
+                                                      .OrderBy(r => r.Nom)
+                                                      .ToList();
 
                 // Met a jour la binding source et n'afficher que ses lignes de salariés dans le DataGridView
                 if (rowList.Any())
                 {
-                    salarieBindingSource.DataSource = rowList.ToList();
+                    salarieBindingSource.DataSource = rowList;
                 }
             }
             catch (Exception)
@@ -288,7 +288,7 @@ namespace OurResto
             var montant = String.Concat(tBMontant.Text, e.KeyChar);
 
             if (e.KeyChar != (char)Keys.Back &&
-                    (!Regex.IsMatch(montant, @"^-?(0|[1-9]\d{0,2})([\.]\d{0,2})?$") ||
+                    (!Regex.IsMatch(montant, @"^(0|[1-9]\d{0,2})([\.]\d{0,2})?$") ||
                      decimal.Parse(montant) + decimal.Parse(tBSolde.Text) > 100))
             {
                 e.Handled = true;

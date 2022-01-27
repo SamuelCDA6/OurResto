@@ -91,7 +91,6 @@ namespace OurResto
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
             this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.btReserver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGVMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vaffichermenuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
@@ -603,10 +602,9 @@ namespace OurResto
             this.fLPButtons.Controls.Add(this.btModifier);
             this.fLPButtons.Controls.Add(this.btSupprimer);
             this.fLPButtons.Controls.Add(this.btPrint);
-            this.fLPButtons.Controls.Add(this.btReserver);
-            this.fLPButtons.Location = new System.Drawing.Point(151, 3);
+            this.fLPButtons.Location = new System.Drawing.Point(223, 3);
             this.fLPButtons.Name = "fLPButtons";
-            this.fLPButtons.Size = new System.Drawing.Size(864, 64);
+            this.fLPButtons.Size = new System.Drawing.Size(720, 64);
             this.fLPButtons.TabIndex = 1;
             // 
             // btActualiser
@@ -737,17 +735,6 @@ namespace OurResto
             // 
             this.printDialog.UseEXDialog = true;
             // 
-            // btReserver
-            // 
-            this.btReserver.Location = new System.Drawing.Point(723, 3);
-            this.btReserver.Name = "btReserver";
-            this.btReserver.Size = new System.Drawing.Size(138, 61);
-            this.btReserver.TabIndex = 17;
-            this.btReserver.Text = "Reserver";
-            this.btReserver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btReserver.UseVisualStyleBackColor = true;
-            this.btReserver.Click += new System.EventHandler(this.BtReserver_Click);
-            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -841,6 +828,5 @@ namespace OurResto
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Drawing.Printing.PrintDocument printDocument;
         private System.Windows.Forms.PrintDialog printDialog;
-        private System.Windows.Forms.Button btReserver;
     }
 }
