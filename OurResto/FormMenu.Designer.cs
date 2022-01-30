@@ -86,7 +86,6 @@ namespace OurResto
             this.menuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.v_affichermenuTableAdapter = new OurResto.cda68_bd1DataSetTableAdapters.v_affichermenuTableAdapter();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.cMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument = new System.Drawing.Printing.PrintDocument();
@@ -147,7 +146,7 @@ namespace OurResto
             this.dGVMenu.RowHeadersVisible = false;
             this.dGVMenu.RowHeadersWidth = 51;
             this.dGVMenu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dGVMenu.Size = new System.Drawing.Size(1165, 279);
+            this.dGVMenu.Size = new System.Drawing.Size(1165, 270);
             this.dGVMenu.StandardTab = true;
             this.dGVMenu.TabIndex = 100;
             this.dGVMenu.TabStop = false;
@@ -304,7 +303,7 @@ namespace OurResto
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tLPMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76F));
-            this.tLPMain.Size = new System.Drawing.Size(1173, 599);
+            this.tLPMain.Size = new System.Drawing.Size(1173, 590);
             this.tLPMain.TabIndex = 1;
             // 
             // tLPInputBox
@@ -332,7 +331,7 @@ namespace OurResto
             this.tLPInputBox.Controls.Add(this.cBMoment, 1, 3);
             this.tLPInputBox.Controls.Add(this.progressBar, 1, 4);
             this.tLPInputBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tLPInputBox.Location = new System.Drawing.Point(3, 350);
+            this.tLPInputBox.Location = new System.Drawing.Point(3, 341);
             this.tLPInputBox.Name = "tLPInputBox";
             this.tLPInputBox.RowCount = 5;
             this.tLPInputBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -572,7 +571,7 @@ namespace OurResto
             this.tableLayoutPanel1.Controls.Add(this.fLPButtons, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btQuitter, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 526);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 517);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -605,7 +604,7 @@ namespace OurResto
             this.fLPButtons.Location = new System.Drawing.Point(223, 3);
             this.fLPButtons.Name = "fLPButtons";
             this.fLPButtons.Size = new System.Drawing.Size(720, 64);
-            this.fLPButtons.TabIndex = 1;
+            this.fLPButtons.TabIndex = 13;
             // 
             // btActualiser
             // 
@@ -701,13 +700,6 @@ namespace OurResto
             // 
             this.v_affichermenuTableAdapter.ClearBeforeFill = true;
             // 
-            // backgroundWorker
-            // 
-            this.backgroundWorker.WorkerReportsProgress = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
-            this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
-            this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
-            // 
             // cMS
             // 
             this.cMS.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -739,12 +731,12 @@ namespace OurResto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1173, 599);
+            this.ClientSize = new System.Drawing.Size(1173, 590);
             this.Controls.Add(this.tLPMain);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
-            this.MinimumSize = new System.Drawing.Size(1191, 646);
+            this.MinimumSize = new System.Drawing.Size(1191, 637);
             this.Name = "FormMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menus";
@@ -809,7 +801,6 @@ namespace OurResto
         private System.Windows.Forms.Button btAddRandom;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
         private System.Windows.Forms.DataGridViewTextBoxColumn repasDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn momentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idPlatEntreeDataGridViewTextBoxColumn;

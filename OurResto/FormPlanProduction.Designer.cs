@@ -258,7 +258,7 @@
             this.dGVPlanProduction.Size = new System.Drawing.Size(558, 371);
             this.dGVPlanProduction.TabIndex = 1;
             this.dGVPlanProduction.TabStop = false;
-            this.dGVPlanProduction.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVPlanProduction_CellFormatting_1);
+            this.dGVPlanProduction.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DGVPlanProduction_CellFormatting);
             // 
             // repasDateDataGridViewTextBoxColumn
             // 

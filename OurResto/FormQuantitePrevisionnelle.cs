@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace OurResto
 {
     public partial class FormQuantitePrevisionnelle : Form
     {
+        List<cda68_bd1DataSet.v_quantiteprevisionnelleRow> rows = null;
+
         public FormQuantitePrevisionnelle()
         {
             InitializeComponent();
@@ -18,6 +21,7 @@ namespace OurResto
             }
 
             dGVQuantitePrevisionelle.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dGVQuantitePrevisionelle.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void FormQuantitePrevisionnelle_Load(object sender, EventArgs e)
@@ -44,7 +48,8 @@ namespace OurResto
 
             tBTitle.Text = String.Format("Semaine du {0} au {1}", monday, dateFriday.ToString("M"));
 
-            vquantiteprevisionnelleBindingSource.DataSource = cda68_bd1DataSet.v_quantiteprevisionnelle.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+            rows = cda68_bd1DataSet.v_quantiteprevisionnelle.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToList();
+            vquantiteprevisionnelleBindingSource.DataSource = rows;
         }
 
         private void BtQuitter_Click(object sender, EventArgs e)

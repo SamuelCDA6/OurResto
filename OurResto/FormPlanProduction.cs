@@ -27,6 +27,7 @@ namespace OurResto
             try
             {
                 v_plancuisineTableAdapter.Fill(cda68_bd1DataSet.v_plancuisine);
+                v_Ingredient_PlatTableAdapter.Fill(cda68_bd1DataSet.v_ingredient_plat);
             }
             catch (Exception)
             {
@@ -49,7 +50,6 @@ namespace OurResto
             foreach (DataGridViewColumn c in dGVPlanProduction.Columns)
             {
                 c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
             }
 
             SetDate(mealDate);
@@ -113,8 +113,8 @@ namespace OurResto
         {
             if (rows.Any())
             {
-                // On 
-                mealDate = rows.First().RepasDate;
+                // On met à jour la date
+                mealDate = rows[0].RepasDate;
                 lblJour.Text = mealDate.ToString("D");
 
                 vplancuisineBindingSource.DataSource = rows.TakeWhile(r => r.RepasDate == mealDate)
@@ -124,35 +124,22 @@ namespace OurResto
             }
         }
 
-        private void DGVPlanProduction_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.RowIndex > 0 && e.ColumnIndex == 2)
-            {
-                if (dGVPlanProduction.Rows[e.RowIndex - 1].Cells[e.ColumnIndex].Value.Equals(e.Value))
-                {
-                    e.Value = String.Empty;
-                }
-            }
-        }
-
         private void VplancuisineBindingSource_CurrentChanged(object sender, EventArgs e)
         {
             if (vplancuisineBindingSource.Current is cda68_bd1DataSet.v_plancuisineRow currentRow)
             {
-                dGVIngredients.DataSource = v_Ingredient_PlatTableAdapter.GetDataBy(currentRow.RepasDate, currentRow.Id_Moment, currentRow.Id_Plat);
+                dGVIngredients.DataSource = cda68_bd1DataSet.v_ingredient_plat.Where(r => r.RepasDate == currentRow.RepasDate && r.Id_Moment == currentRow.Id_Moment && r.Id_Plat == currentRow.Id_Plat).Select(r => new { r.Ingredient, r.Quantite, r.Unite, r.Total }).ToList();
+                //dGVIngredients.DataSource = v_Ingredient_PlatTableAdapter.GetDataBy(currentRow.RepasDate, currentRow.Id_Moment, currentRow.Id_Plat);
 
                 if (start)
                 {
-                    dGVIngredients.Columns[0].Visible = false;
-                    dGVIngredients.Columns[1].Visible = false;
-                    dGVIngredients.Columns[2].Visible = false;
-                    dGVIngredients.Columns[3].Visible = false;
-                    dGVIngredients.Columns[4].Visible = false;
-
                     foreach (DataGridViewColumn c in dGVIngredients.Columns)
                     {
                         c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
+
+                    dGVIngredients.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    dGVIngredients.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
                     start = false;
                 }
@@ -163,7 +150,7 @@ namespace OurResto
             }
         }
 
-        private void DGVPlanProduction_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
+        private void DGVPlanProduction_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Pour ne pas ré afficher la date si la même que celle d'au dessus
             if (e.RowIndex > 0 && e.ColumnIndex == 2)

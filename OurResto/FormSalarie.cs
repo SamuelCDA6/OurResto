@@ -60,7 +60,7 @@ namespace OurResto
                 transactionTableAdapter.Fill(cda68_bd1DataSet.Transaction);
                 salarieTableAdapter.Fill(cda68_bd1DataSet.Salarie);
 
-                salaries = cda68_bd1DataSet.Salarie.OrderBy(r => r.Nom).ToList();
+                salaries = cda68_bd1DataSet.Salarie.ToList();
 
                 salarieBindingSource.DataSource = salaries;
                 typePaiementBindingSource.DataSource = cda68_bd1DataSet.TypePaiement.OrderByDescending(r => r.Nom).Select(r => r.Nom).ToList();
@@ -86,6 +86,8 @@ namespace OurResto
                                                                                       .OrderBy(r => r.Horodate).ToList();
 
                     tBSolde.Text = cda68_bd1DataSet.v_soldesalarie.First(r => r.Matricule == currentRow.Matricule).Solde.ToString();
+
+                    tBSoldeFinal.Text = tBSolde.Text;
                 }
             }
             catch (Exception)
@@ -114,7 +116,6 @@ namespace OurResto
                 var rowList = cda68_bd1DataSet.Salarie.Where(s => s.Matricule.Contains(tBRechercheSalarie.Text) ||
                                                                 s.Nom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase) ||
                                                                 s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase))                                                      
-                                                      .OrderBy(r => r.Nom)
                                                       .ToList();
 
                 // Met a jour la binding source et n'afficher que ses lignes de salariés dans le DataGridView

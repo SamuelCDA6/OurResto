@@ -219,7 +219,7 @@ namespace OurResto
 
         private void DGVMenu_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            if (e.KeyData == Keys.Delete && dGVMenu.SelectedRows.Count > 0)
+            if (e.KeyData == Keys.Delete && btSupprimer.Enabled && dGVMenu.SelectedRows.Count > 0)
             {
                 DeleteMenuSelectedRows();
                 RefreshDisplay();
@@ -643,142 +643,6 @@ namespace OurResto
             column.HeaderCell.SortGlyphDirection = sortOrder;
         }
 
-        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                var random = new Random();
-
-                var dates = EachDay(dateMonday, dateFriday).ToList();
-                var moments = cda68_bd1DataSet.Moment.Select(r => r.Id_Moment).ToImmutableList();
-
-                // Récupère tous les menus de la semaine en cours
-                var menus = cda68_bd1DataSet.v_affichermenu.Where(r => r.RepasDate >= dateMonday && r.RepasDate <= dateFriday).ToImmutableList();
-
-                // Récupère tous les plats de chaque type et enleve ceux qui sont déjà dans les menus de la semaine
-                var Entrees = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 1 && !menus.Any(m => m.Id_Plat_Entree == r.Id_Plat)).ToList();
-                var PlatsPrincipaux = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 2 && !menus.Any(m => m.Id_Plat_Principal == r.Id_Plat)).ToList();
-                var Accompagnements = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 3 && !menus.Any(m => m.Id_Plat_Accompagnement == r.Id_Plat)).ToList();
-                var Fromages = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 4 && !menus.Any(m => m.Id_Plat_Fromage == r.Id_Plat)).ToList();
-                var Desserts = cda68_bd1DataSet.v_plats.Where(r => r.Id_Sorte == 5 && !menus.Any(m => m.Id_Plat_Dessert == r.Id_Plat)).ToList();
-                //var data = from Entree in cda68_bd1DataSet.v_plats
-                //          where Entree.Id_Sorte == 1 && 
-                //          !(from menu in menus 
-                //            select menu.Id_Plat_Entree)
-                //            .Contains(Entree.Id_Plat)
-                //          select Entree.Id_Plat;
-
-                //cda68_bd1DataSet.v_plats.Aggregate((a, b) => (a.Id_Plat > b.Id_Plat) ? a : b);
-                //cda68_bd1DataSet.v_plats.Max(a => a.Id_Plat + a.Id_Sorte);
-
-                // Les stocker dans un tableau de liste de plats
-                List<cda68_bd1DataSet.v_platsRow>[] PlatsLists = { Entrees, PlatsPrincipaux, Accompagnements, Fromages, Desserts };
-
-                using var trans = new TransactionScope();
-
-                int max = ((moments.Count * dates.Count) - menus.Count) * PlatsLists.Length;
-                int j = 0;
-                // Pour chaque date de la semaine
-                foreach (DateTime dt in dates)
-                {
-                    // Pour chaque moment repas
-                    foreach (int idmoment in moments)
-                    {
-                        // Si il n'y a pas deja de menu à cette date et ce moment
-                        if (!menus.Any(m => m.Id_Moment == idmoment && m.RepasDate == dt))
-                        {
-                            // Pour chaque type de plat
-                            foreach (List<cda68_bd1DataSet.v_platsRow> plats in PlatsLists)
-                            {
-                                // Récupérer un plat aléatoire
-                                int i = random.Next(0, plats.Count);
-
-                                // Ajouter le plat dans le SGBD
-                                if (menuTableAdapter.Insert(plats[i].Id_Plat, idmoment, dt) != 1)
-                                {
-                                    // Si le plat n'a pas pus être insérer, prévenir l'utilisateur et quitter la méthode 
-                                    // pour ne pas continuer inutilement les insertions et ne pas valider la transaction
-                                    MessageBox.Show(menus.Count == 49 ?
-                                                        String.Format(Properties.Resources.TXTADDMENU,
-                                                                      cda68_bd1DataSet.Moment.First(m => m.Id_Moment == idmoment).Nom,
-                                                                      dt.ToString("D")) :
-                                                        Properties.Resources.TXTADDMENUS);
-                                    return;
-                                }
-
-                                // Enlever le plat de la liste pour ne pas le réutiliser
-                                plats.RemoveAt(i);
-
-                                // Incrémenter et mettre à jour la barre de progression
-                                backgroundWorker.ReportProgress(j * 100 / max);
-                            }
-                        }
-                    }
-                }
-
-                // Si tous les plats on bien étés insérés, valider la transaction
-                trans.Complete();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show(Properties.Resources.TXTADDMENUS);
-            }
-        }
-
-        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            progressBar.Value = e.ProgressPercentage;
-        }
-
-        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
-        }
-
-        private void BtReserver_Click(object sender, EventArgs e)
-        {
-            Reservations();
-        }
-
-        private void Reservations()
-        {
-            var transactionTableAdapter = new cda68_bd1DataSetTableAdapters.TransactionTableAdapter();
-            Random random = new();
-
-            var salaries = v_SoldesalarieTableAdapter.GetData().ToImmutableList();
-            var formules = formuleTableAdapter.GetData().ToImmutableList();
-            var reservations = reservationTableAdapter.GetData().ToImmutableList();
-            var menus = cda68_bd1DataSet.v_affichermenu.Where(m => m.RepasDate > DateTime.Today).ToImmutableList();
-
-            foreach (cda68_bd1DataSet.v_affichermenuRow menu in menus)
-            {
-                if (!reservations.Any(r => r.RepasDate == menu.RepasDate && r.Id_Moment == menu.Id_Moment))
-                {
-                    int nbRes = random.Next(5, salaries.Count);
-                    var sal = salaries.ToList();
-
-                    for (int i = 0; i < nbRes; i++)
-                    {
-                        int idFormule = random.Next(1, formules.Count + 1);
-                        var indexSal = random.Next(0, sal.Count);
-                        DateTime? datePassage = menu.RepasDate < DateTime.Today ? menu.RepasDate : null;
-                        reservationTableAdapter.Insert(sal[indexSal].Matricule, idFormule, menu.Id_Moment, menu.RepasDate, 0, datePassage, formules[idFormule - 1].Prix);
-                        sal.RemoveAt(indexSal);
-                    }
-                }
-            }
-
-            salaries = v_SoldesalarieTableAdapter.GetData().ToImmutableList();
-
-            foreach (cda68_bd1DataSet.v_soldesalarieRow salarie in salaries)
-            {
-                if (salarie.Solde < 0)
-                {
-                    transactionTableAdapter.Insert(salarie.Matricule, random.Next(1, 3), DateTime.Now, random.Next(1, 101) - salarie.Solde);
-                }
-            }
-        }
-
         private void DGVMenu_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -794,6 +658,7 @@ namespace OurResto
                         cMS.Items.Add("Supprimer");
                     }
                 }
+
                 cMS.Items.Add("Actualiser");
                 cMS.Show(dGVMenu, new Point(e.X, e.Y));
             }
@@ -816,33 +681,16 @@ namespace OurResto
 
         private void BtPrint_Click(object sender, EventArgs e)
         {
-            //Resize DataGridView to full height.
-            int height = dGVMenu.Height;
-            dGVMenu.Height = dGVMenu.RowCount * dGVMenu.RowTemplate.Height;
-
-            dGVMenu.ClearSelection();
-
-            //Create a Bitmap and draw the DataGridView on it.
-            bitmap = new Bitmap(dGVMenu.Width, dGVMenu.Height);
-            dGVMenu.DrawToBitmap(bitmap, new Rectangle(0, 0, dGVMenu.Width, dGVMenu.Height));
-
-            //Resize DataGridView back to original height.
-            dGVMenu.Height = height;
-            
-            //Show the Print Preview Dialog.
-            printDocument.DefaultPageSettings.Landscape = true;
-            printPreviewDialog.Document = printDocument;
-            printPreviewDialog.PrintPreviewControl.Zoom = 1;
-            printPreviewDialog.ShowDialog();
+            bitmap = Manager.MakeImage(dGVMenu);
+            Manager.ShowPrintPreview(printDocument, printPreviewDialog, true);
         }
 
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
-            StringFormat stringFormat = new StringFormat();
-            stringFormat.Alignment = StringAlignment.Center;
+            var stringFormat = new StringFormat{ Alignment = StringAlignment.Center};
 
-            e.Graphics.DrawString(lblSemaine.Text, lblSemaine.Font, Brushes.Black, ClientRectangle.Width / 2, 0, stringFormat);
-            e.Graphics.DrawImage(bitmap, 0, 20);
+            e.Graphics.DrawString(lblSemaine.Text, lblSemaine.Font, Brushes.Black, ClientRectangle.Width / 2 - 80, 0, stringFormat);
+            e.Graphics.DrawImage(bitmap, 0, 30);
         }
 
         private void FormMenu_FormClosing(object sender, FormClosingEventArgs e)

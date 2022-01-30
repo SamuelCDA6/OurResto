@@ -50,6 +50,7 @@ namespace OurResto
                 return false;
             }
         }
+
         private void BtSalarie_Click(object sender, EventArgs e)
         {
             using (FormSalarie formSalarie = new FormSalarie())
