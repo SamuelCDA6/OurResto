@@ -63,7 +63,9 @@ namespace OurResto
                 salaries = cda68_bd1DataSet.Salarie.ToList();
 
                 salarieBindingSource.DataSource = salaries;
+
                 typePaiementBindingSource.DataSource = cda68_bd1DataSet.TypePaiement.OrderByDescending(r => r.Nom).Select(r => r.Nom).ToList();
+                
                 tBRechercheSalarie.Text = String.Empty;
             }
             catch (Exception)
@@ -114,8 +116,8 @@ namespace OurResto
             {
                 // Récupérer les salariés dont le nom, ou le prénom commence par le texte ou 
                 salaries = cda68_bd1DataSet.Salarie.Where(s => s.Matricule.Contains(tBRechercheSalarie.Text) ||
-                                                  s.Nom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase) ||
-                                                  s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase)).ToList();
+                                                          s.Nom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase) ||
+                                                          s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase)).ToList();
 
                 // Met a jour la binding source et n'afficher que ses lignes de salariés dans le DataGridView
                 if (salaries.Any())
@@ -141,16 +143,13 @@ namespace OurResto
             {
                 try
                 {
-                    if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))
-                    {
-                        currentRow.Nom = tBNom.Text.ToUpper();
-                        currentRow.Prenom = String.Concat(char.ToUpper(tBPrenom.Text[0]), tBPrenom.Text.Substring(1).ToLower());
-                        currentRow.Email = tBEmail.Text;
+                    currentRow.Nom = tBNom.Text;
+                    currentRow.Prenom = tBPrenom.Text;
+                    currentRow.Email = tBEmail.Text;
 
-                        if (salarieTableAdapter.Update(currentRow) != 1)
-                        {
-                            MessageBox.Show(String.Format(Properties.Resources.TXTUPDATESALARIE, currentRow.Prenom, currentRow.Nom));
-                        }
+                    if (salarieTableAdapter.Update(currentRow) != 1)
+                    {
+                        MessageBox.Show(String.Format(Properties.Resources.TXTUPDATESALARIE, currentRow.Prenom, currentRow.Nom));
                     }
                 }
                 catch (Exception)
@@ -198,8 +197,6 @@ namespace OurResto
                                     }
                                 }
                             }
-
-                            MySqlConnection.ClearAllPools();
                         }
                     }
                     else
@@ -269,7 +266,8 @@ namespace OurResto
         {
             DataGridViewColumn column = dGVSalarie.Columns[e.ColumnIndex];
 
-            SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+            SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : 
+                                                                                                SortOrder.Ascending;
 
             dGVSalarie.Columns.Cast<DataGridViewColumn>().ToList()
                               .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
@@ -333,31 +331,36 @@ namespace OurResto
 
         private void TBNom_TextChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(tBNom.Text))
+            if (tBNom.Text.Length > 0)
             {
                 tBNom.Text = tBNom.Text.ToUpper();
                 tBNom.SelectionStart = tBNom.TextLength;
             }
 
-            UpdateButtonAndText();
+            UpdateButtonsAndText();
         }
 
         private void TBPrenom_TextChanged(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(tBPrenom.Text))
+            if (tBPrenom.Text.Length > 1)
             {
                 tBPrenom.Text = char.ToUpper(tBPrenom.Text[0]) + tBPrenom.Text[1..].ToLower();
                 tBPrenom.SelectionStart = tBPrenom.TextLength;
             }
 
-            UpdateButtonAndText();
+            UpdateButtonsAndText();
         }
 
-        private void UpdateButtonAndText()
+        private void tBEmail_TextChanged(object sender, EventArgs e)
+        {
+            UpdateButtonsAndText();
+        }
+
+        private void UpdateButtonsAndText()
         {
             if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))
             {
-                var isEmailValid = Regex.IsMatch(tBEmail.Text, @"[\w_\-]+[@]+[a-z A-Z]+[\.][a-z A-Z]{2,4}$");
+                var isEmailValid = Regex.IsMatch(tBEmail.Text, @"^[\w.-]+[@]+[\w-]+[\.][a-zA-Z]{2,4}$");
 
                 lblInfo.Text = isEmailValid ? "" : "L'email saisi n'est pas valide";
 
