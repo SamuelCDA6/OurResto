@@ -37,8 +37,7 @@ namespace OurResto
             catch (Exception)
             {
                 MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+            }            
 
             DateTime dateMonday = DateTime.Today.AddDays(7).WeekDay(DayOfWeek.Monday, 0).Date;
             DateTime dateFriday = dateMonday.WeekDay(DayOfWeek.Friday, 0).Date;

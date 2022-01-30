@@ -113,15 +113,14 @@ namespace OurResto
             try
             {
                 // Récupérer les salariés dont le nom, ou le prénom commence par le texte ou 
-                var rowList = cda68_bd1DataSet.Salarie.Where(s => s.Matricule.Contains(tBRechercheSalarie.Text) ||
-                                                                s.Nom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase) ||
-                                                                s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase))                                                      
-                                                      .ToList();
+                salaries = cda68_bd1DataSet.Salarie.Where(s => s.Matricule.Contains(tBRechercheSalarie.Text) ||
+                                                  s.Nom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase) ||
+                                                  s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase)).ToList();
 
                 // Met a jour la binding source et n'afficher que ses lignes de salariés dans le DataGridView
-                if (rowList.Any())
+                if (salaries.Any())
                 {
-                    salarieBindingSource.DataSource = rowList;
+                    salarieBindingSource.DataSource = salaries;
                 }
             }
             catch (Exception)
@@ -271,11 +270,11 @@ namespace OurResto
             DataGridViewColumn column = dGVSalarie.Columns[e.ColumnIndex];
 
             SortOrder sortOrder = column.HeaderCell.SortGlyphDirection == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-            dGVSalarie.Columns.OfType<DataGridViewColumn>().ToList()
+
+            dGVSalarie.Columns.Cast<DataGridViewColumn>().ToList()
                               .ForEach(c => c.HeaderCell.SortGlyphDirection = SortOrder.None);
 
-            string columnName = column.DataPropertyName;
-            salaries.Sort(new SalarieComparer(columnName, sortOrder));
+            salaries.Sort(new SalarieComparer(column.DataPropertyName, sortOrder));
 
             dGVSalarie.Refresh();
 
@@ -332,17 +331,44 @@ namespace OurResto
             Properties.Settings.Default.formSalarieY = DesktopLocation.Y;
         }
 
-        private void TBNom_Prenom_Email_TextChanged(object sender, EventArgs e)
+        private void TBNom_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(tBNom.Text))
+            {
+                tBNom.Text = tBNom.Text.ToUpper();
+                tBNom.SelectionStart = tBNom.TextLength;
+            }
+
+            UpdateButtonAndText();
+        }
+
+        private void TBPrenom_TextChanged(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(tBPrenom.Text))
+            {
+                tBPrenom.Text = char.ToUpper(tBPrenom.Text[0]) + tBPrenom.Text[1..].ToLower();
+                tBPrenom.SelectionStart = tBPrenom.TextLength;
+            }
+
+            UpdateButtonAndText();
+        }
+
+        private void UpdateButtonAndText()
         {
             if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))
             {
-                var isValid = Regex.IsMatch(tBEmail.Text, @"[a-z A-z 0-9_\-]+[@]+[a-z]+[\.][a-z]{2,4}$");
-                btEdit.Enabled = isValid;
-                lblInfo.Text = isValid ? "" : "L'email saisi n'est pas valide";
+                var isEmailValid = Regex.IsMatch(tBEmail.Text, @"[\w_\-]+[@]+[a-z A-Z]+[\.][a-z A-Z]{2,4}$");
+
+                lblInfo.Text = isEmailValid ? "" : "L'email saisi n'est pas valide";
+
+                btEdit.Enabled = isEmailValid && salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentRow &&
+                                 (tBNom.Text != currentRow.Nom || tBPrenom.Text != currentRow.Prenom ||
+                                  !tBEmail.Text.Equals(currentRow.Email, StringComparison.OrdinalIgnoreCase));
             }
             else
             {
                 btEdit.Enabled = false;
+
                 lblInfo.Text = "Veuillez renseignez tout les champs";
             }
         }
