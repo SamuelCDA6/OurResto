@@ -138,9 +138,6 @@ namespace OurResto
                         c.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
 
-                    dGVIngredients.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    dGVIngredients.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-
                     start = false;
                 }
             }
