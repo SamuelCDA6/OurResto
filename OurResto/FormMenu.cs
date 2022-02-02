@@ -30,8 +30,8 @@ namespace OurResto
 
         public FormMenu()
         {
-            
-            InitializeComponent();            
+
+            InitializeComponent();
         }
 
         private void FormMenu_Load(object sender, EventArgs e)
@@ -126,7 +126,7 @@ namespace OurResto
 
                 // Remettre à jour la DataSource de la BindingSource associé au DataGridView sur ses lignes
                 vaffichermenuBindingSource.DataSource = weekMeals;
-                
+
                 // Et repositionner la position de la BindingSource sur la date
                 if (cda68_bd1DataSet.Moment.Count > 0 && cBMoment.Text != String.Empty)
                 {
@@ -158,6 +158,7 @@ namespace OurResto
 
                 UpdateWeekMenus(dTPUpdateDate.Value.Date);
 
+                progressBar.Visible = false;
             }
             catch (Exception)
             {
@@ -504,11 +505,12 @@ namespace OurResto
 
         private void BtAddRandom_Click(object sender, EventArgs e)
         {
-            AddRandomWeekMeals();
+            if (MessageBox.Show(this, Properties.Resources.TXTADDRANDOMMENUS, "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.OK)
+            {
+                AddRandomWeekMeals();
 
-            RefreshDisplay();
-
-            progressBar.Visible = false;
+                RefreshDisplay();                
+            }
         }
 
         /// <summary>
@@ -687,7 +689,7 @@ namespace OurResto
 
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
-            var stringFormat = new StringFormat{ Alignment = StringAlignment.Center};
+            var stringFormat = new StringFormat { Alignment = StringAlignment.Center };
 
             e.Graphics.DrawString(lblSemaine.Text, lblSemaine.Font, Brushes.Black, ClientRectangle.Width / 2 - 80, 0, stringFormat);
             e.Graphics.DrawImage(bitmap, 0, 30);

@@ -163,6 +163,9 @@
   <data name="TXTADDMENUS" xml:space="preserve">
     <value>Les menus n'ont pas pus être ajoutés</value>
   </data>
+  <data name="TXTADDRANDOMMENUS" xml:space="preserve">
+    <value>Voulez-vous vraiment remplir automatiquement les menus pour toute la semaine ?</value>
+  </data>
   <data name="TXTCONFIRMATIONSOLDER" xml:space="preserve">
     <value>Voulez-vous vraiment solder le compte de {0} {1} ?</value>
   </data>
