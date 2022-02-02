@@ -16,9 +16,9 @@ namespace OurResto
 {
     public partial class FormMenu : Form
     {
-        readonly cda68_bd1DataSetTableAdapters.ReservationTableAdapter reservationTableAdapter = new();
-        readonly cda68_bd1DataSetTableAdapters.FormuleTableAdapter formuleTableAdapter = new();
-        readonly cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter v_SoldesalarieTableAdapter = new();
+        //readonly cda68_bd1DataSetTableAdapters.ReservationTableAdapter reservationTableAdapter = new();
+        //readonly cda68_bd1DataSetTableAdapters.FormuleTableAdapter formuleTableAdapter = new();
+        //readonly cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter v_SoldesalarieTableAdapter = new();
 
         DateTime dateMonday;
         DateTime dateFriday;
@@ -28,6 +28,9 @@ namespace OurResto
 
         List<cda68_bd1DataSet.v_affichermenuRow> weekMeals;
 
+        /// <summary>
+        /// Contructeur du formulaire FormMenu
+        /// </summary>
         public FormMenu()
         {
 
@@ -43,6 +46,9 @@ namespace OurResto
         }
 
         #region Initialisation
+        /// <summary>
+        /// Initialisation de tout les composants du formulaire
+        /// </summary>
         private void Initialisation()
         {
             Manager.ResizeImage(btAjouter, Properties.Resources.Add_256x256, ContentAlignment.MiddleLeft);
@@ -275,7 +281,8 @@ namespace OurResto
         /// <summary>
         /// Méthode pour placer la position de la BindingSource sur une position donnée
         /// </summary>
-        /// <param name="date">la date ou placer la BindingSource</param>
+        /// <param name="date">Date à laquelle placer la BindingSource</param>
+        /// <param name="idMoment">Moment auquel placer la BindingSource</param>
         private void SetPositionBindingSource(DateTime date, int idMoment)
         {
             //Chercher si un menu du DataGridView correspond à la date et au moment
@@ -399,6 +406,9 @@ namespace OurResto
             RefreshDisplay();
         }
 
+        /// <summary>
+        /// Mise à jour des menus
+        /// </summary>
         private void UpdateMeals()
         {
             using (var trans = new TransactionScope())
@@ -441,6 +451,7 @@ namespace OurResto
         /// </summary>
         /// <param name="row">La ligne qui contient les données a mettre à jour</param>
         /// <param name="cb">La combobox qui à le nouveau nom du plat </param>
+        /// <param name="id_Plat">Identifiant du plat à modifier</param>
         /// <returns>Un entier qui est à 0 si l'update à échoué ou 1 si il à reussit</returns>
         private int UpdateOneMeal(cda68_bd1DataSet.v_affichermenuRow row, ComboBox cb, int id_Plat)
         {
@@ -607,9 +618,6 @@ namespace OurResto
             }
         }
 
-        /// <summary>
-        /// Event qui se produit lors de l'affichage du contenu d'une cellule
-        /// </summary>
         private void DGVMenu_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Pour ne pas ré afficher la date si la même que celle d'au dessus
@@ -622,9 +630,7 @@ namespace OurResto
             }
         }
 
-        /// <summary>
-        /// Méthode quand l'on clique sur un titre d'une colonne
-        /// </summary>
+
         private void DGVMenu_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             var column = dGVMenu.Columns[e.ColumnIndex];

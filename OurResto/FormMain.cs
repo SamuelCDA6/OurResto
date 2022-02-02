@@ -7,6 +7,9 @@ namespace OurResto
 {
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// Contructeur du formulaire FormMain
+        /// </summary>
         public FormMain()
         {
             InitializeComponent();
@@ -53,7 +56,7 @@ namespace OurResto
 
         private void BtSalarie_Click(object sender, EventArgs e)
         {
-            using (FormSalarie formSalarie = new FormSalarie())
+            using (var formSalarie = new FormSalarie())
             {
                 if (Properties.Settings.Default.formSalarieX != -1 && Properties.Settings.Default.formSalarieY != -1)
                 {
@@ -73,7 +76,7 @@ namespace OurResto
 
         private void BtMenu_Click(object sender, EventArgs e)
         {
-            using (FormMenu formMenu = new FormMenu())
+            using (var formMenu = new FormMenu())
             {
                 if (Properties.Settings.Default.formMenuX != -1 && Properties.Settings.Default.formMenuY != -1)
                 {
@@ -93,7 +96,7 @@ namespace OurResto
 
         private void BtQuantitePrevisionelle_Click(object sender, EventArgs e)
         {
-            using (FormQuantitePrevisionnelle formQuantitePrevisionnelle = new FormQuantitePrevisionnelle())
+            using (var formQuantitePrevisionnelle = new FormQuantitePrevisionnelle())
             {
                 if (Properties.Settings.Default.formQtPrevX != -1 && Properties.Settings.Default.formQtPrevY != -1)
                 {
@@ -113,7 +116,7 @@ namespace OurResto
 
         private void BtPlanProduction_Click(object sender, EventArgs e)
         {
-            using (FormPlanProduction formPlanProduction = new FormPlanProduction())
+            using (var formPlanProduction = new FormPlanProduction())
             {
                 if (Properties.Settings.Default.formPlanProdX != -1 && Properties.Settings.Default.formPlanProdY != -1)
                 {

@@ -17,6 +17,11 @@ namespace OurResto
             return date.Date.AddDays(nbDays).AddHours(hour);
         }
 
+        /// <summary>
+        /// Renvoi le jour de la semaine correspondant à la date
+        /// </summary>
+        /// <param name="date">Date dont on veut le jour</param>
+        /// <returns>Jour de la semaine</returns>
         public static int JourSemaine(this DateTime date)
         {
             return date.DayOfWeek switch

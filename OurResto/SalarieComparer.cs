@@ -14,23 +14,29 @@ namespace OurResto
             _sortOrder = sortingOrder;
         }
 
-        public int Compare(cda68_bd1DataSet.SalarieRow x, cda68_bd1DataSet.SalarieRow y)
+        /// <summary>
+        /// Comparateur spécifique aux lignes de salariés
+        /// </summary>
+        /// <param name="firstRow">Première ligne à comparer</param>
+        /// <param name="secondRow">Deuxième ligne à comparer</param>
+        /// <returns>Résultat de la comparaison</returns>
+        public int Compare(cda68_bd1DataSet.SalarieRow firstRow, cda68_bd1DataSet.SalarieRow secondRow)
         {
             if (_sortOrder != SortOrder.Ascending)
             {
-                var tmp = x;
-                x = y;
-                y = tmp;
+                var tmp = firstRow;
+                firstRow = secondRow;
+                secondRow = tmp;
             }
 
             return _memberName switch
             {
-                "Nom" => x.Nom.CompareTo(y.Nom),
-                "Prenom" => x.Prenom.CompareTo(y.Prenom),
-                "Matricule" => x.Matricule.CompareTo(y.Matricule),
-                "Email" => x.Email.CompareTo(y.Email),
-                "EstActif" => x.EstActif.CompareTo(y.EstActif),
-                _ => x.Matricule.CompareTo(y.Matricule),
+                "Nom" => firstRow.Nom.CompareTo(secondRow.Nom),
+                "Prenom" => firstRow.Prenom.CompareTo(secondRow.Prenom),
+                "Matricule" => firstRow.Matricule.CompareTo(secondRow.Matricule),
+                "Email" => firstRow.Email.CompareTo(secondRow.Email),
+                "EstActif" => firstRow.EstActif.CompareTo(secondRow.EstActif),
+                _ => firstRow.Matricule.CompareTo(secondRow.Matricule),
             };
         }
     }

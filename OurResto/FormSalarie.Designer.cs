@@ -298,7 +298,7 @@ namespace OurResto
             this.tBEmail.Name = "tBEmail";
             this.tBEmail.Size = new System.Drawing.Size(745, 26);
             this.tBEmail.TabIndex = 4;
-            this.tBEmail.TextChanged += new System.EventHandler(this.tBEmail_TextChanged);
+            this.tBEmail.TextChanged += new System.EventHandler(this.TBEmail_TextChanged);
             // 
             // tBNom
             // 

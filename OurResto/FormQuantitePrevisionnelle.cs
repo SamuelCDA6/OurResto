@@ -7,10 +7,16 @@ using System.Windows.Forms;
 
 namespace OurResto
 {
+    /// <summary>
+    /// Classe partielle pour le formulaire FormQuantitePrevisionnelle
+    /// </summary>
     public partial class FormQuantitePrevisionnelle : Form
     {
         List<cda68_bd1DataSet.v_quantiteprevisionnelleRow> rows = null;
 
+        /// <summary>
+        /// Constructeur du formulaire FormQuantitePrevisionnelle
+        /// </summary>
         public FormQuantitePrevisionnelle()
         {
             InitializeComponent();

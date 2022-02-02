@@ -1,6 +1,9 @@
 ﻿
 namespace OurResto
 {
+    /// <summary>
+    /// Classe partielle du formulaire FormSalarie
+    /// </summary>
     partial class FormMain
     {
         /// <summary>

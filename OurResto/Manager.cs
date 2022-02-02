@@ -46,6 +46,7 @@ namespace OurResto
         /// </summary>
         /// <param name="printDocument">Document à imprimer</param>
         /// <param name="printPreviewDialog">Fenetre d'apercu</param>
+        /// <param name="isLandscape">Afficher en mode paysage?</param>
         public static void ShowPrintPreview(PrintDocument printDocument, PrintPreviewDialog printPreviewDialog, bool isLandscape)
         {
             // Afficher le Fenêtre d'apercu du document

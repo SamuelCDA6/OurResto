@@ -10,10 +10,16 @@ using System.Windows.Forms;
 
 namespace OurResto
 {
+    /// <summary>
+    /// Classe partielle du Formulaire FormSalarie
+    /// </summary>
     public partial class FormSalarie : Form
     {
         List<cda68_bd1DataSet.SalarieRow> salaries = new();
 
+        /// <summary>
+        /// Contructeur du formulaire FormSalarie
+        /// </summary>
         public FormSalarie()
         {
             InitializeComponent();
@@ -351,7 +357,7 @@ namespace OurResto
             UpdateButtonsAndText();
         }
 
-        private void tBEmail_TextChanged(object sender, EventArgs e)
+        private void TBEmail_TextChanged(object sender, EventArgs e)
         {
             UpdateButtonsAndText();
         }

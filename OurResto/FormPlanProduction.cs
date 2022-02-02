@@ -14,9 +14,13 @@ namespace OurResto
     {
         DateTime mealDate = DateTime.Today;
 
-        cda68_bd1DataSetTableAdapters.v_ingredient_platTableAdapter v_Ingredient_PlatTableAdapter = new cda68_bd1DataSetTableAdapters.v_ingredient_platTableAdapter();
+        readonly cda68_bd1DataSetTableAdapters.v_ingredient_platTableAdapter v_Ingredient_PlatTableAdapter = new();
 
         bool start = true;
+
+        /// <summary>
+        /// Contructeur du formulaire FormPlanProduction
+        /// </summary>
         public FormPlanProduction()
         {
             InitializeComponent();
@@ -55,6 +59,10 @@ namespace OurResto
             SetDate(mealDate);
         }
 
+        /// <summary>
+        /// Met à jour la date du plan de production
+        /// </summary>
+        /// <param name="date">Date à laquelle se placer</param>
         private void SetDate(DateTime date)
         {
             var rows = cda68_bd1DataSet.v_plancuisine.OrderBy(r => Math.Abs((r.RepasDate - date).Days)).ToList();
