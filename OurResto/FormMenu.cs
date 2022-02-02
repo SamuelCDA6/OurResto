@@ -279,8 +279,8 @@ namespace OurResto
         {
             //Chercher si un menu du DataGridView correspond à la date et au moment
             if (dGVMenu.Rows.Cast<DataGridViewRow>()
-                            .FirstOrDefault(r => (DateTime)r.Cells[0].Value == date &&
-                                                 (int)r.Cells[12].Value == idMoment)
+                            .FirstOrDefault(r => /*(DateTime)*/r.Cells[0].Value.Equals(date) &&
+                                                 /*(int)*/r.Cells[12].Value.Equals(idMoment))
                             is DataGridViewRow row)
             {
                 //Si oui placer la BindingSource dessus

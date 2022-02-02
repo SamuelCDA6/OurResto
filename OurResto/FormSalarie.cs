@@ -114,7 +114,7 @@ namespace OurResto
 
             try
             {
-                // Récupérer les salariés dont le nom, ou le prénom commence par le texte ou 
+                // Récupérer les salariés dont le nom, ou le prénom commence par le texte ou le matricule est contenu dans le texte
                 salaries = cda68_bd1DataSet.Salarie.Where(s => s.Matricule.Contains(tBRechercheSalarie.Text) ||
                                                           s.Nom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase) ||
                                                           s.Prenom.StartsWith(tBRechercheSalarie.Text, StringComparison.OrdinalIgnoreCase)).ToList();
