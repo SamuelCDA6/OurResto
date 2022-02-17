@@ -76,6 +76,9 @@ namespace OurResto
             }
             catch (Exception)
             {
+                btCredit.Enabled = false;
+                btEdit.Enabled = false;
+                btSellOff.Enabled = false;
                 MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -169,6 +172,8 @@ namespace OurResto
 
         private void BtCredit_Click(object sender, EventArgs e)
         {
+            var matr = String.Empty;
+
             if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentSalarieRow)
             {
                 try
@@ -202,6 +207,8 @@ namespace OurResto
                                         trans.Complete();
                                     }
                                 }
+
+                                matr = currentSalarieRow.Matricule;
                             }
                         }
                     }
@@ -217,10 +224,17 @@ namespace OurResto
             }
 
             RefreshDisplay();
+
+            if (matr != String.Empty)
+            {
+                salarieBindingSource.Position = dGVSalarie.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells[0].Value.Equals(matr)).Index;
+            }
         }
 
         private void BtSellOff_Click(object sender, EventArgs e)
         {
+            var matr = String.Empty;
+
             try
             {
                 if (salarieBindingSource.Current is cda68_bd1DataSet.SalarieRow currentRow)
@@ -245,8 +259,11 @@ namespace OurResto
                             }
                             else
                             {
+                                
                                 trans.Complete();
                             }
+
+                            matr = currentRow.Matricule;
                         }
 
                         MySqlConnection.ClearAllPools();
@@ -261,6 +278,11 @@ namespace OurResto
             }
 
             RefreshDisplay();
+
+            if (matr != String.Empty)
+            {
+                salarieBindingSource.Position = dGVSalarie.Rows.Cast<DataGridViewRow>().FirstOrDefault(r => r.Cells[0].Value.Equals(matr)).Index;
+            }
         }
 
         private void BtQuitter_Click(object sender, EventArgs e)
@@ -362,6 +384,9 @@ namespace OurResto
             UpdateButtonsAndText();
         }
 
+        /// <summary>
+        /// Met à jour les boutons et le texte
+        /// </summary>
         private void UpdateButtonsAndText()
         {
             if (!String.IsNullOrWhiteSpace(tBNom.Text) && !String.IsNullOrWhiteSpace(tBPrenom.Text) && !String.IsNullOrWhiteSpace(tBEmail.Text))

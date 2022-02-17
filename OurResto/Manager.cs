@@ -52,9 +52,10 @@ namespace OurResto
             // Afficher le Fenêtre d'apercu du document
             printDocument.DefaultPageSettings.Landscape = isLandscape;
             printPreviewDialog.Document = printDocument;
+            printPreviewDialog.DesktopLocation = new Point(0, 0);
             printPreviewDialog.Size = new Size(printPreviewDialog.Document.PrinterSettings.PaperSizes[^1].Width, printPreviewDialog.Document.PrinterSettings.PaperSizes[^1].Height);
             printPreviewDialog.PrintPreviewControl.Zoom = 0.75;
-            printPreviewDialog.DesktopLocation = new Point(0, 0);
+            printPreviewDialog.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             printPreviewDialog.ShowDialog();
         }
     }

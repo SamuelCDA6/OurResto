@@ -14,12 +14,11 @@ using System.Threading.Tasks;
 
 namespace OurResto
 {
+    /// <summary>
+    /// Classe partielle du Formulaire FormMenu
+    /// </summary>
     public partial class FormMenu : Form
     {
-        //readonly cda68_bd1DataSetTableAdapters.ReservationTableAdapter reservationTableAdapter = new();
-        //readonly cda68_bd1DataSetTableAdapters.FormuleTableAdapter formuleTableAdapter = new();
-        //readonly cda68_bd1DataSetTableAdapters.v_soldesalarieTableAdapter v_SoldesalarieTableAdapter = new();
-
         DateTime dateMonday;
         DateTime dateFriday;
         DateTime dateLimit;
@@ -168,6 +167,10 @@ namespace OurResto
             }
             catch (Exception)
             {
+                btAjouter.Enabled = false;
+                btSupprimer.Enabled = false;
+                btModifier.Enabled = false;
+                btAddRandom.Enabled = false;
                 MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -287,8 +290,8 @@ namespace OurResto
         {
             //Chercher si un menu du DataGridView correspond à la date et au moment
             if (dGVMenu.Rows.Cast<DataGridViewRow>()
-                            .FirstOrDefault(r => /*(DateTime)*/r.Cells[0].Value.Equals(date) &&
-                                                 /*(int)*/r.Cells[12].Value.Equals(idMoment))
+                            .FirstOrDefault(r => r.Cells[0].Value.Equals(date) &&
+                                                 r.Cells[12].Value.Equals(idMoment))
                             is DataGridViewRow row)
             {
                 //Si oui placer la BindingSource dessus
@@ -520,7 +523,7 @@ namespace OurResto
             {
                 AddRandomWeekMeals();
 
-                RefreshDisplay();                
+                RefreshDisplay();
             }
         }
 

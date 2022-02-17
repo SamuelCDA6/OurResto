@@ -1,6 +1,9 @@
 ﻿
 namespace OurResto
 {
+    /// <summary>
+    /// 
+    /// </summary>
     partial class FormMenu
     {
         /// <summary>

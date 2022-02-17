@@ -8,7 +8,7 @@ namespace OurResto
     public partial class FormMain : Form
     {
         /// <summary>
-        /// Contructeur du formulaire FormMain
+        /// Constructeur du formulaire FormMain
         /// </summary>
         public FormMain()
         {
@@ -38,7 +38,7 @@ namespace OurResto
         /// <summary>
         /// Test la connexion avec le SGBD
         /// </summary>
-        /// <returns> booleen true si connexion reussi sinon false</returns>
+        /// <returns> booléen true si connexion réussi sinon false</returns>
         private static bool TestConnexion()
         {
             var mySqlConnection = new MySqlConnection(Properties.Settings.Default.cda68_bd1ConnectionString);

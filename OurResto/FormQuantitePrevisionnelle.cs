@@ -67,5 +67,10 @@ namespace OurResto
             Properties.Settings.Default.formQtPrevX = DesktopLocation.X;
             Properties.Settings.Default.formQtPrevY = DesktopLocation.Y;
         }
+
+        private void PrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace OurResto
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btQuitter = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.vquantiteprevisionnelleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cda68_bd1DataSet)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -185,6 +186,10 @@ namespace OurResto
             this.btQuitter.UseVisualStyleBackColor = false;
             this.btQuitter.Click += new System.EventHandler(this.BtQuitter_Click);
             // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument_PrintPage);
+            // 
             // FormQuantitePrevisionnelle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -224,5 +229,6 @@ namespace OurResto
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button btQuitter;
+        private System.Drawing.Printing.PrintDocument printDocument;
     }
 }

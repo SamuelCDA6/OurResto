@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace OurResto
 {
+    /// <summary>
+    /// Classe partielle du Formulaire FormPlanProduction
+    /// </summary>
     public partial class FormPlanProduction : Form
     {
         DateTime mealDate = DateTime.Today;
@@ -19,7 +22,7 @@ namespace OurResto
         bool start = true;
 
         /// <summary>
-        /// Contructeur du formulaire FormPlanProduction
+        /// Constructeur du formulaire FormPlanProduction
         /// </summary>
         public FormPlanProduction()
         {
@@ -30,11 +33,14 @@ namespace OurResto
         {
             try
             {
-                v_plancuisineTableAdapter.Fill(cda68_bd1DataSet.v_plancuisine);
+                v_plancuisineTableAdapter.FillBy(cda68_bd1DataSet.v_plancuisine, DateTime.Today);
                 v_Ingredient_PlatTableAdapter.Fill(cda68_bd1DataSet.v_ingredient_plat);
             }
             catch (Exception)
             {
+                btAfter.Enabled = false;
+                btBefore.Enabled = false;
+                btToday.Enabled = false;
                 MessageBox.Show(this, Properties.Resources.TXTUPDATEFAIL, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
