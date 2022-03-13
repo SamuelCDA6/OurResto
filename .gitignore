@@ -6,6 +6,7 @@
 App.config
 appsettings.json
 Settings.settings
+Settings.Designer.cs
 
 # User-specific files
 *.rsuser
